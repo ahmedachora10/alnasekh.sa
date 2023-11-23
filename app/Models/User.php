@@ -22,6 +22,7 @@ class User extends Authenticatable implements LaratrustUser
     protected $fillable = [
         'name',
         'email',
+        'avatar',
         'password',
     ];
 
@@ -44,4 +45,8 @@ class User extends Authenticatable implements LaratrustUser
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getThumbnailAttribute() {
+        return $this->avatar;
+    }
 }
