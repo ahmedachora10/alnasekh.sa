@@ -1,0 +1,65 @@
+/* ----- RTL Style  */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+
+* , body{
+    font-family: cairo;
+}
+
+.collaborat{
+  /* margin-right: 18em;
+  margin-left: 0; */
+}
+
+.collaborat div{
+  /* margin-left: -90px;
+  margin-right: 0; */
+}
+
+
+.collaborat img {
+    border-right: 5px solid #cea416;
+    border-left: none;
+    padding-right: 2em;
+    padding-left: 0;
+    margin-right: 0 !important;
+  }
+
+  .feature-1{
+    border-right: 8px solid rgb(58, 135, 142);
+    border-left: none;
+  }
+
+  .feature-1 a{
+    margin-right: -10px;
+    /* margin-right: -18px; */
+    margin-left: 0x;
+    /* padding: 12px 35px 12px 60px; */
+    padding: 9px 5px 8px 10px;
+  }
+
+  .feature-1 a:hover{
+    padding: 9px 30px 8px 5px !important;
+  }
+
+  .flip-horizontal {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+
+  .footer_content li a:hover{
+    padding-right: 5px;
+    padding-left: 0;
+    color: #fff;
+  }
+
+  .rtl{
+    direction: rtl;
+  }
+
+  .authentication-wrapper.authentication-basic .authentication-inner{
+    direction: rtl;
+  }
+
+  /* Bootstrap classes */
