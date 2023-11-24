@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Services\UploadFileService;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
 class SettingController extends Controller
 {
+    public function __construct(protected UploadFileService $uploadFileService) {}
+
     public function index()
     {
         return view('admin.common.settings.index');
@@ -24,7 +27,7 @@ class SettingController extends Controller
         foreach ($data as $key => $val) {
             if (in_array($key, $validSettings)) {
                 if($val instanceof UploadedFile) {
-                    $fullPath = $val->storeAs('public/images/logo/', str()->random(20) . '.' . $val->getClientOriginalExtension());
+                    $fullPath = 'storage/'. $this->uploadFileService->update($val, '', 'images/logo');
                     $val = $fullPath;
                 }
                 Setting::add($key, $val, Setting::getDataType($key));
