@@ -50,7 +50,6 @@ class User extends Authenticatable implements LaratrustUser
     ];
 
     public function getThumbnailAttribute() {
-        return 'storage/'.$this->avatar;
-        return $this->avatar != null && Storage::disk('public')->exists('storage/'.$this->avatar) ? 'storage/'.$this->avatar : $this->makeAvatar($this->name);
+        return $this->avatar != null && Storage::disk('public')->exists($this->avatar) ? 'storage/'.$this->avatar : $this->makeAvatar($this->name);
     }
 }
