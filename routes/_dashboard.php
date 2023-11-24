@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CorpController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -33,13 +34,15 @@ Route::middleware(['auth'])->group(function ()
     Route::resource('users', UserController::class);
 
     Route::resource('roles', RoleController::class)->only('index', 'destroy');
+
+    Route::resource('corps', CorpController::class)->parameter('corps', 'corp');
 });
 
 
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
