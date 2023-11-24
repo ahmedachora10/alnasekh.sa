@@ -18,9 +18,14 @@
 
         <x-dashboard.sidebar.link :title="trans('sidebar.dashboard')" icon="home-circle" :link="route('dashboard')" />
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.users')" icon="user" :link="route('admin.users')" />
+        <x-dashboard.sidebar.link-head>
+            <span>{{ trans('sidebar.users') }} / {{ trans('sidebar.roles') }}</span>
+        </x-dashboard.sidebar.link-head>
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.images')" icon="image" :link="route('images.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.users')" icon="user" :link="route('users.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.roles')" icon="key" :link="route('roles.index')" />
+
+        {{-- <x-dashboard.sidebar.link :title="trans('sidebar.images')" icon="image" :link="route('images.index')" /> --}}
 
         <x-dashboard.sidebar.link :title="trans('sidebar.settings')" icon="cog" :link="route('settings.index')" />
 
