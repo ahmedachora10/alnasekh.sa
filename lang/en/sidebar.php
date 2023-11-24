@@ -5,4 +5,5 @@ return [
     'settings' => 'Settings',
     'users' => 'Users',
     'images' => 'Images',
+    'roles' => 'Roles',
 ];
