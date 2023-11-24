@@ -1,6 +1,10 @@
 <div class="card">
 
-    <div class="d-flex justify-content-between align-items-center">
+    <div @class([
+        'd-flex align-items-center',
+        'justify-content-end pt-3' => is_null($title),
+        'justify-content-between' => !is_null($title),
+    ])>
         @if (!is_null($title))
             <h5 class="card-header">{{ trans($title) }}</h5>
         @endif
@@ -23,11 +27,11 @@
             @if (!empty($columns))
                 <thead>
                     <tr>
-                        <th colspan="2">ID</th>
+                        <th>ID</th>
                         @foreach ($columns as $col)
                             <th> {{ trans('table.columns.' . strtolower($col)) }} </th>
                         @endforeach
-                        <th colspan="2"> {{ trans('table.columns.actions') }} </th>
+                        <th> {{ trans('table.columns.actions') }} </th>
                     </tr>
                 </thead>
             @endif

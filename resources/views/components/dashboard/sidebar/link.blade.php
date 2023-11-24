@@ -1,5 +1,5 @@
 <li class="menu-item">
-    <a href="{{ $link }}" class="menu-link @if ($hasSubMenu) menu-toggle @endif">
+    <a href="{{ $link }}" @class(['menu-link', 'menu-toggle' => $hasSubMenu])>
         @if ($icon)
             <i class="menu-icon tf-icons bx bx-{{ $icon }}"></i>
         @endif
