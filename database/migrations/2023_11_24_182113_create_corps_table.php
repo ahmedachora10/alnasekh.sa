@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\HasBranches;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +20,7 @@ return new class extends Migration
             $table->string('commercial_registration_number');
             $table->date('start_date');
             $table->date('end_date');
-            $table->enum('has_branches', HasBranches::values());
+            $table->tinyInteger('has_branches');
             $table->timestamps();
         });
     }

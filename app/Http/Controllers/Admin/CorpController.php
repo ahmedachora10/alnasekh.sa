@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\HasBranches;
 use App\Http\Controllers\Controller;
 use App\Models\Corp;
-use App\Http\Requests\StoreCorpRequest;
-use App\Http\Requests\UpdateCorpRequest;
+use App\Http\Requests\Admin\StoreCorpRequest;
+use App\Http\Requests\Admin\UpdateCorpRequest;
 
 class CorpController extends Controller
 {
@@ -14,7 +15,7 @@ class CorpController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.corps.index');
     }
 
     /**
@@ -22,7 +23,8 @@ class CorpController extends Controller
      */
     public function create()
     {
-        //
+        $hasBranches = HasBranches::cases();
+        return view('admin.corps.create', compact('hasBranches'));
     }
 
     /**
@@ -30,7 +32,13 @@ class CorpController extends Controller
      */
     public function store(StoreCorpRequest $request)
     {
-        //
+        $corp = Corp::create($request->validated());
+
+        // if($request->integer('has_branches') === HasBranches::No->value) {
+        //     $corp->
+        // }
+
+        return redirect()->route('corps.index')->with('success', trans('message.create'));
     }
 
     /**
@@ -38,7 +46,7 @@ class CorpController extends Controller
      */
     public function show(Corp $corp)
     {
-        //
+        return view('admin.corps.show', compact('corp'));
     }
 
     /**
@@ -46,7 +54,8 @@ class CorpController extends Controller
      */
     public function edit(Corp $corp)
     {
-        //
+        $hasBranches = HasBranches::cases();
+        return view('admin.corps.edit', compact('corp', 'hasBranches'));
     }
 
     /**
@@ -54,7 +63,8 @@ class CorpController extends Controller
      */
     public function update(UpdateCorpRequest $request, Corp $corp)
     {
-        //
+        $corp->update($request->validated());
+        return redirect()->route('corps.index')->with('success', trans('message.update'));
     }
 
     /**
@@ -62,6 +72,8 @@ class CorpController extends Controller
      */
     public function destroy(Corp $corp)
     {
-        //
+        $corp->delete();
+
+        return redirect()->route('corps.index')->with('success', trans('message.delete'));
     }
 }

@@ -13,6 +13,12 @@ return [
         'actions' => 'Actions',
         'password' => 'Password',
         'password confirmation' => 'Confirme Password',
+
+        'has branches' => 'Has Branches?',
+        'start date' => 'Start Date',
+        'end date' => 'End Date',
+        'administrator name' => 'Administrator Name',
+        'commercial registration number' => 'Commercial Registration Number',
     ],
     'empty' => 'No Records'
 ];

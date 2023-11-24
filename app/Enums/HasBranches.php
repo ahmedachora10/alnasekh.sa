@@ -17,7 +17,7 @@ enum HasBranches:int {
 
     public function color() {
         return match ($this) {
-            self::Yes => 'success',
+            self::Yes => 'primary',
             self::No => 'secondary',
         };
     }

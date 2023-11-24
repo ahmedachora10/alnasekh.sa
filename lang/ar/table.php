@@ -43,6 +43,12 @@ return [
         'password' => 'كلمة المرور',
         'password confirmation' => 'تأكيد كلمة المرور',
         'actions' => 'اجراءات',
+
+        'has branches' => 'لديه فروع؟',
+        'start date' => 'تاريخ البداية',
+        'end date' => 'تاريخ النهاية',
+        'commercial registration number' => 'رقم السجل التجاري',
+        'administrator name' => 'اسم المسوؤل',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

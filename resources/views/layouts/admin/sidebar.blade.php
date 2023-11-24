@@ -27,6 +27,12 @@
 
         {{-- <x-dashboard.sidebar.link :title="trans('sidebar.images')" icon="image" :link="route('images.index')" /> --}}
 
+        <x-dashboard.sidebar.link :title="trans('sidebar.corps')" icon="folder" link="#" :hasSubMenu="true">
+
+            <x-dashboard.sidebar.link :title="trans('sidebar.corps')" :link="route('corps.index')" />
+
+        </x-dashboard.sidebar.link>
+
         <x-dashboard.sidebar.link :title="trans('sidebar.settings')" icon="cog" :link="route('settings.index')" />
 
 
