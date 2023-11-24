@@ -97,6 +97,7 @@
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         {{-- <x-admin.message key="success" /> --}}
+                        <x-dashboard.alert />
 
                         {{ $slot }}
                     </div>
