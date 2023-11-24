@@ -6,7 +6,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class UploadFileService {
-    protected string $driver ='local';
+    protected string $driver ='public';
 
     public function store(UploadedFile $file, string $destination) : string|null {
 
@@ -15,16 +15,16 @@ class UploadFileService {
         }
 
         $name = $this->name($file->getClientOriginalExtension());
-        $file->storeAs($destination, $name);
+        $name = $file->storeAs("{$this->driver}/$destination", $name);
 
-        return $name ?? null;
+        return str_replace('public/', '',$name) ?? null;
     }
 
     public function update(UploadedFile $file, ?string $oldFileName = null, string $destination) : string|null {
         $name = $this->store($file, $destination);
 
         if(!is_null($name)) {
-            $this->delete($destination . $oldFileName);
+            $this->delete($oldFileName);
         }
 
         return $name;
