@@ -7,4 +7,6 @@ return [
     'images' => 'Images',
     'roles' => 'Roles',
     'corps' => 'Corps',
+    'branches' => 'Branches',
+    'monthly quarterly updates' => 'Monthly, Quarterly Updates',
 ];

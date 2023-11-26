@@ -34,9 +34,15 @@ class CorpController extends Controller
     {
         $corp = Corp::create($request->validated());
 
-        // if($request->integer('has_branches') === HasBranches::No->value) {
-        //     $corp->
-        // }
+        if($request->integer('has_branches') === HasBranches::Yes->value) {
+            return redirect()->route('branches.index', ['corp' => $corp, 'target' => 'branches'])
+            ->with('success', trans('message.create'));
+        }
+
+        $corp->branches()->create([
+            'name' => $corp->name,
+            'registration_number' => $corp->commercial_registration_number,
+        ]);
 
         return redirect()->route('corps.index')->with('success', trans('message.create'));
     }

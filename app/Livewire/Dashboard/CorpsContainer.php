@@ -15,7 +15,7 @@ class CorpsContainer extends Component
     public function render()
     {
         return view('livewire.dashboard.corps-container', [
-            'corps' => Corp::paginate(setting('pagination') ?? 8)
+            'corps' => Corp::with('user')->paginate(setting('pagination') ?? 8)
         ]);
     }
 }

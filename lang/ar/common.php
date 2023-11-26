@@ -8,6 +8,7 @@ return [
     'cancel' => 'الغاء',
     'submit' => 'ارسال',
     'show' => 'عرض',
+    'save' => 'حفظ',
 
     'new role' => 'دور جديد',
     'role permissions' => 'صلاحيات الدور',
@@ -17,6 +18,15 @@ return [
     'role name' => 'اسم الدور',
     'display name' => 'اسم العرض',
 
+    'new branch' => 'فرع جديد',
+
     'yes' => 'نعم',
-    'no' => 'لا'
+    'no' => 'لا',
+    'next' => 'التالي',
+    'update subscription' => 'تحديث الاشتراك',
+    'update monthly update' => 'تحديث التحديثات الشهرية والربع سنوية',
+    'new monthly update' => 'اضافة التحديثات الشهرية والربع سنوية',
+
+    'are you sure' => 'هل تود حذف هذا العنصر؟',
+    'there is more branch' => 'هل يوجد اكثر من فرع؟',
 ];

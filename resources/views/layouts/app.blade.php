@@ -38,6 +38,13 @@
             class="template-customizer-core-css" />
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}"
             class="template-customizer-theme-css">
+
+        <style>
+            .phone-number {
+                direction: ltr !important;
+                text-align: right;
+            }
+        </style>
     @else
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
         <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}"
@@ -46,6 +53,7 @@
 
 
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/bs-stepper.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/basic.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}" /> --}}
@@ -96,8 +104,8 @@
 
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        {{-- <x-admin.message key="success" /> --}}
                         <x-dashboard.alert />
+                        <livewire:dashboard.alert />
 
                         {{ $slot }}
                     </div>
@@ -143,11 +151,51 @@
     @stack('component-scripts')
 
     {{-- @vite('resources/js/app.js') --}}
-    <script src="{{ asset('build/assets/app.js') }}"></script>
+    <script src="{{ asset('build/assets/app2.js') }}"></script>
 
     @stack('scripts')
 
     @livewireScripts
+
+    <script defer>
+        Livewire.on('close-modal', () => $('.modal').modal('hide'));
+        Livewire.on('open-modal', () => $('.modal').modal('show'));
+
+        Livewire.directive('confirm', ({
+            el,
+            directive,
+            component,
+            cleanup
+        }) => {
+            let content = directive.expression
+
+            // The "directive" object gives you access to the parsed directive.
+            // For example, here are its values for: wire:click.prevent="deletePost(1)"
+            //
+            // directive.raw = wire:click.prevent
+            // directive.value = "click"
+            // directive.modifiers = ['prevent']
+            // directive.expression = "deletePost(1)"
+
+            let onClick = e => {
+                if (!confirm(content)) {
+                    e.preventDefault()
+                    e.stopImmediatePropagation()
+                }
+            }
+
+            el.addEventListener('click', onClick, {
+                capture: true
+            })
+
+            // Register any cleanup code inside `cleanup()` in the case
+            // where a Livewire component is removed from the DOM while
+            // the page is still active.
+            cleanup(() => {
+                el.removeEventListener('click', onClick)
+            })
+        })
+    </script>
 
 </body>
 

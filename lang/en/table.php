@@ -19,6 +19,18 @@ return [
         'end date' => 'End Date',
         'administrator name' => 'Administrator Name',
         'commercial registration number' => 'Commercial Registration Number',
+
+        'registration number' => 'Registration Number',
+        'certificate number' => 'Certificate Number',
+        'address' => 'Address',
+        'employee' => 'Employee',
+        'mission' => 'Mission',
+        'entity name' => 'Entity Name',
+
+
+        'type' => 'Type',
+
+        'corp name' => 'Corp Name',
     ],
     'empty' => 'No Records'
 ];

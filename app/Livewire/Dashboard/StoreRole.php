@@ -70,15 +70,24 @@ class StoreRole extends Component
     }
 
     public function save() {
+
+        // TODO:: there is some issues should be fixed as soon as possible
+        // fix permission issues like select & add
+
         if($this->role && $this->role?->id === null) {
             $this->store();
+            session()->put('success', trans('message.create'));
         } else {
+            session()->put('success', trans('message.update'));
             $this->update();
+            $this->role = new Role;
         }
 
         $this->reset('name', 'display_name', 'selected');
 
         $this->dispatch('refresh-roles');
+        $this->dispatch('close-modal');
+        $this->dispatch( 'refresh-alert');
     }
 
     private function store() {

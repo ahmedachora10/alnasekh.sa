@@ -30,6 +30,7 @@
         <x-dashboard.sidebar.link :title="trans('sidebar.corps')" icon="folder" link="#" :hasSubMenu="true">
 
             <x-dashboard.sidebar.link :title="trans('sidebar.corps')" :link="route('corps.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.monthly quarterly updates')" :link="route('monthly-quarterly-update.index')" />
 
         </x-dashboard.sidebar.link>
 

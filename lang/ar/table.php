@@ -44,11 +44,20 @@ return [
         'password confirmation' => 'تأكيد كلمة المرور',
         'actions' => 'اجراءات',
 
+        'employee' => 'الموظف',
+        'mission' => 'مهمة',
+        'entity name' => 'اسم السجل',
         'has branches' => 'لديه فروع؟',
         'start date' => 'تاريخ البداية',
         'end date' => 'تاريخ النهاية',
+        'type' => 'النوع',
         'commercial registration number' => 'رقم السجل التجاري',
         'administrator name' => 'اسم المسوؤل',
+
+        'registration number' => 'رقم السجل',
+        'certificate number' => 'رقم الرخصة',
+
+        'corp name' => 'اسم المنشأة',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

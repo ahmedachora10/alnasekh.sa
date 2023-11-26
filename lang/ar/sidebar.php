@@ -7,4 +7,6 @@ return [
     'images' => 'الصور',
     'roles' => 'الادوار',
     'corps' => 'المنشأة',
+    'branches' => 'الفروع',
+    'monthly quarterly updates' => 'التحديثات الشهرية والربع السنوية',
 ];

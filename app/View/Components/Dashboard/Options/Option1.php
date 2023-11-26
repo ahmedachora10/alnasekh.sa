@@ -15,6 +15,7 @@ class Option1 extends Component
         public string $title = '',
         public string $description = '',
         public string $icon = 'bx bx-key',
+        public string $color = 'primary',
     )
     {
         //

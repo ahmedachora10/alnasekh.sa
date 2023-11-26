@@ -7,7 +7,7 @@
             <div class="row">
 
                 <div class="col-md-6 col-12 mb-3">
-                    <x-dashboard.input-group type="text" name="name" :title="trans('table.columns.name')" />
+                    <x-dashboard.input-group type="text" name="name" :title="trans('table.columns.corp name')" />
                 </div>
 
                 <div class="col-md-6 col-12 mb-3">
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="col-md-6 col-12 mb-3">
-                    <x-dashboard.input-group type="number" name="phone" :title="trans('table.columns.phone')" />
+                    <x-dashboard.input-group type="text" name="phone" class="phone-number" :title="trans('table.columns.phone')" />
                 </div>
 
                 <div class="col-12 mb-3">
@@ -35,7 +35,9 @@
                 </div>
 
                 <div class="col-12 my-2"></div>
-
+                <div class="col-12">
+                    <x-dashboard.label> {{ trans('common.there is more branch') }} </x-dashboard.label>
+                </div>
                 @foreach ($hasBranches as $option)
                     <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-2">
                         <x-dashboard.options.option1 icon="bx bx-list-check" :title="$option->name()" type="radio"
