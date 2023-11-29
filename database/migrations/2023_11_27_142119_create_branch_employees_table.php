@@ -11,11 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('corp_branch_monthly_updates', function (Blueprint $table) {
+        Schema::create('branch_employees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('corp_branch_id')->constrained('corp_branches')->cascadeOnDelete();
-            $table->foreignId('monthly_quarterly_update_id')->constrained('monthly_quarterly_updates')->cascadeOnDelete();
-            $table->date('date');
+            $table->string('name');
+            $table->string('resident_number');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->date('business_card_start_date');
+            $table->date('business_card_end_date');
+            $table->date('contract_start_date');
+            $table->date('contract_end_date');
             $table->timestamps();
         });
     }
@@ -25,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('corp_branch_monthly_updates');
+        Schema::dropIfExists('branch_employees');
     }
 };

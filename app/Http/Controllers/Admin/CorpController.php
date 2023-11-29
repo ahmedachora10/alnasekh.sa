@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Corp;
 use App\Http\Requests\Admin\StoreCorpRequest;
 use App\Http\Requests\Admin\UpdateCorpRequest;
+use App\Models\CorpBranch;
 
 class CorpController extends Controller
 {
@@ -39,12 +40,12 @@ class CorpController extends Controller
             ->with('success', trans('message.create'));
         }
 
-        $corp->branches()->create([
+        $branch = $corp->branches()->create([
             'name' => $corp->name,
             'registration_number' => $corp->commercial_registration_number,
         ]);
 
-        return redirect()->route('corps.index')->with('success', trans('message.create'));
+        return redirect()->route('branches.registries.store', $branch)->with('success', trans('message.create'));
     }
 
     /**
@@ -81,5 +82,35 @@ class CorpController extends Controller
         $corp->delete();
 
         return redirect()->route('corps.index')->with('success', trans('message.delete'));
+    }
+
+    public function requirements(CorpBranch $branch) {
+
+        $branch->load('corp', 'employees.healthCardPaper', 'employees.medicalInsurance');
+        $corp = $branch->corp;
+
+        //TODO: implement better solution for employees checker
+
+        $monthly_quarterly_updates = $branch->monthlyQuarterlyUpdates->count() > 0;
+        $employees = !$branch->doesntHave('employees')->exists();
+        $healthPaper = !$branch->doesntHave('employees.healthCardPaper')->exists();
+        $insurance = !$branch->doesntHave('employees.medicalInsurance')->exists();
+
+        $requirements = [
+            'ورقة التحديث الشهري والرفع سنوي' =>  $monthly_quarterly_updates,
+            'ورقة الاقامات والعقود' =>  $employees,
+            'وقة الكروت الصحية' =>  $healthPaper,
+            'ورقة التأمين الطبي' =>  $insurance,
+        ];
+
+        if($corp->doesnt_has_branches) {
+            $requirements = array_merge(['السجلات' => $branch->registries()->exists()], $requirements);
+        } else {
+            $requirements = array_merge(['الاشتراكات' =>  $branch->subscriptions()->count() === 4], $requirements);
+            $requirements = array_merge(['التراخيص' =>  $branch->certificate()->exists()], $requirements);
+            $requirements = array_merge(['السجلات' =>  $branch->record()->exists()], $requirements);
+        }
+
+        return view('admin.corps.requirements', compact('requirements', 'corp'));
     }
 }

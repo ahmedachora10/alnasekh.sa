@@ -9,4 +9,5 @@ return [
     'corps' => 'Corps',
     'branches' => 'Branches',
     'monthly quarterly updates' => 'Monthly, Quarterly Updates',
+    'registries' => 'Registries',
 ];

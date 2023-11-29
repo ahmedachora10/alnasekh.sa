@@ -31,6 +31,7 @@
 
             <x-dashboard.sidebar.link :title="trans('sidebar.corps')" :link="route('corps.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.monthly quarterly updates')" :link="route('monthly-quarterly-update.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.registries')" :link="route('registries.index')" />
 
         </x-dashboard.sidebar.link>
 

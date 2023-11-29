@@ -32,13 +32,19 @@ class CorpBranch extends Model
     }
 
     public function monthlyQuarterlyUpdates(): BelongsToMany {
-        return $this->belongsToMany(MonthlyQuarterlyUpdate::class)
+        return $this->belongsToMany(MonthlyQuarterlyUpdate::class, 'branch_monthly_quarterly', 'corp_branch_id', 'monthly_quarterly_update_id')
         ->as('updates')->withPivot(['date'])->withTimestamps();
     }
 
-    // public function employees(): HasMany {
-    //     return $this->hasMany(CorpEmployee::class);
-    // }
+    public function registries(): BelongsToMany {
+        return $this->belongsToMany(Registry::class, 'corp_branch_registry', 'corp_branch_id', 'registry_id',)->as('registry')->withPivot([
+            'commercial_registration_number', 'start_date', 'end_date'
+        ])->withTimestamps();
+    }
+
+    public function employees(): HasMany {
+        return $this->hasMany(BranchEmployee::class);
+    }
 
     // public function updates() : HasMany {
     //     return $this->hasMany(CorpMonthlyUpdate::class, 'corp_branch_id');

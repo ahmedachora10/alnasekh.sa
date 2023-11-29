@@ -1,4 +1,4 @@
-@props(['name', 'icon' => null])
+@props(['name' => trans('common.save'), 'icon' => null])
 
 <button {{ $attributes->merge(['class' => !is_null($icon) && is_null($name) ? 'btn btn-icon' : 'btn']) }}>
     @if (!empty($icon))

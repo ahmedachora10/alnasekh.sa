@@ -1,5 +1,9 @@
 <x-app-layout>
 
+    <x-dashboard.wizard.wizard-head current="corps" :branch="false" />
+
+    <div class="mb-3"></div>
+
     <form action="{{ route('corps.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <x-dashboard.cards.sample column="col-12">

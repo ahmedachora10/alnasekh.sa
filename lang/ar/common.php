@@ -19,6 +19,11 @@ return [
     'display name' => 'اسم العرض',
 
     'new branch' => 'فرع جديد',
+    'new employee' => 'موظف جديد',
+    'new medical insurance' => 'تأمين طبي جديد',
+    'new health card' => 'كرت صحي جديد',
+
+    'new registry' => 'سجل جديد',
 
     'yes' => 'نعم',
     'no' => 'لا',
@@ -26,6 +31,9 @@ return [
     'update subscription' => 'تحديث الاشتراك',
     'update monthly update' => 'تحديث التحديثات الشهرية والربع سنوية',
     'new monthly update' => 'اضافة التحديثات الشهرية والربع سنوية',
+
+    'corps page' => 'صفحة المنشأة',
+    'branches page' => 'صفحة الفروع',
 
     'are you sure' => 'هل تود حذف هذا العنصر؟',
     'there is more branch' => 'هل يوجد اكثر من فرع؟',

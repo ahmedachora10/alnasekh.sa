@@ -9,12 +9,18 @@ use Illuminate\View\Component;
 class WizardHead extends Component
 {
     public $steps;
+    public $branch;
     /**
      * Create a new component instance.
      */
-    public function __construct(array $steps = [], public string $current = '')
+    public function __construct(
+        bool $branch,
+        public string $current = '',
+        public int $countOfSteps = 6,
+    )
     {
-        $steps = count($steps) > 0 ? $steps : $this->default();
+        $this->branch = $branch;
+        $steps = $this->default();
         $jsonString = json_encode($steps);
         $steps = json_decode($jsonString);
 
@@ -22,14 +28,31 @@ class WizardHead extends Component
     }
 
     private function default() {
-        return [
+
+        $steps = [
             ['target' => 'corps', 'title' => trans('wizard.corp'), 'subtitle' => trans('wizard.add corp')],
+        ];
+
+        if($this->branch) {
+            $steps = array_merge($steps, $this->branches());
+        } else {
+            $steps[] = ['target' => 'registries', 'title' => trans('wizard.registries'), 'subtitle' => trans('wizard.add registry')];
+        }
+
+        $lastSteps = [
+            ['target' => 'monthly_quarterly_updates', 'title' => trans('wizard.monthly quarterly updates'), 'subtitle' => trans('wizard.add monthly quarterly updates')],
+            ['target' => 'employees', 'title' => trans('wizard.employees'), 'subtitle' => trans('wizard.add employee')],
+        ];
+
+        return array_merge($steps, $lastSteps);
+    }
+
+    private function branches() {
+        return [
             ['target' => 'branches', 'title' => trans('wizard.branches'), 'subtitle' => trans('wizard.add branch')],
             ['target' => 'records', 'title' => trans('wizard.records'), 'subtitle' => trans('wizard.add record')],
             ['target' => 'certificates', 'title' => trans('wizard.certificates'), 'subtitle' => trans('wizard.add certificate')],
             ['target' => 'subscriptions', 'title' => trans('wizard.subscriptions'), 'subtitle' => trans('wizard.add subscription')],
-
-            ['target' => 'monthly_updates', 'title' => trans('wizard.monthly updates'), 'subtitle' => trans('wizard.add monthly updates')],
         ];
     }
 

@@ -58,6 +58,18 @@ return [
         'certificate number' => 'رقم الرخصة',
 
         'corp name' => 'اسم المنشأة',
+        'medical insurance' => 'التأمين الطبي',
+        'health card' => 'الكرت الصحي',
+
+        'employee name' => 'اسم المقيم',
+        'resident number' => 'رقم الاقامة',
+        'business card start date' => 'تاريخ بداية كرت العمل',
+        'business card end date' => 'تاريخ نهاية كرت العمل',
+        'contract start date' => 'تاريخ بداية كرت العمل',
+        'contract end date' => 'تاريخ نهاية كرت العمل',
+
+        'company' => 'الشركة',
+        'policy' => 'البوليصة',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

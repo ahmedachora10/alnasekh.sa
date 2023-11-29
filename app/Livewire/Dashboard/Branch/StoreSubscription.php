@@ -56,11 +56,12 @@ class StoreSubscription extends Component
         $this->validate();
 
         if($this->allSubscriptionsAdded) {
-            return $this->dis;
+            return $this->redirectTo();
         }
 
         if($this->branch->subscriptions()->firstWhere('subscription_type', $this->selectedType->value) && !$this->allSubscriptionsAdded) {
-            return session()->put('success', trans('message.exists'));
+            session()->put('success', trans('message.exists'));
+            return $this->dispatch('refresh-alert');
         }
 
         $this->store();
@@ -71,7 +72,7 @@ class StoreSubscription extends Component
     }
 
     public function redirectTo() {
-        dd('done');// redirect()->route('')->with('success', trans('message.create'));
+        return redirect()->route('branches.monthly-quarterly-update.store', $this->branch)->with('success', trans('message.create'));
     }
 
     private function store() {

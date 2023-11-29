@@ -4,12 +4,18 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CorpController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MonthlyQuarterlyUpdateController;
+use App\Http\Controllers\Admin\RegistryController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Livewire\Dashboard\Branch\StoreCertificate;
+use App\Livewire\Dashboard\Branch\StoreEmployee;
+use App\Livewire\Dashboard\Branch\StoreMonthlyQuarterlyUpdate;
 use App\Livewire\Dashboard\Branch\StoreRecord;
+use App\Livewire\Dashboard\Branch\StoreRegistry;
 use App\Livewire\Dashboard\Branch\StoreSubscription;
+use App\Livewire\Dashboard\Container\BranchRegistriesContainer;
+use App\Livewire\Dashboard\Container\EmployeesContainer;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,10 +46,13 @@ Route::middleware(['auth'])->group(function ()
 
     Route::resource('roles', RoleController::class)->only('index', 'destroy');
 
+    Route::get('corps/{branch}/rquirements', [CorpController::class, 'requirements'])->name('corps.requirements');
     Route::resource('corps', CorpController::class)->parameter('corps', 'corp');
 
     Route::resource('monthly-quarterly-update', MonthlyQuarterlyUpdateController::class)
     ->parameter('monthly_quarterly_update', 'monthlyQuarterlyUpdate')->except('show');
+
+    Route::resource('registries', RegistryController::class)->except('show');
 
     Route::controller(BranchController::class)
     ->prefix('corp/branches')->name('branches.')
@@ -54,6 +63,9 @@ Route::middleware(['auth'])->group(function ()
     Route::get('copr/branches/record/{branch}', StoreRecord::class)->name('branches.record.store');
     Route::get('copr/branches/certificate/{branch}', StoreCertificate::class)->name('branches.certificate.store');
     Route::get('copr/branches/subscription/{branch}', StoreSubscription::class)->name('branches.subscription.store');
+    Route::get('copr/branches/monthly-quarterly-updates/{branch}', StoreMonthlyQuarterlyUpdate::class)->name('branches.monthly-quarterly-update.store');
+    Route::get('copr/branches/employees/{branch}', EmployeesContainer::class)->name('branches.employees.store');
+    Route::get('copr/branches/registries/{branch}', BranchRegistriesContainer::class)->name('branches.registries.store');
 });
 
 

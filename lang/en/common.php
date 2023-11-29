@@ -22,6 +22,9 @@ return [
     'new monthly update' => 'New Monthly Update',
 
     'new branch' => 'New Branch',
+    'new employee' => 'New Employee',
+    'new medical insurance' => 'New Medical Insurance',
+    'new  health card' => 'New Health Card',
 
     'yes' => 'Yes',
     'no' => 'No',

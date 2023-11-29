@@ -158,8 +158,15 @@
     @livewireScripts
 
     <script defer>
-        Livewire.on('close-modal', () => $('.modal').modal('hide'));
-        Livewire.on('open-modal', () => $('.modal').modal('show'));
+        Livewire.on('close-modal', ({
+            target
+        }) => $(target ? target : '.modal').modal('hide'));
+
+        Livewire.on('open-modal', ({
+            target
+        }) => {
+            $(target ? target : '.modal').modal('show');
+        });
 
         Livewire.directive('confirm', ({
             el,

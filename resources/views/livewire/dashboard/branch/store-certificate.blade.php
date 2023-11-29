@@ -1,6 +1,5 @@
 <section>
-    <x-dashboard.wizard.wizard-head current="certificates">
-    </x-dashboard.wizard.wizard-head>
+    <x-dashboard.wizard.wizard-head current="certificates" :branch="!$branch->corp->doesnt_has_branches" />
     <div class="mb-3"></div>
     <x-dashboard.cards.sample column="col-12">
         <div class="row">

@@ -27,10 +27,21 @@ return [
         'mission' => 'Mission',
         'entity name' => 'Entity Name',
 
-
         'type' => 'Type',
-
         'corp name' => 'Corp Name',
+
+        'medical insurance' => 'Medical Insurance',
+        'health card' => 'Health Card',
+
+        'employee name' => 'Employee Name',
+        'resident number' => 'Resident Number',
+        'business card start date' => 'Business Card Start Date',
+        'business card end date' => 'Business Card End Date',
+        'contract start date' => 'Contract Start Date',
+        'contract end date' => 'Contract Start Date',
+
+        'company' => 'Company',
+        'policy' => 'Policy',
     ],
     'empty' => 'No Records'
 ];

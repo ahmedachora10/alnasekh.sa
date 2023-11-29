@@ -1,4 +1,5 @@
-<div class="modal fade" id="{{ $id }}" tabindex="-1" style="display: none;" aria-modal="true" role="dialog">
+<div class="modal fade {{ $show }}" id="{{ $id }}" tabindex="-1" style="{{ $style }}"
+    aria-modal="true" role="dialog">
     <div class="modal-dialog modal-lg modal-simple modal-dialog-centered modal-add-new-role">
         <div class="modal-content p-3 p-md-5">
             <div class="modal-body">
