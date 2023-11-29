@@ -24,6 +24,6 @@ class Logo extends Component
      */
     public function render()
     {
-        return view('components.dashboard.logo');
+        return view('components.dashboard.logo', ['image' => $this->image]);
     }
 }
