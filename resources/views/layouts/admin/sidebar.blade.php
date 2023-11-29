@@ -2,7 +2,7 @@
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo">
-                <x-dashboard.logo width="25" />
+                {{-- <x-dashboard.logo width="25" /> --}}
             </span>
             <span class="app-brand-text demo menu-text fw-bolder ms-2">{{ setting('app_name') }}</span>
         </a>
