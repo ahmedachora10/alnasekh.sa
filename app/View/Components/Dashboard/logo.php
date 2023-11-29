@@ -4,7 +4,7 @@ namespace App\View\Components\Dashboard;
 
 use Illuminate\View\Component;
 
-class logo extends Component
+class Logo extends Component
 {
     public $image = null;
     /**
