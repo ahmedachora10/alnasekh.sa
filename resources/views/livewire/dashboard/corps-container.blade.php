@@ -11,7 +11,11 @@
                     {{ $corp->id }}
                 </td>
                 <td>
-                    <a href="{{ route('corps.show', $corp) }}">{{ $corp->name }}</a>
+                    @if ($corp->doesnt_has_branches)
+                        <a href="{{ route('branches.show', $corp->branches->first()) }}">{{ $corp->name }}</a>
+                    @else
+                        <a href="{{ route('corps.show', $corp) }}">{{ $corp->name }}</a>
+                    @endif
                 </td>
                 <td>
                     @if ($user = $corp->user)
