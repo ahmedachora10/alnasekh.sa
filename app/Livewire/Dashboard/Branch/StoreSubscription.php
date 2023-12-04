@@ -87,7 +87,7 @@ class StoreSubscription extends Component
         return $subscription;
     }
 
-    public function udpate() {
+    public function update() {
         $this->subscription->update($this->form->all());
         session()->put('success', trans('message.update'));
 

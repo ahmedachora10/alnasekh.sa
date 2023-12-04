@@ -13,7 +13,7 @@ enum PlatformsSubscriptionType:int {
             self::K => 'قوى',
             self::M => 'مدد',
             self::S => 'سبل',
-            self::SA => 'السعودة',
+            self::SA => 'الغرفة التجارية',
         };
     }
 }

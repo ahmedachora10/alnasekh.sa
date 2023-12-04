@@ -49,12 +49,8 @@ class Corp extends Model
         return $this->has_branches === HasBranches::No;
     }
 
-    public function branches() : HasMany | HasOne {
-        if($this->has_branches == HasBranches::Yes) {
-            return $this->hasMany(CorpBranch::class);
-        }
-
-        return $this->hasOne(CorpBranch::class);
+    public function branches() : HasMany {
+        return $this->hasMany(CorpBranch::class);
     }
 
 }

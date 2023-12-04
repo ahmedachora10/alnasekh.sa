@@ -35,6 +35,26 @@ return [
     'corps page' => 'صفحة المنشأة',
     'branches page' => 'صفحة الفروع',
 
+    'branches' => 'الفروع',
+    'employees' => 'الموظفين',
+    'client' => 'العميل',
+    'registries' => 'السجلات',
+    'certificates' => 'لتراخيص',
+    'subscriptions' => 'الاشتراكات',
+    'records' => 'السجلات',
+    'record' => 'السجل',
+    'corp informations' => 'معلوما المنشأة',
+
     'are you sure' => 'هل تود حذف هذا العنصر؟',
     'there is more branch' => 'هل يوجد اكثر من فرع؟',
+
+    'expired at' => 'ينتهي في',
+    'start at' => 'يبدأ من',
+    'number' => 'الرقم',
+    'almost finished' => 'قارب على الانتهاء',
+    'finished' => 'منتهي',
+    'valid' => 'ساري',
+
+    'update record' => 'تحديث السجل',
+    'update certificate' => 'تحديث الرخصة',
 ];

@@ -2,12 +2,14 @@
 
 return [
     'dashboard' => 'لوحة تحكم',
-    'settings' => 'اعدادات عامة',
+    'home' => 'الرئيسية',
+    'general settings' => 'اعدادات عامة',
+    'settings' => 'اعدادات',
     'users' => 'المستخدمين',
     'images' => 'الصور',
     'roles' => 'الادوار',
-    'corps' => 'المنشأة',
+    'corps' => 'ادارة المنشاة',
     'branches' => 'الفروع',
     'monthly quarterly updates' => 'التحديثات الشهرية والربع السنوية',
-    'registries' => 'السجلات',
+    'registries' => 'التراخيص',
 ];

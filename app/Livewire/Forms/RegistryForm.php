@@ -11,6 +11,9 @@ class RegistryForm extends Form
     #[Rule('required|numeric')]
     public string $commercial_registration_number = '';
 
+    #[Rule('nullable|numeric')]
+    public ?string $registry_number;
+
     #[Rule('required|date')]
     public $start_date;
 

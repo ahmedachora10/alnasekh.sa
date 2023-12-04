@@ -14,9 +14,6 @@ class CertificateForm extends Form
     #[Rule('nullable|string')]
     public string $type = '';
 
-    #[Rule('nullable|string')]
-    public string $status = '';
-
     #[Rule('required|date')]
     public string $start_date = '';
 

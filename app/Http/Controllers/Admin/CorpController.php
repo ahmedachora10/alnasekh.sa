@@ -53,7 +53,28 @@ class CorpController extends Controller
      */
     public function show(Corp $corp)
     {
-        return view('admin.corps.show', compact('corp'));
+        $corp->load(
+            [
+                'branches' => function ($query) {
+                    $query->with([
+                        'record',
+                        'certificate',
+                        'subscriptions',
+                        'monthlyQuarterlyUpdates',
+                        'registries',
+                        'employees'
+                    ])->withCount('employees');
+                }
+            ]
+        )->loadCount(['branches']);
+
+        $records = [];
+
+        foreach($corp->branches as $branch) {
+            $records[] = $branch->record;
+        }
+
+        return view('admin.corps.show', compact('corp', 'records'));
     }
 
     /**

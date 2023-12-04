@@ -13,7 +13,7 @@ class MonthlyQuarterlyUpdate extends Model
     protected $fillable = ['entity_name', 'mission'];
 
     public function branches(): BelongsToMany {
-        return $this->belongsToMany(CorpBranch::class, 'branch_monthly_quarterly', 'corp_branch_id', 'monthly_quarterly_update_id')
+        return $this->belongsToMany(CorpBranch::class, 'branch_monthly_quarterly', 'monthly_quarterly_update_id', 'corp_branch_id')
         ->as('updates')->withPivot(['date'])->withTimestamps();
     }
 }

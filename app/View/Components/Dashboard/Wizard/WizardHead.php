@@ -40,6 +40,7 @@ class WizardHead extends Component
         }
 
         $lastSteps = [
+            ['target' => 'subscriptions', 'title' => trans('wizard.subscriptions'), 'subtitle' => trans('wizard.add subscription')],
             ['target' => 'monthly_quarterly_updates', 'title' => trans('wizard.monthly quarterly updates'), 'subtitle' => trans('wizard.add monthly quarterly updates')],
             ['target' => 'employees', 'title' => trans('wizard.employees'), 'subtitle' => trans('wizard.add employee')],
         ];
@@ -52,7 +53,6 @@ class WizardHead extends Component
             ['target' => 'branches', 'title' => trans('wizard.branches'), 'subtitle' => trans('wizard.add branch')],
             ['target' => 'records', 'title' => trans('wizard.records'), 'subtitle' => trans('wizard.add record')],
             ['target' => 'certificates', 'title' => trans('wizard.certificates'), 'subtitle' => trans('wizard.add certificate')],
-            ['target' => 'subscriptions', 'title' => trans('wizard.subscriptions'), 'subtitle' => trans('wizard.add subscription')],
         ];
     }
 

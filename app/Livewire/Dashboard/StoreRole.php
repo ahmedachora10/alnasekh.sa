@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard;
 
 use App\Models\Permission;
 use App\Models\Role;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule as ValidationRule;
 use Livewire\Attributes\On;
@@ -126,6 +127,9 @@ class StoreRole extends Component
             if(count($this->selected) > 0) {
                 $this->role->syncPermissions($this->selected);
             }
+
+
+            Cache::forget('user-permissions');
 
             return $this->role;
         });

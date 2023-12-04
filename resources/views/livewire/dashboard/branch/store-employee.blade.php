@@ -8,15 +8,6 @@
             :title="trans('table.columns.resident number')" />
     </div>
 
-    <div class="col-md-6 col-12 mb-3">
-        <x-dashboard.input-group type="date" wire:model.defer="form.business_card_start_date"
-            name="form.business_card_start_date" :title="trans('table.columns.business card start date')" />
-    </div>
-
-    <div class="col-md-6 col-12 mb-3">
-        <x-dashboard.input-group type="date" wire:model.defer="form.business_card_end_date"
-            name="form.business_card_end_date" :title="trans('table.columns.business card end date')" />
-    </div>
 
     <div class="col-md-6 col-12 mb-3">
         <x-dashboard.input-group type="date" wire:model.defer="form.contract_start_date"
@@ -29,13 +20,23 @@
     </div>
 
     <div class="col-md-6 col-12 mb-3">
+        <x-dashboard.input-group type="date" wire:model.defer="form.business_card_start_date"
+            name="form.business_card_start_date" :title="trans('table.columns.business card start date')" />
+    </div>
+
+    <div class="col-md-6 col-12 mb-3">
+        <x-dashboard.input-group type="date" wire:model.defer="form.business_card_end_date"
+            name="form.business_card_end_date" :title="trans('table.columns.business card end date')" />
+    </div>
+
+    <div class="col-md-6 col-12 mb-3">
         <x-dashboard.input-group type="date" wire:model.defer="form.start_date" name="form.start_date"
-            :title="trans('table.columns.start date')" />
+            :title="trans('table.columns.employee start date')" />
     </div>
 
     <div class="col-md-6 col-12 mb-3">
         <x-dashboard.input-group type="date" wire:model.defer="form.end_date" name="form.end_date"
-            :title="trans('table.columns.end date')" />
+            :title="trans('table.columns.employee end date')" />
     </div>
 
     <div class="col-12">

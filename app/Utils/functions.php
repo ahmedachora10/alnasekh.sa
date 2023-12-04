@@ -1,6 +1,8 @@
 <?php
 
+use App\Enums\Status;
 use App\Models\Setting;
+use Carbon\Carbon;
 
 if (! function_exists('setting')) {
 
@@ -38,6 +40,32 @@ if(!function_exists('ar_slug')) {
         $string = preg_replace("/[\s_]/", $separator, $string);
 
         return $string;
+    }
+
+}
+
+if(!function_exists('status_handler')) {
+
+    function status_handler($date) : Status {
+
+        if(empty($date) || is_null($date)) {
+            return Status::DEFAULT;
+        }
+
+        $currentDate = now();
+        $endDate = Carbon::parse($date);
+
+        $daysDiff = $endDate->diffInDays($currentDate);
+
+        if($endDate->isPast()) {
+            return Status::FINISHED;
+        }
+
+        if($endDate->isFuture() && $daysDiff > 30) {
+            return Status::VALID;
+        }
+
+        return Status::ALMOST_FINISHED;
     }
 
 }

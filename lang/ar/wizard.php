@@ -8,7 +8,7 @@ return [
     'certificates' => 'التراخيص',
     'subscriptions' => 'الاشتراكات',
     'employees' => 'الموظفين',
-    'registries' => 'السجلات',
+    'registries' => 'التراخيص',
     'monthly quarterly updates' => 'التحديثات الشهرية والربع سنوية',
 
 
@@ -20,7 +20,7 @@ return [
     'add subscriptions' => 'اضافة اشتراك',
     'add certificate' => 'اضافة ترخيص',
     'add employee' => 'اضافة موظف',
-    'add registry' => 'اضافة سجل',
+    'add registry' => 'اضافة ترخيص',
 
     'add monthly quarterly updates' =>'اضافة التحديثات الشهرية والربع سنوية',
 ];

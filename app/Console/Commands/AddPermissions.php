@@ -12,7 +12,7 @@ class AddPermissions extends Command
      *
      * @var string
      */
-    protected $signature = 'permissions:store {model} {customePermissions?}';
+    protected $signature = 'permissions:store {model} {customPermissions?}';
 
     /**
      * The console command description.
@@ -28,19 +28,16 @@ class AddPermissions extends Command
     {
 
         $model = strtolower($this->argument('model'));
-        $customePermissions = $this->argument('customePermissions') ?? '';
+        $customPermissions = $this->argument('customPermissions') ?? '';
 
         if(!$model) return $this->error('model not found');
 
-        if($customePermissions && !is_string($customePermissions)) return $this->error('$customePermissions should be of type array');
+        if($customPermissions && !is_string($customPermissions)) return $this->error('$customPermissions should be of type array');
 
-        $customePermissions = empty($customePermissions) ? [] : explode(',', $customePermissions);
-
-        $permissions = array_merge([
-            'create', 'edit', 'delete', 'show'
-        ], $customePermissions);
+        $permissions = empty($customPermissions) ? [] : explode(',', $customPermissions);
 
         foreach ($permissions as $permission) {
+            $permission = trim($permission);
             $name = "$model.$permission";
 
             Permission::firstOrCreate(

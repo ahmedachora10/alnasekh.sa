@@ -13,14 +13,9 @@
                     name="form.certificate_number" :title="trans('table.columns.certificate number')" />
             </div>
 
-            <div class="col-md-6 col-12 mb-3">
+            <div class="col-12 mb-3">
                 <x-dashboard.input-group type="text" wire:model.defer="form.type" name="form.type"
                     :title="trans('table.columns.type')" />
-            </div>
-
-            <div class="col-md-6 col-12 mb-3">
-                <x-dashboard.input-group type="number" wire:model.defer="form.status" name="form.status"
-                    :title="trans('table.columns.status')" />
             </div>
 
             <div class="col-md-6 col-12 mb-3">

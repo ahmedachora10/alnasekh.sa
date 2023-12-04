@@ -44,7 +44,7 @@ class StoreRegistry extends Component
     #[On('create-branch-registry')]
     public function create(int $registryId) {
         $this->registryId = $registryId;
-        $this->form->reset('start_date', 'end_date');
+        $this->form->reset('start_date', 'end_date', 'registry_number');
         $this->dispatch('open-modal', target: '#branchRegistryFormModal');
     }
 
@@ -53,6 +53,7 @@ class StoreRegistry extends Component
         $registry = $this->branch->registries->find($registry->id);
 
         $this->registry = $registry;
+        $this->form->registry_number = $registry->registry->registry_number;
         $this->form->start_date = $this->parseDate($registry->registry->start_date);
         $this->form->end_date = $this->parseDate($registry->registry->end_date);
 
@@ -71,6 +72,7 @@ class StoreRegistry extends Component
     private function update() {
         $this->branch->registries()->updateExistingPivot($this->registry->id, $this->form->all());
         session()->put('success', trans('message.update'));
+        $this->dispatch('refresh-dashboard');
     }
 
     #[On('delete-branch-registry')]

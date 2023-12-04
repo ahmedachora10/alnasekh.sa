@@ -1,8 +1,13 @@
 <div class="row">
-    <div class="col-12 mb-3">
+    <div class="col-md-6 col-12 mb-3">
         <x-dashboard.input-group readonly type="number" disabled readonly
             wire:model.defer="form.commercial_registration_number" name="form.commercial_registration_number"
             :title="trans('table.columns.commercial registration number')" />
+    </div>
+
+    <div class="col-md-6 col-12 mb-3">
+        <x-dashboard.input-group type="number" wire:model.defer="form.registry_number" name="form.registry_number"
+            :title="trans('table.columns.registry number')" />
     </div>
 
     <div class="col-sm-6 mb-3">

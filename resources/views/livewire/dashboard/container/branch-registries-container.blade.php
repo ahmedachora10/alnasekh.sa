@@ -10,7 +10,11 @@
                 <option value="">تحديد السجل</option>
                 @foreach ($registries as $item)
                     @continue(in_array($item->id, $existingRegistries))
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @php
+                        $this->registryId = $item->id;
+                    @endphp
+                    <option value="{{ $item->id }}">{{ $item->name }}
+                    </option>
                 @endforeach
             </select>
             <button class="btn btn-secondary" type="button" id="button-addon1" wire:click="create">
@@ -58,8 +62,7 @@
         </div>
         @if (count($existingRegistries) > 0)
             <div class="mt-3">
-                <a href="{{ route('branches.monthly-quarterly-update.store', $branch) }}"
-                    class="btn btn-primary float-end">
+                <a href="{{ route('branches.subscription.store', $branch) }}" class="btn btn-primary float-end">
                     {{ trans('common.next') }}
                 </a>
             </div>

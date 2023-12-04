@@ -16,27 +16,44 @@
 
     <ul class="menu-inner py-1 ps ps--active-y">
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.dashboard')" icon="home-circle" :link="route('dashboard')" />
+        @hasPermission('dashboard.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.home')" icon="home-circle" :link="route('dashboard')" />
+        @endhasPermission
 
-        <x-dashboard.sidebar.link-head>
-            <span>{{ trans('sidebar.users') }} / {{ trans('sidebar.roles') }}</span>
-        </x-dashboard.sidebar.link-head>
+        @hasPermission('corp.show|setting.show|monthly-quarterly.show|registry.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.corps')" icon="folder" link="#" :hasSubMenu="true">
+                @hasPermission('corp.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.corps')" :link="route('corps.index')" />
+                @endhasPermission
+                @hasPermission('monthly-quarterly.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.monthly quarterly updates')" :link="route('monthly-quarterly-update.index')" />
+                @endhasPermission
+                @hasPermission('registry.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.registries')" :link="route('registries.index')" />
+                @endhasPermission
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.users')" icon="user" :link="route('users.index')" />
-        <x-dashboard.sidebar.link :title="trans('sidebar.roles')" icon="key" :link="route('roles.index')" />
+            </x-dashboard.sidebar.link>
+        @endhasPermission
 
-        {{-- <x-dashboard.sidebar.link :title="trans('sidebar.images')" icon="image" :link="route('images.index')" /> --}}
+        @hasPermission('user.show|setting.show')
+            <x-dashboard.sidebar.link-head>
+                <span>{{ trans('sidebar.users') }} / {{ trans('sidebar.roles') }}</span>
+            </x-dashboard.sidebar.link-head>
+        @endhasPermission
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.corps')" icon="folder" link="#" :hasSubMenu="true">
-
-            <x-dashboard.sidebar.link :title="trans('sidebar.corps')" :link="route('corps.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.monthly quarterly updates')" :link="route('monthly-quarterly-update.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.registries')" :link="route('registries.index')" />
-
-        </x-dashboard.sidebar.link>
-
-        <x-dashboard.sidebar.link :title="trans('sidebar.settings')" icon="cog" :link="route('settings.index')" />
-
+        @hasPermission('user.show|role.show|setting.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.settings')" icon="cog" link="#" :hasSubMenu="true">
+                @hasPermission('user.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.users')" :link="route('users.index')" />
+                @endhasPermission
+                @hasPermission('role.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.roles')" :link="route('roles.index')" />
+                @endhasPermission
+                @hasPermission('setting.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.general settings')" :link="route('settings.index')" />
+                @endhasPermission
+            </x-dashboard.sidebar.link>
+        @endhasPermission
 
         <!-- Misc -->
         {{-- <li class="menu-item">

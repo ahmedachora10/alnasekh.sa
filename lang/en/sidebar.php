@@ -2,6 +2,7 @@
 
 return [
     'dashboard' => 'Dashboard',
+    'general settings' => 'General Settings',
     'settings' => 'Settings',
     'users' => 'Users',
     'images' => 'Images',

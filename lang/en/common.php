@@ -26,10 +26,18 @@ return [
     'new medical insurance' => 'New Medical Insurance',
     'new  health card' => 'New Health Card',
 
+    'branches' => 'Branches',
+    'employees' => 'Employees',
+    'client' => 'Client',
+    'corp informations' => 'Corp Informations',
+
     'yes' => 'Yes',
     'no' => 'No',
 
     'next' => 'Next',
 
     'are you sure' => 'Are You Sure?',
+
+    'expired at' => 'Expired At',
+    'start at' => 'start at',
 ];

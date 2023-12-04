@@ -16,9 +16,12 @@ class BranchesContainer extends Component
     public Corp $corp;
     public ?string $targetStep = '';
 
-    public function mount($corp) {
+    public $theme;
+
+    public function mount($corp, $theme = 'branches-container') {
         $this->corp = $corp;
         $this->targetStep = request('target');
+        $this->theme = $theme;
     }
 
     #[On('refresh-branches')]
@@ -28,7 +31,7 @@ class BranchesContainer extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.branches-container', [
+        return view('livewire.dashboard.'.$this->theme, [
             'branches' => $this->corp->branches()->paginate(setting('pagination') ?? 8)
         ]);
     }

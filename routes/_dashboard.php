@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function ()
     ->prefix('corp/branches')->name('branches.')
     ->group(function () {
         Route::get('{corp}', 'index')->name('index');
+        Route::get('{branch}/show', 'show')->name('show');
     });
 
     Route::get('copr/branches/record/{branch}', StoreRecord::class)->name('branches.record.store');

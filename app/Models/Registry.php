@@ -15,7 +15,7 @@ class Registry extends Model
 
     public function branches(): BelongsToMany {
         return $this->belongsToMany(CorpBranch::class, 'corp_branch_registry', 'registry_id', 'corp_branch_id')->as('registry')->withPivot([
-            'commercial_registration_number', 'start_date', 'end_date'
+            'registry_number', 'commercial_registration_number', 'start_date', 'end_date'
         ])->withTimestamps();
     }
 }
