@@ -38,6 +38,7 @@ class ExportController extends Controller
             }
         }
 
+
         return view('exports.pdf.monthly-quarterly-updates', compact('data'));
     }
 }

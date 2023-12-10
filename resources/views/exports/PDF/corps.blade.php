@@ -4,7 +4,6 @@
             <tr>
                 <td>
                     <span>{{ $corp->name }}</span>
-
                 </td>
                 <td>
                     @if ($user = $corp->user)
