@@ -46,7 +46,7 @@ class Kernel extends ConsoleKernel
                     'end_date' => $item->end_date,
                     'model' => Corp::class,
                     'link' => route('corps.show', $item)
-                ]);
+                ], $item->email);
 
                 $item->user->notify($notification);
 
@@ -69,7 +69,7 @@ class Kernel extends ConsoleKernel
                     'end_date' => $item->end_date,
                     'model' => BranchRecord::class,
                     'link' => route('branches.show', $item->branch)
-                ]);
+                ], $item->branch->corp->email);
 
                 $item->branch->corp->user->notify($notification);
 
@@ -94,7 +94,7 @@ class Kernel extends ConsoleKernel
                     'end_date' => $item->end_date,
                     'model' => BranchSubscrition::class,
                     'link' => route('branches.show', $item->branch)
-                ]);
+                ], $item->branch->corp->email);
 
                 $item->branch->corp->user->notify($notification);
 
@@ -119,7 +119,7 @@ class Kernel extends ConsoleKernel
                     'end_date' => $item->end_date,
                     'model' => BranchCertificate::class,
                     'link' => route('branches.show', $item->branch)
-                ]);
+                ], $item->branch->corp->email);
 
                 $item->branch->corp->user->notify($notification);
 
@@ -144,7 +144,7 @@ class Kernel extends ConsoleKernel
                     'end_date' => $item->end_date,
                     'model' => CorpBranchRegistry::class,
                     'link' => route('branches.show', $item->branch)
-                ]);
+                ], $item->branch->corp->email);
 
                 $item->branch->corp->user->notify($notification);
 
@@ -169,7 +169,7 @@ class Kernel extends ConsoleKernel
                     'end_date' => $item->end_date,
                     'model' => CorpBranchMonthlyQuarterlyUpdate::class,
                     'link' => route('branches.show', $item->branch)
-                ]);
+                ], $item->branch->corp->email);
 
                 $item->branch->corp->user->notify($notification);
 
@@ -191,7 +191,7 @@ class Kernel extends ConsoleKernel
                         'end_date' => $item->end_date,
                         'model' => BranchEmployee::class,
                         'link' => route('branches.show', $item->branch)
-                    ]);
+                    ], $item->branch->corp->email);
 
                     $item->branch->corp->user->notify($notification);
 
@@ -211,7 +211,7 @@ class Kernel extends ConsoleKernel
                         'business_card_end_date' => $item->business_card_end_date,
                         'model' => BranchEmployee::class,
                         'link' => route('branches.show', $item->branch)
-                    ]);
+                    ], $item->branch->corp->email);
 
                     $item->branch->corp->user->notify($notification);
 
@@ -231,7 +231,7 @@ class Kernel extends ConsoleKernel
                         'contract_end_date' => $item->contract_end_date,
                         'model' => BranchEmployee::class,
                         'link' => route('branches.show', $item->branch)
-                    ]);
+                    ], $item->branch->corp->email);
 
                     $item->branch->corp->user->notify($notification);
 
