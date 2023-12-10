@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Corp;
 use App\Http\Requests\Admin\StoreCorpRequest;
 use App\Http\Requests\Admin\UpdateCorpRequest;
+use App\Mail\SendReminderEmail;
 use App\Models\CorpBranch;
+use Illuminate\Support\Facades\Mail;
 
 class CorpController extends Controller
 {

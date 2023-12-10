@@ -9,6 +9,12 @@ return [
     'submit' => 'Submit',
     'save' => 'Save',
 
+    'my profile' => 'My Profile',
+    'log out' => 'Log Out',
+    'notifications' => 'Notifications',
+    'show more' => 'Show more',
+    'no notifications exists' => 'No Notifications Exists',
+
     'new role' => 'New Role',
 
     'role permissions' => 'Role Permissions',
@@ -40,4 +46,6 @@ return [
 
     'expired at' => 'Expired At',
     'start at' => 'start at',
+    'remember me' => 'Remember Me',
+    'sign in' => 'Sign in',
 ];

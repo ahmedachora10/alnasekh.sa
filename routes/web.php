@@ -1,6 +1,11 @@
 <?php
 
+use App\Exports\CorpsExport;
+use App\Exports\PDF\EmployeesPDFExport;
+use App\Models\Corp;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Excel as ExcelFormat;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('export', function () {
+//     return Excel::download(new CorpsExport, 'corps.xlsx', ExcelFormat::XLSX);
+// });
+
 
 
 require __DIR__.'/auth.php';

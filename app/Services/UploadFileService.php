@@ -30,7 +30,9 @@ class UploadFileService {
         return $name;
     }
 
-    public function delete(string $filePath = ''): bool {
+    public function delete(?string $filePath = ''): bool {
+        if($filePath === '' || is_null($filePath)) return false;
+
         if(Storage::disk($this->driver)->exists($filePath)) {
             Storage::disk($this->driver)->delete($filePath);
             return true;

@@ -29,6 +29,6 @@ class BranchCertificate extends Model
     ];
 
     public function branch() : BelongsTo {
-        return $this->belongsTo(CorpBranch::class);
+        return $this->belongsTo(CorpBranch::class, 'corp_branch_id');
     }
 }

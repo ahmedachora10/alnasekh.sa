@@ -46,7 +46,8 @@ return [
         'actions' => 'اجراءات',
 
         'employee' => 'الموظف',
-        'mission' => 'مهمة',
+        'mission' => 'المهمة',
+        'entity' => 'الجهة',
         'entity name' => 'اسم السجل',
         'has branches?' => 'لديه فروع؟',
         'start date' => 'تاريخ البداية',

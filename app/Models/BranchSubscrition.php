@@ -15,6 +15,7 @@ class BranchSubscrition extends Model
     use HasFactory, ModelBasicAttributeValue, SetStatusAttribute;
 
     protected $fillable = [
+        'corp_branch_id',
         'subscription_type',
         'type',
         'status',
@@ -30,6 +31,6 @@ class BranchSubscrition extends Model
     ];
 
     public function branch() : BelongsTo {
-        return $this->belongsTo(CorpBranch::class);
+        return $this->belongsTo(CorpBranch::class, 'corp_branch_id');
     }
 }

@@ -9,6 +9,14 @@ return [
     'submit' => 'ارسال',
     'show' => 'عرض',
     'save' => 'حفظ',
+    'export' => 'تصدير',
+    'print' => 'طباعة',
+
+    'my profile' => 'حسابي',
+    'log out' => 'الخروج',
+    'notifications' => 'اشعارات',
+    'show more' => 'عرض المزيد',
+    'no notifications exists' =>  'لا توجد اشعارات لعرضها',
 
     'new role' => 'دور جديد',
     'role permissions' => 'صلاحيات الدور',
@@ -57,4 +65,7 @@ return [
 
     'update record' => 'تحديث السجل',
     'update certificate' => 'تحديث الرخصة',
+
+    'remember me' => 'تذكرني',
+    'sign in' => 'تسجيل الدخول',
 ];

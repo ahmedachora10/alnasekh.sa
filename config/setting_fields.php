@@ -86,11 +86,11 @@ return [
 
         'elements' => [
             [
-                'type' => 'email',
+                'type' => 'text',
                 'data' => 'string',
                 'name' => 'email',
                 'label' => 'Email',
-                'rules' => 'nullable|email',
+                'rules' => 'nullable|string|email',
                 'class' => '',
                 'value' => ''
 

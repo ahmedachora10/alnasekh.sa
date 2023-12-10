@@ -22,16 +22,20 @@
         @endif
     </div>
 
-    <div class="table-responsive text-nowrap">
+    <div @class(['text-nowrap', 'table-responsive' => $responsive])>
         <table class="table">
             @if (!empty($columns))
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        @if ($withId)
+                            <th>ID</th>
+                        @endif
                         @foreach ($columns as $col)
                             <th> {{ trans('table.columns.' . strtolower($col)) }} </th>
                         @endforeach
-                        <th> {{ trans('table.columns.actions') }} </th>
+                        @if ($withActions)
+                            <th> {{ trans('table.columns.actions') }} </th>
+                        @endif
                     </tr>
                 </thead>
             @endif

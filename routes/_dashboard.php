@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CorpController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MonthlyQuarterlyUpdateController;
 use App\Http\Controllers\Admin\RegistryController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\ProfileController;
 use App\Livewire\Dashboard\Branch\StoreCertificate;
 use App\Livewire\Dashboard\Branch\StoreEmployee;
 use App\Livewire\Dashboard\Branch\StoreMonthlyQuarterlyUpdate;
@@ -16,6 +18,7 @@ use App\Livewire\Dashboard\Branch\StoreRegistry;
 use App\Livewire\Dashboard\Branch\StoreSubscription;
 use App\Livewire\Dashboard\Container\BranchRegistriesContainer;
 use App\Livewire\Dashboard\Container\EmployeesContainer;
+use App\Livewire\Dashboard\Container\NotificationsContainer;
 use Illuminate\Support\Facades\Route;
 
 
@@ -67,6 +70,21 @@ Route::middleware(['auth'])->group(function ()
     Route::get('copr/branches/monthly-quarterly-updates/{branch}', StoreMonthlyQuarterlyUpdate::class)->name('branches.monthly-quarterly-update.store');
     Route::get('copr/branches/employees/{branch}', EmployeesContainer::class)->name('branches.employees.store');
     Route::get('copr/branches/registries/{branch}', BranchRegistriesContainer::class)->name('branches.registries.store');
+
+    Route::controller(ExportController::class)
+    ->prefix('export')
+    ->name('export.')
+    ->group(function () {
+        Route::get('corps', 'corps')->name('corps.all');
+        Route::get('employees/{corp}', 'employees')->name('corps.employees');
+        Route::get('monthly-quarterly-updates/{corp}', 'monthlyQuarterlyMonthly')->name('corps.monthly-quarterly-update');
+    });
+
+    Route::get('notifications', NotificationsContainer::class)->name('users.notifications');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 

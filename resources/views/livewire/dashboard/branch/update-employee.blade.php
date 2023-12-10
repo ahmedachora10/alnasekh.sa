@@ -2,11 +2,20 @@
     <div class="card">
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="card-header">{{ trans('common.employees') }}</h5>
-            <button class="btn btn-primary me-4 ms-2 btn-sm test-cleave" data-bs-target="#branchEmployeeFormModal"
-                data-bs-toggle="modal">
-                <span class="tf-icons bx bx-plus"></span>
-                <span>{{ trans('common.create') }}</span>
-            </button>
+            <div>
+                {{-- <a href="{{ route('export.branch.employees', $branch) }}"
+                    class="btn btn-secondary  ms-2 btn-sm test-cleave">
+                    <span class="tf-icons bx bx-cloud-download me-1"></span>
+                    <span>{{ trans('common.export') }}</span>
+                </a> --}}
+                {{-- <livewire:exports.export-button :branch="$branch" type="employees" /> --}}
+
+                <button class="btn btn-primary me-4 ms-2 btn-sm test-cleave" data-bs-target="#branchEmployeeFormModal"
+                    data-bs-toggle="modal">
+                    <span class="tf-icons bx bx-plus"></span>
+                    <span>{{ trans('common.create') }}</span>
+                </button>
+            </div>
         </div>
     </div>
     <div class="card-body">

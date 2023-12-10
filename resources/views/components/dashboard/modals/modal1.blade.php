@@ -5,7 +5,9 @@
             <div class="modal-body">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="text-center mb-4">
-                    <h3 class="role-title">{{ $title }}</h3>
+                    @if ($title !== '')
+                        <h3 class="role-title">{{ $title }}</h3>
+                    @endif
                     @if ($description !== '')
                         <p>{{ $description }}</p>
                     @endif
