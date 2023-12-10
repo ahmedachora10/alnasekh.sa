@@ -30,6 +30,9 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $admins = User::whereHasRole('admin')->get();
 
+
+            dd('done', $admins);
+
             // Corps
             foreach (Corp::with('user')->get() as $item) {
                 $status = status_handler($item->end_date);
@@ -150,8 +153,6 @@ class Kernel extends ConsoleKernel
 
                 Notification::send($admins, $notification);
             }
-
-            dd('done');
 
             // Monthly And Quarterly Updates
             foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->get() as $item) {
