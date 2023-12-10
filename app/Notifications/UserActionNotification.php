@@ -20,8 +20,8 @@ class UserActionNotification extends Notification
         public array $data
     )
     {
-        dd($this->data);
         Mail::to(setting('email'))->queue(new SendReminderEmail($this->data['title']));
+        dd($this->data);
     }
 
     /**
