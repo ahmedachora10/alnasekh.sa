@@ -151,6 +151,8 @@ class Kernel extends ConsoleKernel
                 Notification::send($admins, $notification);
             }
 
+            dd('done');
+
             // Monthly And Quarterly Updates
             foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->get() as $item) {
                 $status = status_handler($item->end_date);
