@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Exports\Helpers\CommonColumns;
 use App\Models\BranchRecord;
 use App\Models\Corp;
 use App\Traits\Exports\RTLDirection;
@@ -14,7 +15,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class RecordsExport implements FromQuery, WithEvents, WithHeadings, ShouldAutoSize, WithMapping
 {
-    use RTLDirection;
+    use RTLDirection, CommonColumns;
 
     public function __construct(protected int $corpId) {}
 
@@ -25,21 +26,21 @@ class RecordsExport implements FromQuery, WithEvents, WithHeadings, ShouldAutoSi
 
     public function headings(): array
     {
-        return [
-            '#',
+        return $this->columns([
+            'رقم السجل التجاري',
             'النوع',
             'تاريخ الاصدار',
             'تاريخ الانتهاء',
-        ];
+        ]);
     }
 
     public function map($item): array
     {
-        return [
-            $item->id,
+        return array_merge($this->mapCommonData($item),[
+            $item->branch?->corp->commercial_registration_number,
             $item->type,
             $item->start_date->format('Y-m-d'),
             $item->end_date->format('Y-m-d'),
-        ];
+        ]);
     }
 }

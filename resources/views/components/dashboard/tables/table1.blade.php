@@ -31,7 +31,7 @@
                             <th>ID</th>
                         @endif
                         @foreach ($columns as $col)
-                            <th> {{ trans('table.columns.' . strtolower($col)) }} </th>
+                            <th> {{ $translate ? trans('table.columns.' . strtolower($col)) : $col }} </th>
                         @endforeach
                         @if ($withActions)
                             <th> {{ trans('table.columns.actions') }} </th>

@@ -98,7 +98,7 @@
             <div class="col-6">
                 <div
                     class="form-check custom-option custom-option-icon border-right-0 border-top-0 border-bottom-0  border-left">
-                    <a href="#!" data-bs-target="#PrintModal" data-bs-toggle="modal"
+                    <a href="#!" data-bs-target="#PrintHasBranchesModal" data-bs-toggle="modal"
                         class="form-check-label custom-option-content" for="customRadioIcon1">
                         <span class="custom-option-body">
                             <i class="bx bx-printer fs-1 text-secondary"></i>
@@ -129,7 +129,7 @@
             <div class="col-6">
                 <div
                     class="form-check custom-option custom-option-icon border-right-0 border-top-0 border-bottom-0  border-left">
-                    <a href="#!" data-bs-target="#PrintModal" data-bs-toggle="modal"
+                    <a href="#!" data-bs-target="#PrintDoesntHasBanchesModal" data-bs-toggle="modal"
                         class="form-check-label custom-option-content" for="customRadioIcon1">
                         <span class="custom-option-body">
                             <i class="bx bx-printer fs-1 text-secondary"></i>
@@ -157,89 +157,82 @@
 
     <x-dashboard.modals.modal1 id="ExportModal">
         <div class="row overflow-visible g-0">
-            <div class="col-6">
-                <div
-                    class="form-check custom-option custom-option-icon border-right-0 border-top-0 border-bottom-0  border-left">
-                    <a href="{{ route('export.corps.all') }}" target="_blank"
-                        class="form-check-label custom-option-content" for="customRadioIcon1">
-                        <span class="custom-option-body">
-                            <i class="bx bx-printer fs-1 text-secondary"></i>
-                            <span class="custom-option-title">{{ trans('common.print') }}</span>
-
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6">
-                <livewire:exports.export-button type="corps" />
-            </div>
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.print')" type="corps"
+                icon="bx bx-file" />
+            <livewire:exports.export-button type="corps" />
         </div>
     </x-dashboard.modals.modal1>
 
-    <x-dashboard.modals.modal1 id="PrintModal">
+    <x-dashboard.modals.modal1 id="PrintHasBranchesModal">
         <div class="row overflow-visible g-0">
-            <div class="col-6">
-                <div
-                    class="form-check custom-option custom-option-icon border-right-0 border-top-0 border-bottom-0  border-left">
-                    <a href="{{ route('export.corps.employees', $corpModel) }}" target="_blank"
-                        class="form-check-label custom-option-content" for="customRadioIcon1">
-                        <span class="custom-option-body">
-                            <i class="fas fa-users fs-2 mb-2 text-secondary"></i>
-                            <span class="custom-option-title">{{ trans('common.employees') }}</span>
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.corp details')" type="corp"
+                icon="bx bx-file" />
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.branches')" type="all-branches"
+                icon="bx bx-file-blank" />
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.employees')" type="all-employees"
+                icon="fas fa-users fs-2 mb-2 text-secondary" style="border-top" />
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.monthly and quarterly updates')"
+                type="all-monthly-quarterly-updates" icon="bx bx-file" style="border-top" />
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.subscriptions')"
+                type="all-subscriptions" icon="bx bx-file" style="border-top" />
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.records')" type="all-records"
+                icon="bx bx-file-blank" style="border-top" />
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.certificates')"
+                type="all-certificates" icon="bx bx-file-blank" style="border-top col-12" />
+        </div>
+    </x-dashboard.modals.modal1>
 
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6">
-                <div
-                    class="form-check custom-option custom-option-icon border-right-0 border-top-0 border-bottom-0  border-left">
-                    <a href="{{ route('export.corps.monthly-quarterly-update', $corpModel) }}" target="_blank"
-                        class="form-check-label custom-option-content" for="customRadioIcon1">
-                        <span class="custom-option-body">
-                            <i class="bx bx-file fs-1 text-secondary"></i>
-                            <span class="custom-option-title">{{ trans('common.update monthly update') }}</span>
+    <x-dashboard.modals.modal1 id="PrintDoesntHasBanchesModal">
+        <div class="row overflow-visible g-0">
+            <livewire:exports.export-button fileType="excel" :corp="$corpModel" :title="trans('common.corp details')" type="corp"
+                icon="bx bx-file" />
+            <livewire:exports.export-button fileType="excel" :corp="$corpModel" :title="trans('common.employees')"
+                type="all-employees" icon="fas fa-users" />
 
-                        </span>
-                    </a>
-                </div>
-            </div>
+            <livewire:exports.export-button fileType="excel" :corp="$corpModel" :title="trans('common.monthly and quarterly updates')"
+                type="all-monthly-quarterly-updates" icon="bx bx-file" style="border-top" />
+
+            <livewire:exports.export-button fileType="excel" :corp="$corpModel" :title="trans('common.subscriptions')"
+                type="all-subscriptions" icon="bx bx-file" style="border-top" />
+
+            <livewire:exports.export-button fileType="excel" :corp="$corpModel" :title="trans('common.registries')"
+                type="all-registries" icon="bx bx-file-blank" style="border-top col-12" />
         </div>
     </x-dashboard.modals.modal1>
 
     <x-dashboard.modals.modal1 id="ExportExcelHasBanchesModal">
         <div class="row overflow-visible g-0">
-
+            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.corp details')" type="corp" icon="bx bx-file" />
+            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.branches')" type="all-branches"
+                icon="bx bx-file-blank" />
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.employees')" type="all-employees"
-                icon="fas fa-users" />
-
-            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.update monthly update')" type="all-monthly-quarterly-updates"
-                icon="bx bx-file" />
-
+                icon="fas fa-users" style="border-top" />
+            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.monthly and quarterly updates')" type="all-monthly-quarterly-updates"
+                icon="bx bx-file" style="border-top" />
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.subscriptions')" type="all-subscriptions"
                 icon="bx bx-file" style="border-top" />
-
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.records')" type="all-records"
                 icon="bx bx-file-blank" style="border-top" />
-
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.certificates')" type="all-certificates"
-                icon="bx bx-file-blank" style="border-top" />
+                icon="bx bx-file-blank" style="border-top col-12" />
         </div>
     </x-dashboard.modals.modal1>
 
+
     <x-dashboard.modals.modal1 id="ExportExcelDoesntHasBanchesModal">
         <div class="row overflow-visible g-0">
+            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.corp details')" type="corp" icon="bx bx-file" />
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.employees')" type="all-employees"
                 icon="fas fa-users" />
 
-            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.update monthly update')" type="all-monthly-quarterly-updates"
-                icon="bx bx-file" />
+            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.monthly and quarterly updates')" type="all-monthly-quarterly-updates"
+                icon="bx bx-file" style="border-top" />
 
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.subscriptions')" type="all-subscriptions"
                 icon="bx bx-file" style="border-top" />
 
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.registries')" type="all-registries"
-                icon="bx bx-file-blank" style="border-top" />
+                icon="bx bx-file-blank" style="border-top col-12" />
         </div>
     </x-dashboard.modals.modal1>
 </section>

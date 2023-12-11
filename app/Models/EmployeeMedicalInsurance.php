@@ -30,6 +30,6 @@ class EmployeeMedicalInsurance extends Model
     ];
 
     public function employee() : BelongsTo {
-        return $this->belongsTo(BranchEmployee::class);
+        return $this->belongsTo(BranchEmployee::class, 'branch_employee_id');
     }
 }

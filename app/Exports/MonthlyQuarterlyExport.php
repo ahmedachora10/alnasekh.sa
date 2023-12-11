@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Exports\Helpers\CommonColumns;
 use App\Models\Corp;
 use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Traits\Exports\RTLDirection;
@@ -14,7 +15,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class MonthlyQuarterlyExport implements FromQuery, WithEvents, WithHeadings, ShouldAutoSize, WithMapping
 {
-    use RTLDirection;
+    use RTLDirection, CommonColumns;
 
     public function __construct(
         public int $corpId
@@ -22,27 +23,25 @@ class MonthlyQuarterlyExport implements FromQuery, WithEvents, WithHeadings, Sho
 
     public function query()
     {
-        return CorpBranchMonthlyQuarterlyUpdate::with(['monthlyQuarterlyUpdate'])
+        return CorpBranchMonthlyQuarterlyUpdate::with(['monthlyQuarterlyUpdate', 'branch.corp'])
         ->whereIn('corp_branch_id', Corp::find($this->corpId)?->branches()->pluck('id')->toArray());
     }
 
     public function headings(): array
     {
-        return [
-            '#',
+        return $this->columns([
             'الجهة',
             'المهمة',
             'التاريخ',
-        ];
+        ]);
     }
 
     public function map($item): array
     {
-        return [
-            $item->id,
+        return array_merge($this->mapCommonData($item),[
             $item?->monthlyQuarterlyUpdate->entity_name,
             $item?->monthlyQuarterlyUpdate->mission,
             now()->parse($item->date)->format('Y-m-d'),
-        ];
+        ]);
     }
 }

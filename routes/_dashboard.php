@@ -75,9 +75,14 @@ Route::middleware(['auth'])->group(function ()
     ->prefix('export')
     ->name('export.')
     ->group(function () {
-        Route::get('corps', 'corps')->name('corps.all');
+        Route::get('corps/{corp?}', 'corps')->name('corps.all');
         Route::get('employees/{corp}', 'employees')->name('corps.employees');
+        Route::get('branches/{corp}', 'branches')->name('corps.branches');
         Route::get('monthly-quarterly-updates/{corp}', 'monthlyQuarterlyMonthly')->name('corps.monthly-quarterly-update');
+        Route::get('subscriptions/{corp}', 'subscriptions')->name('corps.subscriptions');
+        Route::get('records/{corp}', 'records')->name('corps.records');
+        Route::get('certificates/{corp}', 'certificates')->name('corps.certificates');
+        Route::get('registries/{corp}', 'registries')->name('corps.registries');
     });
 
     Route::get('notifications', NotificationsContainer::class)->name('users.notifications');

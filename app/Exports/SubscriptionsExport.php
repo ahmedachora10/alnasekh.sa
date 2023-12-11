@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Exports\Helpers\CommonColumns;
 use App\Models\BranchSubscrition;
 use App\Models\Corp;
 use App\Traits\Exports\RTLDirection;
@@ -15,13 +16,10 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 
 class SubscriptionsExport implements FromQuery, ShouldAutoSize, WithHeadings, WithEvents, WithMapping
 {
-    use RTLDirection;
+    use RTLDirection, CommonColumns;
 
     public function __construct(protected int $corpId) {}
 
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     public function query()
     {
         return BranchSubscrition::with('branch')->whereIn('corp_branch_id', Corp::find($this->corpId)->branches()->pluck('id')->toArray());
@@ -29,28 +27,24 @@ class SubscriptionsExport implements FromQuery, ShouldAutoSize, WithHeadings, Wi
 
     public function headings(): array
     {
-        return [
-            '#',
-            'الفرع',
+        return $this->columns([
             'نوع الرخصة',
             'النوع',
             'تاريخ الاصدار',
             'تاريخ النهاية',
             'تاريخ الانشاء'
-        ];
+        ]);
     }
 
     public function map($item): array
     {
-        return [
-            $item->id,
-            $item->branch?->name,
+        return array_merge($this->mapCommonData($item), [
             $item->subscription_type->name(),
             $item->type,
             $item->start_date->format('Y-m-d'),
             $item->end_date->format('Y-m-d'),
             $item->created_at->format('Y-m-d H:i:s'),
-        ];
+        ]);
     }
 
 }

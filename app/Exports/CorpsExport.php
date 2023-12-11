@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Date;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -22,17 +23,20 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class CorpsExport implements FromCollection, WithHeadings, WithEvents, ShouldAutoSize, WithColumnFormatting, WithMapping
+class CorpsExport implements FromQuery, WithHeadings, WithEvents, ShouldAutoSize, WithColumnFormatting, WithMapping
 {
+
+    public function __construct(protected ?int $corpId = null) {}
+
     use Exportable, RTLDirection;
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+
+    public function query()
     {
         return Corp::select(['id', 'name', 'administrator_name', 'phone', 'email', 'commercial_registration_number', 'start_date', 'end_date', 'created_at'])
         ->with('user')
-        ->get();
+        ->when($this->corpId !== null, function ($query) {
+            $query->where('id', $this->corpId);
+        });
     }
 
     public function headings(): array
@@ -47,7 +51,6 @@ class CorpsExport implements FromCollection, WithHeadings, WithEvents, ShouldAut
             'رقم السجل التجاري',
             'تاريخ الاصدار',
             'تاريخ النهاية',
-            'تاريخ الانشاء'
         ];
     }
 
@@ -62,7 +65,6 @@ class CorpsExport implements FromCollection, WithHeadings, WithEvents, ShouldAut
             'G' => NumberFormat::FORMAT_NUMBER,
             'H' => NumberFormat::FORMAT_DATE_DATETIME,
             'I' => NumberFormat::FORMAT_DATE_DATETIME,
-            'J' => NumberFormat::FORMAT_DATE_DATETIME,
         ];
     }
 
@@ -78,7 +80,6 @@ class CorpsExport implements FromCollection, WithHeadings, WithEvents, ShouldAut
             $corp->commercial_registration_number,
             $corp->start_date->format('Y-m-d'),
             $corp->end_date->format('Y-m-d'),
-            $corp->created_at->format('Y-m-d H:i:s'),
         ];
     }
 }

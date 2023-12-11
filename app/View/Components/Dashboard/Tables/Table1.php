@@ -19,6 +19,7 @@ class Table1 extends Component
         public $withActions = true,
         public $withId = true,
         public $responsive = true,
+        public $translate = true,
     )
     {
         //

@@ -40,6 +40,8 @@ return [
     'update monthly update' => 'تحديث التحديثات الشهرية والربع سنوية',
     'new monthly update' => 'اضافة التحديثات الشهرية والربع سنوية',
 
+    'monthly and quarterly updates' => 'التحديثات الشهرية والربع سنوية',
+
     'corps page' => 'صفحة المنشأة',
     'branches page' => 'صفحة الفروع',
 
@@ -47,7 +49,7 @@ return [
     'employees' => 'الموظفين',
     'client' => 'العميل',
     'registries' => 'السجلات',
-    'certificates' => 'لتراخيص',
+    'certificates' => 'التراخيص',
     'subscriptions' => 'الاشتراكات',
     'records' => 'السجلات',
     'record' => 'السجل',
@@ -68,4 +70,6 @@ return [
 
     'remember me' => 'تذكرني',
     'sign in' => 'تسجيل الدخول',
+
+    'corp details' => 'تفاصيل المنشأة',
 ];

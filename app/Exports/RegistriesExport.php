@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Exports\Helpers\CommonColumns;
 use App\Models\BranchRegistry;
 use App\Models\Corp;
 use App\Models\CorpBranchRegistry;
@@ -14,13 +15,10 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class RegistriesExport implements FromQuery, ShouldAutoSize, WithHeadings, WithEvents, WithMapping
 {
-    use RTLDirection;
+    use RTLDirection, CommonColumns;
 
     public function __construct(protected int $corpId) {}
 
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     public function query()
     {
         return CorpBranchRegistry::with('registry')->whereIn('corp_branch_id', Corp::find($this->corpId)->branches()->pluck('id')->toArray());;
@@ -28,25 +26,23 @@ class RegistriesExport implements FromQuery, ShouldAutoSize, WithHeadings, WithE
 
     public function headings(): array
     {
-        return [
-            '#',
+        return $this->columns([
             'اسم الرخصة',
             'رقم السجل التجاري',
             'رقم الرخصة',
             'تاريخ الاصدار',
             'تاريخ النهاية',
-        ];
+        ]);
     }
 
     public function map($item): array
     {
-        return [
-            $item->id,
+        return array_merge($this->mapCommonData($item),[
             $item->registry->name,
             $item->commercial_registration_number,
             $item->registry_number ?? '-',
             now()->parse($item->start_date)->format('Y-m-d'),
             now()->parse($item->end_date)->format('Y-m-d'),
-        ];
+        ]);
     }
 }
