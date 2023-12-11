@@ -221,6 +221,9 @@
 
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.records')" type="all-records"
                 icon="bx bx-file-blank" style="border-top" />
+
+            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.certificates')" type="all-certificates"
+                icon="bx bx-file-blank" style="border-top" />
         </div>
     </x-dashboard.modals.modal1>
 
