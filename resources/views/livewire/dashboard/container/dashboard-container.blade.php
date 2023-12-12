@@ -4,7 +4,7 @@
         <div class="row">
             @if (!$branch->corp->doesnt_has_branches)
                 <div class="col-lg-6 col-md-12 mb-3">
-                    <div class="card border border-{{ status_handler($branch->record->end_date)?->color() }}">
+                    <div class="card border border-{{ status_handler($branch->record?->end_date)?->color() }}">
                         <h5 class="card-header">{{ trans('common.record') }}</h5>
                         <div class="card-body">
                             <div class="added-cards">
@@ -26,7 +26,7 @@
                                             </div>
                                             <small class="mt-sm-auto mt-2 order-sm-1 order-0">
                                                 {{ trans('common.expired at') }}
-                                                {{ $branch->record->end_date->format('d/m/Y') }}
+                                                {{ $branch->record?->end_date->format('d/m/Y') }}
                                             </small>
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="col-lg-6 col-md-12 mb-3">
-                    <div class="card border border-{{ status_handler($branch->certificate->end_date)?->color() }}">
+                    <div class="card border border-{{ status_handler($branch->certificate?->end_date)?->color() }}">
                         <h5 class="card-header">{{ trans('table.columns.certificate') }}</h5>
                         <div class="card-body">
                             <div class="added-cards">
@@ -63,7 +63,7 @@
                                             </div>
                                             <small class="mt-sm-auto mt-2 order-sm-1 order-0">
                                                 {{ trans('common.expired at') }}
-                                                {{ $branch->certificate->end_date->format('d/m/Y') }}
+                                                {{ $branch->certificate?->end_date->format('d/m/Y') }}
                                             </small>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                             <div class="added-cards">
                                 @forelse ($branch->registries as $item)
                                     <div
-                                        class="cardMaster bg-lighter rounded-2 p-3 mb-3 border border-{{ status_handler($item->registry->end_date)?->color() }}">
+                                        class="cardMaster bg-lighter rounded-2 p-3 mb-3 border border-{{ status_handler($item->registry?->end_date)?->color() }}">
                                         <div class="d-flex justify-content-between flex-sm-row flex-column">
                                             <div class="card-information me-2">
                                                 <i class="bx bx-data fs-2 mb-2"></i>
@@ -144,7 +144,7 @@
                                                 </div>
                                                 <small class="mt-sm-auto mt-2 order-sm-1 order-0">
                                                     {{ trans('common.expired at') }}
-                                                    {{ now()->parse($item->registry->end_date)->format('d/m/Y') }}
+                                                    {{ now()->parse($item->registry?->end_date)->format('d/m/Y') }}
                                                 </small>
                                             </div>
                                         </div>
@@ -217,7 +217,7 @@
                 <div class="added-cards">
                     @forelse ($branch->subscriptions as $item)
                         <div
-                            class="cardMaster bg-lighter rounded-2 p-3 mb-3 border border-{{ status_handler($item->end_date)?->color() }}">
+                            class="cardMaster bg-lighter rounded-2 p-3 mb-3 border border-{{ status_handler($item?->end_date)?->color() }}">
                             <div class="d-flex justify-content-between flex-sm-row flex-column">
                                 <div class="card-information me-2">
                                     <i class="bx bx-git-branch fs-2 mb-2"></i>
@@ -237,7 +237,7 @@
                                     </div>
                                     <small class="mt-sm-auto mt-2 order-sm-1 order-0">
                                         {{ trans('common.expired at') }}
-                                        {{ $item->end_date->format('d/m/Y') }}
+                                        {{ $item?->end_date->format('d/m/Y') }}
                                     </small>
                                 </div>
                             </div>
