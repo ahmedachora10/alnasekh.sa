@@ -57,4 +57,8 @@ class Corp extends Model
         return $this->hasMany(CorpBranch::class);
     }
 
+    public function reports() : HasMany {
+        return $this->hasMany(CorpReport::class);
+    }
+
 }

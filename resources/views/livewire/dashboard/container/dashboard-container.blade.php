@@ -254,4 +254,8 @@
     <div class="col-12 mb-4 mt-4">
         <livewire:dashboard.branch.update-employee :branch="$branch" />
     </div>
+
+    <div class="col-12 mb-4 mt-4">
+        <livewire:dashboard.container.reports-container :corp="$branch->corp" />
+    </div>
 </div>

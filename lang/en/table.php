@@ -42,6 +42,7 @@ return [
 
         'company' => 'Company',
         'policy' => 'Policy',
+        'ministry' => 'ministry',
     ],
     'empty' => 'No Records'
 ];

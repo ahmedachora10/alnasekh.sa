@@ -75,6 +75,7 @@ return [
         'company' => 'الشركة',
         'policy' => 'البوليصة',
         'registry number' => 'رقم الرخصة',
+        'ministry' => 'وزارة',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];
