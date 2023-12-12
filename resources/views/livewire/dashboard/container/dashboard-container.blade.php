@@ -16,7 +16,7 @@
                                             </div>
                                             <small class="card-number mt-2">
                                                 {{ trans('common.start at') }}
-                                                {{ $branch->record->start_date->format('d/m/Y') }}
+                                                {{ $branch->record?->start_date->format('d/m/Y') }}
                                             </small>
                                         </div>
                                         <div class="d-flex flex-column text-start text-sm-end">
@@ -52,7 +52,7 @@
                                             </div>
                                             <small class="card-number mt-2">
                                                 {{ trans('common.start at') }}
-                                                {{ $branch->certificate->start_date->format('d/m/Y') }}
+                                                {{ $branch->certificate?->start_date->format('d/m/Y') }}
                                             </small>
                                         </div>
                                         <div class="d-flex flex-column text-start text-sm-end">
@@ -227,7 +227,7 @@
                                     </div>
                                     <small class="card-number">
                                         {{ trans('common.start at') }}
-                                        {{ $item->start_date->format('d/m/Y') }}
+                                        {{ $item?->start_date->format('d/m/Y') }}
                                     </small>
                                 </div>
                                 <div class="d-flex flex-column text-start text-sm-end">
