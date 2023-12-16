@@ -21,7 +21,7 @@
                     <span class="app-brand-logo demo">
                         <img src="{{ asset(setting('logo')) }}" alt="logo" width="60">
                     </span>
-                    <span class="app-brand-text demo text-body fw-bold">{{ setting('app_name') }}</span>
+                    {{-- <span class="app-brand-text demo text-body fw-bold">{{ setting('app_name') }}</span> --}}
                 </a>
             </div>
             <!-- /Logo -->

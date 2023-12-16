@@ -11,12 +11,13 @@ return [
     'save' => 'حفظ',
     'export' => 'تصدير',
     'print' => 'طباعة',
+    'skip' => 'تخطي',
 
     'my profile' => 'حسابي',
     'log out' => 'الخروج',
-    'notifications' => 'اشعارات',
+    'notifications' => 'الاشعارت',
     'show more' => 'عرض المزيد',
-    'no notifications exists' =>  'لا توجد اشعارات لعرضها',
+    'no notifications exists' =>  'لا توجد الاشعارت لعرضها',
 
     'new role' => 'دور جديد',
     'role permissions' => 'صلاحيات الدور',
@@ -42,7 +43,7 @@ return [
 
     'monthly and quarterly updates' => 'التحديثات الشهرية والربع سنوية',
 
-    'corps page' => 'صفحة المنشأة',
+    'corps page' => 'صفحة المنشآة',
     'branches page' => 'صفحة الفروع',
 
     'branches' => 'الفروع',
@@ -53,7 +54,7 @@ return [
     'subscriptions' => 'الاشتراكات',
     'records' => 'السجلات',
     'record' => 'السجل',
-    'corp informations' => 'معلوما المنشأة',
+    'corp informations' => 'معلوما المنشآة',
 
     'are you sure' => 'هل تود حذف هذا العنصر؟',
     'there is more branch' => 'هل يوجد اكثر من فرع؟',
@@ -71,7 +72,7 @@ return [
     'remember me' => 'تذكرني',
     'sign in' => 'تسجيل الدخول',
 
-    'corp details' => 'تفاصيل المنشأة',
-    'reports' => 'التقارير',
-    'report' => 'تقرير',
+    'corp details' => 'تفاصيل المنشآة',
+    'reports' => 'سجل العمليات',
+    'new report' => 'سجل عملية جديد',
 ];

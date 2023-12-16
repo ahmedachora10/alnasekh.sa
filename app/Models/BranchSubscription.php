@@ -6,16 +6,20 @@ use App\Enums\PlatformsSubscriptionType;
 use App\Enums\Status;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\SetStatusAttribute;
+use App\Traits\ThumbnailModelAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class BranchSubscrition extends Model
+class BranchSubscription extends Model
 {
-    use HasFactory, ModelBasicAttributeValue, SetStatusAttribute;
+    use HasFactory, ModelBasicAttributeValue, SetStatusAttribute, ThumbnailModelAttribute;
+
+    protected $table = 'branch_subscritions';
 
     protected $fillable = [
         'corp_branch_id',
+        'image',
         'subscription_type',
         'type',
         'status',

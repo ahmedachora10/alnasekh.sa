@@ -11,7 +11,7 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="" />
-    {{-- <title>{{ setting('app_name') ?? config('app.name', 'WMW Admin') }}</title> --}}
+    <title>{{ setting('app_name') }} {{ @$title }}</title>
 
 
     <!-- Favicon -->
@@ -63,6 +63,10 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}" />
 
     @stack('component-styles')
 
@@ -148,6 +152,9 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
+    <script src="{{ asset('assets/vendor/libs/quill/katex.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/quill/quill.js') }}"></script>
+
     @stack('component-scripts')
 
     {{-- @vite('resources/js/app.js') --}}
@@ -201,7 +208,38 @@
             cleanup(() => {
                 el.removeEventListener('click', onClick)
             })
-        })
+        });
+
+        // console.log('test');
+        // if ($('.editor').length) {
+        //     quillRegister();
+        // }
+
+        // function quillRegister() {
+        //     const quill = new Quill('.editor', {
+        //         theme: 'snow'
+        //     });
+
+        //     quill.on('text-change', function() {
+
+        //         if (quill.getText() === '\n') return false;
+
+        //         // $('.editor-content').html($('.editor').html());
+        //         $('.editor-content').val($('.ql-editor').html());
+
+        //     });
+
+        // }
+
+        window.addEventListener('beforeunload', function(event) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('logout') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                }
+            });
+        });
     </script>
 
 </body>

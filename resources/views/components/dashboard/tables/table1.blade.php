@@ -6,7 +6,7 @@
         'justify-content-between' => !is_null($title),
     ])>
         @if (!is_null($title))
-            <h5 class="card-header">{{ trans($title) }}</h5>
+            <h5 class="card-header">{{ $title }}</h5>
         @endif
 
         {{-- Go to create page --}}

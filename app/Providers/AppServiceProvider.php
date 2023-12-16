@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        view()->share('title', '-' . trans('sidebar.dashboard'));
         Blade::if('hasPermission', function (string $expression) {
 
             if(empty($expression) || !auth()->check()) return false;

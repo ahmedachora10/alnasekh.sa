@@ -67,7 +67,8 @@
                         {{-- <x-dashboard.actions.container> --}}
                         <div class="d-flex align-items-center justify-content-start ">
                             <x-dashboard.actions.delete route="#" text=""
-                                wire:click="$dispatch('delete-employee', {employee: {{ $item }}})" />
+                                wire:click="$dispatch('delete-employee', {employee: {{ $item }}})"
+                                :livewire="true" />
                             <x-dashboard.actions.edit href="#!"
                                 wire:click="$dispatch('edit-employee', {employee : {{ $item }}})"></x-dashboard.actions.edit>
                         </div>

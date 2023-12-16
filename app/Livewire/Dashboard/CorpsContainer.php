@@ -14,6 +14,9 @@ class CorpsContainer extends Component
 
     public ?Corp $corpModel = null;
 
+    public array $numberOfRowsArray = [5, 10, 20, 50, 100];
+    public int $numberOfRows = 10;
+
     public function mount($title = null) {
         $this->corpModel = Corp::first();
     }
@@ -33,7 +36,7 @@ class CorpsContainer extends Component
     public function render()
     {
         return view('livewire.dashboard.corps-container', [
-            'corps' => Corp::with('user')->paginate(setting('pagination') ?? 8)
+            'corps' => Corp::with('user')->paginate($this->numberOfRows)
         ]);
     }
 }

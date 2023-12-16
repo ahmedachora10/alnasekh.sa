@@ -91,7 +91,9 @@
 
 <body class="font-sans antialiased">
 
-    <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-wrapper layout-content-navbar position-relative py-5 mb-5">
+        <img src="{{ asset('assets/img/border-img.png') }}" alt="border"
+            class="position-absolute w-100 h-100 top-0 left-0">
         <div class="layout-container">
 
             <!-- Layout container -->

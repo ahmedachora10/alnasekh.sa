@@ -2,12 +2,16 @@
 
 namespace App\Livewire\Forms;
 
+use App\Enums\Nationalities;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class EmployeeForm extends Form
 {
+    #[Rule('required')]
+    public ?Nationalities $nationality = null;
+
     #[Rule('required|string')]
     public string $name = '';
 

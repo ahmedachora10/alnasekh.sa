@@ -9,6 +9,7 @@ use App\Exports\EmployeesExport;
 use App\Exports\MonthlyQuarterlyExport;
 use App\Exports\RecordsExport;
 use App\Exports\RegistriesExport;
+use App\Exports\ReportsExport;
 use App\Exports\SubscriptionsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Corp;
@@ -100,6 +101,17 @@ class ExportController extends Controller
         $data = $export->query()->get();
 
         $title = 'الرخص';
+
+        return view('exports.pdf.print', compact('data', 'export', 'title'));
+    }
+
+    public function reports(Corp $corp) {
+
+        $export = new ReportsExport($corp->id);
+
+        $data = $export->query()->get();
+
+        $title = 'سجل العمليات';
 
         return view('exports.pdf.print', compact('data', 'export', 'title'));
     }

@@ -1,15 +1,13 @@
 <!-- Footer -->
 <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
+    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+        <div class="mb-2 mb-md-0">
+
+            {{ setting('footer') }}
+            © <a href="#!" target="_blank" class="footer-link fw-bolder">{{ setting('app_name') }}</a>,
+            {{ date('Y') }}
+        </div>
+        {{-- <div>
                   <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
                   <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
@@ -26,6 +24,6 @@
                     class="footer-link me-4"
                     >Support</a
                   >
-                </div>
-              </div>
-            </footer>
+                </div> --}}
+    </div>
+</footer>

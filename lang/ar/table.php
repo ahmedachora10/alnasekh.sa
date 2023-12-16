@@ -57,7 +57,8 @@ return [
         'administrator name' => 'اسم المسوؤل',
 
         'registration number' => 'رقم السجل',
-        'certificate number' => 'رقم الرخصة',
+        'license number' => 'رقم الرخصة',
+        'certificate number' => 'رقم الشهادة',
 
         'corp name' => 'اسم المنشأة',
         'medical insurance' => 'التأمين الطبي',
@@ -75,7 +76,7 @@ return [
         'company' => 'الشركة',
         'policy' => 'البوليصة',
         'registry number' => 'رقم الرخصة',
-        'ministry' => 'وزارة',
+        'ministry' => 'الوزارة',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

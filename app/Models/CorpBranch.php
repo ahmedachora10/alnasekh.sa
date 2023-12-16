@@ -28,7 +28,7 @@ class CorpBranch extends Model
     }
 
     public function subscriptions(): HasMany {
-        return $this->hasMany(BranchSubscrition::class);
+        return $this->hasMany(BranchSubscription::class);
     }
 
     public function monthlyQuarterlyUpdates(): BelongsToMany {

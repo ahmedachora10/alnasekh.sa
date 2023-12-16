@@ -18,6 +18,12 @@ class NotificationsContainer extends Component
         auth()->user()->unreadNotifications->markAsRead();
     }
 
+    public function makeItRead($notification) {
+        if(!isset($notification['id'])) return false;
+
+        DB::table('notifications')->where('id', $notification['id'])->update(['read_at' => now()]);
+    }
+
     public function destroy($notificationId) {
         dd($notificationId);
         DB::table('notifications')->where('id', $notificationId)?->delete();
@@ -31,7 +37,7 @@ class NotificationsContainer extends Component
             ])->layout('layouts.app');
         } else {
             return view('livewire.dashboard.container.notifications-container', [
-                'notifications' => auth()->user()->notifications()->latest()->paginate(10),
+                'notifications' => auth()->user()->unreadNotifications()->latest()->paginate(10),
                 'unreadNotifications' => auth()->user()->unreadNotifications()->count()
             ]);
         }

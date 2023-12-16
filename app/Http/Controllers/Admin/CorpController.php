@@ -9,10 +9,13 @@ use App\Http\Requests\Admin\StoreCorpRequest;
 use App\Http\Requests\Admin\UpdateCorpRequest;
 use App\Mail\SendReminderEmail;
 use App\Models\CorpBranch;
+use App\Services\UploadFileService;
 use Illuminate\Support\Facades\Mail;
 
 class CorpController extends Controller
 {
+    public function __construct(protected UploadFileService $uploadFileService ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +38,9 @@ class CorpController extends Controller
      */
     public function store(StoreCorpRequest $request)
     {
-        $corp = Corp::create($request->validated());
+        $request->validated();
+
+        $corp = Corp::create($request->safe()->except('image') + ['image' => $this->uploadFileService->store($request->file('image'), 'images/corps')]);
 
         if($request->integer('has_branches') === HasBranches::Yes->value) {
             return redirect()->route('branches.index', ['corp' => $corp, 'target' => 'branches'])
@@ -93,7 +98,9 @@ class CorpController extends Controller
      */
     public function update(UpdateCorpRequest $request, Corp $corp)
     {
-        $corp->update($request->validated());
+        $request->validated();
+
+        $corp->update($request->safe()->except('image') + ['image' => $this->uploadFileService->update($request->file('image'), $corp->image, 'images/corps')]);
         return redirect()->route('corps.index')->with('success', trans('message.update'));
     }
 

@@ -24,6 +24,7 @@ class UpdateCorpRequest extends FormRequest
             'start_date'  => 'required|date',
             'end_date'  => 'required|date|after:start_date',
             'has_branches'  => ['required', new Enum(HasBranches::class)],
+            'image' => ['nullable', 'image'],
         ];
     }
 }

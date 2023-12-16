@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Nationalities;
 use App\Traits\ModelBasicAttributeValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,13 +18,14 @@ class BranchEmployee extends Model
         'corp_id',
         'corp_branch_id',
         'name',
+        'nationality',
         'resident_number',
         'start_date',
         'end_date',
         'business_card_start_date',
         'business_card_end_date',
         'contract_start_date',
-        'contract_end_date'
+        'contract_end_date',
     ];
 
     protected $casts = [
@@ -32,7 +34,8 @@ class BranchEmployee extends Model
         'business_card_start_date' => 'datetime',
         'business_card_end_date' => 'datetime',
         'contract_start_date' => 'datetime',
-        'contract_end_date' => 'datetime'
+        'contract_end_date' => 'datetime',
+        'nationality' => Nationalities::class
     ];
 
     public function branch():BelongsTo {

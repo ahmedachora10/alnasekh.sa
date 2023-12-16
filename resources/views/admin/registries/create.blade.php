@@ -6,7 +6,11 @@
 
             <div class="row">
 
-                <div class="col-12 mb-3">
+                <div class="col-md-6 col-12 mb-3">
+                    <x-dashboard.input-group type="file" name="image" :title="trans('table.columns.image')" />
+                </div>
+
+                <div class="col-md-6 col-12 mb-3">
                     <x-dashboard.input-group type="text" name="name" :title="trans('table.columns.name')" />
                 </div>
 

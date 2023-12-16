@@ -1,4 +1,20 @@
 <div class="row">
+
+    @foreach (App\Enums\Nationalities::cases() as $item)
+        <div class="col-md-6 col-12 mb-3">
+            <div class="form-check custom-option custom-option-icon checked">
+                <label class="form-check-label custom-option-content" for="customRadioIcon{{ $loop->index }}">
+                    <span class="custom-option-body">
+                        <i class="bx bx-user"></i>
+                        <span class="custom-option-title"> {{ $item->name() }} </span>
+                    </span>
+                    <input name="nationality" wire:model.defer="form.nationality" class="form-check-input" type="radio"
+                        id="customRadioIcon{{ $loop->index }}" value="{{ $item }}">
+                </label>
+            </div>
+        </div>
+    @endforeach
+
     <div class="col-md-6 col-12 mb-3">
         <x-dashboard.input-group type="text" wire:model.defer="form.name" name="form.name" :title="trans('table.columns.name')" />
     </div>

@@ -31,7 +31,7 @@
 
                 <td>
                     <x-dashboard.actions.container>
-                        <a href="{{ route('users.show', $branch->id) }}" class="dropdown-item"> <i
+                        <a href="{{ route('branches.show', $branch) }}" class="dropdown-item"> <i
                                 class="bx bx-show me-1"></i>
                             عرض</a>
                         <x-dashboard.actions.edit wire:click="$dispatch('edit-branch', {branch: {{ $branch }}})"

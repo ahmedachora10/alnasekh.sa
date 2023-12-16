@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Exports\Helpers\CommonColumns;
-use App\Models\BranchSubscrition;
+use App\Models\BranchSubscription;
 use App\Models\Corp;
 use App\Traits\Exports\RTLDirection;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -22,7 +22,7 @@ class SubscriptionsExport implements FromQuery, ShouldAutoSize, WithHeadings, Wi
 
     public function query()
     {
-        return BranchSubscrition::with('branch')->whereIn('corp_branch_id', Corp::find($this->corpId)->branches()->pluck('id')->toArray());
+        return BranchSubscription::with('branch')->whereIn('corp_branch_id', Corp::find($this->corpId)->branches()->pluck('id')->toArray());
     }
 
     public function headings(): array

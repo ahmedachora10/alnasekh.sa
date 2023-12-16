@@ -4,7 +4,7 @@ namespace App\Livewire\Dashboard\Branch;
 
 use App\Enums\PlatformsSubscriptionType;
 use App\Livewire\Forms\SubscriptionForm;
-use App\Models\BranchSubscrition;
+use App\Models\BranchSubscription;
 use App\Models\CorpBranch;
 use Livewire\Component;
 
@@ -14,7 +14,7 @@ class StoreSubscription extends Component
 
     public CorpBranch $branch;
 
-    public BranchSubscrition $subscription;
+    public BranchSubscription $subscription;
 
     public array $subscriptionTypes = [];
     public PlatformsSubscriptionType $selectedType;
@@ -26,13 +26,13 @@ class StoreSubscription extends Component
 
     public function mount(CorpBranch $branch) {
         $this->branch = $branch;
-        $this->subscription = new BranchSubscrition;
+        $this->subscription = new BranchSubscription;
         $this->company_name = $branch->name;
         $this->registration_number = $branch->registration_number;
 
         $this->subscriptionTypes = PlatformsSubscriptionType::cases();
 
-        $this->allSubscriptionsAdded = $this->branch->subscriptions()->count() === 4;
+        $this->allSubscriptionsAdded = $this->branch->subscriptions()->count() === count(PlatformsSubscriptionType::cases());
 
         if($type = $this->branch?->subscriptions()?->latest()?->first()) {
             $this->selectedType = $type->subscription_type;
@@ -42,12 +42,12 @@ class StoreSubscription extends Component
         }
     }
 
-    public function edit(BranchSubscrition $subscription) {
+    public function edit(BranchSubscription $subscription) {
         $this->dispatch('open-modal');
         $this->subscription = $subscription;
 
         $this->form->type = $subscription->type;
-        $this->form->status = $subscription->status;
+        // $this->form->status = $subscription->status;
         $this->form->start_date = $subscription->date('start_date');
         $this->form->end_date = $subscription->date('end_date');
     }
@@ -65,9 +65,7 @@ class StoreSubscription extends Component
         }
 
         $this->store();
-
-        $this->allSubscriptionsAdded = $this->branch->subscriptions()->count() === 4;
-
+        $this->allSubscriptionsAdded = $this->branch->subscriptions()->count() === count(PlatformsSubscriptionType::cases());
         $this->dispatch('refresh-alert');
     }
 
@@ -91,7 +89,7 @@ class StoreSubscription extends Component
         $this->subscription->update($this->form->all());
         session()->put('success', trans('message.update'));
 
-        $this->subscription = new BranchSubscrition;
+        $this->subscription = new BranchSubscription;
         $this->form->reset();
 
         $this->dispatch('close-modal');

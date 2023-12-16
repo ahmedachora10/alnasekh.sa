@@ -21,7 +21,7 @@ return [
         'commercial registration number' => 'Commercial Registration Number',
 
         'registration number' => 'Registration Number',
-        'certificate number' => 'Certificate Number',
+        'license number' => 'license number',
         'address' => 'Address',
         'employee' => 'Employee',
         'mission' => 'Mission',

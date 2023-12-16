@@ -20,6 +20,8 @@ class StoreMonthlyQuarterlyUpdate extends Component
 
     public array $checkedElements = [];
 
+    public bool $createMode = true;
+
     public $date = null;
 
     public function mount(CorpBranch $branch) {
@@ -32,7 +34,7 @@ class StoreMonthlyQuarterlyUpdate extends Component
     public function switchElement(MonthlyQuarterlyUpdate $monthlyQuarterlyUpdate) {
 
         if(!$this->date && !in_array($monthlyQuarterlyUpdate->id, $this->checkedElements)) {
-            session()->flash('date', 'المرجو ادخال التاريخ أولا');
+            session()->flash('date', 'الرجاء ادخال التاريخ أولا');
             return false;
         }
 
@@ -57,6 +59,7 @@ class StoreMonthlyQuarterlyUpdate extends Component
         session()->put('success', trans('message.create'));
         $this->reset('date');
         $this->dispatch('refresh-alert');
+        $this->dispatch('refresh-dashboard');
     }
 
     private function delete($monthlyQuarterlyUpdate) {

@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 class UploadFileService {
     protected string $driver ='public';
 
-    public function store(UploadedFile $file, string $destination) : string|null {
+    public function store(?UploadedFile $file, string $destination) : string|null {
+        if(is_null($file)) return null;
 
         if(!$file->isValid()) {
             return null;
@@ -20,14 +21,14 @@ class UploadFileService {
         return str_replace('public/', '',$name) ?? null;
     }
 
-    public function update(UploadedFile $file, ?string $oldFileName = null, string $destination) : string|null {
+    public function update(?UploadedFile $file, ?string $oldFileName = null, string $destination) : string|null {
         $name = $this->store($file, $destination);
 
         if(!is_null($name)) {
             $this->delete($oldFileName);
         }
 
-        return $name;
+        return $name === null ? $oldFileName : $name;
     }
 
     public function delete(?string $filePath = ''): bool {

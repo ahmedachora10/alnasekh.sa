@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function ()
         Route::get('records/{corp}', 'records')->name('corps.records');
         Route::get('certificates/{corp}', 'certificates')->name('corps.certificates');
         Route::get('registries/{corp}', 'registries')->name('corps.registries');
+        Route::get('reports/{corp}', 'reports')->name('corps.reports');
     });
 
     Route::get('notifications', NotificationsContainer::class)->name('users.notifications');

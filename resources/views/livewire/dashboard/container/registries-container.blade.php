@@ -2,11 +2,13 @@
 
     <x-dashboard.headline :title="trans('sidebar.registries')" />
 
-    <x-dashboard.tables.table1 :createAction="route('registries.create')" :columns="['name']">
+    <x-dashboard.tables.table1 :createAction="route('registries.create')" :columns="['image', 'name']">
 
         @forelse ($data as $item)
             <tr>
                 <td>{{ $item->id }}</td>
+                <td><img src="{{ asset($item->thumbnail) }}" alt="logo" width="40" height="40"
+                        class="rounded-circle"></td>
                 <td>{{ $item->name }}</td>
                 <td>
                     <x-dashboard.actions.container>

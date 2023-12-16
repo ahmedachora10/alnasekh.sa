@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreRegistryRequest;
 use App\Models\Registry;
+use App\Services\UploadFileService;
 use Illuminate\Http\Request;
 
 class RegistryController extends Controller
 {
+    public function __construct(protected UploadFileService $uploadFileService ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +33,8 @@ class RegistryController extends Controller
      */
     public function store(StoreRegistryRequest $request)
     {
-        Registry::create($request->validated());
+        $request->validated();
+        Registry::create($request->safe()->except('image') + ['image' => $this->uploadFileService->store($request->file('image'), 'images/registries')]);
         return redirect()->route('registries.index')->with('success', trans('message.create'));
     }
 
@@ -55,7 +59,8 @@ class RegistryController extends Controller
      */
     public function update(StoreRegistryRequest $request, Registry $registry)
     {
-        $registry->update($request->validated());
+        $request->validated();
+        $registry->update($request->safe()->except('image') + ['image' => $this->uploadFileService->update($request->file('image'), $registry->image, 'images/registries')]);
         return redirect()->route('registries.index')->with('success', trans('message.update'));
     }
 

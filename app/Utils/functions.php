@@ -67,5 +67,21 @@ if(!function_exists('status_handler')) {
 
         return Status::ALMOST_FINISHED;
     }
+}
 
+if(!function_exists('short_date_name')) {
+
+    function short_date_name(string $date) {
+        $replacement = [
+            'دقيقة' =>  'د',
+            'دقائق' =>  'د',
+            'ساعة' =>  'س',
+            'يوم' =>  'ي',
+            'أيام' =>  'ي',
+            'شهر' =>  'ش',
+            'سنة' =>  'ع',
+        ];
+
+        return str($date)->replace('منذ', '')->replace(array_keys($replacement), array_values($replacement));
+    }
 }

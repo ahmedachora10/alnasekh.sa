@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard\Branch;
 
+use App\Models\BranchEmployee;
 use App\Models\CorpBranch;
 use App\Traits\Livewire\Message;
 use Livewire\Attributes\On;
@@ -19,6 +20,12 @@ class UpdateEmployee extends Component
     #[On('refresh-employees')]
     public function refresh() {
         $this->dispatch('$refresh');
+    }
+
+    #[On('open-medical-insurance-modal')]
+    public function createInsuranceMidecal(int $employee) {
+        $this->dispatch('create-update-medical-insurance', employee: BranchEmployee::find($employee));
+        $this->dispatch('open-modal', target: '#branchEmployeeMedicalInsuranceFormModal');
     }
 
     public function render()

@@ -2,25 +2,39 @@
 
     <x-dashboard.headline :title="trans('sidebar.corps')" />
 
-    <x-dashboard.tables.table1 :columns="['name', 'employee', 'email', 'phone', 'start date', 'end date', 'has branches?']">
+    <x-dashboard.tables.table1 :columns="['image', 'name', 'employee', 'email', 'phone', 'start date', 'end date', 'has branches?']">
+        <x:slot:title>
+            <select wire:model.change="numberOfRows" class="form-control">
+                @foreach ($numberOfRowsArray as $value)
+                    <option value="{{ $value }}">{{ $value }}</option>
+                @endforeach
+            </select>
+        </x:slot:title>
         <x-slot:actions>
             {{-- <livewire:exports.export-button type='corps' /> --}}
 
-            <button data-bs-toggle="modal" data-bs-target="#ExportModal" class="btn btn-secondary btn-sm ">
-                <span class="tf-icons bx bx-cloud-download me-1"></span>
-                <span>{{ trans('common.export') }}</span>
-            </button>
+            <div>
+                <button data-bs-toggle="modal" data-bs-target="#ExportModal" class="btn btn-secondary btn-sm ">
+                    <span class="tf-icons bx bx-cloud-download me-1"></span>
+                    <span>{{ trans('common.export') }}</span>
+                </button>
 
-            <a href="{{ route('corps.create') }}" class="btn btn-primary mx-4 btn-sm ">
-                <span class="tf-icons bx bx-plus"></span>
-                <span>{{ trans('common.create') }}</span>
-            </a>
+                <a href="{{ route('corps.create') }}" class="btn btn-primary mx-4 btn-sm ">
+                    <span class="tf-icons bx bx-plus"></span>
+                    <span>{{ trans('common.create') }}</span>
+                </a>
+            </div>
+
         </x-slot:actions>
         @forelse ($corps as $corp)
             <tr>
                 <td>
                     <i class="{{ status_handler($corp->end_date)?->icon() }}"></i>
-                    {{ $corp->id }}
+                    {{ $loop->iteration }}
+                </td>
+                <td>
+                    <img src="{{ asset($corp->thumbnail) }}" alt="image" width="30" height="30"
+                        class=" rounded-circle">
                 </td>
                 <td>
                     @if ($corp->doesnt_has_branches)
@@ -178,7 +192,9 @@
             <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.records')" type="all-records"
                 icon="bx bx-file-blank" style="border-top" />
             <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.certificates')"
-                type="all-certificates" icon="bx bx-file-blank" style="border-top col-12" />
+                type="all-certificates" icon="bx bx-file-blank" style="border-top" />
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.reports')" type="reports"
+                icon="bx bx-file-blank" style="border-top" />
         </div>
     </x-dashboard.modals.modal1>
 
@@ -196,7 +212,10 @@
                 type="all-subscriptions" icon="bx bx-file" style="border-top" />
 
             <livewire:exports.export-button fileType="excel" :corp="$corpModel" :title="trans('common.registries')"
-                type="all-registries" icon="bx bx-file-blank" style="border-top col-12" />
+                type="all-registries" icon="bx bx-file-blank" style="border-top" />
+
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.reports')" type="reports"
+                icon="bx bx-file" style="border-top" />
         </div>
     </x-dashboard.modals.modal1>
 
@@ -214,7 +233,9 @@
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.records')" type="all-records"
                 icon="bx bx-file-blank" style="border-top" />
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.certificates')" type="all-certificates"
-                icon="bx bx-file-blank" style="border-top col-12" />
+                icon="bx bx-file-blank" style="border-top" />
+            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.reports')" type="reports" icon="bx bx-file"
+                style="border-top" />
         </div>
     </x-dashboard.modals.modal1>
 
@@ -232,7 +253,10 @@
                 icon="bx bx-file" style="border-top" />
 
             <livewire:exports.export-button :corp="$corpModel" :title="trans('common.registries')" type="all-registries"
-                icon="bx bx-file-blank" style="border-top col-12" />
+                icon="bx bx-file-blank" style="border-top" />
+
+            <livewire:exports.export-button :corp="$corpModel" :title="trans('common.reports')" type="reports" icon="bx bx-file"
+                style="border-top" />
         </div>
     </x-dashboard.modals.modal1>
 </section>

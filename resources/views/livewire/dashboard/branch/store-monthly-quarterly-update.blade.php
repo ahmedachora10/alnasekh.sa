@@ -1,8 +1,10 @@
 <section>
     <x-dashboard.alert key="date" color="danger" />
 
-    <x-dashboard.wizard.wizard-head current="monthly_quarterly_updates" :branch="!$branch->corp->doesnt_has_branches" />
-    <div class="mb-3"></div>
+    @if ($createMode)
+        <x-dashboard.wizard.wizard-head current="monthly_quarterly_updates" :branch="!$branch->corp->doesnt_has_branches" />
+        <div class="mb-3"></div>
+    @endif
 
     <div class="row mb-4 py-4 bg-light">
         @foreach ($getAllMonthlyQuarterlyUpdate as $item)
@@ -22,7 +24,7 @@
                                 </div>
                             @else
                                 <input type="date" class="form-control" wire:model.defer="date" aria-label="date"
-                                    aria-describedby="date" />
+                                    aria-describedby="date" min="{{ date('Y-m-d') }}" />
                             @endif
                             <button @class([
                                 'btn',
@@ -48,11 +50,13 @@
             </div>
         @endforeach
 
-        @if ($savedRecords->count() > 0)
-            <div class="col-12">
-                <a href="{{ route('branches.employees.store', $branch) }}"
-                    class="btn btn-primary float-end mt-2">{{ trans('common.next') }}</a>
-            </div>
+        @if ($createMode)
+            @if ($savedRecords->count() > 0)
+                <div class="col-12">
+                    <a href="{{ route('branches.employees.store', $branch) }}"
+                        class="btn btn-primary float-end mt-2">{{ trans('common.next') }}</a>
+                </div>
+            @endif
         @endif
     </div>
 

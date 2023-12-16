@@ -26,6 +26,7 @@ class BranchRegistriesContainer extends Component
 
     public function create() {
         $this->validate();
+        if($this->branch->registries->count() === $this->registries->count()) return;
         $this->dispatch('create-branch-registry', registryId: $this->registryId);
     }
 

@@ -6,6 +6,15 @@
         <x-dashboard.cards.sample column="col-12">
 
             <div class="row">
+                <div class="col-12 mb-3">
+
+                    <div class="mb-3">
+                        <img src="{{ asset($corp->thumbnail) }}" alt="image" width="60" height="60"
+                            class="img-thumbnail">
+                    </div>
+
+                    <x-dashboard.input-group type="file" name="image" :title="trans('table.columns.image')" />
+                </div>
 
                 <div class="col-md-6 col-12 mb-3">
                     <x-dashboard.input-group type="text" :value="$corp->name" name="name" :title="trans('table.columns.corp name')" />

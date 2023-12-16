@@ -3,7 +3,7 @@
     <x-dashboard.headline :title="trans('common.notifications')" />
 
     <x-dashboard.cards.sample column="col-12">
-        <x-dashboard.tables.table1 :columns="['title', 'content', 'created at']">
+        <x-dashboard.tables.table1 :columns="['image', 'title', 'content', 'created at', 'status']" :withActions="false">
 
             @forelse ($notifications as $item)
                 @php
@@ -12,23 +12,32 @@
                     $color = isset($item->data['color']) ? $item->data['color'] : 'success';
                     $icon = isset($item->data['icon']) ? $item->data['icon'] : 'bx bx-wallet';
                     $link = isset($item->data['link']) ? $item->data['link'] : '#!';
+                    $image = isset($item->data['image']) ? $item->data['image'] : '';
+                    $owner = isset($item->data['owner']) ? $item->data['owner'] : '';
                 @endphp
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>
                         <div class="flex-shrink-0 me-3">
                             <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-{{ $color }}"><i
-                                        class="{{ $icon }}"></i></span>
+                                @if (!empty($image))
+                                    <img class="avatar-initial rounded-circle" src="{{ $image }}" />
+                                @else
+                                    <span class="avatar-initial rounded-circle bg-label-{{ $color }}"><i
+                                            class="{{ $icon }}"></i></span>
+                                @endif
                             </div>
                         </div>
                     </td>
-                    <td>{{ $title }}</td>
+                    <td><a href="{{ $link }}" class="text-primary">{{ $title }}</a></td>
                     <td>{{ $content }}</td>
                     <td>{{ $item->created_at->diffForHumans() }}</td>
                     <td>
-                        <x-dashboard.actions.container>
-                            {{-- <x-dashboard.actions.delete wire:click="destroy({{ $item->id }})" :livewire="true" /> --}}
-                        </x-dashboard.actions.container>
+                        <div class="flex-shrink-0 dropdown-notifications-actions">
+                            <a href="javascript:void(0)" class="dropdown-notifications-read">
+                                <span class="badge badge-dot bg-{{ $color }}"></span>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             @empty

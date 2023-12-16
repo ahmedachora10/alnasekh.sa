@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard\Branch;
 
+use App\Enums\Nationalities;
 use App\Livewire\Forms\EmployeeForm;
 use App\Models\BranchEmployee;
 use App\Models\CorpBranch;
@@ -20,6 +21,7 @@ class StoreEmployee extends Component
     public function mount(CorpBranch $branch) {
         $this->branch = $branch;
         $this->employee = new BranchEmployee;
+        $this->form->nationality = Nationalities::SAUDIA;
     }
 
     public function save() {
@@ -38,8 +40,10 @@ class StoreEmployee extends Component
     }
 
     private function store() {
-        $this->branch->employees()->create($this->form->all());
+        $employee = $this->branch->employees()->create($this->form->all());
         session()->put('success', trans('message.create'));
+
+        $this->dispatch('open-medical-insurance-modal', employee: $employee->id);
     }
 
     private function update() {
@@ -52,6 +56,7 @@ class StoreEmployee extends Component
     public function edit(BranchEmployee $employee) {
         $this->dispatch('open-modal', target: '#branchEmployeeFormModal');
         $this->form->name = $employee->name;
+        $this->form->nationality = $employee->nationality;
         $this->form->resident_number = $employee->resident_number;
         $this->form->start_date = $employee->date('start_date');
         $this->form->end_date = $employee->date('end_date');

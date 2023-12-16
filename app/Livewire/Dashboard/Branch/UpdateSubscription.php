@@ -3,7 +3,7 @@
 namespace App\Livewire\Dashboard\Branch;
 
 use App\Livewire\Forms\SubscriptionForm;
-use App\Models\BranchSubscrition;
+use App\Models\BranchSubscription;
 use App\Traits\Livewire\Message;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -14,10 +14,10 @@ class UpdateSubscription extends Component
 
     public SubscriptionForm $form;
 
-    public ?BranchSubscrition $subscription = null;
+    public ?BranchSubscription $subscription = null;
 
     #[On('edit-dashboard-branch-subscription')]
-    public function edit(BranchSubscrition $subscription) {
+    public function edit(BranchSubscription $subscription) {
         $this->subscription = $subscription;
 
         $this->form->type = $subscription->type;

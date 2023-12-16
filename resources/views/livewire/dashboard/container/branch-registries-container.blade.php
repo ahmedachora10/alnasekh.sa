@@ -13,7 +13,8 @@
                     @php
                         $this->registryId = $item->id;
                     @endphp
-                    <option value="{{ $item->id }}">{{ $item->name }}
+                    <option value="{{ $item->id }}">
+                        {{ $item->name }}
                     </option>
                 @endforeach
             </select>

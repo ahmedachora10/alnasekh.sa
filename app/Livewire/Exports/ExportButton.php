@@ -10,6 +10,7 @@ use App\Exports\EmployeesRequirementsExport;
 use App\Exports\MonthlyQuarterlyExport;
 use App\Exports\RecordsExport;
 use App\Exports\RegistriesExport;
+use App\Exports\ReportsExport;
 use App\Exports\SubscriptionsExport;
 use App\Models\Corp;
 use App\Models\CorpBranch;
@@ -62,6 +63,7 @@ class ExportButton extends Component
             'all-certificates' => Excel::download(new CertificatesExport($this->corp->id), date('Y-m-d-H-i-s').'-certificates.xlsx'),
             'all-registries' => Excel::download(new RegistriesExport($this->corp->id), date('Y-m-d-H-i-s').'-registries.xlsx'),
             'all-branches' => Excel::download(new BranchesExport($this->corp), date('Y-m-d-H-i-s').'-branches.xlsx'),
+            'reports' => Excel::download(new ReportsExport($this->corp->id), date('Y-m-d-H-i-s').'-reports.xlsx'),
             default => ''
         };
     }
@@ -78,6 +80,7 @@ class ExportButton extends Component
             'all-certificates' => redirect()->route('export.corps.certificates', $this->corp),
             'all-registries' => redirect()->route('export.corps.registries', $this->corp),
             'all-branches' => redirect()->route('export.corps.branches', $this->corp),
+            'reports' => redirect()->route('export.corps.reports', $this->corp),
             default => ''
         };
     }
