@@ -231,7 +231,15 @@
 
         // }
 
-        window.addEventListener('beforeunload', function(event) {
+        $(window).on('mouseout', (function() {
+            window.onbeforeunload = closingPage;
+        }));
+
+        $(window).on('mouseover', (function() {
+            window.onbeforeunload = null;
+        }));
+
+        function closingPage(event) {
             $.ajax({
                 type: "POST",
                 url: "{{ route('logout') }}",
@@ -239,7 +247,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 }
             });
-        });
+        }
     </script>
 
 </body>
