@@ -26,13 +26,23 @@
     <livewire:dashboard.container.dashboard-container :branch="$branch" />
 
     @if (!$branch->corp->doesnt_has_branches)
-        <x-dashboard.modals.modal1 id="updateRecordForm" :title="trans('common.update record')">
-            <livewire:dashboard.branch.update-record :record="$branch->record" />
-        </x-dashboard.modals.modal1>
+        @if ($branch->record)
+            <x-dashboard.modals.modal1 id="updateRecordForm" :title="trans('common.update record')">
+                <livewire:dashboard.branch.update-record :record="$branch->record" />
+            </x-dashboard.modals.modal1>
+        @endif
 
-        <x-dashboard.modals.modal1 id="updateCertificateForm" :title="trans('common.update certificate')">
-            <livewire:dashboard.branch.update-certificate :certificate="$branch->certificate" />
-        </x-dashboard.modals.modal1>
+        @if ($branch->civilDefenseCertificate)
+            <x-dashboard.modals.modal1 id="updateCivilDefenseCertificateForm" :title="trans('common.update civil defense permit')">
+                <livewire:dashboard.branch.update-civil-defense-certificate :certificate="$branch->civilDefenseCertificate" />
+            </x-dashboard.modals.modal1>
+        @endif
+
+        @if ($branch->certificate)
+            <x-dashboard.modals.modal1 id="updateCertificateForm" :title="trans('common.update certificate')">
+                <livewire:dashboard.branch.update-certificate :certificate="$branch->certificate" />
+            </x-dashboard.modals.modal1>
+        @endif
     @else
         <x-dashboard.modals.modal1 id="branchRegistryFormModal" :title="trans('common.update certificate')">
             <livewire:dashboard.branch.store-registry :branch="$branch" />

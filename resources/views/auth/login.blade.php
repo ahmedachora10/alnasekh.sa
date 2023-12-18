@@ -60,10 +60,15 @@
                         </label>
                     </div>
                 </div>
-                <button class="btn btn-primary d-grid w-100">
+                {{-- <div class="mb-3">
+                    <button class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"
+                        data-callback='onSubmit' data-action='form-rquest'>Submit</button>
+                </div> --}}
+                <button class="btn btn-primary d-grid w-100 g-recaptcha"
+                    data-sitekey="{{ config('services.recaptcha.site_key') }}" data-callback='onSubmit'
+                    data-action='formAuthentication'>
                     {{ trans('common.sign in') }}
                 </button>
-                <input type="hidden">
             </form>
         </div>
     </div>

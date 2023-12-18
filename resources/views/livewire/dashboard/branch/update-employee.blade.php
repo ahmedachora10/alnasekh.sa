@@ -11,7 +11,7 @@
                 {{-- <livewire:exports.export-button :branch="$branch" type="employees" /> --}}
 
                 <button class="btn btn-primary me-4 ms-2 btn-sm test-cleave" data-bs-target="#branchEmployeeFormModal"
-                    data-bs-toggle="modal">
+                    data-bs-toggle="modal" wire:click="$dispatch('reset-employee-form')">
                     <span class="tf-icons bx bx-plus"></span>
                     <span>{{ trans('common.create') }}</span>
                 </button>

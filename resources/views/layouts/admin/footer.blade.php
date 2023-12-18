@@ -4,7 +4,7 @@
         <div class="mb-2 mb-md-0">
 
             {{ setting('footer') }}
-            © <a href="#!" target="_blank" class="footer-link fw-bolder">{{ setting('app_name') }}</a>,
+            © <a href="#!" target="_blank" class="footer-link fw-bolder"></a>
             {{ date('Y') }}
         </div>
         {{-- <div>

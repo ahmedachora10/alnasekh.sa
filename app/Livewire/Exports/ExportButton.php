@@ -12,6 +12,7 @@ use App\Exports\RecordsExport;
 use App\Exports\RegistriesExport;
 use App\Exports\ReportsExport;
 use App\Exports\SubscriptionsExport;
+use App\Exports\UsersExport;
 use App\Models\Corp;
 use App\Models\CorpBranch;
 use Livewire\Attributes\On;
@@ -56,7 +57,7 @@ class ExportButton extends Component
             'employees' => Excel::download(new EmployeesExport($this->branch->id), date('Y-m-d-H-i-s').'-employees.xlsx'),
             'all-employees' => Excel::download(new EmployeesRequirementsExport($this->corp->id, true), date('Y-m-d-H-i-s').'-employees.xlsx'),
             'corp' => Excel::download(new CorpsExport($this->corp->id), date('Y-m-d-H-i-s').'-corp.xlsx'),
-            'corps' => Excel::download(new CorpsExport, date('Y-m-d-H-i-s').'-corps.xlsx'),
+            'corps' => Excel::download(new CorpsExport, date('Y-m-d-H-i-s').'-corps.xlsx'), //Excel::download(new UsersExport, 'users.xlsx'),
             'all-subscriptions' => Excel::download(new SubscriptionsExport($this->corp->id), date('Y-m-d-H-i-s').'-subscriptions.xlsx'),
             'all-monthly-quarterly-updates' => Excel::download(new MonthlyQuarterlyExport($this->corp->id), date('Y-m-d-H-i-s').'-monthly-and-quarterly-updates.xlsx'),
             'all-records' => Excel::download(new RecordsExport($this->corp->id), date('Y-m-d-H-i-s').'-records.xlsx'),

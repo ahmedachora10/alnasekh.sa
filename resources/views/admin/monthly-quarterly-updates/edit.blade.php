@@ -8,6 +8,16 @@
 
             <div class="row">
 
+                <div class="col-12 mb-3">
+
+                    <div class="mb-3">
+                        <img src="{{ asset($monthlyQuarterlyUpdate->thumbnail) }}" alt="image" width="60"
+                            height="60" class="img-thumbnail">
+                    </div>
+
+                    <x-dashboard.input-group type="file" name="image" :title="trans('table.columns.image')" />
+                </div>
+
                 <div class="col-sm-6 mb-3">
                     <x-dashboard.input-group type="text" :value="$monthlyQuarterlyUpdate->entity_name" name="entity_name" :title="trans('table.columns.entity name')" />
                 </div> {{-- / Name --}}

@@ -77,6 +77,16 @@ return [
         'policy' => 'البوليصة',
         'registry number' => 'رقم الرخصة',
         'ministry' => 'الوزارة',
+
+        'asc' => 'الأقدم',
+        'desc' => 'الأحدث',
+        'read' => 'مقروءة',
+        'unread' => 'غير مقروءة',
+
+        'national id' => 'رقم الهوية الوطنية',
+
+        'permit' => 'رقم التصريح',
+        'ministry of interior number' => 'رقم وزارة الداخلية',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

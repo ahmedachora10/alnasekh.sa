@@ -52,6 +52,11 @@ class StoreEmployee extends Component
         $this->employee = new BranchEmployee;
     }
 
+    #[On('reset-employee-form')]
+    public function resetForm() {
+        $this->form->reset();
+    }
+
     #[On('edit-employee')]
     public function edit(BranchEmployee $employee) {
         $this->dispatch('open-modal', target: '#branchEmployeeFormModal');

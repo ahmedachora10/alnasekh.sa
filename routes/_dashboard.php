@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Dashboard\Branch\StoreCertificate;
+use App\Livewire\Dashboard\Branch\StoreCivilDefenseCertificate;
 use App\Livewire\Dashboard\Branch\StoreEmployee;
 use App\Livewire\Dashboard\Branch\StoreMonthlyQuarterlyUpdate;
 use App\Livewire\Dashboard\Branch\StoreRecord;
@@ -66,6 +67,7 @@ Route::middleware(['auth'])->group(function ()
 
     Route::get('copr/branches/record/{branch}', StoreRecord::class)->name('branches.record.store');
     Route::get('copr/branches/certificate/{branch}', StoreCertificate::class)->name('branches.certificate.store');
+    Route::get('copr/branches/civil-defense-permit/{branch}', StoreCivilDefenseCertificate::class)->name('branches.civil_defense_permit.store');
     Route::get('copr/branches/subscription/{branch}', StoreSubscription::class)->name('branches.subscription.store');
     Route::get('copr/branches/monthly-quarterly-updates/{branch}', StoreMonthlyQuarterlyUpdate::class)->name('branches.monthly-quarterly-update.store');
     Route::get('copr/branches/employees/{branch}', EmployeesContainer::class)->name('branches.employees.store');

@@ -9,27 +9,31 @@
                         <div class="card-body">
                             <div class="added-cards">
                                 <div class="cardMaster bg-lighter rounded-2 p-3 mb-3">
-                                    <div class="d-flex justify-content-between flex-sm-row flex-column">
-                                        <div class="card-information me-2">
-                                            <i class="bx bx-file fs-2 mb-2"></i>
-                                            <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
+                                    @if ($branch->record)
+                                        <div class="d-flex justify-content-between flex-sm-row flex-column">
+                                            <div class="card-information me-2">
+                                                <i class="bx bx-file fs-2 mb-2"></i>
+                                                <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
+                                                </div>
+                                                <small class="card-number mt-2">
+                                                    {{ trans('common.start at') }}
+                                                    {{ $branch->record?->start_date->format('d/m/Y') }}
+                                                </small>
                                             </div>
-                                            <small class="card-number mt-2">
-                                                {{ trans('common.start at') }}
-                                                {{ $branch->record?->start_date->format('d/m/Y') }}
-                                            </small>
-                                        </div>
-                                        <div class="d-flex flex-column text-start text-sm-end">
-                                            <div class="d-flex order-sm-0 order-1 mt-sm-0 mt-3 justify-content-end">
-                                                <button class="btn btn-label-primary"
-                                                    wire:click="$dispatch('edit-branch-record', {record:{{ $branch->record }}})">{{ trans('common.edit') }}</button>
+                                            <div class="d-flex flex-column text-start text-sm-end">
+                                                <div class="d-flex order-sm-0 order-1 mt-sm-0 mt-3 justify-content-end">
+                                                    <button class="btn btn-label-primary"
+                                                        wire:click="$dispatch('edit-branch-record', {record:{{ $branch->record }}})">{{ trans('common.edit') }}</button>
+                                                </div>
+                                                <small class="mt-sm-auto mt-2 order-sm-1 order-0">
+                                                    {{ trans('common.expired at') }}
+                                                    {{ $branch->record?->end_date->format('d/m/Y') }}
+                                                </small>
                                             </div>
-                                            <small class="mt-sm-auto mt-2 order-sm-1 order-0">
-                                                {{ trans('common.expired at') }}
-                                                {{ $branch->record?->end_date->format('d/m/Y') }}
-                                            </small>
                                         </div>
-                                    </div>
+                                    @else
+                                        <div>{{ trans('table.empty') }} </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -42,31 +46,35 @@
                         <div class="card-body">
                             <div class="added-cards">
                                 <div class="cardMaster bg-lighter rounded-2 p-3 mb-3">
-                                    <div class="d-flex justify-content-between flex-sm-row flex-column">
-                                        <div class="card-information me-2">
-                                            <i class="bx bx-file fs-2 mb-2"></i>
-                                            <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
-                                                {{-- <h6 class="mb-0 me-2">{{ trans('table.columns.license number') }}</h6> --}}
-                                                <span class="badge bg-label-primary">{{ trans('common.number') }} :
-                                                    {{ $branch->certificate->certificate_number }}</span>
+                                    @if ($branch->certificate)
+                                        <div class="d-flex justify-content-between flex-sm-row flex-column">
+                                            <div class="card-information me-2">
+                                                <i class="bx bx-file fs-2 mb-2"></i>
+                                                <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
+                                                    {{-- <h6 class="mb-0 me-2">{{ trans('table.columns.license number') }}</h6> --}}
+                                                    {{-- <span class="badge bg-label-primary">{{ trans('common.number') }} : --}}
+                                                    {{-- {{ $branch->certificate->certificate_number }}</span> --}}
+                                                </div>
+                                                <small class="card-number mt-2">
+                                                    {{ trans('common.start at') }}
+                                                    {{ $branch->certificate?->start_date->format('d/m/Y') }}
+                                                </small>
                                             </div>
-                                            <small class="card-number mt-2">
-                                                {{ trans('common.start at') }}
-                                                {{ $branch->certificate?->start_date->format('d/m/Y') }}
-                                            </small>
-                                        </div>
-                                        <div class="d-flex flex-column text-start text-sm-end">
-                                            <div class="d-flex order-sm-0 order-1 mt-sm-0 mt-3 justify-content-end">
-                                                <button class="btn btn-label-primary"
-                                                    wire:click="$dispatch('edit-branch-certificate', {certificate:{{ $branch->certificate }}})">{{ trans('common.edit') }}</button>
+                                            <div class="d-flex flex-column text-start text-sm-end">
+                                                <div class="d-flex order-sm-0 order-1 mt-sm-0 mt-3 justify-content-end">
+                                                    <button class="btn btn-label-primary"
+                                                        wire:click="$dispatch('edit-branch-certificate', {certificate:{{ $branch->certificate }}})">{{ trans('common.edit') }}</button>
 
+                                                </div>
+                                                <small class="mt-sm-auto mt-2 order-sm-1 order-0">
+                                                    {{ trans('common.expired at') }}
+                                                    {{ $branch->certificate?->end_date->format('d/m/Y') }}
+                                                </small>
                                             </div>
-                                            <small class="mt-sm-auto mt-2 order-sm-1 order-0">
-                                                {{ trans('common.expired at') }}
-                                                {{ $branch->certificate?->end_date->format('d/m/Y') }}
-                                            </small>
                                         </div>
-                                    </div>
+                                    @else
+                                        <div>{{ trans('table.empty') }} </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -92,7 +100,9 @@
                                         class="cardMaster bg-lighter rounded-2 p-3 mb-3 border border-{{ status_handler($item->updates?->date)?->color() }}">
                                         <div class="d-flex justify-content-between flex-sm-row flex-column">
                                             <div class="card-information me-2">
-                                                <i class="bx bx-data fs-2 mb-2"></i>
+                                                <img src="{{ asset($item->thumbnail) }}" alt="logo" width="30"
+                                                    height="30" class="mb-2 rounded-circle">
+                                                {{-- <i class="bx bx-data fs-2 mb-2"></i> --}}
                                                 <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
                                                     <h6 class="mb-0 me-2">{{ $item->entity_name }}</h6>
                                                     {{-- <span class="badge bg-label-primary">Primary</span> --}}
@@ -178,6 +188,46 @@
 
         @if ($branch->corp->doesnt_has_branches)
             <x-dashboard.cards.user-corp-card :name="$branch->corp->administrator_name" :image="asset($branch->corp->thumbnail)" :startDate="$branch->corp->date('start_date')" :endDate="$branch->corp->date('end_date')" />
+        @endif
+
+        @if (!$branch->corp->doesnt_has_branches)
+            <div class="col-md-12 mb-3">
+                <div
+                    class="card border border-{{ status_handler($branch->civilDefenseCertificate?->end_date)?->color() }}">
+                    <h5 class="card-header">{{ trans('common.civil defense permit') }}</h5>
+                    <div class="card-body">
+                        <div class="added-cards">
+                            <div class="cardMaster bg-lighter rounded-2 p-3 mb-3">
+                                @if ($branch->civilDefenseCertificate)
+                                    <div class="d-flex justify-content-between flex-sm-row flex-column">
+                                        <div class="card-information me-2">
+                                            <i class="bx bx-file fs-2 mb-2"></i>
+                                            <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
+                                            </div>
+                                            <small class="card-number mt-2">
+                                                {{ trans('common.start at') }}
+                                                {{ $branch->civilDefenseCertificate?->start_date->format('d/m/Y') }}
+                                            </small>
+                                        </div>
+                                        <div class="d-flex flex-column text-start text-sm-end">
+                                            <div class="d-flex order-sm-0 order-1 mt-sm-0 mt-3 justify-content-end">
+                                                <button class="btn btn-label-primary"
+                                                    wire:click="$dispatch('edit-branch-civil-defense-permit', {certificate:{{ $branch->civilDefenseCertificate }}})">{{ trans('common.edit') }}</button>
+                                            </div>
+                                            <small class="mt-sm-auto mt-2 order-sm-1 order-0">
+                                                {{ trans('common.expired at') }}
+                                                {{ $branch->civilDefenseCertificate?->end_date->format('d/m/Y') }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div>{{ trans('table.empty') }} </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endif
 
         @if (!$branch->corp->doesnt_has_branches)

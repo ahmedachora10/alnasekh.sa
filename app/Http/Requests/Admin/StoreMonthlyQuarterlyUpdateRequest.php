@@ -16,6 +16,7 @@ class StoreMonthlyQuarterlyUpdateRequest extends FormRequest
         return [
             'entity_name' => 'required|string',
             'mission' => 'required|string',
+            'image' => strtolower($this->method()) == 'put' ? 'nullable|image' : 'required|image',
         ];
     }
 }

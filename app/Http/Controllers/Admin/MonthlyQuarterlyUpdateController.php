@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreMonthlyQuarterlyUpdateRequest;
 use App\Models\MonthlyQuarterlyUpdate;
+use App\Services\UploadFileService;
 use Illuminate\Http\Request;
 
 class MonthlyQuarterlyUpdateController extends Controller
 {
+    public function __construct(protected UploadFileService $uploadFileService ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +33,9 @@ class MonthlyQuarterlyUpdateController extends Controller
      */
     public function store(StoreMonthlyQuarterlyUpdateRequest $request)
     {
-        MonthlyQuarterlyUpdate::create($request->validated());
+        $request->validated();
+
+        MonthlyQuarterlyUpdate::create($request->safe()->except('image') + ['image' => $this->uploadFileService->store($request->file('image'), 'images/monthly-updates')]);
         return redirect()->route('monthly-quarterly-update.index')->with('success', trans('message.create'));
     }
 
@@ -55,7 +60,8 @@ class MonthlyQuarterlyUpdateController extends Controller
      */
     public function update(StoreMonthlyQuarterlyUpdateRequest $request, MonthlyQuarterlyUpdate $monthlyQuarterlyUpdate)
     {
-        $monthlyQuarterlyUpdate->update($request->validated());
+        $request->validated();
+        $monthlyQuarterlyUpdate->update($request->safe()->except('image') + ['image' => $this->uploadFileService->store($request->file('image'), 'images/monthly-updates')]);
 
         return redirect()->route('monthly-quarterly-update.index')->with('success', trans('message.update'));
     }

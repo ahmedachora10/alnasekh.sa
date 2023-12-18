@@ -23,4 +23,7 @@ return [
     'add registry' => 'اضافة ترخيص',
 
     'add monthly quarterly updates' =>'اضافة التحديثات الشهرية والربع سنوية',
+
+    'civil defense permit' => 'تصريح الدفاع المدني',
+    'add civil defense permit' => 'اضافة تصريح الدفاع المدني',
 ];

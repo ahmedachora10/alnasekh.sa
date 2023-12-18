@@ -18,21 +18,21 @@ class EmployeeForm extends Form
     #[Rule('required|numeric')]
     public string $resident_number = '';
 
-    #[Rule('required|date')]
-    public string $start_date = '';
+    #[Rule('nullable|date')]
+    public ?string $start_date = null;
 
-    #[Rule('required|date|after:start_date')]
-    public string $end_date = '';
+    #[Rule('nullable|date|after:start_date')]
+    public ?string $end_date = null;
 
-    #[Rule('required|date')]
-    public string $business_card_start_date = '';
+    #[Rule('nullable|date')]
+    public ?string $business_card_start_date = null;
 
-    #[Rule('required|date|after:business_card_start_date')]
-    public string $business_card_end_date = '';
+    #[Rule('nullable|date|after:business_card_start_date')]
+    public ?string $business_card_end_date = null;
 
-    #[Rule('required|date')]
-    public string $contract_start_date = '';
+    #[Rule('nullable|date')]
+    public ?string $contract_start_date = null;
 
-    #[Rule('required|date|after:contract_start_date')]
-    public string $contract_end_date = '';
+    #[Rule('nullable|date|after:contract_start_date')]
+    public ?string $contract_end_date = null;
 }

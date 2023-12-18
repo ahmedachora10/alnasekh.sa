@@ -83,6 +83,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <!-- Scripts -->
     {{-- @vite('resources/css/app.css') --}}
 
@@ -224,6 +225,11 @@
                 el.removeEventListener('click', onClick)
             })
         })
+
+
+        function onSubmit(token) {
+            document.getElementById("formAuthentication").submit();
+        }
     </script>
 
 </body>

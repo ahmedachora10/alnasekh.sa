@@ -5,6 +5,16 @@
     <x-dashboard.cards.sample column="col-12">
         <x-dashboard.tables.table1 :columns="['image', 'title', 'content', 'created at', 'status']" :withActions="false">
 
+            <x-slot:title>
+
+                <select wire:model.change="filterBy" class="form-control">
+                    @foreach ($filters as $value)
+                        <option value="{{ $value }}">{{ trans('table.columns.' . $value) }}</option>
+                    @endforeach
+                </select>
+
+            </x-slot:title>
+
             @forelse ($notifications as $item)
                 @php
                     $title = isset($item->data['title']) ? $item->data['title'] : '-';

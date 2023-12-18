@@ -32,7 +32,6 @@ class StoreSubscription extends Component
 
         $this->subscriptionTypes = PlatformsSubscriptionType::cases();
 
-        $this->allSubscriptionsAdded = $this->branch->subscriptions()->count() === count(PlatformsSubscriptionType::cases());
 
         if($type = $this->branch?->subscriptions()?->latest()?->first()) {
             $this->selectedType = $type->subscription_type;
@@ -40,6 +39,8 @@ class StoreSubscription extends Component
         } else {
             $this->selectedType = PlatformsSubscriptionType::K;
         }
+
+        $this->allSubscriptionsAdded = $this->selectedType == PlatformsSubscriptionType::AB;
     }
 
     public function edit(BranchSubscription $subscription) {
@@ -65,12 +66,17 @@ class StoreSubscription extends Component
         }
 
         $this->store();
-        $this->allSubscriptionsAdded = $this->branch->subscriptions()->count() === count(PlatformsSubscriptionType::cases());
+        $this->allSubscriptionsAdded = $this->selectedType == PlatformsSubscriptionType::AB; //$this->branch->subscriptions()->count() === count(PlatformsSubscriptionType::cases());
         $this->dispatch('refresh-alert');
     }
 
     public function redirectTo() {
         return redirect()->route('branches.monthly-quarterly-update.store', $this->branch)->with('success', trans('message.create'));
+    }
+
+    public function skip() {
+        $this->allSubscriptionsAdded = $this->selectedType == PlatformsSubscriptionType::AB;
+        $this->selectedType = $this->getNextSubscriptionType();
     }
 
     private function store() {

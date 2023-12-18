@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\HasBranches;
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Models\Corp;
 use App\Http\Requests\Admin\StoreCorpRequest;
 use App\Http\Requests\Admin\UpdateCorpRequest;
 use App\Mail\SendReminderEmail;
 use App\Models\CorpBranch;
+use App\Models\UserModel;
 use App\Services\UploadFileService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CorpController extends Controller
 {
@@ -21,6 +25,7 @@ class CorpController extends Controller
      */
     public function index()
     {
+        // Excel::download(new UsersExport, 'users.xlsx');
         return view('admin.corps.index');
     }
 

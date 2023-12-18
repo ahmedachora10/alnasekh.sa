@@ -53,6 +53,7 @@ class WizardHead extends Component
             ['target' => 'branches', 'title' => trans('wizard.branches'), 'subtitle' => trans('wizard.add branch')],
             ['target' => 'records', 'title' => trans('wizard.records'), 'subtitle' => trans('wizard.add record')],
             ['target' => 'certificates', 'title' => trans('wizard.certificates'), 'subtitle' => trans('wizard.add certificate')],
+            ['target' => 'civil_defense_permit', 'title' => trans('wizard.civil defense permit'), 'subtitle' => trans('wizard.add civil defense permit')],
         ];
     }
 

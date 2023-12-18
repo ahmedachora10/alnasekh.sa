@@ -14,6 +14,10 @@ class NotificationsContainer extends Component
 
     public string $theme = 'card';
 
+    public array $filters = ['read', 'unread'];
+
+    public string $filterBy = 'unread';
+
     public function makeItAllRead() {
         auth()->user()->unreadNotifications->markAsRead();
     }
@@ -32,8 +36,15 @@ class NotificationsContainer extends Component
     public function render()
     {
         if($this->theme == 'card') {
+            $notify = auth()->user()->notifications()
+            ->when($this->filterBy === $this->filters[0], function ($query) {
+                $query->whereNotNull('read_at');
+            })->when($this->filterBy === $this->filters[1], function ($query) {
+                $query->whereNull('read_at');
+            });
+
             return view('livewire.dashboard.container.notifications-container2', [
-            'notifications' => auth()->user()->notifications()->latest()->paginate(10)
+            'notifications' => $notify->paginate(10)
             ])->layout('layouts.app');
         } else {
             return view('livewire.dashboard.container.notifications-container', [

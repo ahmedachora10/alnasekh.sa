@@ -41,8 +41,7 @@
 
                     @foreach ($allPermissions as $key => $permission)
                         <tr>
-                            <td class="text-nowrap fw-medium">{{ ucfirst($key) }}
-                                Management</td>
+                            <td class="text-nowrap fw-medium">{{ trans('common.' . $key . ' management') }}</td>
                             <td>
                                 <div class="d-flex">
                                     @foreach ($permission as $item)

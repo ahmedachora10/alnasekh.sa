@@ -15,9 +15,9 @@ return [
 
     'my profile' => 'حسابي',
     'log out' => 'الخروج',
-    'notifications' => 'الاشعارت',
+    'notifications' => 'الإشعارات',
     'show more' => 'عرض المزيد',
-    'no notifications exists' =>  'لا توجد الاشعارت لعرضها',
+    'no notifications exists' =>  'لا توجد الإشعارات لعرضها',
 
     'new role' => 'دور جديد',
     'role permissions' => 'صلاحيات الدور',
@@ -75,4 +75,15 @@ return [
     'corp details' => 'تفاصيل المنشآة',
     'reports' => 'سجل العمليات',
     'new report' => 'سجل عملية جديد',
+
+    'user management' => 'إدارة المستخدمين',
+    'setting management' => 'إدارة الإعدادات',
+    'corp management' => 'إدارة المنشآت',
+    'role management' => 'إدارة الصلاحيات',
+    'registry management' => 'إدارة الرخص',
+    'monthly-quarterly management' => 'إدارة التحديثات الشهرية والربع السنوية',
+    'dashboard management' => 'إدارة لوحة التحكم',
+
+    'civil defense permit' => 'تصريح الدفاع المدني',
+    'update civil defense permit' => 'تحديث تصريح الدفاع المدني',
 ];

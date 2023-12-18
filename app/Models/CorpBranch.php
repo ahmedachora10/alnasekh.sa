@@ -27,6 +27,10 @@ class CorpBranch extends Model
         return $this->hasOne(BranchCertificate::class);
     }
 
+    public function civilDefenseCertificate(): HasOne {
+        return $this->hasOne(BranchCivilDefenseCertificate::class);
+    }
+
     public function subscriptions(): HasMany {
         return $this->hasMany(BranchSubscription::class);
     }

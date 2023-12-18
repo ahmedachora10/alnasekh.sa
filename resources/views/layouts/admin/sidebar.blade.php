@@ -1,5 +1,5 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
-    <div class="app-brand demo">
+    <div class="app-brand demo d-flex align-items-center justify-content-center">
         <a href="@hasPermission('dashboard.show')
 {{ route('dashboard') }}
 @else
@@ -8,7 +8,7 @@
             class="app-brand-link">
             <span class="app-brand-logo demo">
                 {{-- <x-dashboard.logo width="25" /> --}}
-                <img src="{{ asset(setting('logo')) }}" alt="logo" width="75">
+                <img src="{{ asset(setting('logo')) }}" alt="logo" width="75" class="">
             </span>
             {{-- <span class="app-brand-text demo menu-text fw-bolder ms-2">{{ setting('app_name') }}</span> --}}
         </a>
@@ -24,6 +24,10 @@
 
         @hasPermission('dashboard.show')
             <x-dashboard.sidebar.link :title="trans('sidebar.home')" icon="home-circle" :link="route('dashboard')" />
+        @endhasPermission
+
+        @hasPermission('dashboard.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.notifications')" icon="bell" :link="route('users.notifications')" />
         @endhasPermission
 
         @hasPermission('corp.show|setting.show|monthly-quarterly.show|registry.show')
@@ -43,7 +47,7 @@
 
         @hasPermission('user.show|setting.show')
             <x-dashboard.sidebar.link-head>
-                <span>{{ trans('sidebar.users') }} / {{ trans('sidebar.roles') }}</span>
+                <span>{{ trans('sidebar.all settings') }}</span>
             </x-dashboard.sidebar.link-head>
         @endhasPermission
 

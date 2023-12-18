@@ -28,7 +28,7 @@ class StoreCertificate extends Component
 
         if($this->certificate && $this->certificate?->id === null) {
             $this->store();
-            return redirect()->route('branches.subscription.store', $this->branch)->with('success', trans('message.create'));
+            return redirect()->route('branches.civil_defense_permit.store', $this->branch)->with('success', trans('message.create'));
         } else {
             $this->update();
         }

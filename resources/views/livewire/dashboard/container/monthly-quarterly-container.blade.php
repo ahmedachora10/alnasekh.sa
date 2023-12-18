@@ -2,13 +2,16 @@
 
     <x-dashboard.headline :title="trans('sidebar.monthly quarterly updates')" description="قسم للتعامل مع التحديثات الشهرية والربع سنوية" />
 
-    <x-dashboard.tables.table1 :createAction="route('monthly-quarterly-update.create')" :columns="['entity name', 'mission']">
+    <x-dashboard.tables.table1 :createAction="route('monthly-quarterly-update.create')" :columns="['image', 'entity name', 'mission']">
 
         @forelse ($data as $item)
             <tr>
                 <td>{{ $item->id }}</td>
+                <td>
+                    <img src="{{ asset($item->thumbnail) }}" alt="image" width="30" height="30"
+                        class=" rounded-circle">
+                </td>
                 <td>{{ $item->entity_name }}</td>
-
                 <td>
                     {{ $item->mission }}
                 </td>

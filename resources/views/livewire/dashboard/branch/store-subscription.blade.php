@@ -83,10 +83,8 @@
                             <div class="col-12">
                                 <x-dashboard.button wire:click="save" name="{{ trans('common.save') }}"
                                     class="btn-primary float-end mt-2" />
-                                @if ($branch->subscriptions->count() === 0)
-                                    <x-dashboard.button wire:click="redirectTo" name="{{ trans('common.skip') }}"
-                                        class="btn-outline-warning float-end mx-2 mt-2" />
-                                @endif
+                                <x-dashboard.button wire:click="skip" name="{{ trans('common.skip') }}"
+                                    class="btn-outline-warning float-end mx-2 mt-2" />
                             </div>
                         @else
                             @foreach ($branch->subscriptions as $item)

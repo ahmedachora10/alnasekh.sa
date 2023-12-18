@@ -29,8 +29,9 @@
         @forelse ($corps as $corp)
             <tr>
                 <td>
-                    <i class="{{ status_handler($corp->end_date)?->icon() }}"></i>
+                    {{-- <i class="{{ status_handler($corp->end_date)?->icon() }}"></i> --}}
                     {{ $loop->iteration }}
+                    <span class="ms-3 badge badge-dot bg-{{ status_handler($corp->end_date)?->color() }}"></span>
                 </td>
                 <td>
                     <img src="{{ asset($corp->thumbnail) }}" alt="image" width="30" height="30"
