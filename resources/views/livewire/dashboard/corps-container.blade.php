@@ -44,7 +44,7 @@
                 </td>
                 <td>
                     @if ($corp->doesnt_has_branches)
-                        <a href="{{ route('branches.show', $corp->branches->first()) }}">{{ $corp->name }}</a>
+                        <a href="{{ route('branches.show', $corp->branches?->first()) }}">{{ $corp->name }}</a>
                     @else
                         <a href="{{ route('corps.show', $corp) }}">{{ $corp->name }}</a>
                     @endif
@@ -84,7 +84,7 @@
                         @endif
 
                         @if ($corp->doesnt_has_branches)
-                            <a href="{{ route('branches.show', $corp->branches->first()) }}"
+                            <a href="{{ route('branches.show', $corp->branches?->first()) }}"
                                 class="dropdown-item text-primary">
                                 <i class="bx bx-show me-1"></i>{{ trans('common.show') }}</a>
                             @php
