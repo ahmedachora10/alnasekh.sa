@@ -5,16 +5,19 @@ namespace App\Models;
 use App\Enums\HasBranches;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\ThumbnailModelAttribute;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Scout\Searchable;
 
 class Corp extends Model
 {
-    use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute;
+    use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute, Searchable;
 
     protected $fillable = [
         'user_id',
@@ -60,12 +63,24 @@ class Corp extends Model
         return $this->hasMany(CorpBranch::class);
     }
 
+    public function branch() : HasOne {
+        return $this->hasOne(CorpBranch::class);
+    }
+
     public function reports() : HasMany {
         return $this->hasMany(CorpReport::class);
     }
 
-    // public function getThumbnailAttribute() {
-    //     return $this->image != null && Storage::disk('public')->exists($this->image) ? 'storage/'.$this->image : 'https://th.bing.com/th/id/OIP.g1K70P37u_RLgGQe4Ii5RQHaHa?w=192&h=192&c=7&r=0&o=5&dpr=1.3&pid=1.7';
-    // }
-
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'administrator_name' => $this->administrator_name,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'commercial_registration_number' => $this->commercial_registration_number,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+        ];
+    }
 }

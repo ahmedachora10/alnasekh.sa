@@ -237,7 +237,14 @@
         @endif
 
         <div class="card">
-            <h5 class="card-header">{{ trans('common.subscriptions') }}</h5>
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header">{{ trans('common.subscriptions') }}</h5>
+                <button class="btn btn-primary me-4 ms-2 btn-sm test-cleave" data-bs-target="#updateSubscriptionModal"
+                    data-bs-toggle="modal">
+                    <span class="tf-icons bx bx-plus"></span>
+                    <span>{{ trans('common.create') }}</span>
+                </button>
+            </div>
             <div class="card-body">
                 <div class="added-cards">
                     @forelse ($branch->subscriptions as $item)

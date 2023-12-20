@@ -14,6 +14,7 @@ enum Status: int {
             self::ALMOST_FINISHED => trans('common.almost finished'),
             self::FINISHED => trans('common.finished'),
             self::DEFAULT => trans('common.unknown'),
+            default =>  trans('common.unknown'),
         };
     }
 

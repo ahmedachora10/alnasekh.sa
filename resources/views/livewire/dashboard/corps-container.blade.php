@@ -4,11 +4,16 @@
 
     <x-dashboard.tables.table1 :columns="['image', 'name', 'employee', 'email', 'phone', 'start date', 'end date', 'has branches?']">
         <x:slot:title>
-            <select wire:model.change="numberOfRows" class="form-control">
-                @foreach ($numberOfRowsArray as $value)
-                    <option value="{{ $value }}">{{ $value }}</option>
-                @endforeach
-            </select>
+            <div class="d-flex">
+                <select wire:model.change="numberOfRows" class="form-control w-auto me-2">
+                    @foreach ($numberOfRowsArray as $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+
+                <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
+                    placeholder="{{ trans('table.columns.search') }}" />
+            </div>
         </x:slot:title>
         <x-slot:actions>
             {{-- <livewire:exports.export-button type='corps' /> --}}
@@ -27,7 +32,7 @@
 
         </x-slot:actions>
         @forelse ($corps as $corp)
-            <tr>
+            <tr wire:loading.class="opacity-50">
                 <td>
                     {{-- <i class="{{ status_handler($corp->end_date)?->icon() }}"></i> --}}
                     {{ $loop->iteration }}
@@ -82,6 +87,14 @@
                             <a href="{{ route('branches.show', $corp->branches->first()) }}"
                                 class="dropdown-item text-primary">
                                 <i class="bx bx-show me-1"></i>{{ trans('common.show') }}</a>
+                            @php
+                                $steps = stepsChecker($corp->branch);
+                            @endphp
+                            <a class="dropdown-item text-{{ $steps['link'] === '#' ? 'secondary disabled' : 'danger' }}"
+                                target="_blank" href="{{ $steps['link'] }}">
+                                <i class="bx bx-link-external position-relative" style="font-size: 15px"></i>
+                                {{ $steps['text'] }}
+                            </a>
                         @else
                             <a href="{{ route('corps.show', $corp) }}" class="dropdown-item"> <i
                                     class="bx bx-show me-1"></i> {{ trans('common.show') }} </a>
@@ -184,8 +197,8 @@
                 icon="bx bx-file" />
             <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.branches')" type="all-branches"
                 icon="bx bx-file-blank" />
-            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.employees')" type="all-employees"
-                icon="fas fa-users fs-2 mb-2 text-secondary" style="border-top" />
+            <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.employees')"
+                type="all-employees" icon="fas fa-users fs-2 mb-2 text-secondary" style="border-top" />
             <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.monthly and quarterly updates')"
                 type="all-monthly-quarterly-updates" icon="bx bx-file" style="border-top" />
             <livewire:exports.export-button :corp="$corpModel" fileType="excel" :title="trans('common.subscriptions')"

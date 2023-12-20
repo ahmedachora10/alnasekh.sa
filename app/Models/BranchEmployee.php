@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Scout\Searchable;
 
 class BranchEmployee extends Model
 {
-    use HasFactory, ModelBasicAttributeValue;
+    use HasFactory, ModelBasicAttributeValue, Searchable;
 
     protected $fillable = [
         'corp_id',
@@ -53,4 +54,20 @@ class BranchEmployee extends Model
     // public function branches() : HasMany {
     //     return $this->hasMany(CorpBranch::class);
     // }
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'nationality' => $this->nationality,
+            'resident_number' => $this->resident_number,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'business_card_start_date' => $this->business_card_start_date,
+            'business_card_end_date' => $this->business_card_end_date,
+            'contract_start_date' => $this->contract_start_date,
+            'contract_end_date' => $this->contract_end_date,
+        ];
+    }
+
 }

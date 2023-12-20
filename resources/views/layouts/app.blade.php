@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light-style layout-menu-fixed"
+{{-- light-style --}}
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    class="{{ session('theme', 'light') }}-style  layout-menu-fixed"
     dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" data-theme="theme-default" data-assets-path="../assets/"
     data-template="vertical-menu-template-free">
 
@@ -34,10 +35,19 @@
 
     @if (app()->getLocale() == 'ar')
         {{-- <link rel="stylesheet" href="{{ asset('assets/css/rtl.css') }}"> --}}
-        <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}"
-            class="template-customizer-core-css" />
-        <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}"
-            class="template-customizer-theme-css">
+        @if (session('theme') == 'dark')
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/dark-core.css') }}"
+                class="template-customizer-core-css" />
+
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default-dark.css') }}"
+                class="template-customizer-theme-css">
+        @else
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}"
+                class="template-customizer-core-css" />
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}"
+                class="template-customizer-theme-css">
+        @endif
+
 
         <style>
             .phone-number {
@@ -46,9 +56,18 @@
             }
         </style>
     @else
-        <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
-        <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}"
-            class="template-customizer-theme-css" />
+        @if (session('theme') == 'dark')
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/dark-core.css') }}"
+                class="template-customizer-core-css" />
+
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default-dark.css') }}"
+                class="template-customizer-theme-css">
+        @else
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}"
+                class="template-customizer-core-css" />
+            <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}"
+                class="template-customizer-theme-css" />
+        @endif
     @endif
 
 

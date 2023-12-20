@@ -17,6 +17,8 @@ class UpdateEmployee extends Component
 
     public CorpBranch $branch;
 
+    public $search = '';
+
     #[On('refresh-employees')]
     public function refresh() {
         $this->dispatch('$refresh');
@@ -31,7 +33,7 @@ class UpdateEmployee extends Component
     public function render()
     {
         return view('livewire.dashboard.branch.update-employee', [
-            'employees' => $this->branch->employees()->paginate(setting('pagination') ?? 8)
+            'employees' => BranchEmployee::search($this->search)->where('corp_branch_id', $this->branch->id)->paginate(setting('pagination') ?? 8)
         ]);
     }
 }

@@ -1,8 +1,13 @@
 <section>
-    <x-dashboard.tables.table1 title="sidebar.users" :createAction="route('users.create')" :columns="['image', 'name', 'email', 'role', 'created at']">
+    <x-dashboard.tables.table1 :createAction="route('users.create')" :columns="['image', 'name', 'email', 'role', 'created at']">
+
+        <x-slot:title>
+            <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
+                placeholder="{{ trans('table.columns.search') }}" />
+        </x-slot:title>
 
         @forelse ($users as $user)
-            <tr>
+            <tr wire:loading.class="opacity-50">
                 <td>{{ $user->id }}</td>
                 <td><img src="{{ asset($user->thumbnail) }}" class=" rounded-circle" alt="avatar" width="30px"
                         height="30px">

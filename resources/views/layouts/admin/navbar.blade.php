@@ -23,6 +23,33 @@
                 <span></span>
             </li>
 
+            <!-- Switch Theme -->
+            <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+
+                    <i class="bx bx-sm bx-{{ session('theme') == 'dark' ? 'moon' : 'sun' }}"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                        <a class="dropdown-item" href="{{ route('switch.theme') }}" data-theme="light">
+                            @if (session('theme') == 'dark')
+                                <span class="align-middle"><i
+                                        class="bx bx-sun me-2"></i>{{ trans('common.light') }}</span>
+                            @else
+                                <span class="align-middle"><i
+                                        class="bx bx-moon me-2"></i>{{ trans('common.dark') }}</span>
+                            @endif
+                        </a>
+                    </li>
+                    {{-- <li>
+                        <a class="dropdown-item" href="{{ route('switch.theme') }}" data-theme="dark">
+                        </a>
+                    </li> --}}
+
+                </ul>
+            </li>
+            <!--/ Switch Theme -->
+
             <!-- Notifications -->
             <livewire:dashboard.container.notifications-container theme="navbar" />
             <!--/ Notifications -->

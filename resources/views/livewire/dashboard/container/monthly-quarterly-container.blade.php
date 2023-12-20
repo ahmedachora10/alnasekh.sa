@@ -4,8 +4,13 @@
 
     <x-dashboard.tables.table1 :createAction="route('monthly-quarterly-update.create')" :columns="['image', 'entity name', 'mission']">
 
+        <x-slot:title>
+            <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
+                placeholder="{{ trans('table.columns.search') }}" />
+        </x-slot:title>
+
         @forelse ($data as $item)
-            <tr>
+            <tr wire:loading.class="opacity-50">
                 <td>{{ $item->id }}</td>
                 <td>
                     <img src="{{ asset($item->thumbnail) }}" alt="image" width="30" height="30"

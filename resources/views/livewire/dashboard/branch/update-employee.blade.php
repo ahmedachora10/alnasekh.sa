@@ -2,13 +2,17 @@
     <div class="card">
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="card-header">{{ trans('common.employees') }}</h5>
-            <div>
+            <div class="d-flex">
                 {{-- <a href="{{ route('export.branch.employees', $branch) }}"
                     class="btn btn-secondary  ms-2 btn-sm test-cleave">
                     <span class="tf-icons bx bx-cloud-download me-1"></span>
                     <span>{{ trans('common.export') }}</span>
                 </a> --}}
                 {{-- <livewire:exports.export-button :branch="$branch" type="employees" /> --}}
+
+
+                <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
+                    placeholder="{{ trans('table.columns.search') }}" />
 
                 <button class="btn btn-primary me-4 ms-2 btn-sm test-cleave" data-bs-target="#branchEmployeeFormModal"
                     data-bs-toggle="modal" wire:click="$dispatch('reset-employee-form')">
@@ -19,7 +23,15 @@
         </div>
     </div>
     <div class="card-body">
-        <x-dashboard.tables.table2 :columns="['name', 'resident number', 'start date', 'end date', 'medical insurance', 'health card']">
+        <x-dashboard.tables.table2 :columns="[
+            'name',
+            'resident number',
+            'nationality',
+            'start date',
+            'end date',
+            'medical insurance',
+            'health card',
+        ]">
             @forelse ($employees as $item)
                 @php
                     $insuranceStatus = status_handler($item->medicalInsurance?->end_date);
@@ -27,14 +39,19 @@
                 @endphp
                 <tr>
                     <td>
-                        <i class="{{ status_handler($item->end_date)?->icon() }}"></i>
-                        {{ $item->id }}
+                        {{ $loop->iteration }}
+
+                        <span class="ms-3 badge badge-dot bg-{{ status_handler($item->end_date)?->color() }}"></span>
                     </td>
                     <td>
                         <span class="fw-medium lh-1">{{ $item->name }}</span>
                     </td>
                     <td>
                         <x-dashboard.badge color="primary">{{ $item->resident_number }}</x-dashboard.badge>
+                    </td>
+
+                    <td>
+                        <x-dashboard.badge color="info">{{ $item->nationality->name() }}</x-dashboard.badge>
                     </td>
                     <td>
                         <span class="fw-medium lh-1">{{ $item->date('start_date') }}</span>
@@ -44,7 +61,7 @@
                     </td>
 
                     <td>
-                        <i class="{{ $insuranceStatus?->icon() }}" title="{{ $insuranceStatus?->name() }}"></i>
+                        <span class="ms-3 badge badge-dot bg-{{ $insuranceStatus?->color() }}"></span>
                         <x-dashboard.button
                             wire:click="$dispatch('create-update-medical-insurance', { employee: {{ $item }}})"
                             @class([
@@ -54,7 +71,7 @@
                     </td>
 
                     <td>
-                        <i class="{{ $healthStatus?->icon() }}" title="{{ $healthStatus?->name() }}"></i>
+                        <span class="ms-3 badge badge-dot bg-{{ $healthStatus?->color() }}"></span>
                         <x-dashboard.button
                             wire:click="$dispatch('create-update-health-card', { employee: {{ $item }}})"
                             @class([

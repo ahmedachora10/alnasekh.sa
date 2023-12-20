@@ -22,10 +22,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('export', function () {
-//     return Excel::download(new CorpsExport, 'corps.xlsx', ExcelFormat::XLSX);
-// });
+Route::get('switch-theme', function () {
+    $theme = request()->session()->get('theme', 'light');
 
+    // Toggle between 'light' and 'dark' themes
+    $newTheme = ($theme === 'light') ? 'dark' : 'light';
+
+    // Store the new theme in the session
+    request()->session()->put('theme', $newTheme);
+
+    return redirect()->back();
+})->name('switch.theme');
 
 
 require __DIR__.'/auth.php';

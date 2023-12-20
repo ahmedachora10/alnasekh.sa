@@ -84,9 +84,12 @@ return [
         'unread' => 'غير مقروءة',
 
         'national id' => 'رقم الهوية الوطنية',
+        'nationality' => 'الجنسية',
 
         'permit' => 'رقم التصريح',
         'ministry of interior number' => 'رقم وزارة الداخلية',
+        'search' => 'بحث',
+        'steps' => 'الخطوات',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

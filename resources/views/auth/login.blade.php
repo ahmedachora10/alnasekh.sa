@@ -15,7 +15,7 @@
     <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4">
         <div class="w-px-400 mx-auto">
             <!-- Logo -->
-            <div class="app-brand mb-5">
+            <div class="app-brand mb-5 d-flex justify-content-center align-items-center">
                 <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1"
                     class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">

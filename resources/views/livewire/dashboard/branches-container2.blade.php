@@ -1,8 +1,14 @@
 <section>
-    <x-dashboard.tables.table2 :columns="['name', 'registration number', 'address']">
+
+    <div class="row justify-content-end align-items-center mb-3">
+        <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
+            placeholder="{{ trans('table.columns.search') }}" style="width: 320px" />
+    </div>
+
+    <x-dashboard.tables.table2 :columns="['name', 'registration number', 'address', 'steps']">
 
         @forelse ($branches as $branch)
-            <tr>
+            <tr wire:loading.class="opacity-50">
                 <td>
                     {{ $branch->id }}
                 </td>
@@ -12,6 +18,13 @@
                 <td><x-dashboard.badge color="info">{{ $branch->registration_number }}</x-dashboard.badge></td>
 
                 <td>{{ $branch->address ?? '-' }}</td>
+                <td>
+                    @php
+                        $steps = stepsChecker($corp->branch);
+                    @endphp
+                    <a class="btn btn-sm btn-outline-{{ $steps['link'] === '#' ? 'secondary disabled' : 'danger' }}"
+                        target="_blank" href="{{ $steps['link'] }}">{{ $steps['text'] }}</a>
+                </td>
 
                 <td>
                     <x-dashboard.actions.container>

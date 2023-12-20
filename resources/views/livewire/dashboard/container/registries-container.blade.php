@@ -4,8 +4,13 @@
 
     <x-dashboard.tables.table1 :createAction="route('registries.create')" :columns="['image', 'name']">
 
+        <x-slot:title>
+            <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
+                placeholder="{{ trans('table.columns.search') }}" />
+        </x-slot:title>
+
         @forelse ($data as $item)
-            <tr>
+            <tr wire:loading.class="opacity-50">
                 <td>{{ $item->id }}</td>
                 <td><img src="{{ asset($item->thumbnail) }}" alt="logo" width="40" height="40"
                         class="rounded-circle"></td>

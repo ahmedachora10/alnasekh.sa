@@ -12,10 +12,12 @@ class MonthlyQuarterlyContainer extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $search = '';
+
     public function render()
     {
         return view('livewire.dashboard.container.monthly-quarterly-container', [
-            'data' => MonthlyQuarterlyUpdate::paginate(setting('pagination') ?? 8)
+            'data' => MonthlyQuarterlyUpdate::search($this->search)->paginate(setting('pagination') ?? 8)
         ]);
     }
 }

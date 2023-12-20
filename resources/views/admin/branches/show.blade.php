@@ -76,4 +76,8 @@
     <x-dashboard.modals.modal1 id="createMonthlyUpdatesModal" size="modal-xl" :title="trans('common.new monthly update')">
         <livewire:dashboard.branch.store-monthly-quarterly-update :branch="$branch" :createMode="false" />
     </x-dashboard.modals.modal1>
+
+    <x-dashboard.modals.modal1 id="updateSubscriptionModal" size="modal-xl" :title="trans('common.new subscription')">
+        <livewire:dashboard.branch.store-subscription-from-branch :branch="$branch" />
+    </x-dashboard.modals.modal1>
 </x-app-layout>

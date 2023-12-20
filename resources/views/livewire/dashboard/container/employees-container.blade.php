@@ -5,6 +5,11 @@
 
     <x-dashboard.tables.table1 :columns="['employee name', 'resident number', 'start date', 'end date', 'medical insurance', 'health card']">
 
+        <x-slot:title>
+            <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
+                placeholder="{{ trans('table.columns.search') }}" />
+        </x-slot:title>
+
         <x-slot:actions>
             <div class="mb-3">
                 <button class="btn btn-primary me-4 ms-2 btn-sm test-cleave" data-bs-target="#branchEmployeeFormModal"
@@ -16,7 +21,7 @@
         </x-slot:actions>
 
         @forelse ($employees as $employee)
-            <tr>
+            <tr wire:loading.class="opacity-50">
                 <td>{{ $employee->id }}</td>
 
                 <td>{{ $employee->name }}</td>

@@ -49,6 +49,8 @@ return [
     'branches' => 'الفروع',
     'employees' => 'الموظفين',
     'client' => 'العميل',
+    'completed' => 'مكتمل',
+    'uncompleted' => 'غير مكتمل',
     'registries' => 'السجلات',
     'certificates' => 'التراخيص',
     'subscriptions' => 'الاشتراكات',
@@ -86,4 +88,8 @@ return [
 
     'civil defense permit' => 'تصريح الدفاع المدني',
     'update civil defense permit' => 'تحديث تصريح الدفاع المدني',
+
+    'new subscription' => 'اشتراك جديد',
+    'dark' => 'الوضع الليلي',
+    'light' => 'الوضع العادي',
 ];

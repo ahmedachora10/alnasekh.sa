@@ -5,17 +5,20 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Traits\AvatarGenerator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Laratrust\Contracts\LaratrustUser;
 use Laratrust\Traits\HasRolesAndPermissions;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements LaratrustUser
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, AvatarGenerator;
+    use HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, AvatarGenerator, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -51,5 +54,13 @@ class User extends Authenticatable implements LaratrustUser
 
     public function getThumbnailAttribute() {
         return $this->avatar != null && Storage::disk('public')->exists($this->avatar) ? 'storage/'.$this->avatar : $this->makeAvatar($this->name);
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
     }
 }

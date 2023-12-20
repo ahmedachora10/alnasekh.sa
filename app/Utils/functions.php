@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Status;
+use App\Models\CorpBranch;
 use App\Models\Setting;
 use Carbon\Carbon;
 
@@ -83,5 +84,43 @@ if(!function_exists('short_date_name')) {
         ];
 
         return str($date)->replace('منذ', '')->replace(array_keys($replacement), array_values($replacement));
+    }
+}
+
+if(!function_exists('stepsChecker')) {
+
+    function stepsChecker(CorpBranch $branch) {
+        $subscriptions = $branch->subscriptions->count() > 0 ? true : null;
+        $monthlyQuarterly = $branch->monthlyQuarterlyUpdates->count() > 0 ? true : null;
+        $employees = $branch->employees->count() > 0 ? true : null;
+
+
+        if($branch->corp->corp_has_branches) {
+            $stepsOfBranche = [
+                'branches.record.store' => $branch->record,
+                'branches.certificate.store' => $branch->certificate,
+                'branches.civil_defense_permit.store' => $branch->civilDefenseCertificate,
+            ];
+        } else {
+            $stepsOfBranche = [
+                'branches.registries.store' => $branch->registries->count() > 0 ? true : null,
+            ];
+        }
+
+        $steps = [
+            'branches.subscription.store' => $subscriptions,
+            'branches.monthly-quarterly-update.store' => $monthlyQuarterly,
+            'branches.employees.store' => $employees,
+        ];
+
+        $steps = array_merge($stepsOfBranche, $steps);
+
+        foreach ($steps as $key => $value) {
+            if($value !== null) continue;
+
+            return ['text' => trans('common.uncompleted'), 'link' => route($key, $branch)];
+        }
+
+        return ['text' => trans('common.completed'), 'link' => '#'];
     }
 }

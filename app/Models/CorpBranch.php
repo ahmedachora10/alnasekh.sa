@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Scout\Searchable;
 
 class CorpBranch extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     protected $fillable = ['corp_id', 'name', 'registration_number', 'address'];
 
@@ -48,6 +49,15 @@ class CorpBranch extends Model
 
     public function employees(): HasMany {
         return $this->hasMany(BranchEmployee::class);
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'registration_number' => $this->registration_number,
+            'address' => $this->address,
+        ];
     }
 
     // public function updates() : HasMany {

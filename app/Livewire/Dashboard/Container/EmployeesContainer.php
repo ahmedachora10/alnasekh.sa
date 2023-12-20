@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard\Container;
 
+use App\Models\BranchEmployee;
 use App\Models\CorpBranch;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -16,6 +17,8 @@ class EmployeesContainer extends Component
     public CorpBranch $branch;
 
     public bool $next = false;
+
+    public $search = '';
 
     public function mount(CorpBranch $branch) {
         $this->branch = $branch;
@@ -34,7 +37,7 @@ class EmployeesContainer extends Component
     {
         $this->readyToNextStep();
         return view('livewire.dashboard.container.employees-container', [
-            'employees' => $this->branch->employees()->paginate(setting('pagination') ?? 8)
+            'employees' => BranchEmployee::search($this->search)->where('corp_branch_id', $this->branch->id)->paginate(setting('pagination') ?? 8), //$this->branch->employees()->search($this->search)->paginate(setting('pagination') ?? 8)
         ]);
     }
 }

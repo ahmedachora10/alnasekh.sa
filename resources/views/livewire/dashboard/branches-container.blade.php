@@ -7,7 +7,12 @@
 
     <div class="mb-3"></div>
 
-    <x-dashboard.tables.table1 :columns="['name', 'registration number', 'address']">
+    <x-dashboard.tables.table1 :columns="['name', 'registration number', 'address', 'steps']">
+
+        <x-slot:title>
+            <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
+                placeholder="{{ trans('table.columns.search') }}" class="mb-3" style="width: 290px" />
+        </x-slot:title>
 
         <x-slot:actions>
             <div class="mb-3">
@@ -28,6 +33,14 @@
                 <td><x-dashboard.badge color="info">{{ $branch->registration_number }}</x-dashboard.badge></td>
 
                 <td>{{ $branch->address ?? '-' }}</td>
+
+                <td>
+                    @php
+                        $steps = stepsChecker($branch);
+                    @endphp
+                    <a class="btn btn-sm btn-outline-{{ $steps['link'] == '#!' ? 'secondary' : 'danger' }}"
+                        href="{{ $steps['link'] }}">{{ $steps['text'] }}</a>
+                </td>
 
                 <td>
                     <x-dashboard.actions.container>

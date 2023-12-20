@@ -12,10 +12,12 @@ class RegistriesContainer extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $search = '';
+
     public function render()
     {
         return view('livewire.dashboard.container.registries-container', [
-            'data' => Registry::paginate(setting('pagination') ?? 8)
+            'data' => Registry::search($this->search)->paginate(setting('pagination') ?? 8)
         ]);
     }
 }

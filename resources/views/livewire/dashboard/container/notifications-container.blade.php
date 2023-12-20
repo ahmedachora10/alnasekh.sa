@@ -67,7 +67,8 @@
 
                                 </a>
                                 <a href="#!" wire:click="makeItRead({{ $notification }})"
-                                    class="dropdown-notifications-archive"><span class="bx bx-check"></span></a>
+                                    class="dropdown-notifications-archive"><span
+                                        class="bx bx-check-circle text-success"></span></a>
                             </div>
                         </div>
                     </li>
