@@ -6,6 +6,7 @@ use App\Livewire\Forms\MonthlyQuarterlyUpdateForm;
 use App\Models\CorpBranch;
 use App\Models\MonthlyQuarterlyUpdate;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class StoreMonthlyQuarterlyUpdate extends Component
@@ -67,6 +68,11 @@ class StoreMonthlyQuarterlyUpdate extends Component
         session()->put('success', trans('message.delete'));
         $this->reset('date');
         $this->dispatch('refresh-alert');
+    }
+
+    #[On('refresh-monthly-quarterly-update')]
+    public function refresh() {
+        $this->dispatch('$refresh');
     }
 
     public function render()

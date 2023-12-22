@@ -8,7 +8,8 @@
             class="app-brand-link">
             <span class="app-brand-logo demo">
                 {{-- <x-dashboard.logo width="25" /> --}}
-                <img src="{{ asset(setting('logo')) }}" alt="logo" width="75" class="">
+                <img src="{{ session('theme') === 'dark' ? asset('assets/img/logo-white.png') : asset(setting('logo')) }}"
+                    alt="logo" width="75" class="">
             </span>
             {{-- <span class="app-brand-text demo menu-text fw-bolder ms-2">{{ setting('app_name') }}</span> --}}
         </a>
@@ -30,15 +31,15 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.notifications')" icon="bell" :link="route('users.notifications')" />
         @endhasPermission
 
-        @hasPermission('corp.show|setting.show|monthly-quarterly.show|registry.show')
+        @hasPermission('corp.show|setting.show|corp.updates and registries')
             <x-dashboard.sidebar.link :title="trans('sidebar.corps')" icon="folder" link="#" :hasSubMenu="true">
                 @hasPermission('corp.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.corps')" :link="route('corps.index')" />
                 @endhasPermission
-                @hasPermission('monthly-quarterly.show')
+                @hasPermission('corp.updates and registries')
                     <x-dashboard.sidebar.link :title="trans('sidebar.monthly quarterly updates')" :link="route('monthly-quarterly-update.index')" />
                 @endhasPermission
-                @hasPermission('registry.show')
+                @hasPermission('corp.updates and registries')
                     <x-dashboard.sidebar.link :title="trans('sidebar.registries')" :link="route('registries.index')" />
                 @endhasPermission
 

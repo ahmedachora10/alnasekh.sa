@@ -82,6 +82,9 @@ class StoreRegistry extends Component
 
         $this->dispatch('refresh-alert');
         $this->dispatch('refresh-branch-registries');
+
+        $this->dispatch('refresh-store-registry-from-branch');
+        $this->dispatch('refresh-dashboard');
     }
 
     public function render()

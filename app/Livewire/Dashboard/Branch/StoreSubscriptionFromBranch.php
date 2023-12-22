@@ -4,7 +4,9 @@ namespace App\Livewire\Dashboard\Branch;
 
 use App\Enums\PlatformsSubscriptionType;
 use App\Livewire\Forms\SubscriptionForm;
+use App\Models\BranchSubscription;
 use App\Models\CorpBranch;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class StoreSubscriptionFromBranch extends Component
@@ -50,6 +52,17 @@ class StoreSubscriptionFromBranch extends Component
         $this->dispatch('refresh-alert');
         $this->dispatch('$refresh');
         $this->dispatch('refresh-dashboard');
+    }
+
+    #[On('delete-branch-subscription')]
+    public function delete(BranchSubscription $subscription) {
+        $subscription->delete();
+
+        session()->put('success', trans('message.delete'));
+
+        $this->dispatch('refresh-alert');
+        $this->dispatch('refresh-dashboard');
+        $this->dispatch('$refresh');
     }
 
     public function render()

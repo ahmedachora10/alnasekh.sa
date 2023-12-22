@@ -47,6 +47,10 @@
         <x-dashboard.modals.modal1 id="branchRegistryFormModal" :title="trans('common.update certificate')">
             <livewire:dashboard.branch.store-registry :branch="$branch" />
         </x-dashboard.modals.modal1>
+
+        <x-dashboard.modals.modal1 id="createRegistryModal" :title="trans('common.new certificate')">
+            <livewire:dashboard.branch.store-registry-from-branch :branch="$branch" />
+        </x-dashboard.modals.modal1>
     @endif
 
     <x-dashboard.modals.modal1 id="updateMonthlyQuarterlyForm" :title="trans('common.update monthly update')">

@@ -25,7 +25,8 @@ class CorpController extends Controller
      */
     public function index()
     {
-        // Excel::download(new UsersExport, 'users.xlsx');
+        // Mail::to('ahmed@ahmed.com')->send(new SendReminderEmail('السلام عليكم معك شركة الناسخ لتطوير نشكرك على تفهمك'));
+        // return view('mails.send-reminder-2');
         return view('admin.corps.index');
     }
 

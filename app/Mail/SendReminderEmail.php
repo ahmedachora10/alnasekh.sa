@@ -27,7 +27,7 @@ class SendReminderEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.send-reminder',
+            view: 'mails.send-reminder-2',
         );
     }
 

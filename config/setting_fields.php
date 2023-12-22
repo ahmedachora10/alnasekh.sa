@@ -75,6 +75,46 @@ return [
                 'value' => ''
 
             ],
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'linkedin',
+                'label' => 'linkedin',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => ''
+
+            ],
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'telegram',
+                'label' => 'telegram',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => ''
+
+            ],
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'tiktok',
+                'label' => 'tiktok',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => ''
+
+            ],
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'snapchat',
+                'label' => 'snapchat',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => ''
+
+            ],
         ]
     ],
 

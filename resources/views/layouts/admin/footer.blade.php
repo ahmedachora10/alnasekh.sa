@@ -4,8 +4,7 @@
         <div class="mb-2 mb-md-0">
 
             {{ setting('footer') }}
-            © <a href="#!" target="_blank" class="footer-link fw-bolder"></a>
-            {{ date('Y') }}
+            ©{{ date('Y') }}
         </div>
         {{-- <div>
                   <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>

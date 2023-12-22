@@ -35,8 +35,13 @@
             <tr wire:loading.class="opacity-50">
                 <td>
                     {{-- <i class="{{ status_handler($corp->end_date)?->icon() }}"></i> --}}
-                    {{ $loop->iteration }}
-                    <span class="ms-3 badge badge-dot bg-{{ status_handler($corp->end_date)?->color() }}"></span>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>
+                            {{ $loop->iteration }}
+                        </span>
+
+                        <span class="ms-3 badge badge-dot bg-{{ status_handler($corp->end_date)?->color() }}"></span>
+                    </div>
                 </td>
                 <td>
                     <img src="{{ asset($corp->thumbnail) }}" alt="image" width="30" height="30"

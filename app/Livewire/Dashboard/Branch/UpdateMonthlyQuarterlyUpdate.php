@@ -49,6 +49,15 @@ class UpdateMonthlyQuarterlyUpdate extends Component
         $this->dispatch('close-modal', target: '#updateMonthlyQuarterlyForm');
     }
 
+    #[On('delete-monthly-quarterly-from-branch')]
+    public function delete($id) {
+        $this->branch->monthlyQuarterlyUpdates()->detach($id);
+        session()->put('success', trans('message.delete'));
+
+        $this->dispatch('refresh-alert');
+        $this->dispatch('refresh-dashboard');
+    }
+
     public function render()
     {
         return view('livewire.dashboard.branch.update-monthly-quarterly-update');

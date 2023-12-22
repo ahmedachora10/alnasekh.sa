@@ -100,8 +100,8 @@
                                         class="cardMaster bg-lighter rounded-2 p-3 mb-3 border border-{{ status_handler($item->updates?->date)?->color() }}">
                                         <div class="d-flex justify-content-between flex-sm-row flex-column">
                                             <div class="card-information me-2">
-                                                <img src="{{ asset($item->thumbnail) }}" alt="logo" width="30"
-                                                    height="30" class="mb-2 rounded-circle">
+                                                <img src="{{ asset($item->thumbnail) }}" alt="logo" width="36"
+                                                    height="36" class="mb-2 rounded-circle">
                                                 {{-- <i class="bx bx-data fs-2 mb-2"></i> --}}
                                                 <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
                                                     <h6 class="mb-0 me-2">{{ $item->entity_name }}</h6>
@@ -116,6 +116,10 @@
                                                     class="d-flex order-sm-0 order-1 mt-sm-0 mt-3 justify-content-end mb-3">
                                                     <button class="btn btn-label-primary"
                                                         wire:click="$dispatch('edit-branch-monthly-quarterly-update', {update:{{ $item->updates }}})">{{ trans('common.edit') }}</button>
+                                                    <button class="btn" wire:confirm
+                                                        wire:click="$dispatch('delete-monthly-quarterly-from-branch', {id:{{ $item->id }}})">
+                                                        <i class="bx bx-trash text-danger"></i>
+                                                    </button>
                                                 </div>
                                                 <small class="mt-sm-auto mt-2 order-sm-1 order-0">
                                                     {{ trans('common.expired at') }}
@@ -138,7 +142,14 @@
             @if ($branch->corp->doesnt_has_branches)
                 <div class="col-md-12 col-sm-12 mb-3">
                     <div class="card">
-                        <h5 class="card-header">{{ trans('sidebar.registries') }}</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-header">{{ trans('sidebar.registries') }}</h5>
+                            <button class="btn btn-primary me-4 ms-2 btn-sm test-cleave"
+                                data-bs-target="#createRegistryModal" data-bs-toggle="modal">
+                                <span class="tf-icons bx bx-plus"></span>
+                                <span>{{ trans('common.create') }}</span>
+                            </button>
+                        </div>
                         <div class="card-body">
                             <div class="added-cards row">
                                 @forelse ($branch->registries as $item)
@@ -149,7 +160,7 @@
                                                 <div class="card-information me-2">
                                                     {{-- <i class="bx bx-data fs-2 mb-2"></i> --}}
                                                     <img src="{{ asset($item->thumbnail) }}" alt="logo"
-                                                        width="30" height="30" class="mb-2 rounded-circle">
+                                                        width="36" height="36" class="mb-2 rounded-circle">
                                                     <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
                                                         <h6 class="mb-0 me-2">{{ $item->name }}</h6>
                                                         {{-- <span class="badge bg-label-primary">Primary</span> --}}
@@ -163,6 +174,11 @@
                                                         class="d-flex order-sm-0 order-1 mt-sm-0 mt-3 justify-content-end mb-3">
                                                         <button class="btn btn-label-primary"
                                                             wire:click="$dispatch('edit-branch-registry', {registry:{{ $item }}})">{{ trans('common.edit') }}</button>
+
+                                                        <button class="btn " wire:confirm
+                                                            wire:click="$dispatch('delete-branch-registry', {registry:{{ $item }}})">
+                                                            <i class="bx bx-trash text-danger"></i>
+                                                        </button>
                                                     </div>
                                                     <small class="mt-sm-auto mt-2 order-sm-1 order-0">
                                                         {{ trans('common.expired at') }}
@@ -254,7 +270,7 @@
                                 <div class="card-information me-2">
                                     {{-- <i class="bx bx-git-branch fs-2 mb-2"></i> --}}
                                     <img src="{{ asset($item->subscription_type->thumbnail()) }}" alt="logo"
-                                        width="30" height="30" class="mb-2 rounded-circle">
+                                        width="36" height="36" class="mb-2 rounded-circle">
                                     <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
                                         <h6 class="mb-0 me-2">{{ $item->subscription_type->name() }}</h6>
                                         {{-- <span class="badge bg-label-primary">Primary</span> --}}
@@ -268,6 +284,10 @@
                                     <div class="d-flex justify-content-end order-sm-0 order-1 mt-sm-0 mt-3">
                                         <button class="btn btn-label-primary"
                                             wire:click="$dispatch('edit-dashboard-branch-subscription', {subscription: {{ $item }}})">{{ trans('common.edit') }}</button>
+                                        <button class="btn" wire:confirm
+                                            wire:click="$dispatch('delete-branch-subscription', {subscription:{{ $item }}})">
+                                            <i class="bx bx-trash text-danger"></i>
+                                        </button>
                                     </div>
                                     <small class="mt-sm-auto mt-2 order-sm-1 order-0">
                                         {{ trans('common.expired at') }}

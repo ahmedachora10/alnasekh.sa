@@ -92,4 +92,7 @@ return [
     'new subscription' => 'اشتراك جديد',
     'dark' => 'الوضع الليلي',
     'light' => 'الوضع العادي',
+    'new certificate' => 'رخصة جديدة',
+
+    'updates and registries' => 'التحديثات والرخص'
 ];

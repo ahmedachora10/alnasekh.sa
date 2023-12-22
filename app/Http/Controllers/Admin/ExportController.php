@@ -12,6 +12,7 @@ use App\Exports\RegistriesExport;
 use App\Exports\ReportsExport;
 use App\Exports\SubscriptionsExport;
 use App\Http\Controllers\Controller;
+use App\Models\BranchEmployee;
 use App\Models\Corp;
 use App\Models\CorpBranch;
 use Illuminate\Http\Request;
@@ -33,11 +34,14 @@ class ExportController extends Controller
 
         $export = new EmployeesExport($corp->id, true);
 
-        $data = $export->query()->get();
+        // $data = $export->query()->get();
+        $data = BranchEmployee::with(['healthCardPaper','medicalInsurance'])
+        ->whereIn('corp_branch_id', $corp->branches()->pluck('id')->toArray())
+        ->get();
 
         $title = 'الموظفين';
 
-        return view('exports.pdf.print', compact('data', 'export', 'title'));
+        return view('exports.pdf.employees', compact('data', 'export', 'title'));
     }
 
     public function monthlyQuarterlyMonthly(Corp $corp) {

@@ -8,6 +8,7 @@ enum PlatformsSubscriptionType:int {
     case S = 3;
     case SA = 4;
     case AB = 5;
+    case DB = 6;
 
     public function name() {
         return match ($this) {
@@ -16,6 +17,7 @@ enum PlatformsSubscriptionType:int {
             self::S => 'سبل',
             self::SA => 'الغرفة التجارية',
             self::AB => 'ابشر - مقيم',
+            self::DB => 'اعتماد',
         };
     }
 
