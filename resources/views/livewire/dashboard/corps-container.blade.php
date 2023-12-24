@@ -2,7 +2,7 @@
 
     <x-dashboard.headline :title="trans('sidebar.corps')" />
 
-    <x-dashboard.tables.table1 :columns="['image', 'name', 'employee', 'email', 'phone', 'start date', 'end date', 'has branches?']">
+    <x-dashboard.tables.table1 :columns="['', 'image', 'name', 'employee', 'email', 'phone', 'start date', 'end date', 'has branches?']">
         <x:slot:title>
             <div class="d-flex">
                 <select wire:model.change="numberOfRows" class="form-control w-auto me-2">
@@ -35,13 +35,10 @@
             <tr wire:loading.class="opacity-50">
                 <td>
                     {{-- <i class="{{ status_handler($corp->end_date)?->icon() }}"></i> --}}
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span>
-                            {{ $loop->iteration }}
-                        </span>
-
-                        <span class="ms-3 badge badge-dot bg-{{ status_handler($corp->end_date)?->color() }}"></span>
-                    </div>
+                    {{ $loop->iteration }}
+                </td>
+                <td>
+                    <span class="ms-3 badge badge-dot bg-{{ status_handler($corp->end_date)?->color() }}"></span>
                 </td>
                 <td>
                     <img src="{{ asset($corp->thumbnail) }}" alt="image" width="30" height="30"

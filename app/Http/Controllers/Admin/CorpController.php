@@ -3,29 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\HasBranches;
-use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
-use App\Models\Corp;
 use App\Http\Requests\Admin\StoreCorpRequest;
 use App\Http\Requests\Admin\UpdateCorpRequest;
 use App\Mail\SendReminderEmail;
+use App\Models\Corp;
 use App\Models\CorpBranch;
-use App\Models\UserModel;
 use App\Services\UploadFileService;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Maatwebsite\Excel\Facades\Excel;
 
 class CorpController extends Controller
 {
-    public function __construct(protected UploadFileService $uploadFileService ) {}
+    public function __construct(protected UploadFileService $uploadFileService)
+    {}
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // Mail::to('ahmed@ahmed.com')->send(new SendReminderEmail('السلام عليكم معك شركة الناسخ لتطوير نشكرك على تفهمك'));
+        Mail::to('ahmed@ahmed.com')->send(new SendReminderEmail('السلام عليكم معك شركة الناسخ لتطوير نشكرك على تفهمك'));
         // return view('mails.send-reminder-2');
         return view('admin.corps.index');
     }
@@ -48,9 +45,9 @@ class CorpController extends Controller
 
         $corp = Corp::create($request->safe()->except('image') + ['image' => $this->uploadFileService->store($request->file('image'), 'images/corps')]);
 
-        if($request->integer('has_branches') === HasBranches::Yes->value) {
+        if ($request->integer('has_branches') === HasBranches::Yes->value) {
             return redirect()->route('branches.index', ['corp' => $corp, 'target' => 'branches'])
-            ->with('success', trans('message.create'));
+                ->with('success', trans('message.create'));
         }
 
         $branch = $corp->branches()->create([
@@ -75,15 +72,15 @@ class CorpController extends Controller
                         'subscriptions',
                         'monthlyQuarterlyUpdates',
                         'registries',
-                        'employees'
+                        'employees',
                     ])->withCount('employees');
-                }
+                },
             ]
         )->loadCount(['branches']);
 
         $records = [];
 
-        foreach($corp->branches as $branch) {
+        foreach ($corp->branches as $branch) {
             $records[] = $branch->record;
         }
 
@@ -120,7 +117,8 @@ class CorpController extends Controller
         return redirect()->route('corps.index')->with('success', trans('message.delete'));
     }
 
-    public function requirements(CorpBranch $branch) {
+    public function requirements(CorpBranch $branch)
+    {
 
         $branch->load('corp', 'employees.healthCardPaper', 'employees.medicalInsurance');
         $corp = $branch->corp;
@@ -133,18 +131,18 @@ class CorpController extends Controller
         $insurance = !$branch->doesntHave('employees.medicalInsurance')->exists();
 
         $requirements = [
-            'ورقة التحديث الشهري والرفع سنوي' =>  $monthly_quarterly_updates,
-            'ورقة الاقامات والعقود' =>  $employees,
-            'وقة الكروت الصحية' =>  $healthPaper,
-            'ورقة التأمين الطبي' =>  $insurance,
+            'ورقة التحديث الشهري والرفع سنوي' => $monthly_quarterly_updates,
+            'ورقة الاقامات والعقود' => $employees,
+            'وقة الكروت الصحية' => $healthPaper,
+            'ورقة التأمين الطبي' => $insurance,
         ];
 
-        if($corp->doesnt_has_branches) {
+        if ($corp->doesnt_has_branches) {
             $requirements = array_merge(['السجلات' => $branch->registries()->exists()], $requirements);
         } else {
-            $requirements = array_merge(['الاشتراكات' =>  $branch->subscriptions()->count() === 4], $requirements);
-            $requirements = array_merge(['التراخيص' =>  $branch->certificate()->exists()], $requirements);
-            $requirements = array_merge(['السجلات' =>  $branch->record()->exists()], $requirements);
+            $requirements = array_merge(['الاشتراكات' => $branch->subscriptions()->count() === 4], $requirements);
+            $requirements = array_merge(['التراخيص' => $branch->certificate()->exists()], $requirements);
+            $requirements = array_merge(['السجلات' => $branch->record()->exists()], $requirements);
         }
 
         return view('admin.corps.requirements', compact('requirements', 'corp'));

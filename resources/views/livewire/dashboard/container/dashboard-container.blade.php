@@ -100,8 +100,8 @@
                                         class="cardMaster bg-lighter rounded-2 p-3 mb-3 border border-{{ status_handler($item->updates?->date)?->color() }}">
                                         <div class="d-flex justify-content-between flex-sm-row flex-column">
                                             <div class="card-information me-2">
-                                                <img src="{{ asset($item->thumbnail) }}" alt="logo" width="36"
-                                                    height="36" class="mb-2 rounded-circle">
+                                                <img src="{{ asset($item->thumbnail) }}" alt="logo" width="40"
+                                                    height="40" class="mb-2 rounded-circle">
                                                 {{-- <i class="bx bx-data fs-2 mb-2"></i> --}}
                                                 <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
                                                     <h6 class="mb-0 me-2">{{ $item->entity_name }}</h6>
@@ -160,7 +160,7 @@
                                                 <div class="card-information me-2">
                                                     {{-- <i class="bx bx-data fs-2 mb-2"></i> --}}
                                                     <img src="{{ asset($item->thumbnail) }}" alt="logo"
-                                                        width="36" height="36" class="mb-2 rounded-circle">
+                                                        width="40" height="40" class="mb-2 rounded-circle">
                                                     <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
                                                         <h6 class="mb-0 me-2">{{ $item->name }}</h6>
                                                         {{-- <span class="badge bg-label-primary">Primary</span> --}}
@@ -270,7 +270,7 @@
                                 <div class="card-information me-2">
                                     {{-- <i class="bx bx-git-branch fs-2 mb-2"></i> --}}
                                     <img src="{{ asset($item->subscription_type->thumbnail()) }}" alt="logo"
-                                        width="36" height="36" class="mb-2 rounded-circle">
+                                        width="40" height="40" class="mb-2 rounded-circle">
                                     <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
                                         <h6 class="mb-0 me-2">{{ $item->subscription_type->name() }}</h6>
                                         {{-- <span class="badge bg-label-primary">Primary</span> --}}

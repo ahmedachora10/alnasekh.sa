@@ -211,38 +211,38 @@ class DateReminder implements ShouldQueue
         }
 
         // Monthly And Quarterly Updates
-        foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->get() as $item) {
-            $status = status_handler($item->end_date);
-            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
-                $item->id, $item->date, CorpBranchMonthlyQuarterlyUpdate::class
-            )) {
-                continue;
-            }
+        // foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->get() as $item) {
+        //     $status = status_handler($item->end_date);
+        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
+        //         $item->id, $item->date, CorpBranchMonthlyQuarterlyUpdate::class
+        //     )) {
+        //         continue;
+        //     }
 
-            // $notification = new UserActionNotification([
-            //     'title' => 'التحديثات الشهرية والربع سنوية - ' . $item->branch->name,
-            //     'content' => $status->name(),
-            //     'icon' => $status->icon(),
-            //     'color' => $status->color(),
-            //     'id' => $item->id,
-            //     'end_date' => $item->end_date,
-            //     'model' => CorpBranchMonthlyQuarterlyUpdate::class,
-            //     'link' => route('branches.show', $item->branch)
-            // ], $item->branch->corp->email);
+        //     // $notification = new UserActionNotification([
+        //     //     'title' => 'التحديثات الشهرية والربع سنوية - ' . $item->branch->name,
+        //     //     'content' => $status->name(),
+        //     //     'icon' => $status->icon(),
+        //     //     'color' => $status->color(),
+        //     //     'id' => $item->id,
+        //     //     'end_date' => $item->end_date,
+        //     //     'model' => CorpBranchMonthlyQuarterlyUpdate::class,
+        //     //     'link' => route('branches.show', $item->branch)
+        //     // ], $item->branch->corp->email);
 
-            $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email, $item->branch->corp->thumbnail, [
-                'title' => 'التحديثات الشهرية والربع سنوية ' . $status->name(),
-                'content' => $item->branch->corp->name,
-                'owner' => $item->branch->corp->administrator_name,
-                'date' => $item->date,
-                'model' => CorpBranchMonthlyQuarterlyUpdate::class,
-                'link' => route('branches.show', $item->branch)
-            ]);
+        //     $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email, $item->branch->corp->thumbnail, [
+        //         'title' => 'التحديثات الشهرية والربع سنوية ' . $status->name(),
+        //         'content' => $item->branch->corp->name,
+        //         'owner' => $item->branch->corp->administrator_name,
+        //         'date' => $item->date,
+        //         'model' => CorpBranchMonthlyQuarterlyUpdate::class,
+        //         'link' => route('branches.show', $item->branch)
+        //     ]);
 
-            $item->branch->corp->user->notify($notification);
+        //     $item->branch->corp->user->notify($notification);
 
-            Notification::send($admins, $notification);
-        }
+        //     Notification::send($admins, $notification);
+        // }
 
         // Employees
         foreach (BranchEmployee::with('branch.corp.user')->get() as $item) {

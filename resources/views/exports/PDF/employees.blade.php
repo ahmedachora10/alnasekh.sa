@@ -28,7 +28,7 @@
                 <td>{{ $item->contract_end_date?->format('Y-m-d') }}</td>
 
             </tr> --}}
-    <div class="bg-white">
+    <div class="bg-white mx-auto" style="width: 690px;">
         @forelse ($data as $item)
             <div class="col-12 my-2">
                 <!-- About User -->

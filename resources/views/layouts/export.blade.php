@@ -92,8 +92,8 @@
 <body class="font-sans antialiased">
 
     <div class="layout-wrapper layout-content-navbar position-relative py-5 mb-5">
-        <img src="{{ asset('assets/img/border-img.png') }}" alt="border"
-            class="position-absolute w-100 h-100 top-0 left-0">
+        {{-- <img src="{{ asset('assets/img/border-img.png') }}" alt="border"
+            class="position-absolute w-100 h-100 top-0 left-0"> --}}
         <div class="layout-container">
 
             <!-- Layout container -->
@@ -103,16 +103,17 @@
 
                     <!-- Content -->
                     <div class="w-100 container-xxl flex-grow-1 container-p-y">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2 px-3">
+                            <div class="col-6 border-bottom pb-3" style="border-color: #d6ae967a !important">
                                 <h5 class="mb-0 fw-bold">
                                     المملكة العربية السعودية
                                 </h5>
                                 <small class="fw-bold">شركة الناسخ المتطور للخدمات</small>
                             </div>
-                            <div>
+                            <div class="col-4 px-3">
                                 <img src="{{ asset(setting('logo')) }}" alt="logo" width="80">
                             </div>
+                            <div class="col-2"></div>
                         </div>
                         {{ $slot }}
                     </div>
