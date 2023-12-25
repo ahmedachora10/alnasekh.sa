@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Corp;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,7 +17,10 @@ class SendReminderEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public string $title)
+    public function __construct(
+        public Corp $corp,
+        public string $target = ''
+    )
     {
         //
     }
@@ -27,7 +31,7 @@ class SendReminderEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.send-reminder-2',
+            view: 'mails.send-reminder',
         );
     }
 

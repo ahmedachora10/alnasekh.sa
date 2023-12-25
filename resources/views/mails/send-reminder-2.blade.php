@@ -49,7 +49,11 @@
                                 <tr>
                                     <td
                                         style="color: #ca9475;text-align: center;font-size: 1.6rem;font-weight: 900;padding: 10px 0;border-radius: 5px;">
-                                        {{ $title }}</td>
+                                        الأستاذ {{ $corp?->administrator_name }} المسؤول عن منشأة {{ $corp?->name }}
+                                        نبلغكم بأن {{ $target }}
+                                        </br>
+                                        نشكر لكم ثقتكم
+                                    </td>
                                 </tr>
 
                                 <tr>
