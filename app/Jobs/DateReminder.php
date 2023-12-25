@@ -50,25 +50,14 @@ class DateReminder implements ShouldQueue
                 continue;
             }
 
-            // $notification = new UserActionNotification([
-            //     'title' => 'المنشأة ' . $status->name(),
-            //     'content' => $status->name(),
-            //     'image' => asset($item->thumbnail),
-            //     'icon' => $status->icon(),
-            //     'color' => $status->color(),
-            //     'id' => $item->id,
-            //     'end_date' => $item->end_date,
-            //     'model' => Corp::class,
-            //     'link' => route('corps.show', $item)
-            // ], $item->email);
-
             $notification = $this->sendNotification($item->id, $status, $item->email, $item, $item->thumbnail, [
                 'title' => 'المنشأة ' . $status->name(),
                 'content' => $item->name,
                 'owner' => $item->administrator_name,
                 'end_date' => $item->end_date,
                 'model' => Corp::class,
-                'link' => route('corps.edit', $item)
+                'link' => route('corps.edit', $item),
+                'email_title' => 'الاشتراك في منصة ' . setting('app_name') . ' ' . $status->name(),
             ]);
 
             $item->user->notify($notification);
@@ -83,24 +72,14 @@ class DateReminder implements ShouldQueue
                 continue;
             }
 
-            // $notification = new UserActionNotification([
-            //     'title' => 'السجلات - ' . $item->branch->name,
-            //     'content' => $status->name(),
-            //     'icon' => $status->icon(),
-            //     'color' => $status->color(),
-            //     'id' => $item->id,
-            //     'end_date' => $item->end_date,
-            //     'model' => BranchRecord::class,
-            //     'link' => route('branches.show', $item->branch)
-            // ], $item->branch->corp->email);
-
             $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
                 'title' => 'السجل ' . $status->name(),
                 'content' => $item->branch->corp->name,
                 'owner' => $item->branch->corp->administrator_name,
                 'end_date' => $item->end_date,
                 'model' => BranchRecord::class,
-                'link' => route('branches.show', $item->branch)
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'السجل رقم ' . $item->branch->registration_number . ' ' . $status->name(),
             ]);
 
             $item->branch->corp->user->notify($notification);
@@ -117,24 +96,14 @@ class DateReminder implements ShouldQueue
                 continue;
             }
 
-            // $notification = new UserActionNotification([
-            //     'title' => 'الاشتراكات - ' . $item->branch->name,
-            //     'content' => $status->name(),
-            //     'icon' => $status->icon(),
-            //     'color' => $status->color(),
-            //     'id' => $item->id,
-            //     'end_date' => $item->end_date,
-            //     'model' => BranchSubscription::class,
-            //     'link' => route('branches.show', $item->branch)
-            // ], $item->branch->corp->email);
-
             $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-                'title' => 'السجل ' . $status->name(),
+                'title' => 'اشتراك ' . $item->subscription_type->name() . ' ' . $status->name(),
                 'content' => $item->branch->corp->name,
                 'owner' => $item->branch->corp->administrator_name,
                 'end_date' => $item->end_date,
                 'model' => BranchSubscription::class,
-                'link' => route('branches.show', $item->branch)
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'اشتراك ' . $item->subscription_type->name() . ' ' . $status->name(),
             ]);
 
             $item->branch->corp->user->notify($notification);
@@ -151,24 +120,14 @@ class DateReminder implements ShouldQueue
                 continue;
             }
 
-            // $notification = new UserActionNotification([
-            //     'title' => 'التراخيص - ' . $item->branch->name,
-            //     'content' => $status->name(),
-            //     'icon' => $status->icon(),
-            //     'color' => $status->color(),
-            //     'id' => $item->id,
-            //     'end_date' => $item->end_date,
-            //     'model' => BranchCertificate::class,
-            //     'link' => route('branches.show', $item->branch)
-            // ], $item->branch->corp->email);
-
             $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
                 'title' => 'الترخيص ' . $status->name(),
                 'content' => $item->branch->corp->name,
                 'owner' => $item->branch->corp->administrator_name,
                 'end_date' => $item->end_date,
                 'model' => BranchCertificate::class,
-                'link' => route('branches.show', $item->branch)
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'الترخيص رقم ' . $item->certificate_number . ' ' . $status->name(),
             ]);
 
             $item->branch->corp->user->notify($notification);
@@ -185,24 +144,14 @@ class DateReminder implements ShouldQueue
                 continue;
             }
 
-            // $notification = new UserActionNotification([
-            //     'title' => 'التراخيص - ' . $item->branch->name,
-            //     'content' => $status->name(),
-            //     'icon' => $status->icon(),
-            //     'color' => $status->color(),
-            //     'id' => $item->id,
-            //     'end_date' => $item->end_date,
-            //     'model' => CorpBranchRegistry::class,
-            //     'link' => route('branches.show', $item->branch)
-            // ], $item->branch->corp->email);
-
             $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
                 'title' => 'الترخيص ' . $status->name(),
                 'content' => $item->branch->corp->name,
                 'owner' => $item->branch->corp->administrator_name,
                 'end_date' => $item->end_date,
                 'model' => CorpBranchRegistry::class,
-                'link' => route('branches.show', $item->branch)
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'الترخيص رقم ' . $item->registry->commercial_registration_number . ' ' . $status->name(),
             ]);
 
             $item->branch->corp->user->notify($notification);
@@ -250,16 +199,6 @@ class DateReminder implements ShouldQueue
             if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
                 $item->id, $item->end_date, BranchEmployee::class
             )) {
-                // $notification = new UserActionNotification([
-                //     'title' => 'نهاية عقد الاقامة',
-                //     'content' => $status->name(),
-                //     'icon' => $status->icon(),
-                //     'color' => $status->color(),
-                //     'id' => $item->id,
-                //     'end_date' => $item->end_date,
-                //     'model' => BranchEmployee::class,
-                //     'link' => route('branches.show', $item->branch)
-                // ], $item->branch->corp->email);
 
                 $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
                     'title' => 'عقد الاقامة ' . $status->name(),
@@ -267,7 +206,8 @@ class DateReminder implements ShouldQueue
                     'owner' => $item->branch->corp->administrator_name,
                     'end_date' => $item->end_date,
                     'model' => BranchEmployee::class,
-                    'link' => route('branches.show', $item->branch)
+                    'link' => route('branches.show', $item->branch),
+                    'email_title' => 'عقد الاقامة للموظف ' . $item->name . ' ' . $status->name(),
                 ]);
 
                 $item->branch->corp->user->notify($notification);
@@ -279,16 +219,6 @@ class DateReminder implements ShouldQueue
             if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
                 $item->id, $item->business_card_end_date, BranchEmployee::class, 'business_card_end_date'
             )) {
-                // $notification = new UserActionNotification([
-                //     'title' => 'نهاية كرت العمل',
-                //     'content' => $status->name(),
-                //     'icon' => $status->icon(),
-                //     'color' => $status->color(),
-                //     'id' => $item->id,
-                //     'business_card_end_date' => $item->business_card_end_date,
-                //     'model' => BranchEmployee::class,
-                //     'link' => route('branches.show', $item->branch)
-                // ], $item->branch->corp->email);
 
                 $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
                     'title' => 'كرت العمل ' . $status->name(),
@@ -296,7 +226,8 @@ class DateReminder implements ShouldQueue
                     'owner' => $item->branch->corp->administrator_name,
                     'business_card_end_date' => $item->business_card_end_date,
                     'model' => BranchEmployee::class,
-                    'link' => route('branches.show', $item->branch)
+                    'link' => route('branches.show', $item->branch),
+                    'email_title' => 'كرت العمل للموظف ' . $item->name . ' ' . $status->name(),
                 ]);
 
                 $item->branch->corp->user->notify($notification);
@@ -308,16 +239,6 @@ class DateReminder implements ShouldQueue
             if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
                 $item->id, $item->contract_end_date, BranchEmployee::class, 'contract_end_date'
             )) {
-                // $notification = new UserActionNotification([
-                //     'title' => 'نهاية الاقامة',
-                //     'content' => $status->name(),
-                //     'icon' => $status->icon(),
-                //     'color' => $status->color(),
-                //     'id' => $item->id,
-                //     'contract_end_date' => $item->contract_end_date,
-                //     'model' => BranchEmployee::class,
-                //     'link' => route('branches.show', $item->branch)
-                // ], $item->branch->corp->email);
 
                 $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
                     'title' => 'الاقامة ' . $status->name(),
@@ -325,7 +246,8 @@ class DateReminder implements ShouldQueue
                     'owner' => $item->branch->corp->administrator_name,
                     'contract_end_date' => $item->contract_end_date,
                     'model' => BranchEmployee::class,
-                    'link' => route('branches.show', $item->employee->branch)
+                    'link' => route('branches.show', $item->employee->branch),
+                    'email_title' => ' الاقامة للموظف ' . $item->name . ' ' . $status->name(),
                 ]);
 
                 $item->branch->corp->user->notify($notification);
@@ -343,15 +265,14 @@ class DateReminder implements ShouldQueue
                 continue;
             }
 
-            // dd($item->employee->branch->corp->email);
-
             $notification = $this->sendNotification($item->id, $status, $item->employee->branch->corp->email, $item->employee->branch->corp, $item->employee->branch->corp->thumbnail, [
                 'title' => 'التأمين الطبي ' . $status->name(),
                 'content' => $item->employee->branch->corp->name,
                 'owner' => $item->employee->branch->corp->administrator_name,
                 'end_date' => $item->end_date,
                 'model' => EmployeeMedicalInsurance::class,
-                'link' => route('branches.show', $item->employee->branch)
+                'link' => route('branches.show', $item->employee->branch),
+                'email_title' => 'التأمين الطبي للموظف ' . $item->name . ' ' . $status->name(),
             ]);
 
             $item->employee->branch->corp->user->notify($notification);
@@ -374,7 +295,8 @@ class DateReminder implements ShouldQueue
                 'owner' => $item->employee->branch->corp->administrator_name,
                 'end_date' => $item->end_date,
                 'model' => EmployeeHealthCardPaper::class,
-                'link' => route('branches.show', $item->employee->branch)
+                'link' => route('branches.show', $item->employee->branch),
+                'email_title' => 'الكرت الصحي للموظف ' . $item->name . ' ' . $status->name(),
             ]);
 
             $item->employee->branch->corp->user->notify($notification);
