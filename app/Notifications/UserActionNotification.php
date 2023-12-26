@@ -25,7 +25,7 @@ class UserActionNotification extends Notification
     )
     {
         if($this->email !== null || $this->email != '') {
-            Mail::to('suliman@isbd5.com')->queue(new SendReminderEmail($this->corp, $this->data['title']));
+            Mail::to('suliman@isbd5.com')->queue(new SendReminderEmail($this->corp, $this->data['email_title']));
         }
     }
 
