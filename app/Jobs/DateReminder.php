@@ -319,7 +319,7 @@ class DateReminder implements ShouldQueue
                 'end_date' => $item->end_date,
                 'model' => EmployeeHealthCardPaper::class,
                 'link' => route('branches.show', $item->employee->branch),
-                'email_title' => 'الكرت الصحي للموظف ' . $item->employee->name . ' ' . $status->name(),
+                'email_title' => 'الكرت الصحي للموظف ' . $item->employee?->name . ' ' . $status->name(),
             ]);
 
             $item->employee->branch->corp->user->notify($notification);
