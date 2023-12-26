@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Enums\Status;
 use App\Models\BranchCertificate;
+use App\Models\BranchCivilDefenseCertificate;
 use App\Models\BranchEmployee;
 use App\Models\BranchRecord;
 use App\Models\BranchSubscription;
@@ -87,6 +88,28 @@ class DateReminder implements ShouldQueue
             Notification::send($admins, $notification);
         }
 
+        // Civil Defense Cerificates
+        foreach (BranchCivilDefenseCertificate::with('branch.corp.user')->get() as $item) {
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, BranchCivilDefenseCertificate::class)) {
+                continue;
+            }
+
+            $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                'title' => 'تصريح الدفاع المدني ' . $status->name(),
+                'content' => $item->branch->corp->name,
+                'owner' => $item->branch->corp->administrator_name,
+                'end_date' => $item->end_date,
+                'model' => BranchCivilDefenseCertificate::class,
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'تصريح الدفاع المدني رقم ' . $item->ministry_of_interior_number . ' ' . $status->name(),
+            ]);
+
+            $item->branch->corp->user->notify($notification);
+
+            Notification::send($admins, $notification);
+        }
+
         // Subscriptions
         foreach (BranchSubscription::with('branch.corp.user')->get() as $item) {
             $status = status_handler($item->end_date);
@@ -136,7 +159,7 @@ class DateReminder implements ShouldQueue
         }
 
         // Certificates
-        foreach (CorpBranchRegistry::with('branch.corp.user')->get() as $item) {
+        foreach (CorpBranchRegistry::with(['branch.corp.user', 'registry'])->get() as $item) {
             $status = status_handler($item->end_date);
             if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
                 $item->id, $item->end_date, CorpBranchRegistry::class
@@ -145,13 +168,13 @@ class DateReminder implements ShouldQueue
             }
 
             $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-                'title' => 'الترخيص ' . $status->name(),
+                'title' => 'الترخيص ' . $item->registry?->name . ' ' . $status->name(),
                 'content' => $item->branch->corp->name,
                 'owner' => $item->branch->corp->administrator_name,
                 'end_date' => $item->end_date,
                 'model' => CorpBranchRegistry::class,
                 'link' => route('branches.show', $item->branch),
-                'email_title' => 'الترخيص رقم ' . $item->commercial_registration_number . ' ' . $status->name(),
+                'email_title' => 'الترخيص ' . $item->registry?->name . ' رقم ' . $item->registry_number . ' ' . $status->name(),
             ]);
 
             $item->branch->corp->user->notify($notification);
