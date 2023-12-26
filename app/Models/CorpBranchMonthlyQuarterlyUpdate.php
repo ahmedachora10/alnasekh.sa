@@ -13,6 +13,10 @@ class CorpBranchMonthlyQuarterlyUpdate extends Pivot
 
     protected $table = 'branch_monthly_quarterly';
 
+    public $timestamps = true;
+
+    // public $incrementing = true;
+
     public function branch() : BelongsTo {
         return $this->belongsTo(CorpBranch::class, 'corp_branch_id');
     }

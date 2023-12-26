@@ -6,6 +6,7 @@ use App\Models\CorpBranch;
 use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\MonthlyQuarterlyUpdate;
 use App\Traits\Livewire\Message;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -28,10 +29,10 @@ class UpdateMonthlyQuarterlyUpdate extends Component
         $pivot = CorpBranchMonthlyQuarterlyUpdate::where([
             ['corp_branch_id', '=', $update['corp_branch_id']],
             ['monthly_quarterly_update_id', '=', $update['monthly_quarterly_update_id']],
-            ['updated_at', '=', $update['updated_at']],
-        ])->first();
+            ['date', '=', $update['date']],
+        ])->whereDate('updated_at', '=', Carbon::parse($update['updated_at'])->format('Y-m-d'))->first();
 
-        $this->date = now()->parse($pivot?->date ?? date('Y-m-d'))?->format('Y-m-d');
+        $this->date = now()->parse($pivot?->date)?->format('Y-m-d');
 
         $this->pivotId = $pivot?->id;
 
