@@ -25,6 +25,8 @@ class UpdateMonthlyQuarterlyUpdate extends Component
     #[On('edit-branch-monthly-quarterly-update')]
     public function edit(array $update) {
 
+        dd($update);
+
         $pivot = CorpBranchMonthlyQuarterlyUpdate::where([
             ['corp_branch_id', '=', $update['corp_branch_id']],
             ['monthly_quarterly_update_id', '=', $update['monthly_quarterly_update_id']],
