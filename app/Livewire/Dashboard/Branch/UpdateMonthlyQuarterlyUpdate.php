@@ -31,8 +31,6 @@ class UpdateMonthlyQuarterlyUpdate extends Component
             ['updated_at', '=', $update['updated_at']],
         ])->first();
 
-        dd($pivot);
-
         $this->date = now()->parse($pivot?->date ?? date('Y-m-d'))?->format('Y-m-d');
 
         $this->pivotId = $pivot?->id;
