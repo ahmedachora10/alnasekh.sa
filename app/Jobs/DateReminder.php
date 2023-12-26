@@ -174,7 +174,7 @@ class DateReminder implements ShouldQueue
                 'end_date' => $item->end_date,
                 'model' => CorpBranchRegistry::class,
                 'link' => route('branches.show', $item->branch),
-                'email_title' => 'الترخيص ' . $item->registry?->name . ' رقم ' . $item->registry_number . ' ' . $status->name(),
+                'email_title' => 'الترخيص ' . $item->registry?->name . ' رقم ' . $item->registry_number ?? ' - ' . ' ' . $status->name(),
             ]);
 
             $item->branch->corp->user->notify($notification);
