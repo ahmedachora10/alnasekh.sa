@@ -52,7 +52,7 @@
                                         الأستاذ {{ $corp?->administrator_name }} المسؤول عن منشأة {{ $corp?->name }}
                                         نبلغكم بأن {{ $target }}
 
-                                        <span style="display:block">نشكر لكم ثقتكم</span>
+                                        <span style="display:block; padding-top: 2rem">نشكر لكم ثقتكم</span>
                                     </td>
                                 </tr>
 
