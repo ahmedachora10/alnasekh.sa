@@ -40,6 +40,7 @@ class SendReminderEmail extends Mailable
 {
     return new Envelope(
         from: new Address(setting('email'), setting('app_name')),
+        subject: 'تذكير من شركة الناسخ',
     );
 }
 
