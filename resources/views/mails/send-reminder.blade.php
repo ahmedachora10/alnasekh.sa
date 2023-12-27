@@ -31,7 +31,7 @@
                                             <a href="{{ url('/') }}" style="border:0px;">
                                                 <img style="width:120px;border:0px;display: block!important;"
                                                     src="{{ asset('assets/img/logo-white.png') }}" width="120"
-                                                    border="0" alt="intro">
+                                                    border="0" alt="">
                                                 <small
                                                     style="color:white; font-weight: bold;display: block;position: relative;top: -15px;">شركة
                                                     الناسخ المتطور للخدمات</small>
@@ -129,7 +129,7 @@
                                         <a href="{{ url('/') }}" style="border:0px;">
                                             <img style="width:190px;border:0px;display: inline!important;"
                                                 src="{{ asset('assets/img/logo-white.png') }}" width="190"
-                                                border="0" alt="intro">
+                                                border="0" alt="">
                                         </a>
                                     </td>
                                 </tr>
