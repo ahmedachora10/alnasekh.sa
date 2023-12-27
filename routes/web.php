@@ -34,9 +34,9 @@ Route::get('switch-theme', function () {
     return redirect()->back();
 })->name('switch.theme');
 
-// Route::get('mail', function () {
-//     return view('mails.send-reminder', ['title' => '', 'corp' => Corp::first(), 'target' => '']);
-// });
+Route::get('mail', function () {
+    return view('mails.send-reminder', ['title' => '', 'corp' => Corp::first(), 'target' => '']);
+});
 
 
 require __DIR__.'/auth.php';
