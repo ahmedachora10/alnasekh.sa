@@ -1,7 +1,7 @@
 @props(['key' => ''])
 @if (setting($key))
     <a href="{{ setting($key) }}" {{ $attributes }} style="border:0px; font-size: 1.5rem; color:white; padding: 0 10px">
-        <img src="{{ '/assets/icons/' . $key . '.png' }}"
+        <img src="{{ asset('/assets/icons/' . $key . '.png') }}"
             style="width: 40px; display:inline-block !important; height: 100% !important;" alt="">
     </a>
 @endif
