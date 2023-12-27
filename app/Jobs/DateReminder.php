@@ -98,7 +98,7 @@ class DateReminder implements ShouldQueue
             $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
                 'title' => 'تصريح الدفاع المدني ' . $status->name(),
                 'content' => $item->branch->corp->name,
-                'owner' => $item->branch->corp->administrator_name,
+                'owner' => $item->ministry_of_interior_number,
                 'end_date' => $item->end_date,
                 'model' => BranchCivilDefenseCertificate::class,
                 'link' => route('branches.show', $item->branch),
@@ -146,7 +146,7 @@ class DateReminder implements ShouldQueue
             $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
                 'title' => 'الترخيص ' . $status->name(),
                 'content' => $item->branch->corp->name,
-                'owner' => $item->branch->corp->administrator_name,
+                'owner' => $item->certificate_number,
                 'end_date' => $item->end_date,
                 'model' => BranchCertificate::class,
                 'link' => route('branches.show', $item->branch),
@@ -168,9 +168,9 @@ class DateReminder implements ShouldQueue
             }
 
             $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-                'title' => 'الترخيص ' . $item->registry?->name . ' ' . $status->name(),
+                'title' => $item->registry?->name . ' ' . $status->name(),
                 'content' => $item->branch->corp->name,
-                'owner' => $item->branch->corp->administrator_name,
+                'owner' => $item->registry_number,
                 'end_date' => $item->end_date,
                 'model' => CorpBranchRegistry::class,
                 'link' => route('branches.show', $item->branch),
