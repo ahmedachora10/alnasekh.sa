@@ -80,7 +80,7 @@
     </table>
     <div style="padding:20px 30px; background-color: white; font-size: 13px;">
         <span style="display: block; margin-bottom: 6px; color: #34221e; font-weight:700">
-            <i class="fas fa-map" style="color: #ca9475; padding-left:5px"></i>
+            <img src="{{ asset('assets/icons/map.svg') }}" style="width: 14px;" alt="">
             <b>
                 المملكة العربية السعودية - الفرع
                 الرئيسي: حائل - حي المطار
@@ -88,7 +88,9 @@
         </span>
 
         <span style="display: block; color: #34221e; font-weight:700">
-            <i class="fas fa-envelope" style="color: #ca9475; padding-left:5px"></i> <b>{{ setting('email') }}</b>
+            <img src="{{ asset('assets/icons/envelope.svg') }}" style="width: 12px; position: relative; top: 3px"
+                alt="">
+            <b class="padding-right:5px">{{ setting('email') }}</b>
         </span>
 
         <div style="float: left; font-weight: 900;">
