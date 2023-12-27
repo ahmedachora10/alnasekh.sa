@@ -80,7 +80,7 @@
     </table>
     <div style="padding:20px 30px; background-color: white; font-size: 13px;">
         <span style="display: block; margin-bottom: 6px; color: #34221e; font-weight:700">
-            <img src="{{ asset('assets/icons/map.svg') }}" style="width: 14px;" alt="">
+            <img src="{{ asset('assets/icons/map.png') }}" style="width: 14px;" alt="">
             <b>
                 المملكة العربية السعودية - الفرع
                 الرئيسي: حائل - حي المطار
@@ -88,7 +88,7 @@
         </span>
 
         <span style="display: block; color: #34221e; font-weight:700">
-            <img src="{{ asset('assets/icons/envelope.svg') }}" style="width: 12px; position: relative; top: 3px"
+            <img src="{{ asset('assets/icons/envelope.png') }}" style="width: 12px; position: relative; top: 3px"
                 alt="">
 
             <b class="padding-right:5px">{{ setting('email') }}</b>
