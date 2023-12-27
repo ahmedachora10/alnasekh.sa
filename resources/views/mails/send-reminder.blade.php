@@ -157,6 +157,7 @@
                                         <x-social-media-botton key="linkedin" />
                                         <x-social-media-botton key="whatsapp" />
                                         <x-social-media-botton key="snapchat" />
+                                        <x-social-media-botton key="youtube" />
 
                                     </td>
                                 </tr>
