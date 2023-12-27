@@ -78,7 +78,7 @@
             </td>
         </tr><!-- Outer-Table -->
     </table>
-    <div style="padding:20px 30px; background-color: white; font-size: 13px;">
+    <div style="padding:20px 30px; background-color: white; font-size: 13px; text-align:right">
         <span style="display: block; margin-bottom: 6px; color: #34221e; font-weight:700">
             <img src="{{ asset('assets/icons/map.png') }}" style="width: 14px;" alt="">
             <b>
