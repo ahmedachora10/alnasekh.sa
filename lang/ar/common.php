@@ -17,7 +17,7 @@ return [
     'log out' => 'الخروج',
     'notifications' => 'الإشعارات',
     'show more' => 'عرض المزيد',
-    'no notifications exists' =>  'لا توجد الإشعارات لعرضها',
+    'no notifications exists' =>  'لا توجد إشعارات لعرضها',
 
     'new role' => 'دور جديد',
     'role permissions' => 'صلاحيات الدور',
