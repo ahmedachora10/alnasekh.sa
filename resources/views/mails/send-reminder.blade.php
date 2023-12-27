@@ -80,8 +80,8 @@
     </table>
     <div style="padding:20px 30px; background-color: white; font-size: 13px;">
         <span style="display: block; margin-bottom: 6px; color: #34221e; font-weight:700">
-            {{-- <img src="{{ asset('assets/icons/map.svg') }}" style="width: 14px;" alt=""> --}}
-            <?xml version="1.0" encoding="iso-8859-1"?>
+            <img src="{{ asset('assets/icons/map.svg') }}" style="width: 14px;" alt="">
+            {{-- <?xml version="1.0" encoding="iso-8859-1"?>
             <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
             <svg fill="#ca9475" height="100%" width="14px" version="1.1" id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
@@ -94,7 +94,7 @@
    s83.478,37.446,83.478,83.478C339.478,229.684,302.032,267.13,256,267.13z" />
                     </g>
                 </g>
-            </svg>
+            </svg> --}}
 
             <b>
                 المملكة العربية السعودية - الفرع
@@ -103,9 +103,9 @@
         </span>
 
         <span style="display: block; color: #34221e; font-weight:700">
-            {{-- <img src="{{ asset('assets/icons/envelope.svg') }}" style="width: 12px; position: relative; top: 3px"
-                alt=""> --}}
-            <?xml version="1.0" encoding="utf-8"?>
+            <img src="{{ asset('assets/icons/envelope.svg') }}" style="width: 12px; position: relative; top: 3px"
+                alt="">
+            {{-- <?xml version="1.0" encoding="utf-8"?>
 
             <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
             <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
@@ -120,7 +120,7 @@
                     <path fill="#ca9475"
                         d="M32,36.754l32-23.771V12c0-2.211-1.789-4-4-4H4c-2.211,0-4,1.789-4,4v0.982L32,36.754z" />
                 </g>
-            </svg>
+            </svg> --}}
 
             <b class="padding-right:5px">{{ setting('email') }}</b>
         </span>
@@ -139,16 +139,15 @@
         <tr><!-- Outer Table -->
             <td align="center" bgcolor="#f0f0f0" data-composer>
 
-                <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation"
-                    width="100%" style="width:100%;max-width:100%;">
+                <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation" width="100%"
+                    style="width:100%;max-width:100%;">
                     <!-- lotus-header-1 -->
                     <tr>
                         <td align="center" bgcolor="#ca9475" class="container-padding">
 
                             <!-- Content -->
-                            <table border="0" align="center" cellpadding="0" cellspacing="0"
-                                role="presentation" class="row" width="580"
-                                style="width:580px;max-width:580px;">
+                            <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation"
+                                class="row" width="580" style="width:580px;max-width:580px;">
                                 <tr>
                                     <td height="40" style="font-size:40px;line-height:40px;">&nbsp;</td>
                                 </tr>

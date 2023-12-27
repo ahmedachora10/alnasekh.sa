@@ -1,9 +1,9 @@
 @props(['key' => ''])
 @if (setting($key))
     <a href="{{ setting($key) }}" {{ $attributes }} style="border:0px; font-size: 1.5rem; color:white; padding: 0 10px">
-        {{-- <img src="{{ asset('assets/icons/' . $key . '.svg') }}" style="width: 40px; display:inline-block !important; height: 100% !important;"
-            alt=""> --}}
-        @switch($key)
+        <img src="{{ asset('assets/icons/' . $key . '.svg') }}"
+            style="width: 40px; display:inline-block !important; height: 100% !important;" alt="">
+        {{-- @switch($key)
             @case('facebook')
                 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                 <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -114,6 +114,6 @@
             @break
 
             @default
-        @endswitch
+        @endswitch --}}
     </a>
 @endif
