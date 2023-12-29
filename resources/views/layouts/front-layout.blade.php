@@ -1456,7 +1456,7 @@
                     </span>
                     <a href="https://themeselection.com" target="_blank"
                         class="fw-medium text-white footer-link">{{ setting('app_name') }},</a>
-                    <span class="footer-text"> {{ setting('footer') }} {{ setting('app_name') }}.</span>
+                    <span class="footer-text"> {{ setting('footer') }}.</span>
                 </div>
                 <div>
                     @if (setting('facebook'))
