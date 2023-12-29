@@ -18,7 +18,7 @@
                             <img src="{{ asset(setting('logo')) }}" width="45px" />
                         @endif
                     </span>
-                    <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{{ setting('app_name') }}</span>
+                    {{-- <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{{ setting('app_name') }}</span> --}}
                 </a>
             </div>
             <!-- Menu logo wrapper: End -->
