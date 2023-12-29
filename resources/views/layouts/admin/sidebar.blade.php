@@ -66,6 +66,12 @@
             </x-dashboard.sidebar.link>
         @endhasPermission
 
+        @hasPermission('dashboard.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.sliders')" icon="slider" :link="route('sliders.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.our services')" icon="server" :link="route('our-services.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" :link="route('packages.index')" />
+        @endhasPermission
+
         <!-- Misc -->
         {{-- <li class="menu-item">
             <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank"

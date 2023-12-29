@@ -2,6 +2,7 @@
 
 use App\Exports\CorpsExport;
 use App\Exports\PDF\EmployeesPDFExport;
+use App\Http\Controllers\HomeController;
 use App\Models\Corp;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Excel as ExcelFormat;
@@ -36,6 +37,11 @@ Route::get('switch-theme', function () {
 
 Route::get('mail', function () {
     return view('mails.send-reminder', ['title' => '', 'corp' => Corp::first(), 'target' => '']);
+});
+
+Route::controller(HomeController::class)
+->group(function () {
+    Route::get('/', 'index')->name('home');
 });
 
 

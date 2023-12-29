@@ -90,6 +90,11 @@ return [
         'ministry of interior number' => 'رقم وزارة الداخلية',
         'search' => 'بحث',
         'steps' => 'الخطوات',
+        'monthly price' => 'سعر الشهر',
+        'yearly price' => 'سعر السنة',
+        'properties' => 'المميزات',
+        'full name' => 'الاسم الكامل',
+        'message' => 'الرسالة',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

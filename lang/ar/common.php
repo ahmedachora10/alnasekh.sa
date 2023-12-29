@@ -12,6 +12,7 @@ return [
     'export' => 'تصدير',
     'print' => 'طباعة',
     'skip' => 'تخطي',
+    'send' => 'ارسال',
 
     'my profile' => 'حسابي',
     'log out' => 'الخروج',

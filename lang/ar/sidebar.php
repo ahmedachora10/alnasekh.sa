@@ -14,4 +14,7 @@ return [
     'monthly quarterly updates' => 'التحديثات الشهرية والربع السنوية',
     'registries' => 'التراخيص',
     'all settings' => 'الإعدادت العامة',
+    'sliders' => 'سلايدر',
+    'our services' => 'خدماتنا',
+    'packages' => 'الباقات',
 ];

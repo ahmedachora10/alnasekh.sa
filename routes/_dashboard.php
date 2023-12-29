@@ -5,10 +5,13 @@ use App\Http\Controllers\Admin\CorpController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MonthlyQuarterlyUpdateController;
+use App\Http\Controllers\Admin\OurServiceController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\RegistryController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Dashboard\Branch\StoreCertificate;
 use App\Livewire\Dashboard\Branch\StoreCivilDefenseCertificate;
@@ -93,6 +96,10 @@ Route::middleware(['auth'])->group(function ()
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('sliders', SliderController::class);
+    Route::resource('our-services', OurServiceController::class);
+    Route::resource('packages', PackageController::class);
 });
 
 
