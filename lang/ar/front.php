@@ -13,4 +13,7 @@ return [
     'send a message' => 'ابعث رسالة',
     'about' => 'من نحن',
     'our services' => 'خدماتنا',
+    'pages' => 'الصفحات',
+    'statistics' => 'الاحصائيات',
+    'packages' => 'الباقات',
 ];

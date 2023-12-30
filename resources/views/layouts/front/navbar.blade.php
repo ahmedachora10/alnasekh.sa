@@ -36,17 +36,19 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link fw-medium" aria-current="page" href="#">{{ trans('front.about') }}</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link fw-medium" aria-current="page"
-                            href="#landingPricing">{{ trans('front.pricing plans') }}</a>
-                    </li>
-
-                    <li class="nav-item">
                         <a class="nav-link fw-medium" aria-current="page"
                             href="#landingFeatures">{{ trans('front.our services') }}</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" aria-current="page"
+                            href="#landingPricing">{{ trans('front.packages') }}</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" aria-current="page" href="#">{{ trans('front.about') }}</a>
                     </li>
 
                     <li class="nav-item">
@@ -70,7 +72,7 @@
                 <!-- / Style Switcher-->
 
                 <!-- navbar button: Start -->
-                <li>
+                {{-- <li>
                     @if (Route::has('login'))
                         @auth
                             <a href="{{ route('dashboard') }}" class="btn btn-danger" target="_blank"><span
@@ -82,7 +84,7 @@
                                     class="d-none d-md-block">{{ trans('front.login') }}</span></a>
                         @endauth
                     @endif
-                </li>
+                </li> --}}
                 <!-- navbar button: End -->
             </ul>
             <!-- Toolbar: End -->

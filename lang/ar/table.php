@@ -89,6 +89,7 @@ return [
         'permit' => 'رقم التصريح',
         'ministry of interior number' => 'رقم وزارة الداخلية',
         'search' => 'بحث',
+        'subject' => 'الموضوع',
         'steps' => 'الخطوات',
         'monthly price' => 'سعر الشهر',
         'yearly price' => 'سعر السنة',

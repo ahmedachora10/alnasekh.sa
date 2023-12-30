@@ -134,6 +134,8 @@
     <!-- Fun facts: Start -->
     <section id="landingFunFacts" class="section-py landing-fun-facts">
         <div class="container">
+            <x-front.headline :headline="trans('front.statistics')" subHeadline="Let's work</span> together"
+                description="Any question or remark? just write us a message" />
             <div class="row gy-3">
                 <div class="col-sm-6 col-lg-3">
                     <div class="card border border-label-primary shadow-none">
@@ -165,6 +167,54 @@
         </div>
     </section>
     <!-- Fun facts: End -->
+
+    <!-- Logo Slider: Start -->
+    {{-- <section>
+        <div class="container">
+            <div class="swiper-logo-carousel py-4 my-lg-2">
+                <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden"
+                    id="swiper-clients-logos">
+                    <div class="swiper-wrapper" id="swiper-wrapper-104d80328e2575d103" aria-live="off">
+                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 5"
+                            style="width: 144px;">
+                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_1-light.png"
+                                alt="client logo" class="client-logo"
+                                data-app-light-img="front-pages/branding/logo_1-light.png"
+                                data-app-dark-img="front-pages/branding/logo_1-dark.png">
+                        </div>
+                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 5"
+                            style="width: 144px;">
+                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_2-light.png"
+                                alt="client logo" class="client-logo"
+                                data-app-light-img="front-pages/branding/logo_2-light.png"
+                                data-app-dark-img="front-pages/branding/logo_2-dark.png">
+                        </div>
+                        <div class="swiper-slide" role="group" aria-label="3 / 5" style="width: 144px;">
+                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_3-light.png"
+                                alt="client logo" class="client-logo"
+                                data-app-light-img="front-pages/branding/logo_3-light.png"
+                                data-app-dark-img="front-pages/branding/logo_3-dark.png">
+                        </div>
+                        <div class="swiper-slide" role="group" aria-label="4 / 5" style="width: 144px;">
+                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_4-light.png"
+                                alt="client logo" class="client-logo"
+                                data-app-light-img="front-pages/branding/logo_4-light.png"
+                                data-app-dark-img="front-pages/branding/logo_4-dark.png">
+                        </div>
+                        <div class="swiper-slide" role="group" aria-label="5 / 5" style="width: 144px;">
+                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_5-light.png"
+                                alt="client logo" class="client-logo"
+                                data-app-light-img="front-pages/branding/logo_5-light.png"
+                                data-app-dark-img="front-pages/branding/logo_5-dark.png">
+                        </div>
+                    </div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+    <!-- Logo Slider: End -->
+
 
     <!-- Contact Us: Start -->
     <section id="landingContact" class="section-py bg-body landing-contact">
@@ -210,25 +260,28 @@
                 <div class="col-lg-7">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-3">{{ trans('front.send a message') }}</h4>
+                            <h4 class="mb-3">{{ trans('front.contact us') }}</h4>
                             <form>
                                 <div class="row g-4">
                                     <div class="col-md-6">
-                                        <label class="form-label"
-                                            for="contact-form-fullname">{{ trans('table.columns.full name') }}</label>
-                                        <input type="text" class="form-control" id="contact-form-fullname"
-                                            placeholder="john">
+                                        <x-dashboard.input-group type="text" name="name" :title="trans('table.columns.name')" />
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label"
-                                            for="contact-form-email">{{ trans('table.columns.email') }}</label>
-                                        <input type="text" id="contact-form-email" class="form-control"
-                                            placeholder="johndoe@gmail.com">
+                                        <x-dashboard.input-group type="text" name="email" :title="trans('table.columns.email')" />
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <x-dashboard.input-group type="text" name="phone" :title="trans('table.columns.phone')" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <x-dashboard.input-group type="text" name="subject" :title="trans('table.columns.subject')" />
+                                    </div>
+
                                     <div class="col-12">
                                         <label class="form-label"
                                             for="contact-form-message">{{ trans('table.columns.message') }}</label>
-                                        <textarea id="contact-form-message" class="form-control" rows="9" placeholder="Write a message"></textarea>
+                                        <textarea id="contact-form-message" class="form-control" rows="9"></textarea>
                                     </div>
                                     <div class="col-12">
                                         <button type="submit"

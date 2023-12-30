@@ -1445,6 +1445,44 @@
 
     <footer class="landing-footer bg-body footer-text">
 
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gx-0 gy-4 g-md-5">
+                    <div class="col-lg-5">
+                        <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing"
+                            class="app-brand-link mb-4">
+                            <span class="app-brand-logo demo">
+                                <img src="{{ asset('assets/img/logo-white.png') }}" alt="logo" width="60px">
+                            </span>
+                        </a>
+                        <p class="footer-text footer-logo-description mb-4">
+                            {{ setting('app_description') }}
+                        </p>
+                        {{-- <form class="footer-form">
+                            <label for="footer-email" class="small">Subscribe to newsletter</label>
+                            <div class="d-flex mt-1">
+                                <input type="email"
+                                    class="form-control rounded-0 rounded-start-bottom rounded-start-top"
+                                    id="footer-email" placeholder="Your email">
+                                <button type="submit"
+                                    class="btn btn-primary shadow-none rounded-0 rounded-end-bottom rounded-end-top">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </form> --}}
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <h6 class="footer-title mb-4">{{ trans('front.pages') }}</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <a href="{{ route('home') }}" class="footer-link">{{ trans('front.home') }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer-bottom py-3">
             <div
                 class="container d-flex flex-wrap justify-content-between flex-md-row flex-column text-center text-md-start">
@@ -1509,41 +1547,22 @@
     <!-- Include Scripts -->
     <!-- $isFront is used to append the front layout scripts only on the front layout otherwise the variable will be blank -->
     <!-- BEGIN: Vendor JS-->
-    <script
-        src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/js/dropdown-hover.js">
-    </script>
-    <script
-        src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/js/mega-dropdown.js">
-    </script>
-    <script
-        src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/libs/popper/popper.js?id=baf82d96b7771efbcc05c3b77135d24c">
-    </script>
-    <script
-        src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/js/bootstrap.js?id=4648227467e3fd3f4cf976cfb0e43aea">
-    </script>
+    <script src="{{ asset('assets/vendor/js/dropdown-hover.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/mega-dropdown.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/popper.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
 
-    <script
-        src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/libs/nouislider/nouislider.js">
-    </script>
-    <script
-        src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/libs/swiper/swiper.js">
-    </script>
+    <script src="{{ asset('assets/vendor/js/nouislider.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/swiper.js') }}"></script>
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Theme JS-->
-    <script
-        src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/js/front-main.js?id=7e3beea798d1161b84cbf0934a1cd521">
-    </script>
+    <script src="{{ asset('assets/js/front-main.js') }}"></script>
     <!-- END: Theme JS-->
     <!-- Pricing Modal JS-->
     <!-- END: Pricing Modal JS-->
     <!-- BEGIN: Page JS-->
-    <script
-        src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/js/front-page-landing.js">
-    </script>
+    <script src="{{ asset('assets/js/front-page-landing.js') }}"></script>
     <!-- END: Page JS-->
-
-
-
 
     <script type="text/javascript" id="">
         console.log("TS:GTM Worked!");
