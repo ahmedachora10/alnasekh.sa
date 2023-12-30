@@ -72,19 +72,13 @@
                 <!-- / Style Switcher-->
 
                 <!-- navbar button: Start -->
-                {{-- <li>
+                <li>
                     @if (Route::has('login'))
-                        @auth
-                            <a href="{{ route('dashboard') }}" class="btn btn-danger" target="_blank"><span
-                                    class="tf-icons bx bx-user me-md-1"></span><span
-                                    class="d-none d-md-block">{{ trans('front.dashboard') }}</span></a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-primary" target="_blank"><span
-                                    class="tf-icons bx bx-user me-md-1"></span><span
-                                    class="d-none d-md-block">{{ trans('front.login') }}</span></a>
-                        @endauth
+                        <a href="{{ route('login') }}" class="btn btn-primary" target="_blank"><span
+                                class="tf-icons bx bx-user me-md-1"></span><span
+                                class="d-none d-md-block">{{ trans('front.login') }}</span></a>
                     @endif
-                </li> --}}
+                </li>
                 <!-- navbar button: End -->
             </ul>
             <!-- Toolbar: End -->
