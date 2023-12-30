@@ -13,9 +13,9 @@
                 <a href="{{ route('home') }}" class="app-brand-link">
                     <span class="app-brand-logo demo">
                         @if (session('theme') === 'dark')
-                            <img src="{{ asset('assets/img/logo-white.png') }}" width="45px" />
+                            <img src="{{ asset('assets/img/logo-white.png') }}" width="55px" />
                         @else
-                            <img src="{{ asset(setting('logo')) }}" width="45px" />
+                            <img src="{{ asset(setting('logo')) }}" width="55px" />
                         @endif
                     </span>
                     {{-- <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{{ setting('app_name') }}</span> --}}
