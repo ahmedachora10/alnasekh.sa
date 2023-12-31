@@ -37,8 +37,6 @@ class PackageController extends Controller
 
         $data = $request->safe()->except('image');
 
-        $data['properties'] = array_map(fn($string) => trim($string),explode('-', $data['properties']));
-
         Package::create($data + ['image' => $this->uploadFileService->store($request->image, 'images/packages')]);
         return redirect()->route('packages.index')->with('success', trans('message.create'));
     }
@@ -67,8 +65,6 @@ class PackageController extends Controller
         $request->validated();
 
         $data = $request->safe()->except('image');
-
-        $data['properties'] = array_map(fn($string) => trim($string),explode('-', $data['properties']));
 
         $package->update($data + ['image' => $this->uploadFileService->update($request->image, $package->image, 'images/packages')]);
 

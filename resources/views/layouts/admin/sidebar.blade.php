@@ -70,6 +70,8 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.sliders')" icon="slider" :link="route('sliders.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.our services')" icon="server" :link="route('our-services.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" :link="route('packages.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user-plus" :link="route('subscribers.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.our clients')" icon="user" :link="route('our-clients.index')" />
         @endhasPermission
 
         <!-- Misc -->

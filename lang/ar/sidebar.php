@@ -17,4 +17,6 @@ return [
     'sliders' => 'سلايدر',
     'our services' => 'خدماتنا',
     'packages' => 'الباقات',
+    'subscribers' => 'المشتركين',
+    'our clients' => 'عملاؤنا',
 ];

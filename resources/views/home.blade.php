@@ -79,11 +79,7 @@
                 <div class="row gy-4 pt-lg-3">
                     <!-- Basic Plan: Start -->
                     @foreach ($packages as $item)
-                        <div @class([
-                            'col-lg-6',
-                            'col-xl-4 ' => $item->index < 3,
-                            'col-xl-3' => $item->index >= 3,
-                        ]) class="">
+                        <div class="col-lg-4 col-md-6">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="text-center">
@@ -92,15 +88,15 @@
                                         <h4 class="mb-1">{{ $item->title }}</h4>
                                         <div class="d-flex align-items-center justify-content-center">
                                             <span
-                                                class="price-monthly h1 text-primary fw-bold mb-0 d-none">${{ $item->monthly_price }}</span>
+                                                class="price-monthly h1 text-primary fw-bold mb-0 d-none">${{ $item->yearly_price }}</span>
                                             <span
-                                                class="price-yearly h1 text-primary fw-bold mb-0">${{ $item->monthly_price }}</span>
-                                            <sub class="h6 text-muted mb-0 ms-1">/{{ trans('front.month') }}</sub>
+                                                class="price-yearly h1 text-primary fw-bold mb-0">${{ $item->yearly_price }}</span>
+                                            <sub class="h6 text-muted mb-0 ms-1">/{{ trans('front.year') }}</sub>
                                         </div>
-                                        <div class="position-relative pt-2">
+                                        {{-- <div class="position-relative pt-2">
                                             <div class="price-yearly text-muted price-yearly-toggle">$
                                                 {{ $item->yearly_price }} / {{ trans('front.year') }}</div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -168,53 +164,308 @@
     </section>
     <!-- Fun facts: End -->
 
-    <!-- Logo Slider: Start -->
-    {{-- <section>
+    <!-- : Start -->
+    <section id="landingCTA" class="section-py landing-cta p-lg-0 pb-0">
         <div class="container">
-            <div class="swiper-logo-carousel py-4 my-lg-2">
-                <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden"
-                    id="swiper-clients-logos">
-                    <div class="swiper-wrapper" id="swiper-wrapper-104d80328e2575d103" aria-live="off">
-                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 5"
-                            style="width: 144px;">
-                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_1-light.png"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_1-light.png"
-                                data-app-dark-img="front-pages/branding/logo_1-dark.png">
-                        </div>
-                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 5"
-                            style="width: 144px;">
-                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_2-light.png"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_2-light.png"
-                                data-app-dark-img="front-pages/branding/logo_2-dark.png">
-                        </div>
-                        <div class="swiper-slide" role="group" aria-label="3 / 5" style="width: 144px;">
-                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_3-light.png"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_3-light.png"
-                                data-app-dark-img="front-pages/branding/logo_3-dark.png">
-                        </div>
-                        <div class="swiper-slide" role="group" aria-label="4 / 5" style="width: 144px;">
-                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_4-light.png"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_4-light.png"
-                                data-app-dark-img="front-pages/branding/logo_4-dark.png">
-                        </div>
-                        <div class="swiper-slide" role="group" aria-label="5 / 5" style="width: 144px;">
-                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo_5-light.png"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_5-light.png"
-                                data-app-dark-img="front-pages/branding/logo_5-dark.png">
-                        </div>
-                    </div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            <div class="row align-items-center gy-5 gy-lg-0">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <h6 class="h2 text-primary fw-bold mb-1">Ready to Get Started?</h6>
+                    <p class="fw-medium mb-4">Start your project with a 14-day free trial</p>
+                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/payment"
+                        class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="col-lg-6 pt-lg-5 text-center text-lg-end">
+                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/landing-page/cta-dashboard.png"
+                        alt="cta dashboard" class="img-fluid">
                 </div>
             </div>
         </div>
-    </section> --}}
-    <!-- Logo Slider: End -->
+    </section>
+    <!-- : End -->
 
+    <!-- Real customers reviews: Start -->
+    <section id="landingReviews" class="section-py bg-body landing-reviews pb-0">
+        <!-- What people say slider: Start -->
+        <div class="container">
+            <div class="row align-items-center gx-0 gy-4 g-lg-5">
+                <div class="col-md-6 col-lg-5 col-xl-3">
+                    <div class="mb-3 pb-1">
+                        <span class="badge bg-label-primary">Real Customers Reviews</span>
+                    </div>
+                    <h3 class="mb-1"><span class="section-title">What people say</span></h3>
+                    <p class="mb-3 mb-md-5">
+                        See what our customers have to<br class="d-none d-xl-block">
+                        say about their experience.
+                    </p>
+                    <div class="landing-reviews-btns d-flex align-items-center gap-3">
+                        <button id="reviews-previous-btn" class="btn btn-label-primary reviews-btn" type="button">
+                            <i class="bx bx-chevron-left bx-sm"></i>
+                        </button>
+                        <button id="reviews-next-btn" class="btn btn-label-primary reviews-btn" type="button">
+                            <i class="bx bx-chevron-right bx-sm"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-7 col-xl-9">
+                    <div class="swiper-reviews-carousel overflow-hidden mb-5 pb-md-2 pb-md-3">
+                        <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden"
+                            id="swiper-reviews">
+                            <div class="swiper-wrapper" id="swiper-wrapper-0f1b91be13d10894c" aria-live="off"
+                                style="cursor: grab; transition-duration: 0ms; transform: translate3d(-795px, 0px, 0px);">
+                                <div class="swiper-slide" role="group" aria-label="2 / 6"
+                                    style="width: 245px; margin-right: 20px;" data-swiper-slide-index="1">
+                                    <div class="card h-100">
+                                        <div
+                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo-2.png"
+                                                    alt="client logo" class="client-logo img-fluid">
+                                            </div>
+                                            <p>
+                                                “I've never used a theme as versatile and flexible as Vuexy. It's my go
+                                                to for building
+                                                dashboard sites on almost any project.”
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/avatars/2.png"
+                                                        alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Eugenia Moore</h6>
+                                                    <p class="small text-muted mb-0">Founder of Hubspot</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide" role="group" aria-label="3 / 6"
+                                    style="width: 245px; margin-right: 20px;" data-swiper-slide-index="2">
+                                    <div class="card h-100">
+                                        <div
+                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo-3.png"
+                                                    alt="client logo" class="client-logo img-fluid">
+                                            </div>
+                                            <p>
+                                                This template is really clean &amp; well documented. The docs are really
+                                                easy to understand and
+                                                it's always easy to find a screenshot from their website.
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/avatars/3.png"
+                                                        alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Curtis Fletcher</h6>
+                                                    <p class="small text-muted mb-0">Design Lead at Dribbble</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide swiper-slide-prev" role="group" aria-label="4 / 6"
+                                    style="width: 245px; margin-right: 20px;" data-swiper-slide-index="3">
+                                    <div class="card h-100">
+                                        <div
+                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo-4.png"
+                                                    alt="client logo" class="client-logo img-fluid">
+                                            </div>
+                                            <p>
+                                                All the requirements for developers have been taken into consideration,
+                                                so I’m able to build
+                                                any interface I want.
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bx-star bx-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/avatars/4.png"
+                                                        alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Sara Smith</h6>
+                                                    <p class="small text-muted mb-0">Founder of Continental</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide swiper-slide-active" role="group" aria-label="5 / 6"
+                                    style="width: 245px; margin-right: 20px;" data-swiper-slide-index="4">
+                                    <div class="card h-100">
+                                        <div
+                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo-5.png"
+                                                    alt="client logo" class="client-logo img-fluid">
+                                            </div>
+                                            <p>
+                                                “I've never used a theme as versatile and flexible as Vuexy. It's my go
+                                                to for building
+                                                dashboard sites on almost any project.”
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/avatars/5.png"
+                                                        alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Eugenia Moore</h6>
+                                                    <p class="small text-muted mb-0">Founder of Hubspot</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide swiper-slide-next" role="group" aria-label="6 / 6"
+                                    style="width: 245px; margin-right: 20px;" data-swiper-slide-index="5">
+                                    <div class="card h-100">
+                                        <div
+                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo-6.png"
+                                                    alt="client logo" class="client-logo img-fluid">
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nemo
+                                                mollitia, ad eum
+                                                officia numquam nostrum repellendus consequuntur!
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bx-star bx-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/avatars/1.png"
+                                                        alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Sara Smith</h6>
+                                                    <p class="small text-muted mb-0">Founder of Continental</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide" role="group" aria-label="1 / 6"
+                                    style="width: 245px; margin-right: 20px;" data-swiper-slide-index="0">
+                                    <div class="card h-100">
+                                        <div
+                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
+                                            <div class="mb-3">
+                                                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/branding/logo-1.png"
+                                                    alt="client logo" class="client-logo img-fluid">
+                                            </div>
+                                            <p>
+                                                “Vuexy is hands down the most useful front end Bootstrap theme I've ever
+                                                used. I can't wait
+                                                to use it again for my next project.”
+                                            </p>
+                                            <div class="text-warning mb-3">
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                                <i class="bx bxs-star bx-sm"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2 avatar-sm">
+                                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/avatars/1.png"
+                                                        alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Cecilia Payne</h6>
+                                                    <p class="small text-muted mb-0">CEO of Airbnb</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"
+                                aria-controls="swiper-wrapper-0f1b91be13d10894c"></div>
+                            <div class="swiper-button-prev" tabindex="0" role="button"
+                                aria-label="Previous slide" aria-controls="swiper-wrapper-0f1b91be13d10894c"></div>
+                            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- What people say slider: End -->
+    </section>
+    <!-- Real customers reviews: End -->
+
+    <!-- Our great team: Start -->
+    @if (count($clients) > 0)
+        <section id="landingTeam" class="section-py landing-team">
+            <div class="container">
+                <x-front.headline :headline="trans('front.our clients')"
+                    subHeadline="<span class='section-title'>Supported</span> by Real People"
+                    description="Who is behind these great-looking interfaces?" />
+                {{-- <div class="row gy-5 mt-2"> --}}
+                <div class="swiper" id="clients-swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper" style="height: auto;">
+                        <!-- Slides -->
+                        @foreach ($clients as $item)
+                            <div class="swiper-slide">
+                                <div class="card mt-3 mt-lg-0 shadow-none">
+                                    <div class="bg-label-primary position-relative team-image-box">
+                                        <img src="{{ asset($item->thumbnail) }}"
+                                            class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid"
+                                            alt="human image">
+                                    </div>
+                                    <div class="card-body border border-label-primary border-top-0 text-center">
+                                        <h5 class="card-title mb-0">
+                                            <a href="{{ $item->link }}" target="_blank">{{ $item->name }}</a>
+                                        </h5>
+                                        {{-- <p class="text-muted mb-0">Project Manager</p> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+    <!-- Our great team: End -->
 
     <!-- Contact Us: Start -->
     <section id="landingContact" class="section-py bg-body landing-contact">
@@ -304,7 +555,7 @@
                 height: 100%;
             }
 
-            .swiper-slide {
+            #swiper .swiper-slide {
                 text-align: center;
                 font-size: 18px;
                 background: #fff;
@@ -313,7 +564,7 @@
                 align-items: center;
             }
 
-            .swiper-slide img {
+            #swiper .swiper-slide img {
                 display: block;
                 width: 100%;
                 height: 100%;
@@ -335,6 +586,31 @@
                 // Optional parameters
                 // direction: 'vertical',
                 loop: true,
+
+            });
+
+            var clientSwiper = new Swiper('#clients-swiper', {
+                // Optional parameters
+                // direction: 'vertical',
+                loop: true,
+                slidesPerView: 4,
+                spaceBetween: 20,
+                // freeMode: true,
+
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1,
+                    },
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    768: {
+                        slidesPerView: 4,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                    },
+                },
 
             });
         </script>

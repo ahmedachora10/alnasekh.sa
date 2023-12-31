@@ -46,6 +46,11 @@
                             href="#landingPricing">{{ trans('front.packages') }}</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" target="_blank" aria-current="page"
+                            href="https://www.alnasekh.store">{{ trans('front.store') }}</a>
+                    </li>
+
 
                     <li class="nav-item">
                         <a class="nav-link fw-medium" aria-current="page" href="#">{{ trans('front.about') }}</a>
@@ -70,6 +75,29 @@
                     </a>
                 </li>
                 <!-- / Style Switcher-->
+
+                <!-- Language Switcher-->
+                <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bx bx-globe bx-sm"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a href="{{ route('switch-language', 'en') }}" @class(['dropdown-item', 'active' => session('locale') === 'en'])
+                                data-language="en">
+                                <span class="align-middle">{{ trans('front.english') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('switch-language', 'ar') }}" @class(['dropdown-item', 'active' => session('locale') === 'ar'])
+                                data-language="ar">
+                                <span class="align-middle">{{ trans('front.arabic') }} </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- / Language Switcher-->
 
                 <!-- navbar button: Start -->
                 <li>

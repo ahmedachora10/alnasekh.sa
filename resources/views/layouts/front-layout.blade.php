@@ -1443,39 +1443,56 @@
     </div>
     <!-- / Sections:End -->
 
+    @php
+        $locale = app()->getLocale() == 'en' ? '_en' : '';
+    @endphp
+
     <footer class="landing-footer bg-body footer-text">
 
         <div class="footer-top">
             <div class="container">
                 <div class="row gx-0 gy-4 g-md-5">
                     <div class="col-lg-5">
-                        <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing"
-                            class="app-brand-link mb-4">
+                        <a href="{{ route('home') }}" class="app-brand-link mb-1">
                             <span class="app-brand-logo demo">
                                 <img src="{{ asset('assets/img/logo-white.png') }}" alt="logo" width="60px">
                             </span>
                         </a>
                         <p class="footer-text footer-logo-description mb-4">
-                            {{ setting('app_description') }}
+                            {{ setting("app_description$locale") }}
                         </p>
-                        {{-- <form class="footer-form">
-                            <label for="footer-email" class="small">Subscribe to newsletter</label>
-                            <div class="d-flex mt-1">
-                                <input type="email"
-                                    class="form-control rounded-0 rounded-start-bottom rounded-start-top"
-                                    id="footer-email" placeholder="Your email">
-                                <button type="submit"
-                                    class="btn btn-primary shadow-none rounded-0 rounded-end-bottom rounded-end-top">
-                                    Subscribe
-                                </button>
-                            </div>
-                        </form> --}}
+                        <livewire:store-subscriber />
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <h6 class="footer-title mb-4">{{ trans('front.pages') }}</h6>
                         <ul class="list-unstyled">
                             <li class="mb-3">
                                 <a href="{{ route('home') }}" class="footer-link">{{ trans('front.home') }}</a>
+                            </li>
+
+                            <li class="mb-3">
+                                <a class="footer-link" aria-current="page"
+                                    href="#landingFeatures">{{ trans('front.our services') }}</a>
+                            </li>
+
+                            <li class="mb-3">
+                                <a class="footer-link" aria-current="page"
+                                    href="#landingPricing">{{ trans('front.packages') }}</a>
+                            </li>
+
+                            <li class="mb-3">
+                                <a class="footer-link" aria-current="page"
+                                    href="#landingPricing">{{ trans('front.about') }}</a>
+                            </li>
+
+                            <li class="mb-3">
+                                <a class="footer-link" aria-current="page"
+                                    href="#">{{ trans('front.our websites') }}</a>
+                            </li>
+
+                            <li class="mb-3">
+                                <a class="footer-link" aria-current="page"
+                                    href="#">{{ trans('front.jobs') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -1492,9 +1509,8 @@
                             document.write(new Date().getFullYear());
                         </script>
                     </span>
-                    <a href="https://themeselection.com" target="_blank"
-                        class="fw-medium text-white footer-link">{{ setting('app_name') }},</a>
-                    <span class="footer-text"> {{ setting('footer') }}.</span>
+                    <span class="footer-text">
+                        {{ setting("footer$locale") }}.</span>
                 </div>
                 <div>
                     @if (setting('facebook'))

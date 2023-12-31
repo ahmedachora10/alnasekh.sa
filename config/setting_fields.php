@@ -19,12 +19,30 @@ return [
             [
                 'type' => 'text', // input fields type
                 'data' => 'string', // data type, string, int, boolean
+                'name' => 'app_name_en', // unique name for field
+                'label' => 'English Name', // you know what label it is
+                'rules' => 'required|min:2|max:50', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => config('app.name') // default value if you want
+            ],
+            [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
                 'name' => 'app_description', // unique name for field
                 'label' => 'Description', // you know what label it is
                 'rules' => 'nullable|min:2|max:50', // validation rule of laravel
                 'class' => '', // any class for input
                 'value' => '' // default value if you want
-            ]
+            ],
+            [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'app_description_en', // unique name for field
+                'label' => 'English Description', // you know what label it is
+                'rules' => 'nullable|min:2|max:50', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '' // default value if you want
+            ],
         ]
     ],
 
@@ -190,6 +208,16 @@ return [
                 'data' => 'string',
                 'name' => 'footer',
                 'label' => 'Footer',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => ''
+
+            ],
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'footer_en',
+                'label' => 'English Footer',
                 'rules' => 'nullable|string',
                 'class' => '',
                 'value' => ''

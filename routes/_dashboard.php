@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CorpController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MonthlyQuarterlyUpdateController;
+use App\Http\Controllers\Admin\OurClientController;
 use App\Http\Controllers\Admin\OurServiceController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\RegistryController;
@@ -23,6 +24,7 @@ use App\Livewire\Dashboard\Branch\StoreSubscription;
 use App\Livewire\Dashboard\Container\BranchRegistriesContainer;
 use App\Livewire\Dashboard\Container\EmployeesContainer;
 use App\Livewire\Dashboard\Container\NotificationsContainer;
+use App\Livewire\Dashboard\Container\SubscribersContainer;
 use Illuminate\Support\Facades\Route;
 
 
@@ -100,6 +102,8 @@ Route::middleware(['auth'])->group(function ()
     Route::resource('sliders', SliderController::class);
     Route::resource('our-services', OurServiceController::class);
     Route::resource('packages', PackageController::class);
+    Route::resource('our-clients', OurClientController::class);
+    Route::get('subscribers', SubscribersContainer::class)->name('subscribers.index');
 });
 
 

@@ -253,10 +253,12 @@ return [
         'sign in' => 'الدخول',
         'duration' => 'الفترة',
         'flag' => 'العلم',
-        'display name' => 'اسم العرض',
-        'created at' => 'وقت الانظمام',
-        'duration expiration' => 'انتهاء المدة',
+        'display_name' => 'اسم العرض',
+        'created_at' => 'وقت الانظمام',
+        'duration_expiration' => 'انتهاء المدة',
         'password' => 'كلمة المرور',
+        'company_name' => 'اسم الشركة',
+        'company_name_en' => 'اسم الشركة',
 
     ],
 

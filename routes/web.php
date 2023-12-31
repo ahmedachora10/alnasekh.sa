@@ -44,6 +44,15 @@ Route::controller(HomeController::class)
     Route::get('/', 'index')->name('home');
 });
 
+Route::get('/switch-langauge/{locale?}', function ($locale = 'ar') {
+
+    session()->put('locale', $locale);
+
+    app()->setLocale($locale);
+
+    return back();
+})->name('switch-language');
+
 
 require __DIR__.'/auth.php';
 

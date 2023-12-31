@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePackageRequest extends FormRequest
+class StoreOurClientRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,9 +14,9 @@ class StorePackageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
-            'properties' => 'required|array',
-            'yearly_price' => 'required|integer|min:0',
+            'company_name' => 'required|string',
+            'company_name_en' => 'required|string',
+            'link' => 'nullable|string',
             'image' => strtolower($this->method()) == 'put' ? 'nullable|image' : 'required|image',
         ];
     }

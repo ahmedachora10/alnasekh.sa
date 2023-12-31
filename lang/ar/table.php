@@ -96,6 +96,9 @@ return [
         'properties' => 'المميزات',
         'full name' => 'الاسم الكامل',
         'message' => 'الرسالة',
+        'link' => 'الرابط',
+        'company name en' => 'اسم الشركة (انجليزية)',
+        'company name' => 'اسم الشركة',
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

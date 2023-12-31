@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OurClient;
 use App\Models\OurService;
 use App\Models\Package;
 use App\Models\Slider;
@@ -14,6 +15,7 @@ class HomeController extends Controller
         $sliders = Slider::all();
         $ourServices = OurService::all();
         $packages = Package::all();
+        $clients = OurClient::all();
 
         $counts = DB::select("
             SELECT
@@ -23,6 +25,6 @@ class HomeController extends Controller
 
         $counts = $counts[0];
 
-        return view('home', compact('sliders', 'ourServices', 'packages', 'counts'));
+        return view('home', compact('sliders', 'ourServices', 'packages', 'clients', 'counts'));
     }
 }

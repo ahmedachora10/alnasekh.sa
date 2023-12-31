@@ -10,7 +10,7 @@ class Package extends Model
 {
     use HasFactory, ThumbnailModelAttribute;
 
-    protected $fillable = ['title', 'image', 'monthly_price', 'yearly_price', 'properties', 'sort'];
+    protected $fillable = ['title', 'image', 'yearly_price', 'properties', 'sort'];
 
     protected $casts = [
         'properties' => 'array'

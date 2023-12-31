@@ -20,19 +20,12 @@
                 <div class="col-md-6 col-12 mb-3">
                     <x-dashboard.input-group type="text" :value="$package->title" name="title" :title="trans('table.columns.title')" />
                 </div>
-
-                <div class="col-md-6 col-12 mb-3">
-                    <x-dashboard.input-group type="number" :value="$package->monthly_price" name="monthly_price" :title="trans('table.columns.monthly price')" />
-                </div>
-                <div class="col-md-6 col-12 mb-3">
+                <div class="col-12 mb-3">
                     <x-dashboard.input-group type="number" :value="$package->yearly_price" name="yearly_price" :title="trans('table.columns.yearly price')" />
                 </div>
 
-                <div class="col-12 mb-3">
-                    <x-dashboard.input-group type="text" :value="implode('-', $package->properties)" name="properties" :title="trans('table.columns.properties')" />
-                    <span class="mt-2 d-block text-info" style="font-size: 12px">
-                        اضف مميزات اكثر عن طريق التفريق بينها ب '-'
-                    </span>
+                <div class="col-10 mx-auto mb-3">
+                    <livewire:add-properties :properties="$package->properties" />
                 </div>
 
                 <div class="col-12">
