@@ -12,7 +12,7 @@ return [
     'contact us' => 'تواصل معنا',
     'send a message' => 'ابعث رسالة',
     'about' => 'من نحن',
-    'our services' => 'خدماتنا',
+    'our services' => 'ما يميزنا',
     'pages' => 'الصفحات',
     'statistics' => 'إحصائيات',
     'packages' => 'الباقات',
