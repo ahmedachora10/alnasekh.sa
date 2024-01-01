@@ -1,6 +1,7 @@
 <nav class="layout-navbar shadow-none py-0">
     <div class="container">
-        <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-4 ">
+        <div
+            class="navbar navbar-expand-lg bg-{{ session('theme') === 'dark' ? 'dark-light' : 'white' }} landing-navbar px-3 px-md-4 ">
             <!-- Menu logo wrapper: Start -->
             <div class="navbar-brand app-brand demo d-flex py-0 me-4">
                 <!-- Mobile menu toggle: Start-->
@@ -37,7 +38,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link fw-medium" aria-current="page"
-                            href="#landingFeatures">{{ trans('front.services') }}</a>
+                            href="#services">{{ trans('front.services') }}</a>
                     </li>
 
 
@@ -84,20 +85,6 @@
                         <span
                             class="align-middle">{{ trans(app()->getLocale() === 'en' ? 'front.arabic' : 'front.english') }}</span>
                     </a>
-                    {{-- <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <a href="{{ route('switch-language', 'en') }}" @class(['dropdown-item', 'active' => session('locale') === 'en'])
-                                data-language="en">
-                                <span class="align-middle">{{ trans('front.english') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('switch-language', 'ar') }}" @class(['dropdown-item', 'active' => session('locale') === 'ar'])
-                                data-language="ar">
-                                <span class="align-middle">{{ trans('front.arabic') }} </span>
-                            </a>
-                        </li>
-                    </ul> --}}
                 </li>
                 <!-- / Language Switcher-->
 

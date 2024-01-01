@@ -87,11 +87,17 @@
                                             class="mb-4 pb-2 scaleX-n1-rtl">
                                         <h4 class="mb-1">{{ $item->title }}</h4>
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <span
-                                                class="price-monthly h1 text-primary fw-bold mb-0 d-none">{{ $item->yearly_price }}ر.س</span>
-                                            <span
-                                                class="price-yearly h1 text-primary fw-bold mb-0">{{ $item->yearly_price }}ر.س</span>
-                                            <sub class="h6 text-muted mb-0 ms-1">/{{ trans('front.year') }}</sub>
+                                            @if ($item->yearly_price == 0)
+                                                <span class="h5 text-primary fw-bold mb-0">
+                                                    {{ trans('front.contact us') }}
+                                                </span>
+                                            @else
+                                                <span
+                                                    class="price-monthly h4 text-primary fw-bold mb-0 d-none">{{ $item->yearly_price }}ر.س</span>
+                                                <span
+                                                    class="price-yearly h4 text-primary fw-bold mb-0">{{ $item->yearly_price }}ر.س</span>
+                                                <sub class="h6 text-muted mb-0 ms-1">/{{ trans('front.year') }}</sub>
+                                            @endif
                                         </div>
                                         {{-- <div class="position-relative pt-2">
                                             <div class="price-yearly text-muted price-yearly-toggle">$
@@ -104,22 +110,54 @@
                                         @foreach ($item->properties as $value)
                                             <li>
                                                 <h5>
-                                                    <span
-                                                        class="badge badge-center rounded-pill bg-label-primary p-0 me-2"><i
-                                                            class="bx bx-check bx-xs"></i></span>
+                                                    @if ($item->yearly_price != 0)
+                                                        <span
+                                                            class="badge badge-center rounded-pill bg-label-primary p-0 me-2">
+                                                            <i class="bx bx-check bx-xs"></i>
+                                                        </span>
+                                                    @endif
                                                     {{ $value }}
                                                 </h5>
                                             </li>
                                         @endforeach
                                     </ul>
                                     <div class="d-grid mt-4 pt-3">
-                                        <a href="#"
-                                            class="btn btn-label-primary">{{ trans('front.get started') }}</a>
+                                        @if ($item->yearly_price == 0)
+                                            <a href="#"
+                                                class="btn btn-label-primary">{{ trans('front.contact us') }}</a>
+                                        @else
+                                            <a href="#"
+                                                class="btn btn-label-primary">{{ trans('front.get started') }}</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+                    <!-- Basic Plan: End -->
+                </div>
+            </div>
+        </section>
+        <!-- Pricing plans: End -->
+    @endif
+
+    @if (true)
+        <!-- Pricing plans: Start -->
+        <section class="section-py bg-body" id="services">
+            <div class="container">
+                <x-front.headline :headline="trans('front.services')"
+                    subHeadline="Tailored pricing plans</span> designed for
+                    you"
+                    description="All plans include 40+ advanced tools and features to boost your product.<br>Choose the best plan to
+                    fit
+                    your needs." />
+                <div class="row gy-4 pt-lg-3">
+                    <!-- Basic Plan: Start -->
+                    @for ($i = 0; $i < 4; $i++)
+                        <div class="col-lg-3 col-md-6">
+                            <x-dashboard.cards.service-card />
+                        </div>
+                    @endfor
                     <!-- Basic Plan: End -->
                 </div>
             </div>
@@ -512,34 +550,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-3">{{ trans('front.contact us') }}</h4>
-                            <form>
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <x-dashboard.input-group type="text" name="name" :title="trans('table.columns.name')" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <x-dashboard.input-group type="text" name="email" :title="trans('table.columns.email')" />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <x-dashboard.input-group type="text" name="phone" :title="trans('table.columns.phone')" />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <x-dashboard.input-group type="text" name="subject" :title="trans('table.columns.subject')" />
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label class="form-label"
-                                            for="contact-form-message">{{ trans('table.columns.message') }}</label>
-                                        <textarea id="contact-form-message" class="form-control" rows="9"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit"
-                                            class="btn btn-primary">{{ trans('common.send') }}</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <livewire:contact-us-form />
                         </div>
                     </div>
                 </div>

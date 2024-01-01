@@ -412,6 +412,10 @@
         [dir=rtl] .template-customizer-t-style_switch_light {
             padding-right: 0 !important
         }
+
+        .bg-dark-light {
+            background-color: #2b2c40 !important;
+        }
     </style>
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
