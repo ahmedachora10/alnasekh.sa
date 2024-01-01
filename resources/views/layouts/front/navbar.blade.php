@@ -37,7 +37,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link fw-medium" aria-current="page"
-                            href="#landingFeatures">{{ trans('front.our services') }}</a>
+                            href="#landingFeatures">{{ trans('front.services') }}</a>
                     </li>
 
 
@@ -78,11 +78,13 @@
 
                 <!-- Language Switcher-->
                 <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <a class="nav-link dropdown-toggle hide-arrow"
+                        href="{{ route('switch-language', app()->getLocale() === 'en' ? 'ar' : 'en') }}">
                         <i class="bx bx-globe bx-sm"></i>
+                        <span
+                            class="align-middle">{{ trans(app()->getLocale() === 'en' ? 'front.arabic' : 'front.english') }}</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    {{-- <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <a href="{{ route('switch-language', 'en') }}" @class(['dropdown-item', 'active' => session('locale') === 'en'])
                                 data-language="en">
@@ -95,18 +97,18 @@
                                 <span class="align-middle">{{ trans('front.arabic') }} </span>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </li>
                 <!-- / Language Switcher-->
 
                 <!-- navbar button: Start -->
-                <li>
+                {{-- <li>
                     @if (Route::has('login'))
                         <a href="{{ route('login') }}" class="btn btn-primary" target="_blank"><span
                                 class="tf-icons bx bx-user me-md-1"></span><span
                                 class="d-none d-md-block">{{ trans('front.login') }}</span></a>
                     @endif
-                </li>
+                </li> --}}
                 <!-- navbar button: End -->
             </ul>
             <!-- Toolbar: End -->

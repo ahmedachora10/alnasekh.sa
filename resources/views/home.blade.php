@@ -26,7 +26,7 @@
         <!-- Useful features: Start -->
         <section id="landingFeatures" class="section-py landing-features">
             <div class="container">
-                <x-front.headline :headline="trans('front.our services')" subHeadline="Everything you need</span> to start your next project"
+                <x-front.headline :headline="trans('front.our specials')" subHeadline="Everything you need</span> to start your next project"
                     description="Not just a set of tools, the package includes ready-to-deploy conceptual application." />
                 <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5">
                     @foreach ($ourServices as $item)
@@ -79,7 +79,7 @@
                 <div class="row gy-4 pt-lg-3">
                     <!-- Basic Plan: Start -->
                     @foreach ($packages as $item)
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="text-center">
@@ -88,9 +88,9 @@
                                         <h4 class="mb-1">{{ $item->title }}</h4>
                                         <div class="d-flex align-items-center justify-content-center">
                                             <span
-                                                class="price-monthly h1 text-primary fw-bold mb-0 d-none">${{ $item->yearly_price }}</span>
+                                                class="price-monthly h1 text-primary fw-bold mb-0 d-none">{{ $item->yearly_price }}ر.س</span>
                                             <span
-                                                class="price-yearly h1 text-primary fw-bold mb-0">${{ $item->yearly_price }}</span>
+                                                class="price-yearly h1 text-primary fw-bold mb-0">{{ $item->yearly_price }}ر.س</span>
                                             <sub class="h6 text-muted mb-0 ms-1">/{{ trans('front.year') }}</sub>
                                         </div>
                                         {{-- <div class="position-relative pt-2">

@@ -1472,14 +1472,19 @@
 
                             <li class="mb-3">
                                 <a class="footer-link" aria-current="page"
-                                    href="#landingFeatures">{{ trans('front.our services') }}</a>
+                                    href="#landingFeatures">{{ trans('front.services') }}</a>
                             </li>
 
                             <li class="mb-3">
                                 <a class="footer-link" aria-current="page"
                                     href="#landingPricing">{{ trans('front.packages') }}</a>
                             </li>
+                        </ul>
+                    </div>
 
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <h6 class="footer-title mb-4">{{ trans('front.pages') }}</h6>
+                        <ul class="list-unstyled">
                             <li class="mb-3">
                                 <a class="footer-link" aria-current="page"
                                     href="#landingPricing">{{ trans('front.about') }}</a>
@@ -1504,13 +1509,13 @@
             <div
                 class="container d-flex flex-wrap justify-content-between flex-md-row flex-column text-center text-md-start">
                 <div class="mb-2 mb-md-0">
+                    <span class="footer-text">
+                        {!! setting("footer$locale") !!}</span>
                     <span class="footer-text">©
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
                     </span>
-                    <span class="footer-text">
-                        {{ setting("footer$locale") }}.</span>
                 </div>
                 <div>
                     @if (setting('facebook'))
