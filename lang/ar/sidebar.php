@@ -19,4 +19,5 @@ return [
     'packages' => 'الباقات',
     'subscribers' => 'المشتركين',
     'our clients' => 'عملاؤنا',
+    'headlines' => 'العناوين',
 ];

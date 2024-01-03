@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CorpController;
 use App\Http\Controllers\Admin\ExportController;
+use App\Http\Controllers\Admin\HeadlineTranslationController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MonthlyQuarterlyUpdateController;
 use App\Http\Controllers\Admin\OurClientController;
@@ -104,6 +105,7 @@ Route::middleware(['auth'])->group(function ()
     Route::resource('packages', PackageController::class);
     Route::resource('our-clients', OurClientController::class);
     Route::get('subscribers', SubscribersContainer::class)->name('subscribers.index');
+    Route::resource('translation', HeadlineTranslationController::class)->only(['index', 'update'])->parameter('translation', 'headlineTranslation');
 });
 
 

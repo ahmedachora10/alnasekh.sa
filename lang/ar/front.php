@@ -26,4 +26,5 @@ return [
     'our websites' => 'مواقعنا',
     'jobs' => 'الوظائف',
     'our clients' => 'عملاؤنا',
+    'testimonials' => 'أراء عملاؤنا',
 ];

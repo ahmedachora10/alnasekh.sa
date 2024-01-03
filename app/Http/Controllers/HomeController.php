@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HeadlineTranslation;
 use App\Models\OurClient;
 use App\Models\OurService;
 use App\Models\Package;
@@ -16,6 +17,7 @@ class HomeController extends Controller
         $ourServices = OurService::all();
         $packages = Package::all();
         $clients = OurClient::all();
+        $headlines = collect(HeadlineTranslation::all());
 
         $counts = DB::select("
             SELECT
@@ -25,6 +27,6 @@ class HomeController extends Controller
 
         $counts = $counts[0];
 
-        return view('home', compact('sliders', 'ourServices', 'packages', 'clients', 'counts'));
+        return view('home', compact('sliders', 'ourServices', 'packages', 'clients', 'counts', 'headlines'));
     }
 }

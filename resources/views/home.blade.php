@@ -1,4 +1,10 @@
 <x-front-layout>
+    @php
+        $getHeadline = function (string $key, $column) use ($headlines) {
+            $column = app()->getLocale() == 'en' ? $column . '_en' : $column;
+            return $headlines->firstWhere('section', $key)->{$column} ?? '';
+        };
+    @endphp
     @if (count($sliders) > 0)
         <!-- Hero: Start -->
         <section id="hero-animation" style="height: 100%;">
@@ -26,8 +32,7 @@
         <!-- Useful features: Start -->
         <section id="landingFeatures" class="section-py landing-features">
             <div class="container">
-                <x-front.headline :headline="trans('front.our specials')" subHeadline="Everything you need</span> to start your next project"
-                    description="Not just a set of tools, the package includes ready-to-deploy conceptual application." />
+                <x-front.headline :headline="$getHeadline('our specials', 'title')" :subHeadline="$getHeadline('our specials', 'subtitle')" :description="$getHeadline('our specials', 'description')" />
                 <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5">
                     @foreach ($ourServices as $item)
                         <div class="col-lg-4 col-sm-6 text-center features-icon-box">
@@ -52,12 +57,7 @@
         <!-- Pricing plans: Start -->
         <section id="landingPricing" class="section-py bg-body landing-pricing">
             <div class="container">
-                <x-front.headline :headline="trans('front.pricing plans')"
-                    subHeadline="Tailored pricing plans</span> designed for
-                    you"
-                    description="All plans include 40+ advanced tools and features to boost your product.<br>Choose the best plan to
-                    fit
-                    your needs." />
+                <x-front.headline :headline="$getHeadline('packages', 'title')" :subHeadline="$getHeadline('packages', 'subtitle')" :description="$getHeadline('packages', 'description')" />
                 {{-- <div class="text-center mb-5">
                 <div class="position-relative d-inline-block pt-3 pt-md-0">
                     <label class="switch switch-primary me-0">
@@ -145,12 +145,8 @@
         <!-- Pricing plans: Start -->
         <section class="section-py bg-body" id="services">
             <div class="container">
-                <x-front.headline :headline="trans('front.services')"
-                    subHeadline="Tailored pricing plans</span> designed for
-                    you"
-                    description="All plans include 40+ advanced tools and features to boost your product.<br>Choose the best plan to
-                    fit
-                    your needs." />
+                <x-front.headline :headline="$getHeadline('services', 'title')" :subHeadline="$getHeadline('services', 'subtitle')" :description="$getHeadline('services', 'description')" />
+
                 <div class="row gy-4 pt-lg-3">
                     <!-- Basic Plan: Start -->
                     @for ($i = 0; $i < 4; $i++)
@@ -168,8 +164,7 @@
     <!-- Fun facts: Start -->
     <section id="landingFunFacts" class="section-py landing-fun-facts">
         <div class="container">
-            <x-front.headline :headline="trans('front.statistics')" subHeadline="Let's work</span> together"
-                description="Any question or remark? just write us a message" />
+            <x-front.headline :headline="$getHeadline('statistics', 'title')" :subHeadline="$getHeadline('statistics', 'subtitle')" :description="$getHeadline('statistics', 'description')" />
             <div class="row gy-3">
                 <div class="col-sm-6 col-lg-3">
                     <div class="card border border-label-primary shadow-none">
@@ -227,14 +222,7 @@
         <div class="container">
             <div class="row align-items-center gx-0 gy-4 g-lg-5">
                 <div class="col-md-6 col-lg-5 col-xl-3">
-                    <div class="mb-3 pb-1">
-                        <span class="badge bg-label-primary">Real Customers Reviews</span>
-                    </div>
-                    <h3 class="mb-1"><span class="section-title">What people say</span></h3>
-                    <p class="mb-3 mb-md-5">
-                        See what our customers have to<br class="d-none d-xl-block">
-                        say about their experience.
-                    </p>
+                    <x-front.headline :headline="$getHeadline('testimonials', 'title')" :subHeadline="$getHeadline('testimonials', 'subtitle')" :description="$getHeadline('testimonials', 'description')" />
                     <div class="landing-reviews-btns d-flex align-items-center gap-3">
                         <button id="reviews-previous-btn" class="btn btn-label-primary reviews-btn" type="button">
                             <i class="bx bx-chevron-left bx-sm"></i>
@@ -473,9 +461,7 @@
     @if (count($clients) > 0)
         <section id="landingTeam" class="section-py landing-team">
             <div class="container">
-                <x-front.headline :headline="trans('front.our clients')"
-                    subHeadline="<span class='section-title'>Supported</span> by Real People"
-                    description="Who is behind these great-looking interfaces?" />
+                <x-front.headline :headline="$getHeadline('our clients', 'title')" :subHeadline="$getHeadline('our clients', 'subtitle')" :description="$getHeadline('our clients', 'description')" />
                 {{-- <div class="row gy-5 mt-2"> --}}
                 <div class="swiper" id="clients-swiper">
                     <!-- Additional required wrapper -->
@@ -508,8 +494,7 @@
     <!-- Contact Us: Start -->
     <section id="landingContact" class="section-py bg-body landing-contact">
         <div class="container">
-            <x-front.headline :headline="trans('front.contact us')" subHeadline="Let's work</span> together"
-                description="Any question or remark? just write us a message" />
+            <x-front.headline :headline="$getHeadline('contact us', 'title')" :subHeadline="$getHeadline('contact us', 'subtitle')" :description="$getHeadline('contact us', 'description')" />
             <div class="row gy-4">
                 <div class="col-lg-5">
                     <div class="contact-img-box position-relative border p-2 h-100">
