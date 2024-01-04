@@ -111,7 +111,7 @@
                                     <ul class="list-unstyled">
                                         @foreach ($item->properties as $value)
                                             <li>
-                                                <h5>
+                                                <h5 class="fs-6">
                                                     @if ($item->yearly_price != 0)
                                                         <span
                                                             class="badge badge-center rounded-pill bg-label-primary p-0 me-2">
