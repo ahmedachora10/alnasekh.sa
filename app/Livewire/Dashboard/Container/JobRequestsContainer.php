@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Container;
 
 use App\Models\JobRequest;
 use App\Services\UploadFileService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,7 +15,9 @@ class JobRequestsContainer extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $attachments = [];
+    public ?JobRequest $jobRequest = null;
+
+    public string $search = '';
 
     public function delete(JobRequest $jobRequest) {
 
@@ -36,14 +39,16 @@ class JobRequestsContainer extends Component
     }
 
     public function getAttachments(JobRequest $jobRequest) {
-        $this->attachments = $jobRequest->attachments;
+        $this->jobRequest = $jobRequest;
         $this->dispatch('open-modal', target: '#showAttachments');
     }
 
     public function render()
     {
         return view('livewire.dashboard.container.job-requests-container', [
-            'jobRequests' => JobRequest::with('attachments')->paginate(setting('pagination') ?? 8)
+            'jobRequests' => JobRequest::search($this->search)
+            ->query(fn (Builder $query) => $query->with(['attachments', 'jobPost']))
+            ->paginate(setting('pagination') ?? 8)
         ]);
     }
 }

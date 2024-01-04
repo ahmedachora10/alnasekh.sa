@@ -20,6 +20,8 @@ class HomeController extends Controller
         $clients = OurClient::all();
         $headlines = collect(HeadlineTranslation::all());
 
+        view()->share('title', '');
+
         // $counts = DB::select("
         //     SELECT
         //         (SELECT COUNT(*) FROM users) as users_count,

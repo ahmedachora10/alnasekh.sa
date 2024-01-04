@@ -75,6 +75,7 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.headlines')" icon="heading" :link="route('translation.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="book-content" :link="route('contact-us.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.statistics')" icon="home" :link="route('statistics.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="server" :link="route('jobs.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" icon="server" :link="route('job-requests.index')" />
         @endhasPermission
 

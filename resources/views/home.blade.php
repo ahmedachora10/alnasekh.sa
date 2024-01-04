@@ -86,7 +86,8 @@
                                     <div class="text-center">
                                         <img src="{{ asset($item->thumbnail) }}" alt="paper airplane icon"
                                             class="mb-4 pb-2 scaleX-n1-rtl">
-                                        <h4 class="mb-1">{{ $item->title }}</h4>
+                                        <h4 class="mb-1 {{ $item->yearly_price == 0 ? 'fs-3' : '' }}">
+                                            {{ $item->title }}</h4>
                                         <div class="d-flex align-items-center justify-content-center">
                                             @if ($item->yearly_price == 0)
                                                 <span class="h5 text-primary fw-bold mb-0">
@@ -460,7 +461,8 @@
                                     <div class="text-center">
                                         <a href="{{ $item->link }}" target="_blank">
                                             <img src="{{ asset($item->thumbnail) }}" alt="client logo"
-                                                class="client-logo d-block mx-auto">
+                                                class="client-logo d-block mx-auto"
+                                                style="min-height: 4.5rem !important">
                                         </a>
                                     </div>
                                 </div>

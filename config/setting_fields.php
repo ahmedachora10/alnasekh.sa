@@ -242,6 +242,16 @@ return [
                 'value' => ''
 
             ],
+            [
+                'type' => 'file',
+                'data' => 'file',
+                'name' => 'profile_file_en',
+                'label' => 'Profile en',
+                'rules' => 'nullable|file|mimes:pdf',
+                'class' => '',
+                'value' => ''
+
+            ],
         ]
     ],
 ];

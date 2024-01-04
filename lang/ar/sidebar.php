@@ -24,4 +24,5 @@ return [
     'contact us' => 'تواصل معنا',
     'statistics' => 'إحصائيات',
     'job requests' => 'طلبات التوظيف',
+    'jobs' => 'الوظائف',
 ];

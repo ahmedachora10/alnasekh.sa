@@ -503,7 +503,10 @@
 
                     <div class="col-lg-3 col-md-4">
                         <h6 class="footer-title mb-4">{{ trans('front.to download the profile') }}</h6>
-                        <a href="{{ asset(setting('profile_file')) }}"
+                        @php
+                            $profilePdf = app()->getLocale() === 'en' ? 'profile_file_en' : 'profile_file';
+                        @endphp
+                        <a href="{{ asset(setting($profilePdf)) }}"
                             download="profile.{{ str(setting('profile_file'))->afterLast('.') }}"
                             class="d-block w-auto footer-link mb-3 pb-2 btn btn-outline-danger">
                             {{ trans('front.click here') }}
