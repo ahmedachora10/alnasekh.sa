@@ -86,7 +86,7 @@
                                     <div class="text-center">
                                         <img src="{{ asset($item->thumbnail) }}" alt="paper airplane icon"
                                             class="mb-4 pb-2 scaleX-n1-rtl">
-                                        <h4 class="mb-1 {{ $item->yearly_price == 0 ? 'fs-3' : '' }}">
+                                        <h4 class="mb-1 {{ $item->yearly_price == 0 ? 'fs-2' : '' }}">
                                             {{ $item->title }}</h4>
                                         <div class="d-flex align-items-center justify-content-center">
                                             @if ($item->yearly_price == 0)
