@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Dashboard\Branch\StoreCertificate;
 use App\Livewire\Dashboard\Branch\StoreCivilDefenseCertificate;
@@ -23,7 +24,9 @@ use App\Livewire\Dashboard\Branch\StoreRecord;
 use App\Livewire\Dashboard\Branch\StoreRegistry;
 use App\Livewire\Dashboard\Branch\StoreSubscription;
 use App\Livewire\Dashboard\Container\BranchRegistriesContainer;
+use App\Livewire\Dashboard\Container\ContactUsContainer;
 use App\Livewire\Dashboard\Container\EmployeesContainer;
+use App\Livewire\Dashboard\Container\JobRequestsContainer;
 use App\Livewire\Dashboard\Container\NotificationsContainer;
 use App\Livewire\Dashboard\Container\SubscribersContainer;
 use Illuminate\Support\Facades\Route;
@@ -106,6 +109,9 @@ Route::middleware(['auth'])->group(function ()
     Route::resource('our-clients', OurClientController::class);
     Route::get('subscribers', SubscribersContainer::class)->name('subscribers.index');
     Route::resource('translation', HeadlineTranslationController::class)->only(['index', 'update'])->parameter('translation', 'headlineTranslation');
+    Route::get('contact-us', ContactUsContainer::class)->name('contact-us.index');
+    Route::resource('statistics', StatisticController::class);
+    Route::get('job-requests', JobRequestsContainer::class)->name('job-requests.index');
 });
 
 

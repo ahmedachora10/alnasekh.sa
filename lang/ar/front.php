@@ -27,4 +27,6 @@ return [
     'jobs' => 'الوظائف',
     'our clients' => 'عملاؤنا',
     'testimonials' => 'أراء عملاؤنا',
+    'to download the profile' => 'لتحميل البروفايل',
+    'click here' => 'اضغط هنا',
 ];

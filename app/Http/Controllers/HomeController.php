@@ -7,6 +7,7 @@ use App\Models\OurClient;
 use App\Models\OurService;
 use App\Models\Package;
 use App\Models\Slider;
+use App\Models\Statistic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,14 +20,14 @@ class HomeController extends Controller
         $clients = OurClient::all();
         $headlines = collect(HeadlineTranslation::all());
 
-        $counts = DB::select("
-            SELECT
-                (SELECT COUNT(*) FROM users) as users_count,
-                (SELECT COUNT(*) FROM corps) as corps_count
-        ");
+        // $counts = DB::select("
+        //     SELECT
+        //         (SELECT COUNT(*) FROM users) as users_count,
+        //         (SELECT COUNT(*) FROM corps) as corps_count
+        // ");
 
-        $counts = $counts[0];
+        $statistics = Statistic::all();
 
-        return view('home', compact('sliders', 'ourServices', 'packages', 'clients', 'counts', 'headlines'));
+        return view('home', compact('sliders', 'ourServices', 'packages', 'clients', 'statistics', 'headlines'));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreHeadlineTranslationRequest;
 use App\Models\HeadlineTranslation;
 use Illuminate\Http\Request;
 
@@ -51,25 +52,9 @@ class HeadlineTranslationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HeadlineTranslation $headlineTranslation)
+    public function update(StoreHeadlineTranslationRequest $request, HeadlineTranslation $headlineTranslation)
     {
-        $request->validate([
-            'title' => 'nullable|string',
-            'title_en' => 'nullable|string',
-            'subtitle' => 'nullable|string',
-            'subtitle_en' => 'nullable|string',
-            'description' => 'nullable|string',
-            'description_en' => 'nullable|string',
-        ], $request->all());
-
-        $headlineTranslation->update([
-            'title' => $request->title ?? $headlineTranslation->title,
-            'title_en' => $request->title_en ?? $headlineTranslation->title_en,
-            'subtitle' => $request->subtitle ?? $headlineTranslation->subtitle,
-            'subtitle_en' => $request->subtitle_en ?? $headlineTranslation->subtitle_en,
-            'description' => $request->description ?? $headlineTranslation->description,
-            'description_en' => $request->description_en ?? $headlineTranslation->description_en,
-        ]);
+        $headlineTranslation->update($request->validated());
 
         return redirect()->route('translation.index')->with('success', trans('message.update'));
     }

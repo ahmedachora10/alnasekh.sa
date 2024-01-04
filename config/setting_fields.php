@@ -30,7 +30,7 @@ return [
                 'data' => 'string', // data type, string, int, boolean
                 'name' => 'app_description', // unique name for field
                 'label' => 'Description', // you know what label it is
-                'rules' => 'nullable|min:2|max:50', // validation rule of laravel
+                'rules' => 'nullable|min:2|max:250', // validation rule of laravel
                 'class' => '', // any class for input
                 'value' => '' // default value if you want
             ],
@@ -39,7 +39,7 @@ return [
                 'data' => 'string', // data type, string, int, boolean
                 'name' => 'app_description_en', // unique name for field
                 'label' => 'English Description', // you know what label it is
-                'rules' => 'nullable|min:2|max:50', // validation rule of laravel
+                'rules' => 'nullable|min:2|max:250', // validation rule of laravel
                 'class' => '', // any class for input
                 'value' => '' // default value if you want
             ],
@@ -223,6 +223,25 @@ return [
                 'value' => ''
 
             ]
+        ]
+    ],
+    'profile' => [
+
+        'title' => 'Profile',
+        'desc' => '',
+        'icon' => 'menu-icon tf-icons bx bx-file',
+
+        'elements' => [
+            [
+                'type' => 'file',
+                'data' => 'file',
+                'name' => 'profile_file',
+                'label' => 'Profile',
+                'rules' => 'nullable|file|mimes:pdf',
+                'class' => '',
+                'value' => ''
+
+            ],
         ]
     ],
 ];

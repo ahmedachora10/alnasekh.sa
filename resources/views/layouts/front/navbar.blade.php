@@ -82,8 +82,7 @@
                     <a class="nav-link dropdown-toggle hide-arrow"
                         href="{{ route('switch-language', app()->getLocale() === 'en' ? 'ar' : 'en') }}">
                         <i class="bx bx-globe bx-sm"></i>
-                        <span
-                            class="align-middle">{{ trans(app()->getLocale() === 'en' ? 'front.arabic' : 'front.english') }}</span>
+                        <span class="align-middle">{{ app()->getLocale() === 'en' ? 'عربي' : 'English' }}</span>
                     </a>
                 </li>
                 <!-- / Language Switcher-->

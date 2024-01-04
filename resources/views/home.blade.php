@@ -5,6 +5,7 @@
             return $headlines->firstWhere('section', $key)->{$column} ?? '';
         };
     @endphp
+
     @if (count($sliders) > 0)
         <!-- Hero: Start -->
         <section id="hero-animation" style="height: 100%;">
@@ -141,6 +142,30 @@
         <!-- Pricing plans: End -->
     @endif
 
+    <!-- Fun facts: Start -->
+    <section id="landingFunFacts" class="section-py landing-fun-facts">
+        <div class="container">
+            <x-front.headline :headline="$getHeadline('statistics', 'title')" :subHeadline="$getHeadline('statistics', 'subtitle')" :description="$getHeadline('statistics', 'description')" />
+            <div class="row gy-3">
+                @foreach ($statistics as $item)
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card border border-label-primary shadow-none">
+                            <div class="card-body text-center">
+                                <img src="{{ asset($item->thumbnail) }}" alt="laptop" class="mb-2">
+                                <h5 class="h2 mb-1">{{ $item->statistic }}</h5>
+                                <p class="fw-medium mb-0">
+                                    {{ $item->get_title }}
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    <!-- Fun facts: End -->
+
     @if (true)
         <!-- Pricing plans: Start -->
         <section class="section-py bg-body" id="services">
@@ -160,42 +185,6 @@
         </section>
         <!-- Pricing plans: End -->
     @endif
-
-    <!-- Fun facts: Start -->
-    <section id="landingFunFacts" class="section-py landing-fun-facts">
-        <div class="container">
-            <x-front.headline :headline="$getHeadline('statistics', 'title')" :subHeadline="$getHeadline('statistics', 'subtitle')" :description="$getHeadline('statistics', 'description')" />
-            <div class="row gy-3">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card border border-label-primary shadow-none">
-                        <div class="card-body text-center">
-                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/laptop.png"
-                                alt="laptop" class="mb-2">
-                            <h5 class="h2 mb-1">{{ $counts?->corps_count }}</h5>
-                            <p class="fw-medium mb-0">
-                                المنشآة
-
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card border border-label-info shadow-none">
-                        <div class="card-body text-center">
-                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/user-success.png"
-                                alt="laptop" class="mb-2">
-                            <h5 class="h2 mb-1">{{ $counts?->users_count }}</h5>
-                            <p class="fw-medium mb-0">
-                                عملاؤنا
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Fun facts: End -->
 
     <!-- : Start -->
     <section id="landingCTA" class="section-py landing-cta p-lg-0 pb-0">
@@ -457,39 +446,32 @@
     </section>
     <!-- Real customers reviews: End -->
 
-    <!-- Our great team: Start -->
     @if (count($clients) > 0)
-        <section id="landingTeam" class="section-py landing-team">
+        <section id="our-clients" class="section-py landing-reviews">
             <div class="container">
                 <x-front.headline :headline="$getHeadline('our clients', 'title')" :subHeadline="$getHeadline('our clients', 'subtitle')" :description="$getHeadline('our clients', 'description')" />
-                {{-- <div class="row gy-5 mt-2"> --}}
-                <div class="swiper" id="clients-swiper">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper" style="height: auto;">
-                        <!-- Slides -->
-                        @foreach ($clients as $item)
-                            <div class="swiper-slide">
-                                <div class="card mt-3 mt-lg-0 shadow-none">
-                                    <div class="bg-label-primary position-relative team-image-box">
-                                        <img src="{{ asset($item->thumbnail) }}"
-                                            class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid"
-                                            alt="human image">
-                                    </div>
-                                    <div class="card-body border border-label-primary border-top-0 text-center">
-                                        <h5 class="card-title mb-0">
-                                            <a href="{{ $item->link }}" target="_blank">{{ $item->name }}</a>
-                                        </h5>
-                                        {{-- <p class="text-muted mb-0">Project Manager</p> --}}
+
+                <div class="swiper-logo-carousel py-4 my-lg-2">
+                    <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden"
+                        id="swiper-clients-logos">
+                        <div class="swiper-wrapper" style="height: auto;">
+                            @foreach ($clients as $item)
+                                <div class="swiper-slide swiper-slide-active" role="group" style="width: 254px;">
+                                    <div class="text-center">
+                                        <a href="{{ $item->link }}" target="_blank">
+                                            <img src="{{ asset($item->thumbnail) }}" alt="client logo"
+                                                class="client-logo d-block mx-auto">
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                     </div>
                 </div>
             </div>
         </section>
     @endif
-    <!-- Our great team: End -->
 
     <!-- Contact Us: Start -->
     <section id="landingContact" class="section-py bg-body landing-contact">
@@ -596,6 +578,31 @@
                 breakpoints: {
                     0: {
                         slidesPerView: 1,
+                    },
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    768: {
+                        slidesPerView: 4,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                    },
+                },
+
+            });
+
+            var clientLogosSwiper = new Swiper('#swiper-clients-logos', {
+                // Optional parameters
+                // direction: 'vertical',
+                loop: true,
+                slidesPerView: 4,
+                spaceBetween: 20,
+                // freeMode: true,
+
+                breakpoints: {
+                    0: {
+                        slidesPerView: 2,
                     },
                     640: {
                         slidesPerView: 2,

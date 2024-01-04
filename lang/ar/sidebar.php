@@ -16,8 +16,12 @@ return [
     'all settings' => 'الإعدادت العامة',
     'sliders' => 'سلايدر',
     'our services' => 'خدماتنا',
+    'our specials' => 'ما يميزنا',
     'packages' => 'الباقات',
     'subscribers' => 'المشتركين',
     'our clients' => 'عملاؤنا',
     'headlines' => 'العناوين',
+    'contact us' => 'تواصل معنا',
+    'statistics' => 'إحصائيات',
+    'job requests' => 'طلبات التوظيف',
 ];

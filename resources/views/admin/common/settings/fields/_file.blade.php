@@ -1,7 +1,11 @@
 <div class="form-group mb-3 col-md-6 {{ $errors->has($field['name'] ?? null) ? ' has-error' : '' }}">
     @if (setting($field['name']))
-        <img src="{{ asset(str_replace('public/', 'storage/', \setting($field['name'] ?? ''))) }}"
-            class=" img-thumbnail mb-2" width="100" height="100">
+        @if (str(\setting($field['name'] ?? ''))->afterLast('.') == 'pdf')
+            <i class="bx bx-file my-2 d-block text-primary" style="font-size: 2rem"></i>
+        @else
+            <img src="{{ asset(str_replace('public/', 'storage/', \setting($field['name'] ?? ''))) }}"
+                class=" img-thumbnail mb-2" width="100" height="100">
+        @endif
     @endif
     <label for="{{ $field['name'] ?? '' }}"
         class="mb-2">{{ trans('settings.' . strtolower($field['label'] ?? '')) }}</label>

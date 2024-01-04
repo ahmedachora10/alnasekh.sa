@@ -95,5 +95,6 @@ return [
     'light' => 'الوضع العادي',
     'new certificate' => 'رخصة جديدة',
 
-    'updates and registries' => 'التحديثات والرخص'
+    'updates and registries' => 'التحديثات والرخص',
+    'job request' => 'طلب الوظيفة'
 ];
