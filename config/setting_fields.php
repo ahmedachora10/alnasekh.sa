@@ -64,6 +64,16 @@ return [
 
             ],
             [
+                'type' => 'file',
+                'data' => 'string',
+                'name' => 'contact_img',
+                'label' => 'Contact Image',
+                'rules' => 'nullable|image',
+                'class' => '',
+                'value' => ''
+
+            ],
+            [
                 'type' => 'text',
                 'data' => 'string',
                 'name' => 'twitter',

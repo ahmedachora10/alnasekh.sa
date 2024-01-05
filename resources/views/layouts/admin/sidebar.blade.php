@@ -63,24 +63,23 @@
                 @hasPermission('setting.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.general settings')" :link="route('settings.index')" />
                 @endhasPermission
+                @hasPermission('dashboard.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.sliders')" :link="route('sliders.index')" />
+                    <x-dashboard.sidebar.link :title="trans('sidebar.our specials')" :link="route('our-services.index')" />
+                    <x-dashboard.sidebar.link :title="trans('sidebar.packages')" :link="route('packages.index')" />
+                    <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" :link="route('subscribers.index')" />
+                    <x-dashboard.sidebar.link :title="trans('sidebar.our clients')" :link="route('our-clients.index')" />
+                    <x-dashboard.sidebar.link :title="trans('sidebar.headlines')" :link="route('translation.index')" />
+                    <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" :link="route('contact-us.index')" />
+                    <x-dashboard.sidebar.link :title="trans('sidebar.statistics')" :link="route('statistics.index')" />
+                @endhasPermission
             </x-dashboard.sidebar.link>
         @endhasPermission
 
-        @hasPermission('dashboard.show')
-            <x-dashboard.sidebar.link :title="trans('sidebar.sliders')" icon="slider" :link="route('sliders.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.our specials')" icon="server" :link="route('our-services.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" :link="route('packages.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user-plus" :link="route('subscribers.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.our clients')" icon="user" :link="route('our-clients.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.headlines')" icon="heading" :link="route('translation.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="book-content" :link="route('contact-us.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.statistics')" icon="home" :link="route('statistics.index')" />
-        @endhasPermission
-
-        <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="cog" link="#" :hasSubMenu="true">
-            <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="server" :link="route('jobs.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" icon="server" :link="route('job-requests.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.cities')" icon="map" :link="route('job-cities.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="server" link="#" :hasSubMenu="true">
+            <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" :link="route('jobs.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" :link="route('job-requests.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.cities')" :link="route('job-cities.index')" />
         </x-dashboard.sidebar.link>
 
         <!-- Misc -->

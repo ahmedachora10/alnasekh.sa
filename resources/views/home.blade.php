@@ -482,8 +482,8 @@
             <div class="row gy-4">
                 <div class="col-lg-5">
                     <div class="contact-img-box position-relative border p-2 h-100">
-                        <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/landing-page/contact-customer-service.png"
-                            alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl img-fluid">
+                        <img src="{{ asset(setting('contact_img')) }}" alt="contact customer service"
+                            class="contact-img w-100 scaleX-n1-rtl img-fluid">
                         <div class="pt-3 px-4 pb-1">
                             <div class="row gy-3 gx-md-4">
                                 <div class="col-md-6 col-lg-12 col-xl-6">
