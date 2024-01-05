@@ -47,7 +47,7 @@ class JobRequestsContainer extends Component
     {
         return view('livewire.dashboard.container.job-requests-container', [
             'jobRequests' => JobRequest::search($this->search)
-            ->query(fn (Builder $query) => $query->with(['attachments', 'jobPost']))
+            ->query(fn (Builder $query) => $query->with(['attachments', 'jobPost', 'jobCity']))
             ->paginate(setting('pagination') ?? 8)
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\JobRequestForm;
+use App\Models\JobCity;
 use App\Models\JobPost;
 use App\Models\JobRequest;
 use App\Services\UploadFileService;
@@ -20,6 +21,7 @@ class StoreJobRequest extends Component
     public JobRequestForm $form;
 
     public $jobs = [];
+    public $jobCities = [];
 
     #[Validate([
         'attachments.*' => 'file',
@@ -29,10 +31,10 @@ class StoreJobRequest extends Component
     public function mount() {
         $this->uploadFileService = new UploadFileService;
         $this->jobs = JobPost::all();
+        $this->jobCities = JobCity::all();
     }
 
     public function save() {
-
         $this->validate();
 
         $this->uploadFileService = new UploadFileService;

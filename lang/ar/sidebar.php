@@ -25,4 +25,5 @@ return [
     'statistics' => 'إحصائيات',
     'job requests' => 'طلبات التوظيف',
     'jobs' => 'الوظائف',
+    'cities' => 'المدن',
 ];

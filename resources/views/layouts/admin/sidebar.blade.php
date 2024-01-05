@@ -75,9 +75,13 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.headlines')" icon="heading" :link="route('translation.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="book-content" :link="route('contact-us.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.statistics')" icon="home" :link="route('statistics.index')" />
+        @endhasPermission
+
+        <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="cog" link="#" :hasSubMenu="true">
             <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="server" :link="route('jobs.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" icon="server" :link="route('job-requests.index')" />
-        @endhasPermission
+            <x-dashboard.sidebar.link :title="trans('sidebar.cities')" icon="map" :link="route('job-cities.index')" />
+        </x-dashboard.sidebar.link>
 
         <!-- Misc -->
         {{-- <li class="menu-item">

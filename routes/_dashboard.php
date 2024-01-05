@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CorpController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\HeadlineTranslationController;
+use App\Http\Controllers\Admin\JobCityController;
 use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MonthlyQuarterlyUpdateController;
@@ -113,7 +114,8 @@ Route::middleware(['auth'])->group(function ()
     Route::get('contact-us', ContactUsContainer::class)->name('contact-us.index');
     Route::resource('statistics', StatisticController::class);
     Route::get('job-requests', JobRequestsContainer::class)->name('job-requests.index');
-    Route::resource('jobs', JobPostController::class)->parameter('job', 'jobPost');
+    Route::resource('jobs', JobPostController::class);
+    Route::resource('job-cities', JobCityController::class);
 });
 
 

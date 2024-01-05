@@ -51,8 +51,16 @@
     </div>
 
     <div class="col-md-6 col-12 mb-3">
-        <x-dashboard.input-group type="text" wire:model.defer="form.job_city" name="form.job_city"
-            :title="trans('table.columns.job city')" />
+        {{-- <x-dashboard.input-group type="text" wire:model.defer="form.job_city" name="form.job_city"
+            :title="trans('table.columns.job city')" /> --}}
+
+        <x-dashboard.label>{{ trans('table.columns.job city') }}</x-dashboard.label>
+        <select name="job_city" id="job_city" class="form-control" wire:model.defer="form.job_city">
+            @foreach ($jobCities as $city)
+                <option value="{{ $city->id }}">{{ $city->get_title }}</option>
+            @endforeach
+        </select>
+        <x-dashboard.error field="form.job_city" />
     </div>
 
     <div class="col-md-6 col-12 mb-3">

@@ -33,6 +33,10 @@ class JobRequest extends Model
         return $this->belongsTo(JobPost::class, 'job');
     }
 
+    public function jobCity() : BelongsTo {
+        return $this->belongsTo(JobCity::class, 'job_city');
+    }
+
     public function toSearchableArray()
     {
         return [

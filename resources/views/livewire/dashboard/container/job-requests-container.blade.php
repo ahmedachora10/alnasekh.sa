@@ -31,7 +31,7 @@
                 <td>{{ $item->years_of_experience }}</td>
                 <td>{{ $item->excerpt }}</td>
                 <td>{{ $item->jobPost?->get_title ?? '-' }}</td>
-                <td>{{ $item->job_city }}</td>
+                <td>{{ $item->jobCity?->get_title ?? '-' }}</td>
 
                 <td>
                     <a href="{{ asset('storage/' . $item->cv) }}" class="btn btn-sm btn-primary" target="_blank">
@@ -80,7 +80,8 @@
                     <p class="text-nowrap"><i
                             class="bx bx-category bx-sm me-2"></i>{{ $jobRequest?->jobPost?->get_title ?? '-' }}
                     </p>
-                    <p class="text-nowrap"><i class="bx bx-map bx-sm me-2"></i>{{ $jobRequest?->job_city }}</p>
+                    <p class="text-nowrap"><i class="bx bx-map bx-sm me-2"></i>{{ $jobRequest?->jobCity?->get_title }}
+                    </p>
                 </div>
             </div>
 
