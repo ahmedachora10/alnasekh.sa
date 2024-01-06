@@ -2,6 +2,7 @@
 
 use App\Exports\CorpsExport;
 use App\Exports\PDF\EmployeesPDFExport;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
 use App\Models\Corp;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,12 @@ Route::get('/switch-langauge/{locale?}', function ($locale = 'ar') {
 
     return back();
 })->name('switch-language');
+
+Route::get('clients/reviews', function () {
+    return view('reviews');
+})->name('clients.reviews');
+
+Route::post('clients/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 
 require __DIR__.'/auth.php';

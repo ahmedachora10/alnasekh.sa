@@ -67,10 +67,8 @@
                     <x-dashboard.sidebar.link :title="trans('sidebar.sliders')" :link="route('sliders.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.our specials')" :link="route('our-services.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.packages')" :link="route('packages.index')" />
-                    <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" :link="route('subscribers.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.our clients')" :link="route('our-clients.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.headlines')" :link="route('translation.index')" />
-                    <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" :link="route('contact-us.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.statistics')" :link="route('statistics.index')" />
                 @endhasPermission
             </x-dashboard.sidebar.link>
@@ -81,6 +79,10 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" :link="route('job-requests.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.cities')" :link="route('job-cities.index')" />
         </x-dashboard.sidebar.link>
+
+        <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user" :link="route('subscribers.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="user-pin" :link="route('contact-us.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.reviews')" icon="star" :link="route('reviews.index')" />
 
         <!-- Misc -->
         {{-- <li class="menu-item">

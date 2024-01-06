@@ -30,6 +30,7 @@ class Corp extends Model
         'start_date',
         'end_date',
         'has_branches',
+        'send_reminder',
     ];
 
     protected $casts = [

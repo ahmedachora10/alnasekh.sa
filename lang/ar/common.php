@@ -96,5 +96,6 @@ return [
     'new certificate' => 'رخصة جديدة',
 
     'updates and registries' => 'التحديثات والرخص',
-    'job request' => 'طلب الوظيفة'
+    'job request' => 'طلب الوظيفة',
+    'send reminder' => 'ارسال تذكير'
 ];

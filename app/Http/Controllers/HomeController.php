@@ -6,6 +6,7 @@ use App\Models\HeadlineTranslation;
 use App\Models\OurClient;
 use App\Models\OurService;
 use App\Models\Package;
+use App\Models\Review;
 use App\Models\Slider;
 use App\Models\Statistic;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class HomeController extends Controller
         // ");
 
         $statistics = Statistic::all();
+        $reviews = Review::all();
 
-        return view('home', compact('sliders', 'ourServices', 'packages', 'clients', 'statistics', 'headlines'));
+        return view('home', compact('sliders', 'ourServices', 'packages', 'clients', 'statistics', 'headlines', 'reviews'));
     }
 }

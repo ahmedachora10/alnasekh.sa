@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\OurClientController;
 use App\Http\Controllers\Admin\OurServiceController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\RegistryController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
@@ -116,6 +117,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('job-requests', JobRequestsContainer::class)->name('job-requests.index');
     Route::resource('jobs', JobPostController::class);
     Route::resource('job-cities', JobCityController::class);
+    Route::resource('reviews', ReviewController::class)->only(['index', 'destroy']);
 });
 
 

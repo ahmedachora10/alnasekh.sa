@@ -53,12 +53,20 @@
                     </div>
                 @endforeach
 
-            </div>
+                <div class="col-12">
+                    <label class="switch switch-primary my-3">
+                        <input type="checkbox" class="switch-input" name="send_reminder" value="1">
+                        <span class="switch-toggle-slider">
+                            <span class="switch-on"></span>
+                            <span class="switch-off"></span>
+                        </span>
+                        <span class="switch-label">{{ trans('common.send reminder') }}</span>
+                    </label>
+                </div>
 
-
-            <div class="col-12">
-                <x-dashboard.button type="submit" class="btn-primary mt-4" />
-            </div>
+                <div class="col-12">
+                    <x-dashboard.button type="submit" class="btn-primary mt-4" />
+                </div>
         </x-dashboard.cards.sample>
 
     </form>

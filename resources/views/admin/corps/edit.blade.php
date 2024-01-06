@@ -61,6 +61,19 @@
                 @endforeach
                 <x-dashboard.error field="has_branches" />
 
+                <div class="col-12">
+                    <label class="switch switch-primary my-3">
+                        <input type="checkbox" class="switch-input" name="send_reminder" @checked($corp->send_reminder)
+                            value="{{ $corp->send_reminder }}">
+                        <span class="switch-toggle-slider">
+                            <span class="switch-on"></span>
+                            <span class="switch-off"></span>
+                        </span>
+                        <span class="switch-label">{{ trans('common.send reminder') }}</span>
+                    </label>
+                </div>
+
+
             </div>
 
 

@@ -29,4 +29,6 @@ return [
     'testimonials' => 'أراء عملاؤنا',
     'to download the profile' => 'لتحميل البروفايل',
     'click here' => 'اضغط هنا',
+    'reviews' => 'التقييمات',
+    'new review' => 'تقييم جديد',
 ];

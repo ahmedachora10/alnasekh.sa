@@ -10,6 +10,7 @@ use App\Mail\SendReminderEmail;
 use App\Models\Corp;
 use App\Models\CorpBranch;
 use App\Services\UploadFileService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class CorpController extends Controller
@@ -43,7 +44,12 @@ class CorpController extends Controller
     {
         $request->validated();
 
-        $corp = Corp::create($request->safe()->except('image') + ['image' => $this->uploadFileService->store($request->file('image'), 'images/corps')]);
+         $data = $request->safe()->except('image');
+        if(!$request->exists('send_reminder')) {
+            $data['send_reminder'] = false;
+        }
+
+        $corp = Corp::create($data + ['image' => $this->uploadFileService->store($request->file('image'), 'images/corps')]);
 
         if ($request->integer('has_branches') === HasBranches::Yes->value) {
             return redirect()->route('branches.index', ['corp' => $corp, 'target' => 'branches'])
@@ -103,7 +109,12 @@ class CorpController extends Controller
     {
         $request->validated();
 
-        $corp->update($request->safe()->except('image') + ['image' => $this->uploadFileService->update($request->file('image'), $corp->image, 'images/corps')]);
+        $data = $request->safe()->except('image');
+        if(!$request->exists('send_reminder')) {
+            $data['send_reminder'] = false;
+        }
+
+        $corp->update( $data + ['image' => $this->uploadFileService->update($request->file('image'), $corp->image, 'images/corps')]);
         return redirect()->route('corps.index')->with('success', trans('message.update'));
     }
 

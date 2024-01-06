@@ -462,26 +462,45 @@
                         <livewire:store-subscriber />
                     </div>
 
-                    <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="col-lg-4 col-md-8 col-sm-6">
                         <h6 class="footer-title mb-4">{{ trans('front.pages') }}</h6>
-                        <ul class="list-unstyled">
-                            <li class="mb-3">
-                                <a href="{{ route('home') }}" class="footer-link">{{ trans('front.home') }}</a>
-                            </li>
+                        <div class="d-flex">
 
-                            <li class="mb-3">
-                                <a class="footer-link" aria-current="page"
-                                    href="#landingFeatures">{{ trans('front.services') }}</a>
-                            </li>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <a href="{{ route('home') }}" class="footer-link">{{ trans('front.home') }}</a>
+                                </li>
 
-                            <li class="mb-3">
-                                <a class="footer-link" aria-current="page"
-                                    href="#landingPricing">{{ trans('front.packages') }}</a>
-                            </li>
-                        </ul>
+                                <li class="mb-3">
+                                    <a class="footer-link" aria-current="page"
+                                        href="#landingFeatures">{{ trans('front.services') }}</a>
+                                </li>
+
+                                <li class="mb-3">
+                                    <a class="footer-link" aria-current="page"
+                                        href="#landingPricing">{{ trans('front.packages') }}</a>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled ms-5">
+                                <li class="mb-3">
+                                    <a class="footer-link" aria-current="page"
+                                        href="#landingPricing">{{ trans('front.about') }}</a>
+                                </li>
+
+                                <li class="mb-3">
+                                    <a class="footer-link" aria-current="page"
+                                        href="#">{{ trans('front.our websites') }}</a>
+                                </li>
+
+                                <li class="mb-3">
+                                    <a class="footer-link" aria-current="page" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#jobsForm">{{ trans('front.jobs') }}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-4 col-sm-6">
+                    {{-- <div class="col-lg-2 col-md-4 col-sm-6">
                         <h6 class="footer-title mb-4">{{ trans('front.pages') }}</h6>
                         <ul class="list-unstyled">
                             <li class="mb-3">
@@ -499,7 +518,7 @@
                                     data-bs-target="#jobsForm">{{ trans('front.jobs') }}</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
 
                     <div class="col-lg-3 col-md-4">
                         <h6 class="footer-title mb-4">{{ trans('front.to download the profile') }}</h6>
@@ -523,11 +542,7 @@
                 <div class="mb-2 mb-md-0">
                     <span class="footer-text">
                         {!! setting("footer$locale") !!}</span>
-                    <span class="footer-text">©
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                    </span>
+                    <span class="footer-text">©{{ date('Y') }}</span>
                 </div>
                 <div>
                     @if (setting('facebook'))
@@ -584,6 +599,7 @@
     <!-- Include Scripts -->
     <!-- $isFront is used to append the front layout scripts only on the front layout otherwise the variable will be blank -->
     <!-- BEGIN: Vendor JS-->
+    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/dropdown-hover.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/mega-dropdown.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/popper.js') }}"></script>
