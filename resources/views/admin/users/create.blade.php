@@ -8,6 +8,7 @@
 
                 <div class="col-12 mb-3">
                     <x-dashboard.input-group type="file" name="avatar" :title="trans('table.columns.image')" />
+                    <x-size-notice key="user" />
                 </div> {{-- / Name --}}
 
                 <div class="col-md-6 col-12 mb-3">

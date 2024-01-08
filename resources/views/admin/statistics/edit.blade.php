@@ -15,6 +15,7 @@
                     </div>
 
                     <x-dashboard.input-group type="file" name="image" :title="trans('table.columns.image')" />
+                    <x-size-notice key="statistic" />
                 </div>
 
                 <div class="col-md-6 col-12 mb-3">

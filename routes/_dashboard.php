@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\RegistryController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
@@ -118,6 +119,7 @@ Route::middleware(['auth'])->group(function ()
     Route::resource('jobs', JobPostController::class);
     Route::resource('job-cities', JobCityController::class);
     Route::resource('reviews', ReviewController::class)->only(['index', 'destroy']);
+    Route::resource('services', ServiceController::class);
 });
 
 

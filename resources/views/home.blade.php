@@ -167,7 +167,7 @@
     </section>
     <!-- Fun facts: End -->
 
-    @if (true)
+    @if (count($services) > 0)
         <!-- Pricing plans: Start -->
         <section class="section-py bg-body" id="services">
             <div class="container">
@@ -175,11 +175,11 @@
 
                 <div class="row gy-4 pt-lg-3">
                     <!-- Basic Plan: Start -->
-                    @for ($i = 0; $i < 4; $i++)
+                    @foreach ($services as $service)
                         <div class="col-lg-3 col-md-6">
-                            <x-dashboard.cards.service-card />
+                            <x-dashboard.cards.service-card :service="$service" />
                         </div>
-                    @endfor
+                    @endforeach
                     <!-- Basic Plan: End -->
                 </div>
             </div>
@@ -187,24 +187,22 @@
         <!-- Pricing plans: End -->
     @endif
 
-    <!-- : Start -->
+    <!-- CTA: Start -->
     <section id="landingCTA" class="section-py landing-cta p-lg-0 pb-0">
         <div class="container">
             <div class="row align-items-center gy-5 gy-lg-0">
                 <div class="col-lg-6 text-center text-lg-start">
                     <h6 class="h2 text-primary fw-bold mb-1">Ready to Get Started?</h6>
                     <p class="fw-medium mb-4">Start your project with a 14-day free trial</p>
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/payment"
-                        class="btn btn-primary">Get Started</a>
+                    <a href="{{ setting('cta_link') }}" class="btn btn-primary">Get Started</a>
                 </div>
                 <div class="col-lg-6 pt-lg-5 text-center text-lg-end">
-                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/landing-page/cta-dashboard.png"
-                        alt="cta dashboard" class="img-fluid">
+                    <img src="{{ asset(setting('cta_file')) }}" alt="cta dashboard" class="img-fluid">
                 </div>
             </div>
         </div>
     </section>
-    <!-- : End -->
+    <!-- CTA: End -->
 
     <!-- Real customers reviews: Start -->
     @if (count($reviews) > 0)

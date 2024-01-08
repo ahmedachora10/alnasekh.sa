@@ -97,5 +97,6 @@ return [
 
     'updates and registries' => 'التحديثات والرخص',
     'job request' => 'طلب الوظيفة',
-    'send reminder' => 'ارسال تذكير'
+    'send reminder' => 'ارسال تذكير',
+    'order now' => 'اطلب الان',
 ];

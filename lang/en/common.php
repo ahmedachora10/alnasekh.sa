@@ -48,4 +48,6 @@ return [
     'start at' => 'start at',
     'remember me' => 'Remember Me',
     'sign in' => 'Sign in',
+
+    'order now' => 'Order Now',
 ];

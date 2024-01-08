@@ -70,7 +70,8 @@ return [
                 'label' => 'Contact Image',
                 'rules' => 'nullable|image',
                 'class' => '',
-                'value' => ''
+                'value' => '',
+                'dimension' => 'contact_image',
 
             ],
             [
@@ -190,7 +191,8 @@ return [
                 'label' => 'Logo',
                 'rules' => 'nullable|image',
                 'class' => '',
-                'value' => ''
+                'value' => '',
+                'dimension' => 'logo',
 
             ],
             [
@@ -260,6 +262,37 @@ return [
                 'rules' => 'nullable|file|mimes:pdf',
                 'class' => '',
                 'value' => ''
+
+            ],
+        ]
+    ],
+
+    'cta' => [
+
+        'title' => 'CTA',
+        'desc' => '',
+        'icon' => 'menu-icon tf-icons bx bx-file',
+
+        'elements' => [
+            [
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'cta_file_link',
+                'label' => 'link',
+                'rules' => 'nullable|string',
+                'class' => '',
+                'value' => ''
+
+            ],
+            [
+                'type' => 'file',
+                'data' => 'file',
+                'name' => 'cta_file',
+                'label' => 'file',
+                'rules' => 'nullable|file',
+                'class' => '',
+                'value' => '',
+                'dimension' => 'cta'
 
             ],
         ]

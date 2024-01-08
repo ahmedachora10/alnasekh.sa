@@ -83,6 +83,7 @@
         <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user" :link="route('subscribers.index')" />
         <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="user-pin" :link="route('contact-us.index')" />
         <x-dashboard.sidebar.link :title="trans('sidebar.reviews')" icon="star" :link="route('reviews.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="server" :link="route('services.index')" />
 
         <!-- Misc -->
         {{-- <li class="menu-item">
