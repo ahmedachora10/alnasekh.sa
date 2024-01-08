@@ -116,7 +116,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('contact-us', ContactUsContainer::class)->name('contact-us.index');
     Route::resource('statistics', StatisticController::class);
     Route::get('job-requests', JobRequestsContainer::class)->name('job-requests.index');
-    Route::resource('jobs', JobPostController::class);
+    Route::resource('requests/jobs', JobPostController::class);//->parameter('translation', 'headlineTranslation');
     Route::resource('job-cities', JobCityController::class);
     Route::resource('reviews', ReviewController::class)->only(['index', 'destroy']);
     Route::resource('services', ServiceController::class);
