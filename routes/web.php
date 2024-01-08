@@ -58,6 +58,10 @@ Route::get('clients/reviews', function () {
     return view('reviews');
 })->name('clients.reviews');
 
+Route::get('/jobs/request', function () {
+    return view('job');
+})->name('jobs.request');
+
 Route::post('clients/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 

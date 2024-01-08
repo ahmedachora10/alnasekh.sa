@@ -493,8 +493,8 @@
                                 </li>
 
                                 <li class="mb-3">
-                                    <a class="footer-link" aria-current="page" href="#" data-bs-toggle="modal"
-                                        data-bs-target="#jobsForm">{{ trans('front.jobs') }}</a>
+                                    <a class="footer-link" aria-current="page"
+                                        href="{{ route('jobs.request') }}">{{ trans('front.jobs') }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -590,10 +590,6 @@
             </div>
         </div>
     </footer>
-
-    <x-dashboard.modals.modal1 id="jobsForm" :title="trans('common.job request')">
-        <livewire:store-job-request />
-    </x-dashboard.modals.modal1>
 
 
     <!-- Include Scripts -->
