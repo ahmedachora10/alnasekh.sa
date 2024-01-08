@@ -1,13 +1,9 @@
 <?php
 
-use App\Exports\CorpsExport;
-use App\Exports\PDF\EmployeesPDFExport;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
 use App\Models\Corp;
 use Illuminate\Support\Facades\Route;
-use Maatwebsite\Excel\Excel as ExcelFormat;
-use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,9 +37,9 @@ Route::get('mail', function () {
 });
 
 Route::controller(HomeController::class)
-->group(function () {
-    Route::get('/', 'index')->name('home');
-});
+    ->group(function () {
+        Route::get('/', 'index')->name('home');
+    });
 
 Route::get('/switch-langauge/{locale?}', function ($locale = 'ar') {
 
@@ -58,13 +54,12 @@ Route::get('clients/reviews', function () {
     return view('reviews');
 })->name('clients.reviews');
 
-Route::get('/jobs/request', function () {
+Route::get('/jobs', function () {
     return view('job');
 })->name('jobs.request');
 
 Route::post('clients/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
+require __DIR__ . '/auth.php';
 
-require __DIR__.'/auth.php';
-
-require __DIR__.'/_dashboard.php';
+require __DIR__ . '/_dashboard.php';
