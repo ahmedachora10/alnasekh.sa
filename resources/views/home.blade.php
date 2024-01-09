@@ -276,8 +276,7 @@
                                     <div class="text-center">
                                         <a href="{{ $item->link }}" target="_blank">
                                             <img src="{{ asset($item->thumbnail) }}" alt="client logo"
-                                                class="client-logo d-block mx-auto"
-                                                style="min-height: 4.5rem !important">
+                                                class="client-logo d-block mx-auto" style="height: 5.5rem !important">
                                         </a>
                                     </div>
                                 </div>

@@ -12,6 +12,7 @@ use App\Models\Slider;
 use App\Models\Statistic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -23,12 +24,6 @@ class HomeController extends Controller
         $headlines = collect(HeadlineTranslation::all());
 
         view()->share('title', '');
-
-        // $counts = DB::select("
-        //     SELECT
-        //         (SELECT COUNT(*) FROM users) as users_count,
-        //         (SELECT COUNT(*) FROM corps) as corps_count
-        // ");
 
         $statistics = Statistic::all();
         $reviews = Review::all();

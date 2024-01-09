@@ -17,7 +17,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon"
-        href="{{ asset(str_replace('public/', 'storage/', setting('icon'))) ?? asset('assets/img/favicon/favicon.ico') }}" />
+        href="{{ asset(setting('icon')) ?? asset('assets/img/favicon/favicon.ico') }}" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,9 +32,6 @@
     <link href="{{ asset('assets/fontawesome/solid.css') }}" rel="stylesheet">
 
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon"
-        href="{{ asset(str_replace('public/', 'storage/', setting('icon'))) ?? asset('assets/img/favicon/favicon.ico') }}" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
