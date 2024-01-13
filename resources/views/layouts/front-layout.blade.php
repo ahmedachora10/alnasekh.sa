@@ -523,8 +523,8 @@
                             $profilePdf = app()->getLocale() === 'en' ? 'profile_file_en' : 'profile_file';
                         @endphp
                         <a href="{{ asset(setting($profilePdf)) }}"
-                            download="profile.{{ str(setting('profile_file'))->afterLast('.') }}"
-                            class="d-block w-auto footer-link mb-3 pb-2 btn btn-outline-danger">
+                            @if (setting($profilePdf) != '') download="profile.{{ str(setting('profile_file'))->afterLast('.') }}" @endif
+                            class="d-block w-auto footer-link mb-3 pb-2 btn btn-outline-secondary">
                             {{ trans('front.click here') }}
                         </a>
 
