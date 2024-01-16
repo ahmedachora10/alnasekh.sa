@@ -11,7 +11,7 @@ class Slider extends Model
 {
     use HasFactory, ThumbnailModelAttribute;
 
-    protected $fillable = ['title', 'title_en', 'delay', 'image', 'image_en', 'sort'];
+    protected $fillable = ['title', 'title_en', 'delay', 'delay_en', 'image', 'image_en', 'sort'];
 
     protected static function boot()
     {
@@ -24,6 +24,10 @@ class Slider extends Model
 
     public function getGetTitleAttribute() {
         return app()->getLocale() === 'en' ? $this->title_en : $this->title;
+    }
+
+    public function getGetDelayAttribute() {
+        return app()->getLocale() === 'en' ? $this->delay_en : $this->delay;
     }
 
     public function getGetThumbnailAttribute() {

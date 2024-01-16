@@ -17,6 +17,8 @@ return [
         'phone' => 'Phone',
         'image en' => 'Image (english)',
 
+        'delay en' => 'Delay (english)',
+
         'title' => 'Title',
         'title_en' => 'Title (english)',
         'subtitle' => 'SubTitle',

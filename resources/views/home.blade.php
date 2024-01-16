@@ -15,7 +15,7 @@
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         @foreach ($sliders as $item)
-                            <div class="swiper-slide" data-swiper-autoplay="{{ $item->delay * 1000 ?? 1 }}">
+                            <div class="swiper-slide" data-swiper-autoplay="{{ $item->get_delay * 1000 ?? 1 }}">
                                 <div data-src="{{ asset($item->get_thumbnail) }}" alt="slider-{{ $item->id }}"
                                     class="img" style="background-image: url({{ asset($item->get_thumbnail) }})">
                                 </div>

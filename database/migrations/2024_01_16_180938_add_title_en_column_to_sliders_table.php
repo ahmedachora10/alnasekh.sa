@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('sliders', function (Blueprint $table) {
             $table->string('image_en')->nullable()->after('image');
             $table->string('title_en')->nullable()->after('title');
+            $table->string('delay_en')->nullable()->after('delay');
         });
     }
 
@@ -25,6 +26,7 @@ return new class extends Migration
         Schema::table('sliders', function (Blueprint $table) {
             $table->dropColumn('image_en');
             $table->dropColumn('title_en');
+            $table->dropColumn('delay_en');
 
         });
     }
