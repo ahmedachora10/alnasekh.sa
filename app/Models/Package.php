@@ -31,6 +31,6 @@ class Package extends Model
     }
 
     public function getGetPropertiesAttribute() {
-        return app()->getLocale() === 'en' ? $this->properties_en : $this->properties;
+        return app()->getLocale() === 'en' ? $this->properties_en ?? [] : $this->properties ?? [];
     }
 }
