@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('packages', function (Blueprint $table) {
             $table->string('title_en')->nullable()->after('title');
-            $table->text('properties_en')->default('[]')->after('properties');
+            $table->text('properties_en')->nullable()->after('properties');
         });
     }
 
