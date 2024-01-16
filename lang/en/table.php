@@ -14,7 +14,11 @@ return [
         'password' => 'Password',
         'password confirmation' => 'Confirme Password',
 
-        'phone' => 'الهاتف',
+        'phone' => 'Phone',
+
+        'title' => 'Title',
+        'title_en' => 'Title (english)',
+        'subtitle' => 'SubTitle',
 
         'has branches' => 'Has Branches?',
         'start date' => 'Start Date',

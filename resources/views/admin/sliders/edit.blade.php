@@ -23,8 +23,12 @@
                         :title="trans('table.columns.delay')" />
                 </div>
 
-                <div class="col-12 mb-3">
+                <div class="col-12 col-md-6 mb-3">
                     <x-dashboard.input-group type="text" :value="$slider->title" name="title" :title="trans('table.columns.title')" />
+                </div>
+
+                <div class="col-md-6 col-12 mb-3">
+                    <x-dashboard.input-group type="text" :value="$slider->title_en" name="title_en" :title="trans('table.columns.title_en')" />
                 </div>
 
                 <div class="col-12">

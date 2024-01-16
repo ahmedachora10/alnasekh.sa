@@ -15,8 +15,12 @@
                     <x-dashboard.input-group type="number" min="1" name="delay" :title="trans('table.columns.delay')" />
                 </div>
 
-                <div class="col-12 mb-3">
+                <div class="col-md-6 col-12 mb-3">
                     <x-dashboard.input-group type="text" name="title" :title="trans('table.columns.title')" />
+                </div>
+
+                <div class="col-md-6 col-12 mb-3">
+                    <x-dashboard.input-group type="text" name="title_en" :title="trans('table.columns.title_en')" />
                 </div>
 
                 <div class="col-12">
