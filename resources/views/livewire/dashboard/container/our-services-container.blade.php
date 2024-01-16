@@ -14,8 +14,8 @@
                 <td>{{ $item->id }}</td>
                 <td><img src="{{ asset($item->thumbnail) }}" alt="logo" width="40" height="40"
                         class="rounded-circle"></td>
-                <td>{{ $item->title }}</td>
-                <td>{{ $item->description }}</td>
+                <td>{{ $item->get_title }}</td>
+                <td>{{ $item->get_description }}</td>
                 <td>
                     <x-dashboard.actions.container>
                         <x-dashboard.actions.edit

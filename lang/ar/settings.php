@@ -31,4 +31,8 @@ return [
     'contact account' => 'معلومات التواصل',
     'email' => 'البريد الالكترني',
     'phone number' => 'رقم الهاتف',
+
+    'all the general settings for application.' => 'كل الاعدادات العامة الخاصة بالتطبيق',
+    'file' => 'ملف',
+    'link' => 'الرابط',
 ];

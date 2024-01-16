@@ -15,7 +15,7 @@
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         @foreach ($sliders as $item)
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" data-swiper-autoplay="{{ $item->delay * 1000 ?? 1 }}">
                                 <div data-src="{{ asset($item->thumbnail) }}" alt="slider-{{ $item->id }}"
                                     class="img" style="background-image: url({{ asset($item->thumbnail) }})">
                                 </div>
@@ -47,12 +47,13 @@
                     @foreach ($ourServices as $item)
                         <div class="col-lg-4 col-sm-6 text-center features-icon-box">
                             <div class="text-center mb-3">
-                                <img src="{{ asset($item->thumbnail) }}" alt="laptop charging">
+                                <img src="{{ asset($item->thumbnail) }}" alt="laptop charging" width="65"
+                                    height="65">
                             </div>
-                            <h5 class="mb-3">{{ $item->title }}</h5>
+                            <h5 class="mb-3">{{ $item->get_title }}</h5>
                             @if ($item->description)
                                 <p class="features-icon-description">
-                                    {{ $item->description }}
+                                    {{ $item->get_description }}
                                 </p>
                             @endif
                         </div>
@@ -94,9 +95,9 @@
                                 <div class="card-header">
                                     <div class="text-center">
                                         <img src="{{ asset($item->thumbnail) }}" alt="paper airplane icon"
-                                            class="mb-4 pb-2 scaleX-n1-rtl">
+                                            class="mb-4 pb-2 scaleX-n1-rtl" width="88" height="96">
                                         <h4 class="mb-1 {{ $item->yearly_price == 0 ? 'fs-2' : '' }}">
-                                            {{ $item->title }}</h4>
+                                            {{ $item->get_title }}</h4>
                                         <div class="d-flex align-items-center justify-content-center">
                                             @if ($item->yearly_price == 0)
                                                 <span class="h5 text-primary fw-bold mb-0">
@@ -118,7 +119,7 @@
                                 </div>
                                 <div class="card-body d-flex flex-column align-items-start justify-content-between">
                                     <ul class="list-unstyled">
-                                        @foreach ($item->properties as $value)
+                                        @foreach ($item->get_properties as $value)
                                             <li>
                                                 <h5 class="fs-6">
                                                     @if ($item->yearly_price != 0)
@@ -222,7 +223,8 @@
                     <div class="col-md-6 col-lg-5 col-xl-3">
                         <x-front.headline :headline="$getHeadline('testimonials', 'title')" :subHeadline="$getHeadline('testimonials', 'subtitle')" :description="$getHeadline('testimonials', 'description')" />
                         <div class="landing-reviews-btns d-flex align-items-center gap-3">
-                            <button id="reviews-previous-btn" class="btn btn-label-primary reviews-btn" type="button">
+                            <button id="reviews-previous-btn" class="btn btn-label-primary reviews-btn"
+                                type="button">
                                 <i class="bx bx-chevron-left bx-sm"></i>
                             </button>
                             <button id="reviews-next-btn" class="btn btn-label-primary reviews-btn" type="button">
@@ -439,7 +441,7 @@
                 centeredSlides: true,
 
                 autoplay: {
-                    delay: 2500,
+                    // delay: 2500,
                     disableOnInteraction: true,
                 },
 

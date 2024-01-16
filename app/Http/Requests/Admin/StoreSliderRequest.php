@@ -15,6 +15,7 @@ class StoreSliderRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string'],
+            'delay' => ['nullable', 'integer'],
             'image' => strtolower($this->method()) == 'put' ? 'nullable|image' : 'required|image',
         ];
     }

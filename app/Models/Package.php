@@ -10,10 +10,11 @@ class Package extends Model
 {
     use HasFactory, ThumbnailModelAttribute;
 
-    protected $fillable = ['title', 'image', 'yearly_price', 'properties', 'sort'];
+    protected $fillable = ['title', 'title_en', 'image', 'yearly_price', 'properties', 'properties_en', 'sort'];
 
     protected $casts = [
-        'properties' => 'array'
+        'properties' => 'array',
+        'properties_en' => 'array',
     ];
 
     protected static function boot()
@@ -23,5 +24,13 @@ class Package extends Model
         static::created(function (Package $model) {
             $model->update(['sort' => $model->id]);
         });
+    }
+
+    public function getGetTitleAttribute() {
+        return app()->getLocale() === 'en' ? $this->title_en : $this->title;
+    }
+
+    public function getGetPropertiesAttribute() {
+        return app()->getLocale() === 'en' ? $this->properties_en : $this->properties;
     }
 }

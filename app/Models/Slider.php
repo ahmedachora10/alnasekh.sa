@@ -10,7 +10,7 @@ class Slider extends Model
 {
     use HasFactory, ThumbnailModelAttribute;
 
-    protected $fillable = ['title', 'image', 'sort'];
+    protected $fillable = ['title', 'delay', 'image', 'sort'];
 
     protected static function boot()
     {

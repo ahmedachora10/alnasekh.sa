@@ -6,6 +6,8 @@ use Livewire\Component;
 
 class AddProperties extends Component
 {
+    public string $fieldName = 'properties';
+
     public array $properties = [];
 
     public string $property = '';

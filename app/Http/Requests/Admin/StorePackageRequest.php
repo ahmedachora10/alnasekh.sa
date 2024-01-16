@@ -15,7 +15,9 @@ class StorePackageRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
+            'title_en' => 'nullable|string',
             'properties' => 'required|array',
+            'properties_en' => 'nullable|array',
             'yearly_price' => 'required|integer|min:0',
             'image' => strtolower($this->method()) == 'put' ? 'nullable|image' : 'required|image',
         ];

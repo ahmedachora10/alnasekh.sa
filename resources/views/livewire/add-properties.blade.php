@@ -14,7 +14,7 @@
                 <a href="#!" wire:click="remove('{{ $item }}')">
                     <i class="bx bx-trash text-danger" style="font-size: 14px"></i>
                 </a>
-                <input type="hidden" value="{{ $item }}" name="properties[]">
+                <input type="hidden" value="{{ $item }}" name="{{ $fieldName }}[]">
             </div>
         @endforeach
     </div>

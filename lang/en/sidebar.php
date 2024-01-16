@@ -2,6 +2,8 @@
 
 return [
     'dashboard' => 'Dashboard',
+    'home' => 'Dashboard',
+    'notifications' => 'Notifications',
     'general settings' => 'General Settings',
     'settings' => 'Settings',
     'users' => 'Users',
@@ -11,4 +13,19 @@ return [
     'branches' => 'Branches',
     'monthly quarterly updates' => 'Monthly, Quarterly Updates',
     'registries' => 'Registries',
+    'all settings' => 'General Settings',
+    'sliders' => 'Sliders',
+    'our services' => 'Our Services',
+    'our specials' => 'Our Specials',
+    'packages' => 'Packages',
+    'subscribers' => 'Subscribers',
+    'our clients' => 'Our Clients',
+    'headlines' => 'Headlines',
+    'contact us' => 'Contact Us',
+    'statistics' => 'Statistics',
+    'job requests' => 'Job Requests',
+    'jobs' => 'Jobs',
+    'cities' => 'Cities',
+    'reviews' => 'Reviews',
+    'services' => 'Services',
 ];

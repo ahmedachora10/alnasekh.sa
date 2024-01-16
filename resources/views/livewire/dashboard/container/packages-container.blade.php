@@ -14,7 +14,7 @@
                 <td>{{ $item->id }}</td>
                 <td><img src="{{ asset($item->thumbnail) }}" alt="logo" width="40" height="40"
                         class="rounded-circle"></td>
-                <td>{{ $item->title }}</td>
+                <td>{{ $item->get_title }}</td>
                 <td><x-dashboard.badge color="info">{{ $item->yearly_price }}</x-dashboard.badge></td>
                 <td>
                     <x-dashboard.actions.container>

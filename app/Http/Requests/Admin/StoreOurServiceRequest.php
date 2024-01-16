@@ -15,7 +15,9 @@ class StoreOurServiceRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
+            'title_en' => 'nullable|string',
             'description' => 'nullable|string',
+            'description_en' => 'nullable|string',
             'image' => strtolower($this->method()) == 'put' ? 'nullable|image' : 'required|image',
         ];
     }

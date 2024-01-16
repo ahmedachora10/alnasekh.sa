@@ -35,7 +35,16 @@ return [
     'branches' => 'Branches',
     'employees' => 'Employees',
     'client' => 'Client',
+    'completed' => 'Completed',
+    'uncompleted' => 'Incomplete',
+    'registries' => 'Registries',
+    'certificates' => 'Certificates',
+    'subscriptions' => 'Subscriptions',
+    'records' => 'Records',
+    'record' => 'Record',
     'corp informations' => 'Corp Informations',
+
+    'there is more branch' => 'There Is More Branch?',
 
     'yes' => 'Yes',
     'no' => 'No',
@@ -48,6 +57,40 @@ return [
     'start at' => 'start at',
     'remember me' => 'Remember Me',
     'sign in' => 'Sign in',
+
+    'almost finished' => 'Almost Finished',
+    'finished' => 'finished',
+    'valid' => 'valid',
+
+    'update record' => 'Update Record',
+    'update certificate' => 'Update Certificate',
+
+    'remember me' => 'Remember Me',
+    'sign in' => 'Sign In',
+
+    'corp details' => 'Corp Details',
+    'reports' => 'Reports',
+    'new report' => 'New Report',
+
+    'user management' => 'User Management',
+    'setting management' => 'Setting Management',
+    'corp management' => 'Corp Management',
+    'role management' => 'Role Management',
+    'registry management' => 'Registry Management',
+    'monthly-quarterly management' => 'Monthly & Quarterly Updates Management',
+    'dashboard management' => 'Dashboard Management',
+
+    'civil defense permit' => 'Civil Defense Permit',
+    'update civil defense permit' => 'Update Civil Defense Permit',
+
+    'new subscription' => 'New Subscription',
+    'dark' => 'Dark Mode',
+    'light' => 'Light Mode',
+    'new certificate' => 'New Certificate',
+
+    'updates and registries' => 'Updates & Registries',
+    'job request' => 'Job Request',
+    'send reminder' => 'Send Reminder',
 
     'order now' => 'Order Now',
 ];
