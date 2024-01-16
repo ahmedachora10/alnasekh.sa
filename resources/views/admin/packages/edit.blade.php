@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="col-10 mx-auto mb-3">
-                                <livewire:add-properties fieldName="properties_en" :properties="$package->properties_en" />
+                                <livewire:add-properties fieldName="properties_en" :properties="$package->properties_en ?? []" />
                             </div>
 
                             <div class="col-12">

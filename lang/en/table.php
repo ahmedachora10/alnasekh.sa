@@ -14,6 +14,8 @@ return [
         'password' => 'Password',
         'password confirmation' => 'Confirme Password',
 
+        'phone' => 'الهاتف',
+
         'has branches' => 'Has Branches?',
         'start date' => 'Start Date',
         'end date' => 'End Date',
