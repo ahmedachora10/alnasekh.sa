@@ -10,7 +10,7 @@
         <!-- Hero: Start -->
         <section id="hero-animation" style="height: 100%;">
             <div id="landingHero" class="section-py landing-hero position-relative" style="padding: 0 !important;">
-                <div class="swiper" id="swiper">
+                <div class="swiper" id="swiper" dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}">
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
                         <!-- Slides -->
