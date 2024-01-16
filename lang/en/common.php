@@ -8,6 +8,10 @@ return [
     'cancel' => 'Cancel',
     'submit' => 'Submit',
     'save' => 'Save',
+    'export' => 'Export',
+    'print' => 'Print',
+    'skip' => 'Skip',
+    'send' => 'Send',
 
     'my profile' => 'My Profile',
     'log out' => 'Log Out',
