@@ -18,6 +18,7 @@ class StoreSliderRequest extends FormRequest
             'title_en' => ['nullable', 'string'],
             'delay' => ['nullable', 'integer'],
             'image' => strtolower($this->method()) == 'put' ? 'nullable|image' : 'required|image',
+            'image_en' => strtolower($this->method()) == 'put' ? 'nullable|image' : 'required|image',
         ];
     }
 }

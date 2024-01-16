@@ -35,7 +35,10 @@ class SliderController extends Controller
     {
         $request->validated();
 
-        Slider::create($request->safe()->except('image') + ['image' => $this->uploadFileService->store($request->image, 'images/sliders')]);
+        Slider::create($request->safe()->except(['image', 'image_en']) + [
+            'image' => $this->uploadFileService->store($request->image, 'images/sliders'),
+            'image_en' => $this->uploadFileService->store($request->image_en, 'images/sliders')
+        ]);
 
         return redirect()->route('sliders.index')->with('success', trans('message.create'));
     }
@@ -63,7 +66,10 @@ class SliderController extends Controller
     {
         $request->validated();
 
-        $slider->update($request->safe()->except('image') + ['image' => $this->uploadFileService->update($request->image, $slider->image, 'images/sliders')]);
+        $slider->update($request->safe()->except(['image', 'image_en']) + [
+            'image' => $this->uploadFileService->update($request->image, $slider->image, 'images/sliders'),
+            'image_en' => $this->uploadFileService->update($request->image_en, $slider->image_en, 'images/sliders'),
+        ]);
 
         return redirect()->route('sliders.index')->with('success', trans('message.update'));
     }
@@ -74,6 +80,7 @@ class SliderController extends Controller
     public function destroy(Slider $slider)
     {
         $this->uploadFileService->delete($slider->image);
+        $this->uploadFileService->delete($slider->image_en);
         $slider->delete();
 
         return redirect()->route('sliders.index')->with('success', trans('message.delete'));

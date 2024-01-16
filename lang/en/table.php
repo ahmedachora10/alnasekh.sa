@@ -15,6 +15,7 @@ return [
         'password confirmation' => 'Confirme Password',
 
         'phone' => 'Phone',
+        'image en' => 'Image (english)',
 
         'title' => 'Title',
         'title_en' => 'Title (english)',
