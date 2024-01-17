@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
 use App\Models\Corp;
+use App\Models\Package;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +58,10 @@ Route::get('clients/reviews', function () {
 Route::get('/jobs', function () {
     return view('job');
 })->name('jobs.request');
+
+Route::get('/packages/{package}/request', function (Package $package) {
+    return view('package-request', compact('package'));
+})->name('packages.request');
 
 Route::post('clients/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 

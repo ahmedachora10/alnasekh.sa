@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\ThumbnailModelAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Package extends Model
 {
@@ -24,6 +25,10 @@ class Package extends Model
         static::created(function (Package $model) {
             $model->update(['sort' => $model->id]);
         });
+    }
+
+    public function subscribeRequests() : HasMany {
+        return $this->hasMany(SubscribePackageRequest::class);
     }
 
     public function getGetTitleAttribute() {

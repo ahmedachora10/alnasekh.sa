@@ -28,4 +28,5 @@ return [
     'cities' => 'المدن',
     'reviews' => 'التقييمات',
     'services' => 'الخدمات',
+    'package requests' => 'طلبات الاشتراك',
 ];

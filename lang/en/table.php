@@ -125,6 +125,17 @@ return [
 
 
         'delay' => 'Delay',
+        'delay en' => 'Delay (second Image)',
+
+        'company size' => 'Company Size',
+        'company activity' => 'Company Activity',
+        'number of resident employees' => 'Number Of Resident Employees',
+        'number of suadi employees' => 'Number Of Suadi Employees',
+        'total employees' => 'Total Employees',
+        'company headquarters' => 'Company Headquarters',
+        'company type' => 'Company Type',
+        'company city' => 'Company City',
+        'number of branches' => 'Number Of Branches',
     ],
     'empty' => 'No Records'
 ];

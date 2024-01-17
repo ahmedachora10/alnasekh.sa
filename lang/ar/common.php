@@ -99,4 +99,6 @@ return [
     'job request' => 'طلب الوظيفة',
     'send reminder' => 'ارسال تذكير',
     'order now' => 'اطلب الان',
+    'sar' => 'ر.س',
+    'subscribe package request' => 'طلب الاشتراك',
 ];

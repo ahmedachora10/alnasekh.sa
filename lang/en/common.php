@@ -97,4 +97,8 @@ return [
     'send reminder' => 'Send Reminder',
 
     'order now' => 'Order Now',
+
+    'sar' => 'SAR',
+
+    'subscribe package request' => 'Subscribe Request',
 ];

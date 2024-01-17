@@ -66,7 +66,6 @@
                 @hasPermission('dashboard.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.sliders')" :link="route('sliders.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.our specials')" :link="route('our-services.index')" />
-                    <x-dashboard.sidebar.link :title="trans('sidebar.packages')" :link="route('packages.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.our clients')" :link="route('our-clients.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.headlines')" :link="route('translation.index')" />
                     <x-dashboard.sidebar.link :title="trans('sidebar.statistics')" :link="route('statistics.index')" />
@@ -78,6 +77,11 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" :link="route('jobs.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" :link="route('job-requests.index')" />
             <x-dashboard.sidebar.link :title="trans('sidebar.cities')" :link="route('job-cities.index')" />
+        </x-dashboard.sidebar.link>
+
+        <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" link="#" :hasSubMenu="true">
+            <x-dashboard.sidebar.link :title="trans('sidebar.packages')" :link="route('packages.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.package requests')" :link="route('packages.requests')" />
         </x-dashboard.sidebar.link>
 
         <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user" :link="route('subscribers.index')" />

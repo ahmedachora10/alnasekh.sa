@@ -28,4 +28,6 @@ return [
     'cities' => 'Cities',
     'reviews' => 'Reviews',
     'services' => 'Services',
+
+    'package requests' => 'Subscription Requests',
 ];

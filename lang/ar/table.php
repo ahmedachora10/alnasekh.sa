@@ -120,6 +120,17 @@ return [
 
         'delay' => 'وقت التأخير',
         'delay en' => 'وقت التأخير (الصورة الثانية)',
+
+        'company size' => 'حجم الشركة',
+        'company activity' => 'نشاط الشركة',
+        'number of resident employees' => 'عدد الموظفين المقيمين',
+        'number of suadi employees' => 'عدد الموظفين السعوديين',
+        'total employees' => 'اجمالي الموظفين',
+        'company headquarters' => 'مقر الشركة',
+        'company type' => 'نوع الشركة',
+        'company city' => 'مدينة الشركة',
+        'number of branches' => 'عدد الفروع',
+
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
 ];

@@ -260,6 +260,16 @@ return [
         'company_name' => 'اسم الشركة',
         'company_name_en' => 'اسم الشركة',
 
+        'company_size' => 'حجم الشركة',
+        'company_activity' => 'نشاط الشركة',
+        'number_of_resident_employees' => 'عدد الموظفين المقيمين',
+        'number_of_suadi_employees' => 'عدد الموظفين السعوديين',
+        'total_employees' => 'اجمالي الموظفين',
+        'company_headquarters' => 'مقر الشركة',
+        'company_type' => 'نوع الشركة',
+        'company_city' => 'مدينة الشركة',
+        'number_of_branches' => 'عدد الفروع',
+
     ],
 
 ];

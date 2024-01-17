@@ -105,9 +105,9 @@
                                                 </span>
                                             @else
                                                 <span
-                                                    class="price-monthly h4 text-primary fw-bold mb-0 d-none">{{ $item->yearly_price }}ر.س</span>
+                                                    class="price-monthly h4 text-primary fw-bold mb-0 d-none">{{ $item->yearly_price }}{{ trans('common.sar') }}</span>
                                                 <span
-                                                    class="price-yearly h4 text-primary fw-bold mb-0">{{ $item->yearly_price }}ر.س</span>
+                                                    class="price-yearly h4 text-primary fw-bold mb-0">{{ $item->yearly_price }}{{ trans('common.sar') }}</span>
                                                 <sub class="h6 text-muted mb-0 ms-1">/{{ trans('front.year') }}</sub>
                                             @endif
                                         </div>
@@ -138,7 +138,7 @@
                                             <a href="#"
                                                 class="btn btn-label-primary">{{ trans('front.contact us') }}</a>
                                         @else
-                                            <a href="#"
+                                            <a href="{{ route('packages.request', $item) }}"
                                                 class="btn btn-label-primary">{{ trans('front.get started') }}</a>
                                         @endif
                                     </div>
