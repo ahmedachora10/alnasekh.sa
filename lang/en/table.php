@@ -5,6 +5,7 @@ return [
         'id' => 'ID',
         'name' => 'Name',
         'email' => 'Email',
+        'email address' => 'Email Address',
         'description' => 'Description',
         'image' => 'Image',
         'role' => 'Role',
@@ -134,7 +135,7 @@ return [
         'total employees' => 'Total Employees',
         'company headquarters' => 'Company Headquarters',
         'company type' => 'Company Type',
-        'company city' => 'Company City',
+        'company city' => 'City of the Company',
         'number of branches' => 'Number Of Branches',
     ],
     'empty' => 'No Records'
