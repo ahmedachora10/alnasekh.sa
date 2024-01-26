@@ -24,6 +24,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class DateReminder implements ShouldQueue
 {
@@ -43,6 +44,8 @@ class DateReminder implements ShouldQueue
     public function handle(): void
     {
         $admins = User::whereHasRole('admin')->get();
+
+        Storage::disk('public')->put('tests.txt', now());
 
         // Corps
         foreach (Corp::with('user')->get() as $item) {
