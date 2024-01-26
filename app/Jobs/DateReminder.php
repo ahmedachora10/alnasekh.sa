@@ -45,8 +45,6 @@ class DateReminder implements ShouldQueue
     {
         $admins = User::whereHasRole('admin')->get();
 
-        Storage::disk('public')->put('tests.txt', now());
-
         // Corps
         foreach (Corp::with('user')->get() as $item) {
             $status = status_handler($item->end_date);
