@@ -19,7 +19,7 @@ class NotificationsContainer extends Component
     public string $filterBy = 'unread';
 
     public function makeItAllRead() {
-        auth()->user()->unreadNotifications->markAsRead();
+        auth()->user()->unreadNotifications()->where('type', 'App\Notifications\UserActionNotification')->update(['read_at' => now()]);
     }
 
     public function makeItRead($notification) {
@@ -37,6 +37,7 @@ class NotificationsContainer extends Component
     {
         if($this->theme == 'card') {
             $notify = auth()->user()->notifications()
+            ->where('type', 'App\Notifications\UserActionNotification')
             ->when($this->filterBy === $this->filters[0], function ($query) {
                 $query->whereNotNull('read_at');
             })->when($this->filterBy === $this->filters[1], function ($query) {
@@ -48,8 +49,8 @@ class NotificationsContainer extends Component
             ])->layout('layouts.app');
         } else {
             return view('livewire.dashboard.container.notifications-container', [
-                'notifications' => auth()->user()->unreadNotifications()->latest()->paginate(10),
-                'unreadNotifications' => auth()->user()->unreadNotifications()->count()
+                'notifications' => auth()->user()->unreadNotifications()->where('type', 'App\Notifications\UserActionNotification')->latest()->paginate(10),
+                'unreadNotifications' => auth()->user()->unreadNotifications()->where('type', 'App\Notifications\UserActionNotification')->count()
             ]);
         }
     }

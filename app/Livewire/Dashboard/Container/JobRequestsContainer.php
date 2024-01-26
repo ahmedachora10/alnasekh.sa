@@ -3,6 +3,7 @@
 namespace App\Livewire\Dashboard\Container;
 
 use App\Models\JobRequest;
+use App\Models\User;
 use App\Services\UploadFileService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,12 @@ class JobRequestsContainer extends Component
     public ?JobRequest $jobRequest = null;
 
     public string $search = '';
+
+    public function mount() {
+        if(auth()->user()->hasRole('admin')) {
+            auth()->user()->unreadnotifications()->whereJsonContains('data->model',JobRequest::class)?->update(['read_at' => now()]);
+        }
+    }
 
     public function delete(JobRequest $jobRequest) {
 

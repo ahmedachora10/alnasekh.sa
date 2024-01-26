@@ -17,6 +17,12 @@ class SubscribePackageRequestsContainer extends Component
 
     public string $search = '';
 
+    public function mount() {
+        if(auth()->user()->hasRole('admin')) {
+            auth()->user()->unreadnotifications()->whereJsonContains('data->model',SubscribePackageRequest::class)?->update(['read_at' => now()]);
+        }
+    }
+
     public function delete(SubscribePackageRequest $request) {
         $request->delete();
         session()->put('success', trans('message.delete'));

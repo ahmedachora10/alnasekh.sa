@@ -5,6 +5,9 @@ namespace App\Livewire;
 use App\Livewire\Forms\SubscribePackageRequestForm;
 use App\Models\Package;
 use App\Models\SubscribePackageRequest;
+use App\Models\User;
+use App\Notifications\ClientActionNotification;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class StoreSubscribePackageRequest extends Component
@@ -21,6 +24,12 @@ class StoreSubscribePackageRequest extends Component
         $this->validate();
 
         $this->package->subscribeRequests()->create($this->form->all());
+
+        Notification::send(User::whereHasRole('admin')->get(), new ClientActionNotification([
+            'title' => '',
+            'content' => '',
+            'model' => SubscribePackageRequest::class,
+        ]));
 
         session()->flash('success', trans('message.create'));
         $this->form->reset();

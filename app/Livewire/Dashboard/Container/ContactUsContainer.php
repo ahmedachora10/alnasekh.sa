@@ -14,6 +14,12 @@ class ContactUsContainer extends Component
 
     public string $content = '';
 
+    public function mount() {
+        if(auth()->user()->hasRole('admin')) {
+            auth()->user()->unreadnotifications()->whereJsonContains('data->model',ContactUs::class)?->update(['read_at' => now()]);
+        }
+    }
+
     public function delete(ContactUs $contact) {
         $contact->delete();
 

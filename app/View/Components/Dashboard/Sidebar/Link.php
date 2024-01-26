@@ -11,7 +11,7 @@ class Link extends Component
      *
      * @return void
      */
-    public function __construct(public $link = 'javascript:viod(0)', public $icon = '', public $title = null, public bool $hasSubMenu = false)
+    public function __construct(public $link = 'javascript:viod(0)', public $icon = '', public $title = null, public bool $hasSubMenu = false, public int|bool $notification = false)
     {
         //
     }

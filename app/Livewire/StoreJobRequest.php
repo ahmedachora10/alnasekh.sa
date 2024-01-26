@@ -6,8 +6,11 @@ use App\Livewire\Forms\JobRequestForm;
 use App\Models\JobCity;
 use App\Models\JobPost;
 use App\Models\JobRequest;
+use App\Models\User;
+use App\Notifications\ClientActionNotification;
 use App\Services\UploadFileService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -47,6 +50,12 @@ class StoreJobRequest extends Component
                     $jobRequest->attachments()->create(['file' => $this->uploadFileService->store($attachment, 'jobs/attachments')]);
                 }
             }
+
+            Notification::send(User::whereHasRole('admin')->get(), new ClientActionNotification([
+                'title' => '',
+                'content' => '',
+                'model' => JobRequest::class,
+            ]));
 
             session()->flash('success', trans('message.create'));
             $this->form->reset();

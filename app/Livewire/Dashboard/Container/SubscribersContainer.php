@@ -12,6 +12,12 @@ class SubscribersContainer extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public function mount() {
+        if(auth()->user()->hasRole('admin')) {
+            auth()->user()->unreadnotifications()->whereJsonContains('data->model',Subscriber::class)?->update(['read_at' => now()]);
+        }
+    }
+
     public function render()
     {
         return view('livewire.dashboard.container.subscribers-container', [

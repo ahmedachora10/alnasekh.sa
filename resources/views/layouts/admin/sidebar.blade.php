@@ -1,3 +1,23 @@
+@php
+    $notifications = collect(
+        auth()
+            ->user()
+            ->hasRole('admin')
+            ? auth()
+                ->user()
+                ?->unreadNotifications()
+                ->where('type', 'App\Notifications\ClientActionNotification')
+                ->get()
+            : [],
+    )->pluck('data');
+
+    // $servicesRequestsCount = $notifications->where('type', 'App\Models\ServiceRequest')->count();
+    $jobsRequestsCount = $notifications->where('model', 'App\Models\JobRequest')->count();
+    $contactsCount = $notifications->where('model', 'App\Models\ContactUs')->count();
+    $packagesRequestCount = $notifications->where('model', 'App\Models\SubscribePackageRequest')->count();
+    $subscribersCount = $notifications->where('model', 'App\Models\Subscriber')->count();
+@endphp
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
     <div class="app-brand demo d-flex align-items-center justify-content-center">
         <a href="@hasPermission('dashboard.show')
@@ -73,19 +93,21 @@
             </x-dashboard.sidebar.link>
         @endhasPermission
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="server" link="#" :hasSubMenu="true">
+        <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="server" link="#" :hasSubMenu="true"
+            :notification="$jobsRequestsCount">
             <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" :link="route('jobs.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" :link="route('job-requests.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" :link="route('job-requests.index')" :notification="$jobsRequestsCount" />
             <x-dashboard.sidebar.link :title="trans('sidebar.cities')" :link="route('job-cities.index')" />
         </x-dashboard.sidebar.link>
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" link="#" :hasSubMenu="true">
+        <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" link="#" :hasSubMenu="true"
+            :notification="$packagesRequestCount">
             <x-dashboard.sidebar.link :title="trans('sidebar.packages')" :link="route('packages.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.package requests')" :link="route('packages.requests')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.package requests')" :link="route('packages.requests')" :notification="$packagesRequestCount" />
         </x-dashboard.sidebar.link>
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user" :link="route('subscribers.index')" />
-        <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="user-pin" :link="route('contact-us.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user" :link="route('subscribers.index')" :notification="$subscribersCount" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="user-pin" :link="route('contact-us.index')" :notification="$contactsCount" />
         <x-dashboard.sidebar.link :title="trans('sidebar.reviews')" icon="star" :link="route('reviews.index')" />
         <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="server" :link="route('services.index')" />
 

@@ -2,32 +2,21 @@
 
 namespace App\Notifications;
 
-use App\Mail\SendReminderEmail;
-use App\Models\Corp;
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Mail;
 
-class UserActionNotification extends Notification
+class ClientActionNotification extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(
-        public array $data,
-        public ?string $email = null,
-        public ?Corp $corp = null
-    )
+    public function __construct(public array $data)
     {
-        if($this->corp->send_reminder && ($this->email !== null || $this->email != '')) {
-            Mail::to($this->email)->queue(new SendReminderEmail($this->corp, $this->data['email_title']));
-            // 'suliman@isbd5.com'
-        }
+        //
     }
 
     /**
@@ -39,7 +28,6 @@ class UserActionNotification extends Notification
     {
         return ['database'];
     }
-
 
     /**
      * Get the array representation of the notification.
