@@ -7,6 +7,7 @@ use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\MonthlyQuarterlyUpdate;
 use App\Traits\Livewire\Message;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -52,11 +53,32 @@ class UpdateMonthlyQuarterlyUpdate extends Component
 
     #[On('delete-monthly-quarterly-from-branch')]
     public function delete($id) {
-        $this->branch->monthlyQuarterlyUpdates()->detach($id);
-        session()->put('success', trans('message.delete'));
+        DB::transaction(function () use($id) {
+            $this->branch->monthlyQuarterlyUpdates()->detach($id);
+            session()->put('success', trans('message.delete'));
 
-        $this->dispatch('refresh-alert');
-        $this->dispatch('refresh-dashboard');
+            $ids =
+                DB::table('notifications')
+                ->whereJsonContains('data->model', CorpBranchMonthlyQuarterlyUpdate::class)
+                ->pluck('data')->map(fn($item) => Json::decode($item)['id'])
+                ->unique()
+                ->toArray();
+
+            $all = CorpBranchMonthlyQuarterlyUpdate::where('monthly_quarterly_update_id', $id)
+            ->where('corp_branch_id', $this->branch->id)
+            ->pluck('id')->toArray();
+
+            foreach($ids as $id) {
+                if(!in_array($id, $all)) {
+                    DB::table('notifications')
+                    ->whereJsonContains("data->id", $id)
+                    ->whereJsonContains('data->model', CorpBranchMonthlyQuarterlyUpdate::class)?->delete();
+                }
+            }
+
+            $this->dispatch('refresh-alert');
+            $this->dispatch('refresh-dashboard');
+        });
     }
 
     public function render()

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Nationalities;
+use App\Traits\DeleteNotification;
 use App\Traits\ModelBasicAttributeValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Laravel\Scout\Searchable;
 
 class BranchEmployee extends Model
 {
-    use HasFactory, ModelBasicAttributeValue, Searchable;
+    use HasFactory, ModelBasicAttributeValue, Searchable, DeleteNotification;
 
     protected $fillable = [
         'corp_id',
@@ -38,6 +39,13 @@ class BranchEmployee extends Model
         'contract_end_date' => 'datetime',
         'nationality' => Nationalities::class
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleteNotification();
+    }
 
     public function branch():BelongsTo {
         return $this->belongsTo(CorpBranch::class, 'corp_branch_id');

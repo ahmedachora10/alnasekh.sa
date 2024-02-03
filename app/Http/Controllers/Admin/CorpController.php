@@ -9,8 +9,10 @@ use App\Http\Requests\Admin\UpdateCorpRequest;
 use App\Mail\SendReminderEmail;
 use App\Models\Corp;
 use App\Models\CorpBranch;
+use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Services\UploadFileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class CorpController extends Controller
@@ -114,7 +116,7 @@ class CorpController extends Controller
             $data['send_reminder'] = false;
         }
 
-        $corp->update( $data + ['image' => $this->uploadFileService->update($request->file('image'), $corp->image, 'images/corps')]);
+        $corp->update($data + ['image' => $this->uploadFileService->update($request->file('image'), $corp->image, 'images/corps')]);
         return redirect()->route('corps.index')->with('success', trans('message.update'));
     }
 

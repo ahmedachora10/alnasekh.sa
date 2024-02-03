@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\DeleteNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,9 +10,18 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CorpBranchMonthlyQuarterlyUpdate extends Pivot
 {
-    use HasFactory;
+    use HasFactory, DeleteNotification;
 
     protected $table = 'branch_monthly_quarterly';
+
+    protected $guarded = [];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleteNotification();
+    }
 
     public $timestamps = true;
 

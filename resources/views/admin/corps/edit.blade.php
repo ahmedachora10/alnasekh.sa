@@ -64,8 +64,8 @@
 
                 <div class="col-12">
                     <label class="switch switch-primary my-3">
-                        <input type="checkbox" class="switch-input" name="send_reminder" @checked($corp->send_reminder)
-                            value="{{ $corp->send_reminder }}">
+                        <input type="checkbox" class="switch-input" name="send_reminder" @checked($corp->send_reminder == 1)
+                            value="1">
                         <span class="switch-toggle-slider">
                             <span class="switch-on"></span>
                             <span class="switch-off"></span>

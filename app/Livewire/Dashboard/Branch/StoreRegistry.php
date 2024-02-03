@@ -4,9 +4,12 @@ namespace App\Livewire\Dashboard\Branch;
 
 use App\Livewire\Forms\RegistryForm;
 use App\Models\CorpBranch;
+use App\Models\CorpBranchRegistry;
 use App\Models\Registry;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -77,14 +80,39 @@ class StoreRegistry extends Component
 
     #[On('delete-branch-registry')]
     public function delete(Registry $registry) {
-        $this->branch->registries()->detach($registry->id);
-        session()->put('success', trans('message.delete'));
+        DB::transaction(function () use($registry) {
 
-        $this->dispatch('refresh-alert');
-        $this->dispatch('refresh-branch-registries');
+            $this->branch->registries()->detach($registry->id);
+            session()->put('success', trans('message.delete'));
 
-        $this->dispatch('refresh-store-registry-from-branch');
-        $this->dispatch('refresh-dashboard');
+            $id = $registry->id;
+
+            $ids =
+                DB::table('notifications')
+                ->whereJsonContains('data->model', CorpBranchRegistry::class)
+                ->pluck('data')->map(fn($item) => Json::decode($item)['id'])
+                ->unique()
+                ->toArray();
+
+            $all = CorpBranchRegistry::where('registry_id', $id)
+            ->where('corp_branch_id', $this->branch->id)
+            ->pluck('id')->toArray();
+
+            foreach($ids as $id) {
+                if(!in_array($id, $all)) {
+                    DB::table('notifications')
+                    ->whereJsonContains("data->id", $id)
+                    ->whereJsonContains('data->model', CorpBranchRegistry::class)?->delete();
+                }
+            }
+
+            $this->dispatch('refresh-alert');
+            $this->dispatch('refresh-branch-registries');
+
+            $this->dispatch('refresh-store-registry-from-branch');
+            $this->dispatch('refresh-dashboard');
+        });
+
     }
 
     public function render()

@@ -47,6 +47,9 @@ class DateReminder implements ShouldQueue
 
         // Corps
         foreach (Corp::with('user')->get() as $item) {
+
+            if($item->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
             if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, Corp::class)) {
                 continue;
@@ -69,6 +72,9 @@ class DateReminder implements ShouldQueue
 
         // Records
         foreach (BranchRecord::with('branch.corp.user')->get() as $item) {
+
+            if($item->branch->corp->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
             if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, BranchRecord::class)) {
                 continue;
@@ -91,8 +97,11 @@ class DateReminder implements ShouldQueue
 
         // Civil Defense Cerificates
         foreach (BranchCivilDefenseCertificate::with('branch.corp.user')->get() as $item) {
+
+            if($item->branch->corp->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
-            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, BranchCivilDefenseCertificate::class)) {
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, BranchCivilDefenseCertificate::class) ) {
                 continue;
             }
 
@@ -113,6 +122,9 @@ class DateReminder implements ShouldQueue
 
         // Subscriptions
         foreach (BranchSubscription::with('branch.corp.user')->get() as $item) {
+
+            if($item->branch->corp->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
             if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
                 $item->id, $item->end_date, BranchSubscription::class
@@ -137,10 +149,13 @@ class DateReminder implements ShouldQueue
 
         // Certificates
         foreach (BranchCertificate::with('branch.corp.user')->get() as $item) {
+
+            if($item->branch->corp->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
             if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
                 $item->id, $item->end_date, BranchCertificate::class
-            )) {
+            ) ) {
                 continue;
             }
 
@@ -161,10 +176,13 @@ class DateReminder implements ShouldQueue
 
         // Certificates
         foreach (CorpBranchRegistry::with(['branch.corp.user', 'registry'])->get() as $item) {
+
+            if($item->branch->corp->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
             if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
                 $item->id, $item->end_date, CorpBranchRegistry::class
-            )) {
+            ) ) {
                 continue;
             }
 
@@ -184,41 +202,37 @@ class DateReminder implements ShouldQueue
         }
 
         // Monthly And Quarterly Updates
-        // foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->get() as $item) {
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
-        //         $item->id, $item->date, CorpBranchMonthlyQuarterlyUpdate::class
-        //     )) {
-        //         continue;
-        //     }
+        foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->latest()->get() as $item) {
 
-        //     // $notification = new UserActionNotification([
-        //     //     'title' => 'التحديثات الشهرية والربع سنوية - ' . $item->branch->name,
-        //     //     'content' => $status->name(),
-        //     //     'icon' => $status->icon(),
-        //     //     'color' => $status->color(),
-        //     //     'id' => $item->id,
-        //     //     'end_date' => $item->end_date,
-        //     //     'model' => CorpBranchMonthlyQuarterlyUpdate::class,
-        //     //     'link' => route('branches.show', $item->branch)
-        //     // ], $item->branch->corp->email);
+            if($item->branch->corp->send_reminder == false) continue;
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //         'title' => 'التحديثات الشهرية والربع سنوية ' . $status->name(),
-        //         'content' => $item->branch->corp->name,
-        //         'owner' => $item->branch->corp->administrator_name,
-        //         'date' => $item->date,
-        //         'model' => CorpBranchMonthlyQuarterlyUpdate::class,
-        //         'link' => route('branches.show', $item->branch)
-        //     ]);
+            $status = status_handler($item->date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
+                $item->id, $item->date, CorpBranchMonthlyQuarterlyUpdate::class, 'date'
+                )) {
+                continue;
+            }
 
-        //     $item->branch->corp->user->notify($notification);
+            $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                'title' => 'التحديثات الشهرية والربع سنوية ' . $status->name(),
+                'content' => $item->branch->corp->name,
+                'owner' => $item->branch->corp->administrator_name,
+                'date' => $item->date,
+                'model' => CorpBranchMonthlyQuarterlyUpdate::class,
+                'link' => route('branches.show', $item->branch),
+                'email_title' => '',
+            ]);
 
-        //     Notification::send($admins, $notification);
-        // }
+            $item->branch->corp->user->notify($notification);
+
+            Notification::send($admins, $notification);
+        }
 
         // Employees
         foreach (BranchEmployee::with('branch.corp.user')->get() as $item) {
+
+            if($item->branch->corp->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
             if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
                 $item->id, $item->end_date, BranchEmployee::class
@@ -282,6 +296,9 @@ class DateReminder implements ShouldQueue
 
         // Medical Insurance
         foreach (EmployeeMedicalInsurance::with('employee.branch.corp.user')->get() as $item) {
+
+            if($item->employee->branch->corp->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
             if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
                 $item->id, $item->end_date, EmployeeMedicalInsurance::class
@@ -306,9 +323,12 @@ class DateReminder implements ShouldQueue
 
         // Health Card Paper
         foreach (EmployeeHealthCardPaper::with('employee.branch.corp.user')->get() as $item) {
+
+            if($item->employee->branch->corp->send_reminder == false) continue;
+
             $status = status_handler($item->end_date);
             if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
-                $item->id, $item->end_date, EmployeeHealthCardPaper::class
+                $item->id, $item->end_date, EmployeeHealthCardPaper::class,
             )) {
                 continue;
             }

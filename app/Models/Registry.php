@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\DeleteNotification;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\ThumbnailModelAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,9 +12,16 @@ use Laravel\Scout\Searchable;
 
 class Registry extends Model
 {
-    use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute, Searchable;
+    use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute, Searchable, DeleteNotification;
 
     protected $fillable = ['name', 'image'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleteNotification();
+    }
 
     public function branches(): BelongsToMany {
         return $this->belongsToMany(CorpBranch::class, 'corp_branch_registry', 'registry_id', 'corp_branch_id')->as('registry')->withPivot([

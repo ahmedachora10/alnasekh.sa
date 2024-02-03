@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\HasBranches;
+use App\Traits\DeleteNotification;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\ThumbnailModelAttribute;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,9 +16,30 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Scout\Searchable;
 
+/**
+ * Class Corp
+ *
+ * @package App\Models
+ * @property int $user_id
+ * @property string $name
+ * @property string $image
+ * @property string $administrator_name
+ * @property string $phone
+ * @property string $email
+ * @property string $commercial_registration_number
+ * @property \DateTime $start_date
+ * @property \DateTime $end_date
+ * @property HasBranches $has_branches
+ * @property boolean $send_reminder
+ * @property-read User $user
+ * @property-read CorpBranch[]|Collection $branches
+ * @property-read CorpBranch|null $branch
+ * @property-read CorpReport[]|Collection $reports
+ */
+
 class Corp extends Model
 {
-    use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute, Searchable;
+    use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute, Searchable, DeleteNotification;
 
     protected $fillable = [
         'user_id',
@@ -46,6 +68,8 @@ class Corp extends Model
         static::creating(function (Corp $model) {
             $model->user_id = auth()->id();
         });
+
+        self::deleteNotification();
     }
 
     public function user() : BelongsTo {
