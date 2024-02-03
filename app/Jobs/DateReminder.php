@@ -347,6 +347,8 @@ class DateReminder implements ShouldQueue
 
             Notification::send($admins, $notification);
         }
+
+        Storage::put('text.txt', now());
     }
 
     private function notificationAlreadySend($id, $date, $model, $columnName = 'end_date') {
