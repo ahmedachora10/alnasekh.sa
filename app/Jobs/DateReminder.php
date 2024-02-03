@@ -202,7 +202,7 @@ class DateReminder implements ShouldQueue
         }
 
         // Monthly And Quarterly Updates
-        foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->latest()->get() as $item) {
+        foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->get() as $item) {
 
             if($item->branch->corp->send_reminder == false) continue;
 
