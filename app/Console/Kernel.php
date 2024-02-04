@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         // $schedule->call(function () {})->everyMinute();
-        $schedule->job(new DateReminder)->everyMinute();
+        $schedule->call(new DateReminder)->everyFifteenSeconds();
     }
 
     /**

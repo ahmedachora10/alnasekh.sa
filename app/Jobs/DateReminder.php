@@ -9,39 +9,22 @@ use App\Models\BranchEmployee;
 use App\Models\BranchRecord;
 use App\Models\BranchSubscription;
 use App\Models\Corp;
-use App\Models\CorpBranch;
 use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\CorpBranchRegistry;
 use App\Models\EmployeeHealthCardPaper;
 use App\Models\EmployeeMedicalInsurance;
 use App\Models\User;
 use App\Notifications\UserActionNotification;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
-class DateReminder implements ShouldQueue
+class DateReminder
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function __invoke(): void
     {
         $admins = User::whereHasRole('admin')->get();
 
