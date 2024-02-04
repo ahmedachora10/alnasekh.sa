@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         // $schedule->call(function () {})->everyMinute();
-        $schedule->job(new DateReminder)->everyFifteenSeconds();
+        $schedule->job(new DateReminder)->everyMinute();
     }
 
     /**
@@ -40,12 +40,5 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
-    }
-
-    private function notificationAlreadySend($id, $date, $model, $columnName = 'end_date') {
-        return DB::table('notifications')->whereJsonContains('data->id', $id)
-                ->whereJsonContains("data->".$columnName, $date)
-                ->whereJsonContains('data->model', $model)
-                ->first();
     }
 }
