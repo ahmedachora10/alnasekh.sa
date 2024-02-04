@@ -26,165 +26,165 @@ class DateReminder
      */
     public function __invoke()
     {
-        // $admins = User::whereHasRole('admin')->get();
+        $admins = User::whereHasRole('admin')->get();
 
-        // // Corps
-        // foreach (Corp::with('user')->get() as $item) {
+        // Corps
+        foreach (Corp::with('user')->get() as $item) {
 
-        //     if($item->send_reminder == false) continue;
+            if($item->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, Corp::class)) {
-        //         continue;
-        //     }
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, Corp::class)) {
+                continue;
+            }
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->email, $item, $item->thumbnail, [
-        //         'title' => 'المنشأة ' . $status->name(),
-        //         'content' => $item->name,
-        //         'owner' => $item->administrator_name,
-        //         'end_date' => $item->end_date,
-        //         'model' => Corp::class,
-        //         'link' => route('corps.edit', $item),
-        //         'email_title' => 'الاشتراك في منصة ' . setting('app_name') . ' ' . $status->name(),
-        //     ]);
+            $notification = $this->sendNotification($item->id, $status, $item->email, $item, $item->thumbnail, [
+                'title' => 'المنشأة ' . $status->name(),
+                'content' => $item->name,
+                'owner' => $item->administrator_name,
+                'end_date' => $item->end_date,
+                'model' => Corp::class,
+                'link' => route('corps.edit', $item),
+                'email_title' => 'الاشتراك في منصة ' . setting('app_name') . ' ' . $status->name(),
+            ]);
 
-        //     $item->user->notify($notification);
+            $item->user->notify($notification);
 
-        //     Notification::send($admins, $notification);
-        // }
+            Notification::send($admins, $notification);
+        }
 
-        // // Records
-        // foreach (BranchRecord::with('branch.corp.user')->get() as $item) {
+        // Records
+        foreach (BranchRecord::with('branch.corp.user')->get() as $item) {
 
-        //     if($item->branch->corp->send_reminder == false) continue;
+            if($item->branch->corp->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, BranchRecord::class)) {
-        //         continue;
-        //     }
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, BranchRecord::class)) {
+                continue;
+            }
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //         'title' => 'السجل ' . $status->name(),
-        //         'content' => $item->branch->corp->name,
-        //         'owner' => $item->branch->corp->administrator_name,
-        //         'end_date' => $item->end_date,
-        //         'model' => BranchRecord::class,
-        //         'link' => route('branches.show', $item->branch),
-        //         'email_title' => 'السجل رقم ' . $item->branch->registration_number . ' ' . $status->name(),
-        //     ]);
+            $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                'title' => 'السجل ' . $status->name(),
+                'content' => $item->branch->corp->name,
+                'owner' => $item->branch->corp->administrator_name,
+                'end_date' => $item->end_date,
+                'model' => BranchRecord::class,
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'السجل رقم ' . $item->branch->registration_number . ' ' . $status->name(),
+            ]);
 
-        //     $item->branch->corp->user->notify($notification);
+            $item->branch->corp->user->notify($notification);
 
-        //     Notification::send($admins, $notification);
-        // }
+            Notification::send($admins, $notification);
+        }
 
-        // // Civil Defense Cerificates
-        // foreach (BranchCivilDefenseCertificate::with('branch.corp.user')->get() as $item) {
+        // Civil Defense Cerificates
+        foreach (BranchCivilDefenseCertificate::with('branch.corp.user')->get() as $item) {
 
-        //     if($item->branch->corp->send_reminder == false) continue;
+            if($item->branch->corp->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, BranchCivilDefenseCertificate::class) ) {
-        //         continue;
-        //     }
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend($item->id, $item->end_date, BranchCivilDefenseCertificate::class) ) {
+                continue;
+            }
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //         'title' => 'تصريح الدفاع المدني ' . $status->name(),
-        //         'content' => $item->branch->corp->name,
-        //         'owner' => $item->ministry_of_interior_number,
-        //         'end_date' => $item->end_date,
-        //         'model' => BranchCivilDefenseCertificate::class,
-        //         'link' => route('branches.show', $item->branch),
-        //         'email_title' => 'تصريح الدفاع المدني رقم ' . $item->ministry_of_interior_number . ' ' . $status->name(),
-        //     ]);
+            $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                'title' => 'تصريح الدفاع المدني ' . $status->name(),
+                'content' => $item->branch->corp->name,
+                'owner' => $item->ministry_of_interior_number,
+                'end_date' => $item->end_date,
+                'model' => BranchCivilDefenseCertificate::class,
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'تصريح الدفاع المدني رقم ' . $item->ministry_of_interior_number . ' ' . $status->name(),
+            ]);
 
-        //     $item->branch->corp->user->notify($notification);
+            $item->branch->corp->user->notify($notification);
 
-        //     Notification::send($admins, $notification);
-        // }
+            Notification::send($admins, $notification);
+        }
 
-        // // Subscriptions
-        // foreach (BranchSubscription::with('branch.corp.user')->get() as $item) {
+        // Subscriptions
+        foreach (BranchSubscription::with('branch.corp.user')->get() as $item) {
 
-        //     if($item->branch->corp->send_reminder == false) continue;
+            if($item->branch->corp->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
-        //         $item->id, $item->end_date, BranchSubscription::class
-        //     )) {
-        //         continue;
-        //     }
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
+                $item->id, $item->end_date, BranchSubscription::class
+            )) {
+                continue;
+            }
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //         'title' => 'اشتراك ' . $item->subscription_type->name() . ' ' . $status->name(),
-        //         'content' => $item->branch->corp->name,
-        //         'owner' => $item->branch->corp->administrator_name,
-        //         'end_date' => $item->end_date,
-        //         'model' => BranchSubscription::class,
-        //         'link' => route('branches.show', $item->branch),
-        //         'email_title' => 'اشتراك ' . $item->subscription_type->name() . ' ' . $status->name(),
-        //     ]);
+            $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                'title' => 'اشتراك ' . $item->subscription_type->name() . ' ' . $status->name(),
+                'content' => $item->branch->corp->name,
+                'owner' => $item->branch->corp->administrator_name,
+                'end_date' => $item->end_date,
+                'model' => BranchSubscription::class,
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'اشتراك ' . $item->subscription_type->name() . ' ' . $status->name(),
+            ]);
 
-        //     $item->branch->corp->user->notify($notification);
+            $item->branch->corp->user->notify($notification);
 
-        //     Notification::send($admins, $notification);
-        // }
+            Notification::send($admins, $notification);
+        }
 
-        // // Certificates
-        // foreach (BranchCertificate::with('branch.corp.user')->get() as $item) {
+        // Certificates
+        foreach (BranchCertificate::with('branch.corp.user')->get() as $item) {
 
-        //     if($item->branch->corp->send_reminder == false) continue;
+            if($item->branch->corp->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
-        //         $item->id, $item->end_date, BranchCertificate::class
-        //     ) ) {
-        //         continue;
-        //     }
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
+                $item->id, $item->end_date, BranchCertificate::class
+            ) ) {
+                continue;
+            }
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //         'title' => 'الترخيص ' . $status->name(),
-        //         'content' => $item->branch->corp->name,
-        //         'owner' => $item->certificate_number,
-        //         'end_date' => $item->end_date,
-        //         'model' => BranchCertificate::class,
-        //         'link' => route('branches.show', $item->branch),
-        //         'email_title' => 'الترخيص رقم ' . $item->certificate_number . ' ' . $status->name(),
-        //     ]);
+            $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                'title' => 'الترخيص ' . $status->name(),
+                'content' => $item->branch->corp->name,
+                'owner' => $item->certificate_number,
+                'end_date' => $item->end_date,
+                'model' => BranchCertificate::class,
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'الترخيص رقم ' . $item->certificate_number . ' ' . $status->name(),
+            ]);
 
-        //     $item->branch->corp->user->notify($notification);
+            $item->branch->corp->user->notify($notification);
 
-        //     Notification::send($admins, $notification);
-        // }
+            Notification::send($admins, $notification);
+        }
 
-        // // Certificates
-        // foreach (CorpBranchRegistry::with(['branch.corp.user', 'registry'])->get() as $item) {
+        // Certificates
+        foreach (CorpBranchRegistry::with(['branch.corp.user', 'registry'])->get() as $item) {
 
-        //     if($item->branch->corp->send_reminder == false) continue;
+            if($item->branch->corp->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
-        //         $item->id, $item->end_date, CorpBranchRegistry::class
-        //     ) ) {
-        //         continue;
-        //     }
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
+                $item->id, $item->end_date, CorpBranchRegistry::class
+            ) ) {
+                continue;
+            }
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //         'title' => $item->registry?->name . ' ' . $status->name(),
-        //         'content' => $item->branch->corp->name,
-        //         'owner' => $item->registry_number,
-        //         'end_date' => $item->end_date,
-        //         'model' => CorpBranchRegistry::class,
-        //         'link' => route('branches.show', $item->branch),
-        //         'email_title' => 'الترخيص ' . $item->registry?->name . ' رقم ' . $item->registry_number ?? ' - ' . ' ' . $status->name(),
-        //     ]);
+            $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                'title' => $item->registry?->name . ' ' . $status->name(),
+                'content' => $item->branch->corp->name,
+                'owner' => $item->registry_number,
+                'end_date' => $item->end_date,
+                'model' => CorpBranchRegistry::class,
+                'link' => route('branches.show', $item->branch),
+                'email_title' => 'الترخيص ' . $item->registry?->name . ' رقم ' . $item->registry_number ?? ' - ' . ' ' . $status->name(),
+            ]);
 
-        //     $item->branch->corp->user->notify($notification);
+            $item->branch->corp->user->notify($notification);
 
-        //     Notification::send($admins, $notification);
-        // }
+            Notification::send($admins, $notification);
+        }
 
-        // // Monthly And Quarterly Updates
+        // Monthly And Quarterly Updates
         // foreach (CorpBranchMonthlyQuarterlyUpdate::with('branch.corp.user')->get() as $item) {
 
         //     if($item->branch->corp->send_reminder == false) continue;
@@ -211,125 +211,125 @@ class DateReminder
         //     Notification::send($admins, $notification);
         // }
 
-        // // Employees
-        // foreach (BranchEmployee::with('branch.corp.user')->get() as $item) {
+        // Employees
+        foreach (BranchEmployee::with('branch.corp.user')->get() as $item) {
 
-        //     if($item->branch->corp->send_reminder == false) continue;
+            if($item->branch->corp->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
-        //         $item->id, $item->end_date, BranchEmployee::class
-        //     )) {
+            $status = status_handler($item->end_date);
+            if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
+                $item->id, $item->end_date, BranchEmployee::class
+            )) {
 
-        //         $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //             'title' => 'عقد الاقامة ' . $status->name(),
-        //             'content' => $item->branch->corp->name,
-        //             'owner' => $item->branch->corp->administrator_name,
-        //             'end_date' => $item->end_date,
-        //             'model' => BranchEmployee::class,
-        //             'link' => route('branches.show', $item->branch),
-        //             'email_title' => 'عقد الاقامة للموظف ' . $item->name . ' ' . $status->name(),
-        //         ]);
+                $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                    'title' => 'عقد الاقامة ' . $status->name(),
+                    'content' => $item->branch->corp->name,
+                    'owner' => $item->branch->corp->administrator_name,
+                    'end_date' => $item->end_date,
+                    'model' => BranchEmployee::class,
+                    'link' => route('branches.show', $item->branch),
+                    'email_title' => 'عقد الاقامة للموظف ' . $item->name . ' ' . $status->name(),
+                ]);
 
-        //         $item->branch->corp->user->notify($notification);
+                $item->branch->corp->user->notify($notification);
 
-        //         Notification::send($admins, $notification);
-        //     }
+                Notification::send($admins, $notification);
+            }
 
-        //     $status = status_handler($item->business_card_end_date);
-        //     if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
-        //         $item->id, $item->business_card_end_date, BranchEmployee::class, 'business_card_end_date'
-        //     )) {
+            $status = status_handler($item->business_card_end_date);
+            if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
+                $item->id, $item->business_card_end_date, BranchEmployee::class, 'business_card_end_date'
+            )) {
 
-        //         $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //             'title' => 'كرت العمل ' . $status->name(),
-        //             'content' => $item->branch->corp->name,
-        //             'owner' => $item->branch->corp->administrator_name,
-        //             'business_card_end_date' => $item->business_card_end_date,
-        //             'model' => BranchEmployee::class,
-        //             'link' => route('branches.show', $item->branch),
-        //             'email_title' => 'كرت العمل للموظف ' . $item->name . ' ' . $status->name(),
-        //         ]);
+                $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                    'title' => 'كرت العمل ' . $status->name(),
+                    'content' => $item->branch->corp->name,
+                    'owner' => $item->branch->corp->administrator_name,
+                    'business_card_end_date' => $item->business_card_end_date,
+                    'model' => BranchEmployee::class,
+                    'link' => route('branches.show', $item->branch),
+                    'email_title' => 'كرت العمل للموظف ' . $item->name . ' ' . $status->name(),
+                ]);
 
-        //         $item->branch->corp->user->notify($notification);
+                $item->branch->corp->user->notify($notification);
 
-        //         Notification::send($admins, $notification);
-        //     }
+                Notification::send($admins, $notification);
+            }
 
-        //     $status = status_handler($item->contract_end_date);
-        //     if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
-        //         $item->id, $item->contract_end_date, BranchEmployee::class, 'contract_end_date'
-        //     )) {
+            $status = status_handler($item->contract_end_date);
+            if(!in_array($status, [Status::DEFAULT, Status::VALID]) && !$this->notificationAlreadySend(
+                $item->id, $item->contract_end_date, BranchEmployee::class, 'contract_end_date'
+            )) {
 
-        //         $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
-        //             'title' => 'الاقامة ' . $status->name(),
-        //             'content' => $item->branch->corp->name,
-        //             'owner' => $item->branch->corp->administrator_name,
-        //             'contract_end_date' => $item->contract_end_date,
-        //             'model' => BranchEmployee::class,
-        //             'link' => route('branches.show', $item->employee->branch),
-        //             'email_title' => ' الاقامة للموظف ' . $item->name . ' ' . $status->name(),
-        //         ]);
+                $notification = $this->sendNotification($item->id, $status, $item->branch->corp->email,$item->branch->corp, $item->branch->corp->thumbnail, [
+                    'title' => 'الاقامة ' . $status->name(),
+                    'content' => $item->branch->corp->name,
+                    'owner' => $item->branch->corp->administrator_name,
+                    'contract_end_date' => $item->contract_end_date,
+                    'model' => BranchEmployee::class,
+                    'link' => route('branches.show', $item->employee->branch),
+                    'email_title' => ' الاقامة للموظف ' . $item->name . ' ' . $status->name(),
+                ]);
 
-        //         $item->branch->corp->user->notify($notification);
+                $item->branch->corp->user->notify($notification);
 
-        //         Notification::send($admins, $notification);
-        //     }
-        // }
+                Notification::send($admins, $notification);
+            }
+        }
 
-        // // Medical Insurance
-        // foreach (EmployeeMedicalInsurance::with('employee.branch.corp.user')->get() as $item) {
+        // Medical Insurance
+        foreach (EmployeeMedicalInsurance::with('employee.branch.corp.user')->get() as $item) {
 
-        //     if($item->employee->branch->corp->send_reminder == false) continue;
+            if($item->employee->branch->corp->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
-        //         $item->id, $item->end_date, EmployeeMedicalInsurance::class
-        //     )) {
-        //         continue;
-        //     }
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
+                $item->id, $item->end_date, EmployeeMedicalInsurance::class
+            )) {
+                continue;
+            }
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->employee->branch->corp->email, $item->employee->branch->corp, $item->employee->branch->corp->thumbnail, [
-        //         'title' => 'التأمين الطبي ' . $status->name(),
-        //         'content' => $item->employee->branch->corp->name,
-        //         'owner' => $item->employee->branch->corp->administrator_name,
-        //         'end_date' => $item->end_date,
-        //         'model' => EmployeeMedicalInsurance::class,
-        //         'link' => route('branches.show', $item->employee->branch),
-        //         'email_title' => 'التأمين الطبي للموظف ' . $item->employee->name . ' ' . $status->name(),
-        //     ]);
+            $notification = $this->sendNotification($item->id, $status, $item->employee->branch->corp->email, $item->employee->branch->corp, $item->employee->branch->corp->thumbnail, [
+                'title' => 'التأمين الطبي ' . $status->name(),
+                'content' => $item->employee->branch->corp->name,
+                'owner' => $item->employee->branch->corp->administrator_name,
+                'end_date' => $item->end_date,
+                'model' => EmployeeMedicalInsurance::class,
+                'link' => route('branches.show', $item->employee->branch),
+                'email_title' => 'التأمين الطبي للموظف ' . $item->employee->name . ' ' . $status->name(),
+            ]);
 
-        //     $item->employee->branch->corp->user->notify($notification);
+            $item->employee->branch->corp->user->notify($notification);
 
-        //     Notification::send($admins, $notification);
-        // }
+            Notification::send($admins, $notification);
+        }
 
-        // // Health Card Paper
-        // foreach (EmployeeHealthCardPaper::with('employee.branch.corp.user')->get() as $item) {
+        // Health Card Paper
+        foreach (EmployeeHealthCardPaper::with('employee.branch.corp.user')->get() as $item) {
 
-        //     if($item->employee->branch->corp->send_reminder == false) continue;
+            if($item->employee->branch->corp->send_reminder == false) continue;
 
-        //     $status = status_handler($item->end_date);
-        //     if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
-        //         $item->id, $item->end_date, EmployeeHealthCardPaper::class,
-        //     )) {
-        //         continue;
-        //     }
+            $status = status_handler($item->end_date);
+            if(in_array($status, [Status::DEFAULT, Status::VALID]) || $this->notificationAlreadySend(
+                $item->id, $item->end_date, EmployeeHealthCardPaper::class,
+            )) {
+                continue;
+            }
 
-        //     $notification = $this->sendNotification($item->id, $status, $item->employee->branch->corp->email, $item->employee->branch->corp, $item->employee->branch->corp->thumbnail, [
-        //         'title' => 'الكرت الصحي ' . $status->name(),
-        //         'content' => $item->employee->branch->corp->name,
-        //         'owner' => $item->employee->branch->corp->administrator_name,
-        //         'end_date' => $item->end_date,
-        //         'model' => EmployeeHealthCardPaper::class,
-        //         'link' => route('branches.show', $item->employee->branch),
-        //         'email_title' => 'الكرت الصحي للموظف ' . $item->employee?->name . ' ' . $status->name(),
-        //     ]);
+            $notification = $this->sendNotification($item->id, $status, $item->employee->branch->corp->email, $item->employee->branch->corp, $item->employee->branch->corp->thumbnail, [
+                'title' => 'الكرت الصحي ' . $status->name(),
+                'content' => $item->employee->branch->corp->name,
+                'owner' => $item->employee->branch->corp->administrator_name,
+                'end_date' => $item->end_date,
+                'model' => EmployeeHealthCardPaper::class,
+                'link' => route('branches.show', $item->employee->branch),
+                'email_title' => 'الكرت الصحي للموظف ' . $item->employee?->name . ' ' . $status->name(),
+            ]);
 
-        //     $item->employee->branch->corp->user->notify($notification);
+            $item->employee->branch->corp->user->notify($notification);
 
-        //     Notification::send($admins, $notification);
-        // }
+            Notification::send($admins, $notification);
+        }
 
         Storage::put('text.txt', now());
     }
