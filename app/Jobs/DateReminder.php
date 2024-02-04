@@ -24,7 +24,7 @@ class DateReminder
     /**
      * Execute the job.
      */
-    public function __invoke(): void
+    public function __invoke()
     {
         $admins = User::whereHasRole('admin')->get();
 
