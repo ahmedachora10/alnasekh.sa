@@ -230,7 +230,7 @@ class DateReminderJob implements ShouldQueue
             return route('corps.edit', $item);
         }
 
-        return route('branches.show', $item);
+        return route('branches.show', $branch);
     }
 
     private function getEmailTitle($item, string $status, $columnName, $customValue = '')
