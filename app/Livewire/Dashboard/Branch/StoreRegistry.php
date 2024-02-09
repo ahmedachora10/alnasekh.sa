@@ -82,35 +82,28 @@ class StoreRegistry extends Component
     public function delete(Registry $registry) {
         DB::transaction(function () use($registry) {
 
-            $this->branch->registries()->detach($registry->id);
-            session()->put('success', trans('message.delete'));
+            // $this->branch->registries()->detach($registry->id);
 
-            $id = $registry->id;
-
-            $ids =
+            if(
+                $removedItemId = CorpBranchRegistry::where('registry_id', $registry->id)
+                    ->where('corp_branch_id', $this->branch->id)
+                    ->first()
+            ) {
                 DB::table('notifications')
-                ->whereJsonContains('data->model', CorpBranchRegistry::class)
-                ->pluck('data')->map(fn($item) => Json::decode($item)['id'])
-                ->unique()
-                ->toArray();
+                ->whereJsonContains("data->id", $removedItemId->id)
+                ->whereJsonContains('data->model', Registry::class)?->delete();
 
-            $all = CorpBranchRegistry::where('registry_id', $id)
-            ->where('corp_branch_id', $this->branch->id)
-            ->pluck('id')->toArray();
+                $removedItemId->delete();
 
-            foreach($ids as $id) {
-                if(!in_array($id, $all)) {
-                    DB::table('notifications')
-                    ->whereJsonContains("data->id", $id)
-                    ->whereJsonContains('data->model', CorpBranchRegistry::class)?->delete();
-                }
+                session()->put('success', trans('message.delete'));
+
+                $this->dispatch('refresh-alert');
+                $this->dispatch('refresh-branch-registries');
+
+                $this->dispatch('refresh-store-registry-from-branch');
+                $this->dispatch('refresh-dashboard');
             }
 
-            $this->dispatch('refresh-alert');
-            $this->dispatch('refresh-branch-registries');
-
-            $this->dispatch('refresh-store-registry-from-branch');
-            $this->dispatch('refresh-dashboard');
         });
 
     }

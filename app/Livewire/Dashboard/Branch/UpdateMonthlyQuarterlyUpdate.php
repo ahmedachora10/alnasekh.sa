@@ -54,30 +54,24 @@ class UpdateMonthlyQuarterlyUpdate extends Component
     #[On('delete-monthly-quarterly-from-branch')]
     public function delete($id) {
         DB::transaction(function () use($id) {
-            $this->branch->monthlyQuarterlyUpdates()->detach($id);
-            session()->put('success', trans('message.delete'));
+            // $this->branch->monthlyQuarterlyUpdates()->detach($id);
 
-            $ids =
+            if(
+                $removedItemId = CorpBranchMonthlyQuarterlyUpdate::where('monthly_quarterly_update_id', $id)
+                    ->where('corp_branch_id', $this->branch->id)
+                    ->first()
+            ) {
                 DB::table('notifications')
-                ->whereJsonContains('data->model', CorpBranchMonthlyQuarterlyUpdate::class)
-                ->pluck('data')->map(fn($item) => Json::decode($item)['id'])
-                ->unique()
-                ->toArray();
+                ->whereJsonContains("data->id", $removedItemId->id)
+                ->whereJsonContains('data->model', MonthlyQuarterlyUpdate::class)?->delete();
 
-            $all = CorpBranchMonthlyQuarterlyUpdate::where('monthly_quarterly_update_id', $id)
-            ->where('corp_branch_id', $this->branch->id)
-            ->pluck('id')->toArray();
+                $removedItemId->delete();
 
-            foreach($ids as $id) {
-                if(!in_array($id, $all)) {
-                    DB::table('notifications')
-                    ->whereJsonContains("data->id", $id)
-                    ->whereJsonContains('data->model', CorpBranchMonthlyQuarterlyUpdate::class)?->delete();
-                }
+                session()->put('success', trans('message.delete'));
+                $this->dispatch('refresh-alert');
+                $this->dispatch('refresh-dashboard');
             }
 
-            $this->dispatch('refresh-alert');
-            $this->dispatch('refresh-dashboard');
         });
     }
 

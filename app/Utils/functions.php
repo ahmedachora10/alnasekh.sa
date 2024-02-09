@@ -9,6 +9,11 @@ if (! function_exists('setting')) {
 
     function setting($key, $default = null)
     {
+
+        if (cache()->has('setting_' . $key)) {
+            return cache()->get('setting_' . $key);
+        }
+
         if (is_null($key)) {
             return new Setting();
         }
@@ -18,6 +23,8 @@ if (! function_exists('setting')) {
         }
 
         $value = Setting::get($key);
+
+        cache()->put('setting_' . $key, $value, now()->addDay());
 
         return is_null($value) ? value($default) : $value;
     }

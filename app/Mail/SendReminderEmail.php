@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Corp;
+use COM;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,6 +11,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 
 class SendReminderEmail extends Mailable
 {
@@ -19,7 +21,8 @@ class SendReminderEmail extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-        public Corp $corp,
+        public string $corpName,
+        public string $corpAdministratorName,
         public string $target = ''
     )
     {
@@ -37,12 +40,12 @@ class SendReminderEmail extends Mailable
     }
 
     public function envelope(): Envelope
-{
-    return new Envelope(
-        from: new Address(setting('email'), setting('app_name')),
-        subject: 'تذكير من شركة الناسخ',
-    );
-}
+    {
+        return new Envelope(
+            from: new Address(setting('email'), setting('app_name')),
+            subject: 'تذكير من شركة الناسخ',
+        );
+    }
 
     /**
      * Get the attachments for the message.

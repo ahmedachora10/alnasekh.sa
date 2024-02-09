@@ -49,7 +49,7 @@
                                 <tr>
                                     <td
                                         style="color: #ca9475;text-align: center;font-size: 1.6rem;font-weight: 900;padding: 10px 0;border-radius: 5px;">
-                                        الأستاذ {{ $corp?->administrator_name }} المسؤول عن منشأة {{ $corp?->name }}
+                                        الأستاذ {{ $corpAdministratorName }} المسؤول عن منشأة {{ $corpName }}
                                         نبلغكم بأن {{ $target }}
 
                                         <span style="display:block; padding-top: 2rem">نشكر لكم ثقتكم</span>
@@ -147,7 +147,6 @@
                                 </tr>
                                 <tr>
                                     <td align="center" class="center-text">
-
 
                                         <x-social-media-botton key="facebook" />
                                         <x-social-media-botton key="twitter" />

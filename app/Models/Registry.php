@@ -12,7 +12,7 @@ use Laravel\Scout\Searchable;
 
 class Registry extends Model
 {
-    use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute, Searchable, DeleteNotification;
+    use HasFactory, ThumbnailModelAttribute, Searchable, DeleteNotification;
 
     protected $fillable = ['name', 'image'];
 

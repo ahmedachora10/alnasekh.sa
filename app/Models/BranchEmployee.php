@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
 
 class BranchEmployee extends Model
@@ -78,4 +79,14 @@ class BranchEmployee extends Model
         ];
     }
 
+    public function delete()
+    {
+        return DB::transaction(function () {
+            $employeeId = $this->id;
+            EmployeeHealthCardPaper::firstWhere('branch_employee_id', $employeeId)?->delete();
+            EmployeeMedicalInsurance::firstWhere('branch_employee_id', $employeeId)?->delete();
+
+        return parent::delete();
+        });
+    }
 }

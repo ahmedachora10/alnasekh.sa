@@ -38,12 +38,12 @@ class CorpBranch extends Model
 
     public function monthlyQuarterlyUpdates(): BelongsToMany {
         return $this->belongsToMany(MonthlyQuarterlyUpdate::class, 'branch_monthly_quarterly', 'corp_branch_id', 'monthly_quarterly_update_id')
-        ->as('updates')->withPivot(['date'])->withTimestamps();
+        ->as('updates')->withPivot(['id','date'])->withTimestamps();
     }
 
     public function registries(): BelongsToMany {
         return $this->belongsToMany(Registry::class, 'corp_branch_registry', 'corp_branch_id', 'registry_id',)->as('registry')->withPivot([
-            'registry_number', 'commercial_registration_number', 'start_date', 'end_date'
+            'id', 'registry_number', 'commercial_registration_number', 'start_date', 'end_date'
         ])->withTimestamps();
     }
 
