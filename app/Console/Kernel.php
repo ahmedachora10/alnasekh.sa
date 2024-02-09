@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Jobs\DateReminder;
+use App\Jobs\DateReminderJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->call(new DateReminder)->everyMinute();
+        // $schedule->call(new DateReminder)->everyMinute();
+        $schedule->job(new DateReminderJob())->everyMinute();
     }
 
     /**

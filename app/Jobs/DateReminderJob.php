@@ -2,6 +2,13 @@
 
 namespace App\Jobs;
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+
 use App\Enums\Status;
 use App\Models\BranchCertificate;
 use App\Models\BranchCivilDefenseCertificate;
@@ -9,28 +16,33 @@ use App\Models\BranchEmployee;
 use App\Models\BranchRecord;
 use App\Models\BranchSubscription;
 use App\Models\Corp;
-use App\Models\CorpBranchMonthlyQuarterlyUpdate;
-use App\Models\CorpBranchRegistry;
 use App\Models\EmployeeHealthCardPaper;
 use App\Models\EmployeeMedicalInsurance;
 use App\Models\MonthlyQuarterlyUpdate;
 use App\Models\Registry;
 use App\Models\User;
 use App\Notifications\UserActionNotification;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Storage;
 
-class DateReminder
+class DateReminderJob implements ShouldQueue
 {
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $notifications;
 
     /**
+     * Create a new job instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
      * Execute the job.
      */
-    public function __invoke()
+    public function handle() : void
     {
         // Get all Users that have an Admin role
         $admins = User::whereHasRole('admin')->get();
