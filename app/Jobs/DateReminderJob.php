@@ -160,7 +160,7 @@ class DateReminderJob implements ShouldQueue
 
                 Notification::send($admins, $peraperNotification);
 
-                // sleep(1);
+                sleep(2);
             });
 
         });
