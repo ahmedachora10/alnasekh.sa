@@ -96,11 +96,11 @@ class DateReminderJob implements ShouldQueue
                     }
 
                     if($employee && !$this->checkItemStatusNotification($employee, 'business_card_end_date')) {
-                        $notifications[] = $this->prepareNotificationData($employee, $corp, 'business_card_end_date', branch:$branch);
+                        $notifications[] = $this->prepareNotificationData($employee, $corp, 'business_card_end_date', $branch);
                     }
 
                     if($employee && !$this->checkItemStatusNotification($employee, 'contract_end_date')) {
-                        $notifications[] = $this->prepareNotificationData($employee, $corp, 'contract_end_date', branch:$branch);
+                        $notifications[] = $this->prepareNotificationData($employee, $corp, 'contract_end_date', $branch);
                     }
 
                     $healthCard = $employee->healthCardPaper;
@@ -128,7 +128,7 @@ class DateReminderJob implements ShouldQueue
 
                 foreach($monthlyAndQuarterlyUpdates as $item) {
                     if(!$this->checkItemStatusNotification($item->updates, 'date', MonthlyQuarterlyUpdate::class)) {
-                        $notifications[] = $this->prepareNotificationData($item, $corp, 'date', branch:$branch);
+                        $notifications[] = $this->prepareNotificationData($item, $corp, 'date', $branch);
                     }
                 }
 
@@ -136,7 +136,7 @@ class DateReminderJob implements ShouldQueue
 
                 foreach($registries as $registry) {
                     if(!$this->checkItemStatusNotification($registry->registry, className: Registry::class)) {
-                        $notifications[] = $this->prepareNotificationData($registry, $corp, 'end_date', branch:$branch);
+                        $notifications[] = $this->prepareNotificationData($registry, $corp, 'end_date', $branch);
                     }
                 }
             }
@@ -160,7 +160,7 @@ class DateReminderJob implements ShouldQueue
 
                 Notification::send($admins, $peraperNotification);
 
-                sleep(1);
+                // sleep(1);
             });
 
         });
