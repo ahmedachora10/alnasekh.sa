@@ -73,7 +73,7 @@ class DateReminderJob implements ShouldQueue
                 $record = $branch->record;
 
                 if($record && !$this->checkItemStatusNotification($record)) {
-                    $notifications[] = $this->prepareNotificationData($record, $corp);
+                    $notifications[] = $this->prepareNotificationData($record, $corp, branch: $branch);
                 }
 
                 $certificate = $branch->certificate;
