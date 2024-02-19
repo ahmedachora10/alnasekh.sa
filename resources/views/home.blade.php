@@ -135,7 +135,7 @@
                                     </ul>
                                     <div class="w-100 d-grid mt-4 pt-3">
                                         @if ($item->yearly_price == 0)
-                                            <a href="#"
+                                            <a href="{{ route('packages.request', $item) }}"
                                                 class="btn btn-label-primary">{{ trans('front.contact us') }}</a>
                                         @else
                                             <a href="{{ route('packages.request', $item) }}"

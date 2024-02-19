@@ -16,14 +16,38 @@ class StoreSubscribePackageRequest extends Component
 
     public Package $package;
 
+    public $isDefaultPackage = false;
+
     public function mount(Package $package) {
         $this->package = $package;
+
+        $this->isDefaultPackage = $package->yearly_price == 0;
     }
 
     public function save() {
-        $this->validate();
 
-        $this->package->subscribeRequests()->create($this->form->all());
+        if($this->isDefaultPackage) {
+            $fields = $this->form->only([
+                'company_name',
+                'administrator_name',
+                'email',
+                'phone',
+                'company_type',
+                'company_activity'
+            ]);
+
+            $rules = $this->form->getRules();
+            $rules = array_diff_key($rules, array_diff_key($rules, $fields));
+
+            $this->form->validate($rules);
+
+        } else {
+            $fields = $this->form->all();
+            $this->validate();
+        }
+
+
+        $this->package->subscribeRequests()->create($fields);
 
         Notification::send(User::whereHasRole('admin')->get(), new ClientActionNotification([
             'title' => '',

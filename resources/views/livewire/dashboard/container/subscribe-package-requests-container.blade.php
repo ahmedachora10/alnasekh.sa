@@ -1,6 +1,6 @@
 <section>
 
-    <x-dashboard.headline :title="trans('sidebar.job requests')" />
+    <x-dashboard.headline :title="trans('sidebar.package requests')" />
 
     <x-dashboard.tables.table1 :columns="['package', 'company name', 'administrator name', 'email', 'phone', 'city', 'type']">
 
@@ -9,8 +9,14 @@
                 placeholder="{{ trans('table.columns.search') }}" />
         </x-slot:title>
 
+        <x-slot:actions>
+            <label class=" badge bg-warning mx-3">
+                الاجمالي : {{ $requests->total() }}
+            </label>
+        </x-slot:actions>
+
         @forelse ($requests as $item)
-            <tr wire:loading.class="opacity-50">
+            <tr wire:loading.class="opacity-50" @class(['table-primary' => $item->package?->yearly_price == 0])>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item?->package?->get_title }}</td>
                 <td>{{ $item->company_name }}</td>

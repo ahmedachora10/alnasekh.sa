@@ -9,6 +9,12 @@
                 placeholder="{{ trans('table.columns.search') }}" />
         </x-slot:title> --}}
 
+        <x-slot:actions>
+            <label class=" badge bg-warning mx-3">
+                الاجمالي : {{ $subscribers->total() }}
+            </label>
+        </x-slot:actions>
+
         @forelse ($subscribers as $item)
             <tr wire:loading.class="opacity-50">
                 <td>{{ $item->id }}</td>

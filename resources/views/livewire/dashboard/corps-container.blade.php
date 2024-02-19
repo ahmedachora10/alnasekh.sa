@@ -28,6 +28,10 @@
                     <span class="tf-icons bx bx-plus"></span>
                     <span>{{ trans('common.create') }}</span>
                 </a>
+
+                <label class="btn btn-warning btn-sm me-3">
+                    الاجمالي : {{ $corps->total() }}
+                </label>
             </div>
 
         </x-slot:actions>

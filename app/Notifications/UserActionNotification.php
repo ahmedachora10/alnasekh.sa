@@ -26,14 +26,14 @@ class UserActionNotification extends Notification
     )
     {
         if($this->corp->send_reminder == true && ($this->email !== null || $this->email != '')) {
-            // Mail::to($this->email)->send(new SendReminderEmail($this->corp->name, $this->corp->administrator_name, $this->data['email_title']));
+            Mail::to($this->email)->queue(new SendReminderEmail($this->corp->name, $this->corp->administrator_name, $this->data['email_title']));
             // 'suliman@isbd5.com'
-            Artisan::call('email:send', [
-                'email' => $this->email,
-                'name' => $this->corp->name,
-                'administrator_name' => $this->corp->administrator_name,
-                '--title' => $this->data['email_title'],
-            ]);
+            // Artisan::call('email:send', [
+            //     'email' => $this->email,
+            //     'name' => $this->corp->name,
+            //     'administrator_name' => $this->corp->administrator_name,
+            //     '--title' => $this->data['email_title'],
+            // ]);
         }
     }
 
