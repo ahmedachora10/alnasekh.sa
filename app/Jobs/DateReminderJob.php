@@ -16,6 +16,7 @@ use App\Models\BranchEmployee;
 use App\Models\BranchRecord;
 use App\Models\BranchSubscription;
 use App\Models\Corp;
+use App\Models\CorpBranch;
 use App\Models\EmployeeHealthCardPaper;
 use App\Models\EmployeeMedicalInsurance;
 use App\Models\MonthlyQuarterlyUpdate;
@@ -30,6 +31,10 @@ class DateReminderJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $notifications;
+
+    private Corp $corp;
+    private CorpBranch $corpBranch;
+    private BranchEmployee $employee;
 
     /**
      * Create a new job instance.
@@ -67,9 +72,14 @@ class DateReminderJob implements ShouldQueue
                 $notifications[] = $this->prepareNotificationData($corp);
             }
 
+            $this->corp = $corp;
+
             $corpBranches = $corp->branches;
 
             foreach($corpBranches as $branch) {
+
+                $this->corpBranch = $branch;
+
                 $record = $branch->record;
 
                 if($record && !$this->checkItemStatusNotification($record)) {
@@ -91,6 +101,9 @@ class DateReminderJob implements ShouldQueue
                 $employees = $branch->employees;
 
                 foreach($employees as $employee) {
+
+                    $this->employee = $employee;
+
                     if($employee && !$this->checkItemStatusNotification($employee)) {
                         $notifications[] = $this->prepareNotificationData($employee, $corp, branch:$branch);
                     }
@@ -117,6 +130,7 @@ class DateReminderJob implements ShouldQueue
                 }
 
                 $subscriptions = $branch->subscriptions;
+
 
                 foreach($subscriptions as $subscription) {
                     if(!$this->checkItemStatusNotification($subscription)) {
@@ -188,8 +202,8 @@ class DateReminderJob implements ShouldQueue
             'image' => !empty($corp->thumbnail) ? asset($corp->thumbnail) : '',
             'icon' => $status->icon(),
             'color' => $status->color(),
-            'title' => $this->getNotificationTitle($item, $status->name(), $columnName),
-            'content' => $item?->name,
+            'title' => $this->getNotificationTitle($item, $status->name(), $columnName),// . ' للمنشأة ' . $this->corp->name,
+            'content' => $this->corp->name,//$this->getPrepareContent($item, $columnName), //$item?->name,
             'owner' => $corp->administrator_name,
             $columnName => now()->parse($columnValue)->format('Y-m-d'),
             'model' => get_class($item),
@@ -205,13 +219,30 @@ class DateReminderJob implements ShouldQueue
             Corp::class => 'المنشأة ' . $status,
             BranchRecord::class => 'السجل ' . $status,
             BranchCivilDefenseCertificate::class => 'تصريح الدفاع المدني ' . $status,
-            BranchSubscription::class => 'اشتراك ' . $item->subscription_type->name() . ' ' . $status,
+            BranchSubscription::class => 'اشتراك "' . $item->subscription_type->name() . '" ' . $status,
             BranchCertificate::class => 'الترخيص ' . $status,
             Registry::class => $item->name . ' ' . $status,
-            MonthlyQuarterlyUpdate::class => 'التحديثات الشهرية والربع سنوية ' . $status,
-            BranchEmployee::class => $this->getNotificationTitleForEmployee($columnName) . ' ' . $status,
-            EmployeeMedicalInsurance::class => 'التأمين الطبي ' . $status,
-            EmployeeHealthCardPaper::class => 'الكرت الصحي ' . $status,
+            MonthlyQuarterlyUpdate::class => 'التحديثات الشهرية والربع سنوية "' . $item->entity_name . '" ' . $status,
+            BranchEmployee::class => $this->getNotificationTitleForEmployee($columnName) . ' للموظف "' . $this->employee->name . '" ' . $status,
+            EmployeeMedicalInsurance::class => 'التأمين الطبي للموظف ' . $this->employee->name . '" ' . $status,
+            EmployeeHealthCardPaper::class => 'الكرت الصحي للموظف "' . $this->employee->name . '" ' . $status,
+            default => '',
+        };
+    }
+
+    private function getPrepareContent($item, $columnName)
+    {
+        return match (get_class($item)) {
+            Corp::class => 'المنشأة ' . $item->name,
+            BranchRecord::class => 'السجل  ' . $this->corpBranch->name,
+            BranchCivilDefenseCertificate::class => 'تصريح الدفاع المدني رقم ' . $item->ministry_of_interior_number,
+            BranchSubscription::class => 'اشتراك ' . $item->subscription_type->name(),
+            BranchCertificate::class => 'الترخيص رقم ' . $item->certificate_number,
+            Registry::class => 'الترخيص ' . $item->name,
+            MonthlyQuarterlyUpdate::class => 'التحديثات الشهرية والربع سنوية ' . $item->entity_name,
+            BranchEmployee::class => $this->getNotificationTitleForEmployee($columnName),
+            EmployeeMedicalInsurance::class => 'التأمين الطبي',
+            EmployeeHealthCardPaper::class => 'الكرت الصحي',
             default => '',
         };
     }
@@ -237,15 +268,15 @@ class DateReminderJob implements ShouldQueue
     {
         return match (get_class($item)) {
             Corp::class => 'الاشتراك في منصة ' . setting('app_name') . ' ' . $status,
-            BranchRecord::class => 'السجل رقم ' . $item->branch->registration_number . ' ' . $status,
+            BranchRecord::class => 'السجل رقم ' . $this->corpBranch->registration_number . ' ' . $status,
             BranchCivilDefenseCertificate::class => 'تصريح الدفاع المدني رقم ' . $item->ministry_of_interior_number . ' ' . $status,
             BranchSubscription::class => 'اشتراك ' . $item->subscription_type->name() . ' ' . $status,
             BranchCertificate::class => 'الترخيص رقم ' . $item->certificate_number . ' ' . $status,
             Registry::class => 'الترخيص ' . $item->name . ' رقم ' . $item->registry->registry_number ?? ' - ' . ' ' . $status,
             MonthlyQuarterlyUpdate::class => 'التحديثات الشهرية والربع سنوية  "'. $item->entity_name . '" ' . $status,
             BranchEmployee::class => $this->getNotificationTitleForEmployee($columnName) . ' للموظف ' . $item->name . ' ' . $status,
-            EmployeeMedicalInsurance::class => 'التأمين الطبي للموظف ' . $item->employee?->name . ' ' . $status,
-            EmployeeHealthCardPaper::class => 'الكرت الصحي للموظف ' . $item->employee?->name . ' ' . $status,
+            EmployeeMedicalInsurance::class => 'التأمين الطبي للموظف ' . $this->employee?->name . ' ' . $status,
+            EmployeeHealthCardPaper::class => 'الكرت الصحي للموظف ' . $this->employee?->name . ' ' . $status,
             default => '',
         };
     }

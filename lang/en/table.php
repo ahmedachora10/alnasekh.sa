@@ -137,6 +137,7 @@ return [
         'company type' => 'Company Type',
         'company city' => 'City of the Company',
         'number of branches' => 'Number Of Branches',
+        'corp' => 'Corp',
     ],
     'empty' => 'No Records'
 ];

@@ -131,6 +131,7 @@ return [
         'company type' => 'نوع الشركة',
         'company city' => 'مدينة الشركة',
         'number of branches' => 'عدد الفروع',
+        'corp' => 'المنشأة',
 
     ],
     'empty' => 'لا يوجد عناصر لعرضها',

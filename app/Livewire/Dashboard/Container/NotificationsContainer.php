@@ -23,14 +23,28 @@ class NotificationsContainer extends Component
     }
 
     public function makeItRead($notification) {
-        if(!isset($notification['id'])) return false;
+        if(!isset($notification['id']) && !isset($notification['data']['id'])) return false;
 
-        DB::table('notifications')->where('id', $notification['id'])->update(['read_at' => now()]);
+        $data = $notification['data'];
+        DB::table('notifications')
+        ->whereJsonContains('data->id', $data['id'])
+        ->whereJsonContains('data->model', $data['model'])
+        ->update(['read_at' => now()]);
     }
 
-    public function destroy($notificationId) {
-        dd($notificationId);
-        DB::table('notifications')->where('id', $notificationId)?->delete();
+    public function delete($notification) {
+        if(!isset($notification['id']) && !isset($notification['data']['id'])) return false;
+
+        $data = $notification['data'];
+
+            DB::table('notifications')
+            ->whereJsonContains('data->id', $data['id'])
+            ->whereJsonContains('data->model', $data['model'])
+            ?->delete();
+
+            session()->put('success', trans('message.delete'));
+            $this->dispatch('refresh-alert');
+
     }
 
     public function render()

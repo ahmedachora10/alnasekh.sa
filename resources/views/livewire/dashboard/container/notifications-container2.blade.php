@@ -3,7 +3,7 @@
     <x-dashboard.headline :title="trans('common.notifications')" />
 
     <x-dashboard.cards.sample column="col-12">
-        <x-dashboard.tables.table1 :columns="['image', 'title', 'content', 'created at', 'status']" :withActions="false">
+        <x-dashboard.tables.table1 :columns="['image', 'title', 'corp', 'created at', 'status']" :withActions="false">
 
             <x-slot:title>
 
@@ -47,6 +47,11 @@
                             <a href="javascript:void(0)" class="dropdown-notifications-read">
                                 <span class="badge badge-dot bg-{{ $color }}"></span>
                             </a>
+                            <a href="#!" wire:click="makeItRead({{ $item }})"
+                                class="dropdown-notifications-archive"><span
+                                    class="bx bx-check-circle text-success"></span></a>
+                            <a href="#!" wire:click="delete({{ $item }})" wire:confirm
+                                class="dropdown-notifications-archive"><span class="bx bx-trash text-danger"></span></a>
                         </div>
                     </td>
                 </tr>
