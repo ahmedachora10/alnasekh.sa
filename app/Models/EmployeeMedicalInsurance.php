@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Models\Interfaces\ObservationColumnsInterface;
 use App\Traits\DeleteNotification;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\SetStatusAttribute;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class EmployeeMedicalInsurance extends Model
+class EmployeeMedicalInsurance extends Model implements ObservationColumnsInterface
 {
     use HasFactory, ModelBasicAttributeValue, SetStatusAttribute, DeleteNotification;
 
@@ -39,5 +40,12 @@ class EmployeeMedicalInsurance extends Model
 
     public function employee() : BelongsTo {
         return $this->belongsTo(BranchEmployee::class, 'branch_employee_id');
+    }
+
+    public function observationColumns(): array
+    {
+        return [
+            'end_date',
+        ];
     }
 }

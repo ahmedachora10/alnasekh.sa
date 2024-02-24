@@ -2,7 +2,19 @@
 
 namespace App\Providers;
 
+use App\Models\BranchCertificate;
+use App\Models\BranchCivilDefenseCertificate;
+use App\Models\BranchEmployee;
+use App\Models\BranchRecord;
+use App\Models\BranchSubscription;
+use App\Models\Corp;
+use App\Models\CorpBranchMonthlyQuarterlyUpdate;
+use App\Models\CorpBranchRegistry;
+use App\Models\EmployeeHealthCardPaper;
+use App\Models\EmployeeMedicalInsurance;
+use App\Models\MonthlyQuarterlyUpdate;
 use App\Models\Role;
+use App\Observers\DeleteNotificationObserver;
 use App\Observers\RoleObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -24,6 +36,16 @@ class EventServiceProvider extends ServiceProvider
 
     protected $observers = [
         Role::class => [RoleObserver::class],
+        Corp::class => [DeleteNotificationObserver::class],
+        BranchSubscription::class => [DeleteNotificationObserver::class],
+        BranchEmployee::class => [DeleteNotificationObserver::class],
+        BranchRecord::class => [DeleteNotificationObserver::class],
+        BranchRecord::class => [DeleteNotificationObserver::class],
+        BranchCertificate::class => [DeleteNotificationObserver::class],
+        BranchCivilDefenseCertificate::class => [DeleteNotificationObserver::class],
+        EmployeeMedicalInsurance::class => [DeleteNotificationObserver::class],
+        EmployeeHealthCardPaper::class => [DeleteNotificationObserver::class],
+        EmployeeHealthCardPaper::class => [DeleteNotificationObserver::class],
     ];
 
     /**

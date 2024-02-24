@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\HasBranches;
+use App\Models\Interfaces\ObservationColumnsInterface;
 use App\Traits\DeleteNotification;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\ThumbnailModelAttribute;
@@ -37,7 +38,7 @@ use Laravel\Scout\Searchable;
  * @property-read CorpReport[]|Collection $reports
  */
 
-class Corp extends Model
+class Corp extends Model implements ObservationColumnsInterface
 {
     use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute, Searchable, DeleteNotification;
 
@@ -107,5 +108,10 @@ class Corp extends Model
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
         ];
+    }
+
+    public function observationColumns(): array
+    {
+        return ['end_date'];
     }
 }

@@ -73,7 +73,22 @@ class StoreRegistry extends Component
     }
 
     private function update() {
-        $this->branch->registries()->updateExistingPivot($this->registry->id, $this->form->all());
+        // $this->branch->registries()->updateExistingPivot($this->registry->id, $this->form->all());
+
+
+        $registry = CorpBranchRegistry::where('registry_id', $this->registry->id)
+                    ->where('corp_branch_id', $this->branch->id)->first();
+        $oldEndDate = $registry->end_date;
+
+        $registry->update($this->form->all());
+        $registry->fireUpdatedEvent($oldEndDate);
+        // if($registry) {
+        //     DB::table('notifications')
+        //         ->whereJsonContains("data->id", $registry->id)
+        //         ->whereJsonDoesntContain("data->date", 'date')
+        //         ->whereJsonContains('data->model', $registry::class)?->delete();
+        // }
+
         session()->put('success', trans('message.update'));
         $this->dispatch('refresh-dashboard');
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Models\Interfaces\ObservationColumnsInterface;
 use App\Traits\DeleteNotification;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\SetStatusAttribute;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class BranchCivilDefenseCertificate extends Model
+class BranchCivilDefenseCertificate extends Model implements ObservationColumnsInterface
 {
     use HasFactory, ModelBasicAttributeValue, DeleteNotification;
 
@@ -36,5 +37,10 @@ class BranchCivilDefenseCertificate extends Model
 
     public function branch() : BelongsTo {
         return $this->belongsTo(CorpBranch::class, 'corp_branch_id');
+    }
+
+    public function observationColumns(): array
+    {
+        return ['end_date'];
     }
 }

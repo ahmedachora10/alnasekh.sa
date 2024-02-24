@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Branch;
 
 use App\Livewire\Forms\MedicalInsuranceForm;
 use App\Models\BranchEmployee;
+use App\Models\EmployeeMedicalInsurance;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -18,7 +19,9 @@ class StoreMedicalInsurance extends Component
         $this->validate();
 
         if($this->employee->medicalInsurance) {
-            $this->employee->medicalInsurance()->update($this->form->all());
+            // $this->employee->medicalInsurance()->update($this->form->all());
+            EmployeeMedicalInsurance::firstWhere('branch_employee_id', $this->employee->id)->update($this->form->all());
+
             session()->put('success', trans('message.update'));
         } else {
             $this->employee->medicalInsurance()->create($this->form->all());

@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Branch;
 
 use App\Livewire\Forms\HealthCardForm;
 use App\Models\BranchEmployee;
+use App\Models\EmployeeHealthCardPaper;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -18,7 +19,8 @@ class StoreHealthCard extends Component
         $this->validate();
 
         if($this->employee->healthCardPaper) {
-            $this->employee->healthCardPaper()->update($this->form->all());
+            // $this->employee->healthCardPaper()->update($this->form->all());
+            EmployeeHealthCardPaper::firstWhere('branch_employee_id', $this->employee->id)->update($this->form->all());
             session()->put('success', trans('message.update'));
         } else {
             $this->employee->healthCardPaper()->create($this->form->all());

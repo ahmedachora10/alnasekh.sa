@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard\Branch;
 use App\Models\CorpBranch;
 use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\MonthlyQuarterlyUpdate;
+use App\Observers\DeleteNotificationObserver;
 use App\Traits\Livewire\Message;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Json;
@@ -43,7 +44,15 @@ class UpdateMonthlyQuarterlyUpdate extends Component
     public function update() {
         $this->validate();
 
-        CorpBranchMonthlyQuarterlyUpdate::find($this->pivotId)?->update(['date' => $this->date]);
+        $update = CorpBranchMonthlyQuarterlyUpdate::find($this->pivotId);
+        $oldDate = $update->date;
+        $update?->update(['date' => $this->date]);
+        $update->fireUpdatedEvent($oldDate);
+
+        // DB::table('notifications')
+        //     ->whereJsonContains("data->id", $update->id)
+        //     ->whereJsonDoesntContain("data->date", 'date')
+        //     ->whereJsonContains('data->model', $update::class)?->delete();
 
         $this->fireMessage();
 

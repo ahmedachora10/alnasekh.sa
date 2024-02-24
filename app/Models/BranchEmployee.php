@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Nationalities;
+use App\Models\Interfaces\ObservationColumnsInterface;
 use App\Traits\DeleteNotification;
 use App\Traits\ModelBasicAttributeValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
 
-class BranchEmployee extends Model
+class BranchEmployee extends Model implements ObservationColumnsInterface
 {
     use HasFactory, ModelBasicAttributeValue, Searchable, DeleteNotification;
 
@@ -86,7 +87,16 @@ class BranchEmployee extends Model
             EmployeeHealthCardPaper::firstWhere('branch_employee_id', $employeeId)?->delete();
             EmployeeMedicalInsurance::firstWhere('branch_employee_id', $employeeId)?->delete();
 
-        return parent::delete();
+            return parent::delete();
         });
+    }
+
+    public function observationColumns(): array
+    {
+        return [
+            'end_date',
+            'business_card_end_date',
+            'contract_end_date',
+        ];
     }
 }
