@@ -1,13 +1,7 @@
 @php
     $notifications = collect(
-        auth()
-            ->user()
-            ->hasRole('admin')
-            ? auth()
-                ->user()
-                ?->unreadNotifications()
-                ->where('type', 'App\Notifications\ClientActionNotification')
-                ->get()
+        auth()->user()->hasRole('admin')
+            ? auth()->user()?->unreadNotifications()->where('type', 'App\Notifications\ClientActionNotification')->get()
             : [],
     )->pluck('data');
 
@@ -61,6 +55,10 @@
                 @endhasPermission
                 @hasPermission('corp.updates and registries')
                     <x-dashboard.sidebar.link :title="trans('sidebar.registries')" :link="route('registries.index')" />
+                @endhasPermission
+
+                @hasPermission('corp.updates and registries')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.ministries')" :link="route('ministries.index')" />
                 @endhasPermission
 
             </x-dashboard.sidebar.link>

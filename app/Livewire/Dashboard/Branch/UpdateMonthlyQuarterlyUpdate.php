@@ -58,6 +58,7 @@ class UpdateMonthlyQuarterlyUpdate extends Component
 
         $this->dispatch('refresh-dashboard');
         $this->dispatch('close-modal', target: '#updateMonthlyQuarterlyForm');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
     }
 
     #[On('delete-monthly-quarterly-from-branch')]

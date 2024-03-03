@@ -101,4 +101,5 @@ return [
     'sar' => 'SAR',
 
     'subscribe package request' => 'Subscribe Request',
+    'select the element' => 'Select The Element',
 ];

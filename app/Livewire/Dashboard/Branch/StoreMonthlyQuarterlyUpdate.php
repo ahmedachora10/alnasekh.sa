@@ -61,6 +61,8 @@ class StoreMonthlyQuarterlyUpdate extends Component
         $this->reset('date');
         $this->dispatch('refresh-alert');
         $this->dispatch('refresh-dashboard');
+
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
     }
 
     private function delete($monthlyQuarterlyUpdate) {

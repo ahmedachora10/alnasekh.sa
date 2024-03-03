@@ -39,6 +39,7 @@ class UpdateCertificate extends Component
 
         $this->dispatch('refresh-dashboard');
         $this->dispatch('close-modal', target: '#updateCertificateForm');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
     }
 
 

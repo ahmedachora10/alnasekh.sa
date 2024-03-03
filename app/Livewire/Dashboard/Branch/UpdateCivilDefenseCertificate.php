@@ -38,6 +38,7 @@ class UpdateCivilDefenseCertificate extends Component
 
         $this->dispatch('refresh-dashboard');
         $this->dispatch('close-modal', target: '#updateCivilDefenseCertificateForm');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
     }
 
 

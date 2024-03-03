@@ -1,6 +1,8 @@
-@props(['type' => 'text', 'name', 'title', 'value' => null, 'placeholder' => null])
+@props(['type' => 'text', 'name', 'title' => null, 'value' => null, 'placeholder' => null])
 
-<x-dashboard.label :for="$name">{{ $title }}</x-dashboard.label>
+@if ($title)
+    <x-dashboard.label :for="$name">{{ $title }}</x-dashboard.label>
+@endif
 
 <x-dashboard.input {{ $attributes }} :type="$type" :name="$name" :value="$value ?? old($name)" :id="$name"
     :placeholder="$placeholder" />

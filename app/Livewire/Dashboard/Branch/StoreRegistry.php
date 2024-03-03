@@ -40,6 +40,7 @@ class StoreRegistry extends Component
         $this->dispatch('refresh-alert');
         $this->dispatch('close-modal');
         $this->dispatch('refresh-branch-registries');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
 
         $this->form->reset('start_date', 'end_date');
     }

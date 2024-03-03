@@ -37,6 +37,7 @@ class StoreRegistryFromBranch extends Component
         $this->dispatch('close-modal');
 
         $this->form->reset('start_date', 'end_date');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
     }
 
     #[On('refresh-store-registry-from-branch')]

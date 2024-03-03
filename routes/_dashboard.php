@@ -56,6 +56,10 @@ Route::middleware(['auth'])->group(function ()
     //     Route::post('/', 'store')->name('store');
     // });
 
+    Route::get('ministries', function () {
+        return view('admin.ministries');
+    })->name('ministries.index');
+
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->middleware('verified')->name('dashboard');
@@ -121,5 +125,5 @@ Route::middleware(['auth'])->group(function ()
     Route::resource('job-cities', JobCityController::class);
     Route::resource('reviews', ReviewController::class)->only(['index', 'destroy']);
     Route::resource('services', ServiceController::class);
-    Route::get('subscribe-package-requests', SubscribePackageRequestsContainer::class)->name('packages.requests');;
+    Route::get('subscribe-package-requests', SubscribePackageRequestsContainer::class)->name('packages.requests');
 });

@@ -21,4 +21,16 @@ class CorpReport extends Model
     public function corp() : BelongsTo {
         return $this->belongsTo(Corp::class, 'corp_id');
     }
+
+    public function ministryModel() : BelongsTo {
+        return $this->belongsTo(Ministry::class, 'ministry');
+    }
+
+    public function entityModel() : BelongsTo {
+        return $this->belongsTo(Entity::class, 'entity');
+    }
+
+    public function missionModel() : BelongsTo {
+        return $this->belongsTo(Mission::class, 'mission');
+    }
 }

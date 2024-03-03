@@ -5,6 +5,9 @@ namespace App\Livewire\Dashboard;
 use App\Livewire\Forms\ReportForm;
 use App\Models\Corp;
 use App\Models\CorpReport;
+use App\Models\Entity;
+use App\Models\Ministry;
+use App\Models\Mission;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -15,6 +18,12 @@ class StoreReport extends Component
     public Corp $corp;
 
     public ?CorpReport $report = null;
+
+    public $ministries = [];
+
+    public function mount() {
+        $this->ministries = Ministry::all();
+    }
 
     public function save() {
         $this->validate();
@@ -58,6 +67,9 @@ class StoreReport extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.store-report');
+        return view('livewire.dashboard.store-report', [
+            'entities' => Entity::where('ministry_id', $this->form?->ministry)->get(),
+            'missions' => Mission::where('entity_id', $this->form?->entity)->get(),
+        ]);
     }
 }

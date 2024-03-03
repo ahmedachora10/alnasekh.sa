@@ -19,13 +19,13 @@
                         {{ $item->id }}
                     </td>
                     <td>
-                        <x-dashboard.badge color="info">{{ $item->ministry }}</x-dashboard.badge>
+                        <x-dashboard.badge color="info">{{ $item->ministryModel?->name }}</x-dashboard.badge>
                     </td>
                     <td>
-                        <x-dashboard.badge color="primary">{{ $item->entity }}</x-dashboard.badge>
+                        <x-dashboard.badge color="primary">{{ $item->entityModel?->name }}</x-dashboard.badge>
                     </td>
                     <td>
-                        <span class="fw-medium lh-1">{{ $item->mission }}</span>
+                        <span class="fw-medium lh-1">{{ $item->missionModel?->content }}</span>
                     </td>
                     <td>
                         <span class="fw-medium lh-1">{{ $item->created_at->format('Y-m-d H:i:s') }}</span>

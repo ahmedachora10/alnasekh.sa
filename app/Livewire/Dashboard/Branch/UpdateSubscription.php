@@ -21,7 +21,6 @@ class UpdateSubscription extends Component
         $this->subscription = $subscription;
 
         $this->form->type = $subscription->type;
-        $this->form->status = $subscription->status;
         $this->form->start_date = $subscription->date('start_date');
         $this->form->end_date = $subscription->date('end_date');
 
@@ -35,6 +34,7 @@ class UpdateSubscription extends Component
 
         $this->dispatch('refresh-dashboard');
         $this->dispatch('close-modal', target: '#updateSubscriptoinModal');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
     }
 
     public function render()

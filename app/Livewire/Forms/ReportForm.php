@@ -8,12 +8,12 @@ use Livewire\Form;
 
 class ReportForm extends Form
 {
-    #[Rule('required|string')]
-    public ?string $ministry;
+    #[Rule('required|integer|exists:ministries,id')]
+    public ?string $ministry = null;
 
-    #[Rule('required|string')]
-    public ?string $entity;
+    #[Rule('required|integer|exists:entities,id')]
+    public ?string $entity = null;
 
-    #[Rule('required|string')]
-    public ?string $mission;
+    #[Rule('required|integer|exists:missions,id')]
+    public ?string $mission = null;
 }

@@ -37,6 +37,7 @@ class UpdateRecord extends Component
 
         $this->dispatch('refresh-dashboard');
         $this->dispatch('close-modal', target: '#updateRecordForm');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
     }
 
     public function render()

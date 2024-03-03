@@ -36,6 +36,7 @@ class StoreEmployee extends Component
         $this->dispatch('close-modal');
         $this->dispatch('refresh-alert');
         $this->dispatch('refresh-employees');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
         $this->form->reset();
     }
 

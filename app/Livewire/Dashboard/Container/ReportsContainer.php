@@ -25,7 +25,9 @@ class ReportsContainer extends Component
     public function render()
     {
         return view('livewire.dashboard.container.reports-container', [
-            'reports' => CorpReport::where('corp_id', $this->corp->id)->paginate(setting('pagination') ?? 8)
+            'reports' => CorpReport::with(['ministryModel', 'entityModel', 'missionModel'])
+            ->where('corp_id', $this->corp->id)
+            ->paginate(setting('pagination') ?? 8)
         ]);
     }
 }

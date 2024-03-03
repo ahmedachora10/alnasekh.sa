@@ -101,4 +101,5 @@ return [
     'order now' => 'اطلب الان',
     'sar' => 'ر.س',
     'subscribe package request' => 'طلب الاشتراك',
+    'select the element' => 'حدد العنصر',
 ];

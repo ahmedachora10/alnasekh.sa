@@ -29,4 +29,7 @@ return [
     'reviews' => 'التقييمات',
     'services' => 'الخدمات',
     'package requests' => 'طلبات الاشتراك',
+    'missions' => 'المهام',
+    'entities' => 'الجهات',
+    'ministries' => 'الوزارات',
 ];

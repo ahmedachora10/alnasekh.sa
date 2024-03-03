@@ -52,6 +52,8 @@ class StoreSubscriptionFromBranch extends Component
         $this->dispatch('refresh-alert');
         $this->dispatch('$refresh');
         $this->dispatch('refresh-dashboard');
+        $this->dispatch('close-modal');
+        $this->dispatch('open-modal', target: '#createCorpReportModal');
     }
 
     #[On('delete-branch-subscription')]

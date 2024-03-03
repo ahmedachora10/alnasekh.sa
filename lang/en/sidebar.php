@@ -30,4 +30,7 @@ return [
     'services' => 'Services',
 
     'package requests' => 'Subscription Requests',
+    'missions' => 'Missions',
+    'entities' => 'Entities',
+    'ministries' => 'Ministries',
 ];
