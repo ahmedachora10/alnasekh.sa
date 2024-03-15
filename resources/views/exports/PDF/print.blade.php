@@ -2,6 +2,7 @@
     @if ($title !== '')
         <h4 class="text-primary text-center">{{ $title }}</h4>
     @endif
+
     <x-dashboard.tables.table1 :responsive="false" :withActions="false" :withId="false" :translate="false"
         :columns="$export->headings()">
         @forelse ($data as $item)
