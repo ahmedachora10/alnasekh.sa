@@ -27,7 +27,7 @@ class ExportController extends Controller
 
         $title = 'المنشأة';
 
-        return view('exports.pdf.print_', compact('data', 'export', 'title'));
+        return view('exports.print.common', compact('data', 'export', 'title'));
     }
 
     public function employees(Corp $corp) {
@@ -51,7 +51,7 @@ class ExportController extends Controller
 
         $title = 'التحديثات الشهرية والربع السنوية';
 
-        return view('exports.pdf.print_', compact('data', 'export', 'title'));
+        return view('exports.print.common', compact('data', 'export', 'title'));
     }
 
     public function branches(Corp $corp) {
@@ -62,7 +62,7 @@ class ExportController extends Controller
 
         $title = 'الفروع';
 
-        return view('exports.pdf.print_', compact('data', 'export', 'title'));
+        return view('exports.print.common', compact('data', 'export', 'title'));
     }
 
     public function subscriptions(Corp $corp) {
@@ -73,7 +73,7 @@ class ExportController extends Controller
 
         $title = 'الاشتراكات';
 
-        return view('exports.pdf.print_', compact('data', 'export', 'title'));
+        return view('exports.print.common', compact('data', 'export', 'title'));
     }
 
     public function certificates(Corp $corp) {
@@ -84,7 +84,7 @@ class ExportController extends Controller
 
         $title = 'السجلات';
 
-        return view('exports.pdf.print_', compact('data', 'export', 'title'));
+        return view('exports.print.common', compact('data', 'export', 'title'));
     }
 
     public function registries(Corp $corp) {
@@ -95,7 +95,7 @@ class ExportController extends Controller
 
         $title = 'الرخص';
 
-        return view('exports.pdf.print_', compact('data', 'export', 'title'));
+        return view('exports.print.common', compact('data', 'export', 'title'));
     }
 
     public function records(Corp $corp) {
@@ -106,7 +106,7 @@ class ExportController extends Controller
 
         $title = 'الرخص';
 
-        return view('exports.pdf.print_', compact('data', 'export', 'title'));
+        return view('exports.print.common', compact('data', 'export', 'title'));
     }
 
     public function reports(Corp $corp) {
@@ -117,6 +117,6 @@ class ExportController extends Controller
 
         $title = 'سجل العمليات';
 
-        return view('exports.pdf.print_', compact('data', 'export', 'title'));
+        return view('exports.print.common', compact('data', 'export', 'title'));
     }
 }
