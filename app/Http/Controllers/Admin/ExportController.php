@@ -41,7 +41,7 @@ class ExportController extends Controller
 
         $title = 'الموظفين';
 
-        return view('exports.pdf.employees', compact('data', 'export', 'title'));
+        return view('exports.print.employees', compact('data', 'export', 'title'));
     }
 
     public function monthlyQuarterlyMonthly(Corp $corp) {
