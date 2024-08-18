@@ -600,6 +600,7 @@
 
     <script src="{{ asset('assets/vendor/js/nouislider.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/swiper.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Theme JS-->
     <script src="{{ asset('assets/js/front-main.js') }}"></script>
@@ -627,6 +628,18 @@
 
     @stack('scripts')
     @livewireScripts
+
+    <script>
+        Livewire.on('alert-message-prompte', ({
+        message
+        }) => swal({
+            title: '',
+            text: message,
+            icon: "success",
+            button: false,
+            timer: 2000,
+        }));
+    </script>
 </body>
 
 </html>
