@@ -31,4 +31,5 @@ return [
     'click here' => 'اضغط هنا',
     'reviews' => 'التقييمات',
     'new review' => 'تقييم جديد',
+    'job request' => 'طلب وظيفة'
 ];

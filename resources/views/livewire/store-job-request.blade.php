@@ -56,6 +56,7 @@
 
         <x-dashboard.label>{{ trans('table.columns.job city') }}</x-dashboard.label>
         <select name="job_city" id="job_city" class="form-control" wire:model.defer="form.job_city">
+            <option value="0">{{trans('select a city')}}</option>
             @foreach ($jobCities as $city)
                 <option value="{{ $city->id }}">{{ $city->get_title }}</option>
             @endforeach

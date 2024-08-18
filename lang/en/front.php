@@ -31,4 +31,5 @@ return [
     'click here' => 'Click here',
     'reviews' => 'Reviews',
     'new review' => 'New Review',
+    'job request' => 'Job Request'
 ];

@@ -57,9 +57,9 @@ class StoreJobRequest extends Component
                 'model' => JobRequest::class,
             ]));
 
-            session()->flash('success', trans('message.create'));
             $this->form->reset();
             $this->reset('attachments');
+            session()->flash('success', trans('message.create'));
         });
 
         $this->dispatch('close-modal', target:'#jobsForm');
