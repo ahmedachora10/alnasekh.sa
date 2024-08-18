@@ -60,7 +60,7 @@ class StoreJobRequest extends Component
             $this->form->reset();
             $this->reset('attachments');
             // session()->flash('success', trans('message.create'));
-            $this->dispatch('alert-message-prompte', message: trans('message.create'));
+            $this->dispatch('alert-message-prompte', message: 'خليها تم التقديم بنجاح');
         });
 
         $this->dispatch('close-modal', target:'#jobsForm');
