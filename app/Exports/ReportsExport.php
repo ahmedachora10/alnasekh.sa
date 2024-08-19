@@ -40,9 +40,9 @@ class ReportsExport implements FromQuery, ShouldAutoSize, WithHeadings, WithEven
         return [
             $item->id,
             $item->corp?->name,
-            $item->ministry,
-            $item->entity,
-            $item->mission,
+            $item->ministry?->name,
+            $item->entity?->name,
+            $item->mission?->content,
             $item->created_at?->format('Y-m-d'),
         ];
     }
