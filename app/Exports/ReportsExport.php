@@ -20,7 +20,7 @@ class ReportsExport implements FromQuery, ShouldAutoSize, WithHeadings, WithEven
 
     public function query()
     {
-        return CorpReport::with('corp')->where('corp_id', $this->corpId);
+        return CorpReport::with(['corp', 'ministryModel', 'entityModel', 'missionModel'])->where('corp_id', $this->corpId);
     }
 
     public function headings(): array
@@ -40,9 +40,9 @@ class ReportsExport implements FromQuery, ShouldAutoSize, WithHeadings, WithEven
         return [
             $item->id,
             $item->corp?->name,
-            $item->ministry?->name,
-            $item->entity?->name,
-            $item->mission?->content,
+            $item->ministryModel?->name,
+            $item->entityModel?->name,
+            $item->missionModel?->content,
             $item->created_at?->format('Y-m-d'),
         ];
     }
