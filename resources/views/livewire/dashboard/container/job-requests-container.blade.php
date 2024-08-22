@@ -82,7 +82,7 @@
                     </p>
                 </div>
                 <div class="col-sm-5 col-12">
-                    <p class="text-nowrap"><i class="bx bx-paragraph bx-sm me-2"></i>{{ $jobRequest?->excerpt }}</p>
+                    <p class="text-wrap"><i class="bx bx-paragraph bx-sm me-2"></i>{{ $jobRequest?->excerpt }}</p>
                     <p class="text-nowrap"><i
                             class="bx bx-category bx-sm me-2"></i>{{ $jobRequest?->jobPost?->get_title ?? '-' }}
                     </p>
