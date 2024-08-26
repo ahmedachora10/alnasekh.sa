@@ -102,12 +102,12 @@
                     <span class="custom-option-header pb-0">
                         <span class="fw-medium">{{ trans('table.columns.cv') }}</span>
                         <div>
-                            <a class="badge bg-label-primary" href="{{ asset('storage/' . $jobRequest?->file) }}"
+                            <a class="badge bg-label-primary" href="{{ asset('storage/' . $jobRequest?->cv) }}"
                                 target="_blank"
-                                download="{{ str($jobRequest?->file)->replace('jobs/attachments/', '') }}">
+                                download="{{ str($jobRequest?->cv)->replace('jobs/attachments/', '') }}">
                                 <i class="bx bx-download"></i>
                             </a>
-                            <a class="badge bg-label-danger" href="{{ asset('storage/' . $jobRequest?->file) }}"
+                            <a class="badge bg-label-danger" href="{{ asset('storage/' . $jobRequest?->cv) }}"
                                 target="_blank">
                                 <i class="bx bx-show"></i>
                             </a>
