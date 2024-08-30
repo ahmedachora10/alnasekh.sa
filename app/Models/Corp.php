@@ -73,6 +73,10 @@ class Corp extends Model implements ObservationColumnsInterface
         self::deleteNotification();
     }
 
+    public function scopeForUser($query, int $userId) {
+        return $query->where('user_id', $userId);
+    }
+
     public function user() : BelongsTo {
         return $this->belongsTo(User::class);
     }

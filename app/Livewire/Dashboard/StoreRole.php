@@ -108,6 +108,8 @@ class StoreRole extends Component
                 $role->givePermissions($this->selected);
             }
 
+            Cache::clear();
+
             return $role;
         });
     }
@@ -129,7 +131,7 @@ class StoreRole extends Component
             }
 
 
-            Cache::forget('user-permissions');
+            Cache::clear();
 
             return $this->role;
         });

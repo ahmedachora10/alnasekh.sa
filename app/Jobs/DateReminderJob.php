@@ -174,7 +174,7 @@ class DateReminderJob implements ShouldQueue
 
                 Notification::send($admins, $peraperNotification);
 
-                sleep(2);
+                sleep(1);
             });
 
         });
@@ -203,7 +203,7 @@ class DateReminderJob implements ShouldQueue
             'icon' => $status->icon(),
             'color' => $status->color(),
             'title' => $this->getNotificationTitle($item, $status->name(), $columnName),// . ' للمنشأة ' . $this->corp->name,
-            'content' => $this->corp->name,//$this->getPrepareContent($item, $columnName), //$item?->name,
+            'content' => $this->corp->name,//$this->($item, $columnName), //$item?->name,
             'owner' => $corp->administrator_name,
             $columnName => now()->parse($columnValue)->format('Y-m-d'),
             'model' => get_class($item),

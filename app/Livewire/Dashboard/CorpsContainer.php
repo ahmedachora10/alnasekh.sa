@@ -40,7 +40,19 @@ class CorpsContainer extends Component
     {
         return view('livewire.dashboard.corps-container', [
             'corps' => Corp::search($this->search)
-            ->query(fn (Builder $query) => $query->with(['user', 'branch' => fn ($q) => $q->with(['record', 'certificate', 'civilDefenseCertificate', 'subscriptions', 'monthlyQuarterlyUpdates', 'registries', 'employees'])]))
+            ->query(fn (Builder $query) => $query
+            ->when(!auth()->user()->hasRole('admin'), fn($q) => $q->forUser(auth()->id()))
+            ->with([
+                'user', 'branch' => fn ($q) => $q->with([
+                    'record',
+                    'certificate',
+                    'civilDefenseCertificate',
+                    'subscriptions',
+                    'monthlyQuarterlyUpdates',
+                    'registries',
+                    'employees'
+                    ])
+                ]))
             ->paginate($this->numberOfRows)
         ]);
     }

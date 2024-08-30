@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
             if(empty($expression) || !auth()->check()) return false;
 
-            $userPermissions = Cache::remember('user-permissions', now()->addWeek(), function () {
+            $userPermissions = Cache::remember('user-permissions-'. auth()->id(), now()->addWeek(), function () {
                 return auth()->user()->allPermissions()->pluck('name')->toArray();
             });
 
