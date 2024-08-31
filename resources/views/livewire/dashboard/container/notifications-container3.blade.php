@@ -1,7 +1,7 @@
 <div class="card overflow-hidden mb-6" style="height: 600px;">
-    <h5 class="card-header d-flex">
+    <h5 class="card-header">
         <span class="col-4">المهام</span>
-        <x-dashboard.input class="col-8" type="search" name='search' wire:model.live="search" />
+        {{-- <x-dashboard.input class="col-8" type="search" name='search' wire:model.live="search" /> --}}
     </h5>
     <div class="card-body ps ps--active-y" id="notification-scrolling">
         <ul class="list-group list-group-flush">
