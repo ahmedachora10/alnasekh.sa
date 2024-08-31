@@ -18,6 +18,8 @@ class NotificationsContainer extends Component
 
     public string $filterBy = 'unread';
 
+    public string $search = '';
+
     public function makeItAllRead() {
         auth()->user()->unreadNotifications()->where('type', 'App\Notifications\UserActionNotification')->update(['read_at' => now()]);
     }
@@ -49,21 +51,35 @@ class NotificationsContainer extends Component
 
     public function render()
     {
-        if($this->theme == 'card') {
+        if ($this->theme == 'card') {
             $notify = auth()->user()->notifications()
-            ->where('type', 'App\Notifications\UserActionNotification')
-            ->when($this->filterBy === $this->filters[0], function ($query) {
-                $query->whereNotNull('read_at');
-            })->when($this->filterBy === $this->filters[1], function ($query) {
-                $query->whereNull('read_at');
-            });
+                ->where('type', 'App\Notifications\UserActionNotification')
+                ->when($this->filterBy === $this->filters[0], function ($query) {
+                    $query->whereNotNull('read_at');
+                })->when($this->filterBy === $this->filters[1], function ($query) {
+                    $query->whereNull('read_at');
+                });
 
             return view('livewire.dashboard.container.notifications-container2', [
-            'notifications' => $notify->paginate(10)
+                'notifications' => $notify->paginate(10)
             ])->layout('layouts.app');
-        } else {
-            return view('livewire.dashboard.container.notifications-container', [
+        } elseif($this->theme == 'todo') {
+            return view('livewire.dashboard.container.notifications-container3', [
                 'notifications' => auth()->user()->unreadNotifications()->where('type', 'App\Notifications\UserActionNotification')->latest()->paginate(10),
+            ]);
+        } else {
+            // dd($this->search);
+            return view('livewire.dashboard.container.notifications-container', [
+                'notifications' => auth()
+                ->user()
+                ->unreadNotifications()
+                // ->where('type', 'App\Notifications\UserActionNotification')
+                // ->where(fn($query) => $query
+                //     ->whereJsonContains('data->title', $this->search)
+                    // ->orWhereJsonContains('data->content', $this->search)
+                    // ->orWhereJsonContains('data->owner', $this->search)
+                // )
+                ->latest()->paginate(10),
                 'unreadNotifications' => auth()->user()->unreadNotifications()->where('type', 'App\Notifications\UserActionNotification')->count()
             ]);
         }
