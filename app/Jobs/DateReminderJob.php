@@ -172,7 +172,7 @@ class DateReminderJob implements ShouldQueue
                 }
 
                 // Send a Whatsapp message to owner
-                $this->sendToWhatsapp($corp->phone, $notification['email_title']);
+                // $this->sendToWhatsapp($corp->phone, $notification['email_title']);
 
                 Notification::send($admins, $peraperNotification);
 
