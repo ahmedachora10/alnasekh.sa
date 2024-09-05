@@ -23,6 +23,7 @@ use App\Models\MonthlyQuarterlyUpdate;
 use App\Models\Registry;
 use App\Models\User;
 use App\Notifications\UserActionNotification;
+use App\Services\WhatsappService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
@@ -40,9 +41,7 @@ class DateReminderJob implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct()
-    {
-        //
-    }
+    {}
 
     /**
      * Execute the job.
@@ -172,6 +171,9 @@ class DateReminderJob implements ShouldQueue
                     $user->notify($peraperNotification);
                 }
 
+                // Send a Whatsapp message to owner
+                $this->sendToWhatsapp($corp->phone, $notification['email_title']);
+
                 Notification::send($admins, $peraperNotification);
 
                 sleep(1);
@@ -179,7 +181,6 @@ class DateReminderJob implements ShouldQueue
 
         });
     }
-
     private function prepareNotificationData($item, $parentItem = null, $columnName = 'end_date', $branch = null)
     {
         $id = $item->id;
@@ -212,7 +213,6 @@ class DateReminderJob implements ShouldQueue
             'corp' => $corp,
         ];
     }
-
     private function getNotificationTitle($item, string $status, $columnName)
     {
         return match (get_class($item)) {
@@ -229,7 +229,6 @@ class DateReminderJob implements ShouldQueue
             default => '',
         };
     }
-
     private function getPrepareContent($item, $columnName)
     {
         return match (get_class($item)) {
@@ -246,7 +245,6 @@ class DateReminderJob implements ShouldQueue
             default => '',
         };
     }
-
     private function getNotificationTitleForEmployee($columnName) {
         return match($columnName) {
             'end_date' => 'عقد الاقامة',
@@ -254,7 +252,6 @@ class DateReminderJob implements ShouldQueue
             'contract_end_date' => 'الاقامة',
         };
     }
-
     private function getNotificationLink($item, $branch)
     {
         if(get_class($item) === Corp::class) {
@@ -263,7 +260,6 @@ class DateReminderJob implements ShouldQueue
 
         return route('branches.show', $branch);
     }
-
     private function getEmailTitle($item, string $status, $columnName, $customValue = '')
     {
         return match (get_class($item)) {
@@ -280,7 +276,6 @@ class DateReminderJob implements ShouldQueue
             default => '',
         };
     }
-
     private function sendNotification($data)
     {
         $corp = $data['corp'];
@@ -288,11 +283,9 @@ class DateReminderJob implements ShouldQueue
 
         return new UserActionNotification($data, $corp->email, $corp);
     }
-
     private function getAllNotifications() {
         $this->notifications = DB::table('notifications')->get();
     }
-
     private function notificationsFilter($item, $columnName, $className) : bool {
         $className = $className !== null ? $className : get_class($item);
 
@@ -303,13 +296,14 @@ class DateReminderJob implements ShouldQueue
             (isset($data[$columnName]) && now()->parse($data[$columnName])->format('Y-m-d') == now()->parse($item->{$columnName})->format('Y-m-d'));
         })->count() > 0;
     }
-
     private function getStatus($item, $columnName) : bool {
         $status = status_handler($item->{$columnName});
         return in_array($status, [Status::DEFAULT, Status::VALID]);
     }
-
     private function checkItemStatusNotification($item, $columnName = 'end_date', $className = null) : bool {
         return $this->getStatus($item, $columnName) || $this->notificationsFilter($item, $columnName, $className);
+    }
+    private function sendToWhatsapp(string $phone, string $message = '') {
+        return SendWhatsappMessages::dispatch($phone, $message);
     }
 }

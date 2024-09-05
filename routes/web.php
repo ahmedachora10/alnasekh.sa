@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
 use App\Models\Corp;
 use App\Models\Package;
+use App\Services\WhatsappService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
  */
+
+Route::get('send-whatsapp-message', fn() => (new WhatsappService)->sendMessage(to: '212684825329', variables: ['رسالة مشفرة من احمد']));
 
 Route::get('/', function () {
     return view('welcome');

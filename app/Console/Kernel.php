@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         // $schedule->call(new DateReminder)->everyMinute();
         $schedule->job(new DateReminderJob())->everyMinute();
+        $schedule->command('queue:work --stop-when-empty')->everyMinute();
     }
 
     /**
