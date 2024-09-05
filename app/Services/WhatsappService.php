@@ -22,7 +22,7 @@ class WhatsappService {
         $response = Http::withToken(config('services.whatsapp.token'))
             ->post($url, [
                 'messaging_product' => 'whatsapp',
-                'to' => "212$to",
+                'to' => "966$to",
                 'type' => 'template',
                 'template' => [
                     'name' => $templateName,
