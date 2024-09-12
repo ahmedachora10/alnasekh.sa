@@ -17,7 +17,7 @@ class ActivitiesLogs extends Component
     public function render()
     {
         return view('livewire.dashboard.container.activities-logs', [
-            'activities' => ActivityLog::with('user')->paginate(setting('pagination'))
+            'activities' => ActivityLog::with('user')->latest()->paginate(setting('pagination'))
         ]);
     }
 }
