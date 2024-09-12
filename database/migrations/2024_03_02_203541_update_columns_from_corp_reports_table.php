@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('corp_reports', function (Blueprint $table) {
-            $table->foreignId('ministry')->change();
-            $table->foreignId('entity')->change();
-            $table->foreignId('mission')->change();
+            $table->unsignedBigInteger('ministry')->change();
+            $table->unsignedBigInteger('entity')->change();
+            $table->unsignedBigInteger('mission')->change();
         });
     }
 
