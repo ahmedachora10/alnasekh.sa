@@ -29,6 +29,8 @@ enum ActivityLogType:string {
             self::Update => 'info',
             self::Delete => 'danger',
             self::Login => 'warning',
+            self::Whatsapp => 'success',
+            self::Email => 'success',
         };
     }
 

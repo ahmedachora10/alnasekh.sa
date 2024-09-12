@@ -2,7 +2,7 @@
 
     <x-dashboard.headline :title="trans('sidebar.activities')" />
 
-    <x-dashboard.tables.table1 :columns="['user', 'type' ,'activity']">
+    <x-dashboard.tables.table1 :columns="['user', 'type' ,'activity', 'created at']">
 
         {{-- <x-slot:title>
             <x-dashboard.input type="search" name="search" wire:model.live.debounce.250ms="search"
@@ -18,9 +18,10 @@
         @forelse ($activities as $item)
         <tr wire:loading.class="opacity-50">
             <td>{{ $item->id }}</td>
-            <td>{{ $item->user?->name }}</td>
+            <td>{{ $item->user?->name ?? '-' }}</td>
             <td><x-dashboard.badge :color="$item->activity_type?->color()"> {{ $item->activity_type?->name() }} </x-dashboard.badge></td>
             <td>{{ $item->content }}</td>
+            <td>{{ $item->created_at->format('Y-m-d H:i:s') }}</td>
             <td>
                 <x-dashboard.actions.container>
                     <x-dashboard.actions.delete wire:click="delete({{ $item }})" :livewire="true" />
