@@ -138,6 +138,7 @@ return [
         'company city' => 'City of the Company',
         'number of branches' => 'Number Of Branches',
         'corp' => 'Corp',
+        'activity' => 'Activity'
     ],
     'empty' => 'No Records'
 ];

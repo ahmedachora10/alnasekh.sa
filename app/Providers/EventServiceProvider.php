@@ -14,6 +14,7 @@ use App\Models\EmployeeHealthCardPaper;
 use App\Models\EmployeeMedicalInsurance;
 use App\Models\MonthlyQuarterlyUpdate;
 use App\Models\Role;
+use App\Observers\ActivityLogsObserver;
 use App\Observers\DeleteNotificationObserver;
 use App\Observers\RoleObserver;
 use Illuminate\Auth\Events\Registered;
@@ -36,16 +37,17 @@ class EventServiceProvider extends ServiceProvider
 
     protected $observers = [
         Role::class => [RoleObserver::class],
-        Corp::class => [DeleteNotificationObserver::class],
-        BranchSubscription::class => [DeleteNotificationObserver::class],
-        BranchEmployee::class => [DeleteNotificationObserver::class],
-        BranchRecord::class => [DeleteNotificationObserver::class],
-        BranchRecord::class => [DeleteNotificationObserver::class],
-        BranchCertificate::class => [DeleteNotificationObserver::class],
-        BranchCivilDefenseCertificate::class => [DeleteNotificationObserver::class],
-        EmployeeMedicalInsurance::class => [DeleteNotificationObserver::class],
-        EmployeeHealthCardPaper::class => [DeleteNotificationObserver::class],
-        EmployeeHealthCardPaper::class => [DeleteNotificationObserver::class],
+        Corp::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        BranchSubscription::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        BranchEmployee::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        BranchRecord::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        BranchRecord::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        BranchCertificate::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        BranchCivilDefenseCertificate::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        EmployeeMedicalInsurance::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        EmployeeHealthCardPaper::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        EmployeeHealthCardPaper::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
+        CorpBranchRegistry::class => [DeleteNotificationObserver::class, ActivityLogsObserver::class],
     ];
 
     /**

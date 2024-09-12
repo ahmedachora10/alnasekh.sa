@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard\Branch;
 use App\Models\CorpBranch;
 use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\MonthlyQuarterlyUpdate;
+use App\Observers\ActivityLogsObserver;
 use App\Observers\DeleteNotificationObserver;
 use App\Traits\Livewire\Message;
 use Carbon\Carbon;
@@ -44,15 +45,20 @@ class UpdateMonthlyQuarterlyUpdate extends Component
     public function update() {
         $this->validate();
 
-        $update = CorpBranchMonthlyQuarterlyUpdate::find($this->pivotId);
+        $update = CorpBranchMonthlyQuarterlyUpdate::find($this->pivotId)?->load(('monthlyQuarterlyUpdate'));
         $oldDate = $update->date;
         $update?->update(['date' => $this->date]);
         $update->fireUpdatedEvent($oldDate);
 
-        // DB::table('notifications')
-        //     ->whereJsonContains("data->id", $update->id)
-        //     ->whereJsonDoesntContain("data->date", 'date')
-        //     ->whereJsonContains('data->model', $update::class)?->delete();
+        (
+            new ActivityLogsObserver(
+                className: CorpBranchMonthlyQuarterlyUpdate::class,
+                title: $update?->monthlyQuarterlyUpdate?->entity_name
+            )
+        )
+        ->updated(
+            model: $update,
+        );
 
         $this->fireMessage();
 
@@ -67,13 +73,21 @@ class UpdateMonthlyQuarterlyUpdate extends Component
             // $this->branch->monthlyQuarterlyUpdates()->detach($id);
 
             if(
-                $removedItemId = CorpBranchMonthlyQuarterlyUpdate::where('monthly_quarterly_update_id', $id)
+                $removedItemId = CorpBranchMonthlyQuarterlyUpdate::with('monthlyQuarterlyUpdate')->where('monthly_quarterly_update_id', $id)
                     ->where('corp_branch_id', $this->branch->id)
                     ->first()
             ) {
                 DB::table('notifications')
                 ->whereJsonContains("data->id", $removedItemId->id)
                 ->whereJsonContains('data->model', MonthlyQuarterlyUpdate::class)?->delete();
+
+                (new ActivityLogsObserver(
+                    className: CorpBranchMonthlyQuarterlyUpdate::class,
+                    title: $removedItemId?->monthlyQuarterlyUpdate?->entity_name
+                ))
+                ->deleted(
+                    model: $removedItemId,
+                );
 
                 $removedItemId->delete();
 

@@ -4,8 +4,11 @@ namespace App\Livewire\Dashboard\Branch;
 
 use App\Livewire\Forms\RegistryForm;
 use App\Models\CorpBranch;
+use App\Models\CorpBranchRegistry;
 use App\Models\Registry;
+use App\Observers\ActivityLogsObserver;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -29,15 +32,23 @@ class StoreRegistryFromBranch extends Component
     public function save() {
         $this->validate();
 
-        $this->branch->registries()->attach($this->registryId, $this->form->all());
-        session()->put('success', trans('message.create'));
+        DB::transaction(function () {
+            $this->branch->registries()->attach($this->registryId, $this->form->all());
 
-        $this->dispatch('refresh-alert');
-        $this->dispatch('refresh-dashboard');
-        $this->dispatch('close-modal');
+            (new ActivityLogsObserver(CorpBranchRegistry::class))
+            ->created(
+                model: $this->branch->registries()->latest()->first()
+            );
 
-        $this->form->reset('start_date', 'end_date');
-        $this->dispatch('open-modal', target: '#createCorpReportModal');
+            session()->put('success', trans('message.create'));
+
+            $this->dispatch('refresh-alert');
+            $this->dispatch('refresh-dashboard');
+            $this->dispatch('close-modal');
+
+            $this->form->reset('start_date', 'end_date');
+            $this->dispatch('open-modal', target: '#createCorpReportModal');
+        });
     }
 
     #[On('refresh-store-registry-from-branch')]

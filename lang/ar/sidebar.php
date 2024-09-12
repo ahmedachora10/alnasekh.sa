@@ -32,4 +32,5 @@ return [
     'missions' => 'المهام',
     'entities' => 'الجهات',
     'ministries' => 'الوزارات',
+    'activities' => 'سجل العمليات',
 ];

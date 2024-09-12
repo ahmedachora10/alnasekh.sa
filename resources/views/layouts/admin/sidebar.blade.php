@@ -108,6 +108,7 @@
         <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="user-pin" :link="route('contact-us.index')" :notification="$contactsCount" />
         <x-dashboard.sidebar.link :title="trans('sidebar.reviews')" icon="star" :link="route('reviews.index')" />
         <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="server" :link="route('services.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.activities')" icon="archive" :link="route('activitylogs')" />
 
         <!-- Misc -->
         {{-- <li class="menu-item">

@@ -4,8 +4,11 @@ namespace App\Livewire\Dashboard\Branch;
 
 use App\Livewire\Forms\MonthlyQuarterlyUpdateForm;
 use App\Models\CorpBranch;
+use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\MonthlyQuarterlyUpdate;
+use App\Observers\ActivityLogsObserver;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -56,17 +59,25 @@ class StoreMonthlyQuarterlyUpdate extends Component
     }
 
     private function save($monthlyQuarterlyUpdate) {
-        $this->branch->monthlyQuarterlyUpdates()->attach($monthlyQuarterlyUpdate, ['date' => $this->date, 'corp_branch_id' => $this->branch->id]);
-        session()->put('success', trans('message.create'));
-        $this->reset('date');
-        $this->dispatch('refresh-alert');
-        $this->dispatch('refresh-dashboard');
+        DB::transaction(function () use($monthlyQuarterlyUpdate) {
 
-        $this->dispatch('open-modal', target: '#createCorpReportModal');
+            $this->branch->monthlyQuarterlyUpdates()->attach($monthlyQuarterlyUpdate, ['date' => $this->date, 'corp_branch_id' => $this->branch->id]);
+            // dd($this->branch->monthlyQuarterlyUpdates()->latest()->first());
+            (new ActivityLogsObserver(CorpBranchMonthlyQuarterlyUpdate::class))
+            ->created(
+                model: $this->branch->monthlyQuarterlyUpdates()->latest()->first()
+            );
+            session()->put('success', trans('message.create'));
+            $this->reset('date');
+            $this->dispatch('refresh-alert');
+            $this->dispatch('refresh-dashboard');
+
+            $this->dispatch('open-modal', target: '#createCorpReportModal');
+        });
     }
 
-    private function delete($monthlyQuarterlyUpdate) {
-        $this->branch->monthlyQuarterlyUpdates()->detach($monthlyQuarterlyUpdate);
+    private function delete($monthlyQuarterlyUpdate): void {
+        $this->branch->monthlyQuarterlyUpdates()->detach(ids: $monthlyQuarterlyUpdate);
         session()->put('success', trans('message.delete'));
         $this->reset('date');
         $this->dispatch('refresh-alert');

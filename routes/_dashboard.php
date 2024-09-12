@@ -27,6 +27,7 @@ use App\Livewire\Dashboard\Branch\StoreMonthlyQuarterlyUpdate;
 use App\Livewire\Dashboard\Branch\StoreRecord;
 use App\Livewire\Dashboard\Branch\StoreRegistry;
 use App\Livewire\Dashboard\Branch\StoreSubscription;
+use App\Livewire\Dashboard\Container\ActivitiesLogs;
 use App\Livewire\Dashboard\Container\BranchRegistriesContainer;
 use App\Livewire\Dashboard\Container\ContactUsContainer;
 use App\Livewire\Dashboard\Container\EmployeesContainer;
@@ -48,13 +49,7 @@ Route::middleware(['auth'])->group(function ()
         Route::post('/', 'store')->name('store');
     });
 
-    // Route::controller(MediaController::class)
-    // ->prefix('images')->name('images.')
-    // ->group(function ()
-    // {
-    //     Route::get('/', 'index')->name('index');
-    //     Route::post('/', 'store')->name('store');
-    // });
+    Route::get('activities', ActivitiesLogs::class)->name('activitylogs');
 
     Route::get('ministries', function () {
         return view('admin.ministries');

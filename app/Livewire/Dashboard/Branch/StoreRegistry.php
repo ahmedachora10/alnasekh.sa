@@ -6,6 +6,7 @@ use App\Livewire\Forms\RegistryForm;
 use App\Models\CorpBranch;
 use App\Models\CorpBranchRegistry;
 use App\Models\Registry;
+use App\Observers\ActivityLogsObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Collection;
@@ -70,12 +71,12 @@ class StoreRegistry extends Component
 
     private function store() {
         $this->branch->registries()->attach($this->registryId, $this->form->all());
+        // dd(CorpBranchRegistry::find($this->registryId));
+        (new ActivityLogsObserver)->created(model: CorpBranchRegistry::find($this->registryId));
         session()->put('success', trans('message.create'));
     }
 
     private function update() {
-        // $this->branch->registries()->updateExistingPivot($this->registry->id, $this->form->all());
-
 
         $registry = CorpBranchRegistry::where('registry_id', $this->registry->id)
                     ->where('corp_branch_id', $this->branch->id)->first();
@@ -83,12 +84,6 @@ class StoreRegistry extends Component
 
         $registry->update($this->form->all());
         $registry->fireUpdatedEvent($oldEndDate);
-        // if($registry) {
-        //     DB::table('notifications')
-        //         ->whereJsonContains("data->id", $registry->id)
-        //         ->whereJsonDoesntContain("data->date", 'date')
-        //         ->whereJsonContains('data->model', $registry::class)?->delete();
-        // }
 
         session()->put('success', trans('message.update'));
         $this->dispatch('refresh-dashboard');
@@ -97,8 +92,6 @@ class StoreRegistry extends Component
     #[On('delete-branch-registry')]
     public function delete(Registry $registry) {
         DB::transaction(function () use($registry) {
-
-            // $this->branch->registries()->detach($registry->id);
 
             if(
                 $removedItemId = CorpBranchRegistry::where('registry_id', $registry->id)

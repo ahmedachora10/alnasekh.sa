@@ -3,10 +3,7 @@
 namespace App\Models;
 
 use App\Models\Interfaces\ObservationColumnsInterface;
-use App\Observers\DeleteNotificationObserver;
-use App\Traits\DeleteNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Facades\DB;

@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Observers;
-
-use App\Enums\Status;
 use App\Models\Interfaces\ObservationColumnsInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -18,13 +16,33 @@ class DeleteNotificationObserver
             unset($updatedColumns[count($updatedColumns) - 1]);
 
             foreach($updatedColumns as $column) {
-                // if(in_array(status_handler($model->getOriginal($column)),[Status::ALMOST_FINISHED, Status::FINISHED])) {
                 DB::table('notifications')
-                ->whereJsonContains("data->id", $model->id)
-                ->whereJsonContains("data->{$column}", now()->parse($model->getOriginal($column))->format('Y-m-d'))
-                ->whereJsonContains('data->model', $this->modelName ?? $model::class)?->delete();
-                // }
+                    ->whereJsonContains(
+                        column: "data->id",
+                        value: $model->id
+                    )
+                    ->whereJsonContains(
+                        column: "data->{$column}",
+                        value: now()->parse($model->getOriginal($column))->format('Y-m-d')
+                    )
+                    ->whereJsonContains(
+                        column: 'data->model',
+                        value: $this->modelName ?? $model::class
+                    )?->delete();
             }
         }
+    }
+
+    public function delete(Model|Pivot $model) {
+        DB::table('notifications')
+            ->whereJsonContains(
+                column: "data->id",
+                value: $model->id
+            )
+            ->whereJsonContains(
+                column: 'data->model',
+                value: $this->modelName ?? $model::class
+            )
+            ?->delete();
     }
 }

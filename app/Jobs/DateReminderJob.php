@@ -229,7 +229,7 @@ class DateReminderJob implements ShouldQueue
             default => '',
         };
     }
-    private function getPrepareContent($item, $columnName)
+    private function getPrepareContent($item, $columnName): string
     {
         return match (get_class($item)) {
             Corp::class => 'المنشأة ' . $item->name,
@@ -245,14 +245,14 @@ class DateReminderJob implements ShouldQueue
             default => '',
         };
     }
-    private function getNotificationTitleForEmployee($columnName) {
+    private function getNotificationTitleForEmployee($columnName): string {
         return match($columnName) {
             'end_date' => 'عقد الاقامة',
             'business_card_end_date' =>  'كرت العمل',
             'contract_end_date' => 'الاقامة',
         };
     }
-    private function getNotificationLink($item, $branch)
+    private function getNotificationLink($item, $branch): string
     {
         if(get_class($item) === Corp::class) {
             return route('corps.edit', $item);
@@ -260,7 +260,7 @@ class DateReminderJob implements ShouldQueue
 
         return route('branches.show', $branch);
     }
-    private function getEmailTitle($item, string $status, $columnName, $customValue = '')
+    private function getEmailTitle($item, string $status, $columnName, $customValue = ''): string
     {
         return match (get_class($item)) {
             Corp::class => 'الاشتراك في منصة ' . setting('app_name') . ' ' . $status,
@@ -276,14 +276,14 @@ class DateReminderJob implements ShouldQueue
             default => '',
         };
     }
-    private function sendNotification($data)
+    private function sendNotification($data): UserActionNotification
     {
         $corp = $data['corp'];
         unset($data['corp']);
 
         return new UserActionNotification($data, $corp->email, $corp);
     }
-    private function getAllNotifications() {
+    private function getAllNotifications(): void {
         $this->notifications = DB::table('notifications')->get();
     }
     private function notificationsFilter($item, $columnName, $className) : bool {

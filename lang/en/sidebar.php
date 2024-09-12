@@ -33,4 +33,5 @@ return [
     'missions' => 'Missions',
     'entities' => 'Entities',
     'ministries' => 'Ministries',
+    'activities' => 'Activities',
 ];
