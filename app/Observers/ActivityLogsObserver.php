@@ -36,6 +36,13 @@ class ActivityLogsObserver
     public function login(Model|Pivot $model) {
         $this->createActivityLog(activityLogType: ActivityLogType::Login, title: $this->prepareModelContent($model));
     }
+
+    public function sendEmail(Model|Pivot $model) {
+        $this->createActivityLog(activityLogType: ActivityLogType::Email, title: $this->prepareModelContent($model));
+    }
+    public function sendWhatsapp(Model|Pivot $model) {
+        $this->createActivityLog(activityLogType: ActivityLogType::Whatsapp, title: $this->prepareModelContent($model));
+    }
     private function createActivityLog(ActivityLogType $activityLogType, string $title) {
         ActivityLog::create(attributes: [
             'user_id' => auth()->id(),

@@ -9,6 +9,8 @@ enum ActivityLogType:string {
     case Update = 'Update';
     case Delete = 'Delete';
     case Login = 'Login';
+    case Email = 'Email';
+    case Whatsapp = 'Whatsapp';
 
     public function name() {
         return match ($this) {
@@ -16,6 +18,8 @@ enum ActivityLogType:string {
             self::Update => 'التحديث',
             self::Delete => 'الحذف',
             self::Login => 'الدخول على الحساب',
+            self::Email => 'تذكير عبر الايميل',
+            self::Whatsapp => 'تذكير عبر الواتساب',
         };
     }
 
@@ -34,6 +38,8 @@ enum ActivityLogType:string {
             self::Update => 'تم تحديث ' . $title,
             self::Delete => 'تم حذف ' . $title,
             self::Login => 'تم تسجيل الدخول من طرف ' . $title,
+            self::Email => 'تذكير عبر الايميل - ' . $title,
+            self::Whatsapp => 'تذكير عبر الواتساب - ' . $title,
         };
     }
 }

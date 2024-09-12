@@ -23,6 +23,7 @@ use App\Models\MonthlyQuarterlyUpdate;
 use App\Models\Registry;
 use App\Models\User;
 use App\Notifications\UserActionNotification;
+use App\Observers\ActivityLogsObserver;
 use App\Services\WhatsappService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -172,7 +173,7 @@ class DateReminderJob implements ShouldQueue
                 }
 
                 // Send a Whatsapp message to owner
-                // $this->sendToWhatsapp($corp->phone, $notification['email_title']);
+                // $this->sendToWhatsapp($corp, $notification['email_title']);
 
                 Notification::send($admins, $peraperNotification);
 
@@ -303,7 +304,8 @@ class DateReminderJob implements ShouldQueue
     private function checkItemStatusNotification($item, $columnName = 'end_date', $className = null) : bool {
         return $this->getStatus($item, $columnName) || $this->notificationsFilter($item, $columnName, $className);
     }
-    private function sendToWhatsapp(string $phone, string $message = '') {
-        return SendWhatsappMessages::dispatch($phone, $message);
+    private function sendToWhatsapp(Corp $corp, string $message = '') {
+         (new ActivityLogsObserver)->sendWhatsapp($corp);
+        return SendWhatsappMessages::dispatch($corp->phone, $message);
     }
 }
