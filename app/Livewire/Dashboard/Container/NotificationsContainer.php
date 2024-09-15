@@ -62,7 +62,7 @@ class NotificationsContainer extends Component
 
             return view('livewire.dashboard.container.notifications-container2', [
                 'notifications' => $notify->paginate(10)
-            ])->layout('layouts.app');
+            ]);
         } elseif($this->theme == 'todo') {
             return view('livewire.dashboard.container.notifications-container3', [
                 'notifications' => auth()->user()->unreadNotifications()->where('type', 'App\Notifications\UserActionNotification')->latest()->paginate(10),
@@ -73,13 +73,13 @@ class NotificationsContainer extends Component
                 'notifications' => auth()
                 ->user()
                 ->unreadNotifications()
+                ->latest()->paginate(10),
                 // ->where('type', 'App\Notifications\UserActionNotification')
                 // ->where(fn($query) => $query
                 //     ->whereJsonContains('data->title', $this->search)
                     // ->orWhereJsonContains('data->content', $this->search)
                     // ->orWhereJsonContains('data->owner', $this->search)
                 // )
-                ->latest()->paginate(10),
                 'unreadNotifications' => auth()->user()->unreadNotifications()->where('type', 'App\Notifications\UserActionNotification')->count()
             ]);
         }
