@@ -50,7 +50,7 @@ class CorpsContainer extends Component
                     'subscriptions',
                     'monthlyQuarterlyUpdates',
                     'registries',
-                    'employees'
+                    'employees',
                     ])
                 ]))
             ->paginate($this->numberOfRows)

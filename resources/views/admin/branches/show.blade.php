@@ -1,4 +1,16 @@
 <x-app-layout>
+    <div class="col-12">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb breadcrumb-style2 mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{{back()->getTargetUrl()}}" class="text-gray font-bold">
+                        <i class="bx bx-right-arrow-alt fs-4"></i>
+                        الرجوع
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
     @if ($branch->corp->doesnt_has_branches)
         <div class="col-12">
             <div class="card mb-4">

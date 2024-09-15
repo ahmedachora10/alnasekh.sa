@@ -30,6 +30,7 @@
             <p class="mb-4">Please sign-in to your account and start the adventure</p> --}}
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
+            {{-- <x-input-error :messages="$errors->get('g-recaptcha-response')" class="mt-2" /> --}}
 
             <form id="formAuthentication" class="mb-3 fv-plugins-bootstrap5 fv-plugins-framework"
                 action="{{ route('login') }}" method="POST" novalidate="novalidate">

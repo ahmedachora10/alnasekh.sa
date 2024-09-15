@@ -30,9 +30,10 @@ if (! function_exists('setting')) {
     }
 }
 
-if(!function_exists('ar_slug')) {
+if (!function_exists('ar_slug')) {
 
-    function ar_slug(string $string, string $separator = '-') {
+    function ar_slug(string $string, string $separator = '-')
+    {
         if (is_null($string)) {
             return "";
         }
@@ -49,14 +50,14 @@ if(!function_exists('ar_slug')) {
 
         return $string;
     }
-
 }
 
-if(!function_exists('status_handler')) {
+if (!function_exists('status_handler')) {
 
-    function status_handler($date) : Status {
+    function status_handler($date): Status
+    {
 
-        if(empty($date) || is_null($date)) {
+        if (empty($date) || is_null($date)) {
             return Status::DEFAULT;
         }
 
@@ -65,11 +66,11 @@ if(!function_exists('status_handler')) {
 
         $daysDiff = $endDate->diffInDays($currentDate);
 
-        if($endDate->isPast()) {
+        if ($endDate->isPast()) {
             return Status::FINISHED;
         }
 
-        if($endDate->isFuture() && $daysDiff > 30) {
+        if ($endDate->isFuture() && $daysDiff > 30) {
             return Status::VALID;
         }
 
@@ -77,9 +78,10 @@ if(!function_exists('status_handler')) {
     }
 }
 
-if(!function_exists('short_date_name')) {
+if (!function_exists('short_date_name')) {
 
-    function short_date_name(string $date) {
+    function short_date_name(string $date)
+    {
         $replacement = [
             'دقيقة' =>  'د',
             'دقائق' =>  'د',
@@ -94,15 +96,16 @@ if(!function_exists('short_date_name')) {
     }
 }
 
-if(!function_exists('stepsChecker')) {
+if (!function_exists('stepsChecker')) {
 
-    function stepsChecker(CorpBranch $branch) {
+    function stepsChecker(CorpBranch $branch)
+    {
         $subscriptions = $branch->subscriptions->count() > 0 ? true : null;
         $monthlyQuarterly = $branch->monthlyQuarterlyUpdates->count() > 0 ? true : null;
         $employees = $branch->employees->count() > 0 ? true : null;
 
 
-        if($branch->corp->corp_has_branches) {
+        if ($branch->corp->corp_has_branches) {
             $stepsOfBranche = [
                 'branches.record.store' => $branch->record,
                 'branches.certificate.store' => $branch->certificate,
@@ -123,11 +126,33 @@ if(!function_exists('stepsChecker')) {
         $steps = array_merge($stepsOfBranche, $steps);
 
         foreach ($steps as $key => $value) {
-            if($value !== null) continue;
+            if ($value !== null) continue;
 
             return ['text' => trans('common.uncompleted'), 'link' => route($key, $branch)];
         }
 
         return ['text' => trans('common.completed'), 'link' => '#'];
+    }
+}
+
+if (!function_exists('go_back')) {
+    function go_back()
+    {
+        // Retrieve the navigation history from the session
+        $history = session()->get('my_history', []);
+
+        // If history exists, pop the last entry
+        if (!empty($history)) {
+            $previousUrl = array_pop(array: $history);
+
+            // Update the session with the new history
+            session()->put('my_history', $history);
+
+            // Redirect the user to the last page in the history
+            return $previousUrl;
+        }
+
+        // Default: If no history exists, go to a fallback route (e.g., Dashboard)
+        return '/dashboard';
     }
 }

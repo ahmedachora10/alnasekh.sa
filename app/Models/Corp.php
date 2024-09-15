@@ -101,6 +101,9 @@ class Corp extends Model implements ObservationColumnsInterface
         return $this->hasMany(CorpReport::class);
     }
 
+    public function activities() {
+        return $this->morphMany(ActivityLog::class, 'logable');
+    }
     public function toSearchableArray()
     {
         return [

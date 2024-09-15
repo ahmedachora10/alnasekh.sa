@@ -72,7 +72,7 @@ class StoreRegistry extends Component
     private function store() {
         $this->branch->registries()->attach($this->registryId, $this->form->all());
         // dd(CorpBranchRegistry::find($this->registryId));
-        (new ActivityLogsObserver)->created(model: CorpBranchRegistry::find($this->registryId));
+        (new ActivityLogsObserver)->created(model: $this->branch->registries()->latest()->first());
         session()->put('success', trans('message.create'));
     }
 

@@ -15,6 +15,7 @@ use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\CorpBranchRegistry;
 use App\Models\EmployeeHealthCardPaper;
 use App\Models\EmployeeMedicalInsurance;
+use App\Models\Registry;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -24,30 +25,32 @@ class ActivityLogsObserver
 
     public function __construct(protected ?string $className = null, protected ?string $title = null) {}
     public function created(Model|Pivot $model) {
-        $this->createActivityLog(activityLogType: ActivityLogType::Create, title: $this->prepareModelContent($model));
+        $this->createActivityLog(activityLogType: ActivityLogType::Create,model: $model);
     }
     public function updated(Model|Pivot $model) {
-        $this->createActivityLog(activityLogType: ActivityLogType::Update, title: $this->prepareModelContent($model));
+        $this->createActivityLog(activityLogType: ActivityLogType::Update,model: $model);
     }
 
     public function deleted(Model|Pivot $model) {
-        $this->createActivityLog(activityLogType: ActivityLogType::Delete, title: $this->prepareModelContent($model));
+        $this->createActivityLog(activityLogType: ActivityLogType::Delete,model: $model);
     }
     public function login(Model|Pivot $model) {
-        $this->createActivityLog(activityLogType: ActivityLogType::Login, title: $this->prepareModelContent($model));
+        $this->createActivityLog(activityLogType: ActivityLogType::Login,model: $model);
     }
 
     public function sendEmail(Model|Pivot $model) {
-        $this->createActivityLog(activityLogType: ActivityLogType::Email, title: $this->prepareModelContent($model));
+        $this->createActivityLog(activityLogType: ActivityLogType::Email,model: $model);
     }
     public function sendWhatsapp(Model|Pivot $model) {
-        $this->createActivityLog(activityLogType: ActivityLogType::Whatsapp, title: $this->prepareModelContent($model));
+        $this->createActivityLog(activityLogType: ActivityLogType::Whatsapp,model: $model);
     }
-    private function createActivityLog(ActivityLogType $activityLogType, string $title) {
+    private function createActivityLog(ActivityLogType $activityLogType, Model $model) {
         ActivityLog::create(attributes: [
             'user_id' => auth()->id(),
             'activity_type' => $activityLogType->value,
-            'content' => $activityLogType->content($title)
+            'content' => $activityLogType->content($this->prepareModelContent($model)),
+            'logable_id' => $model->id,
+            'logable_type' => $model::class,
         ]);
     }
 
@@ -64,6 +67,7 @@ class ActivityLogsObserver
             EmployeeMedicalInsurance::class => 'التأمين الطبي للموظف ' . $model?->employee?->name,
             CorpBranchMonthlyQuarterlyUpdate::class => 'التحديثات الشهرية و الربع السنوية ' .  ($this->title !== null ? $this->title : $model?->entity_name),
             CorpBranchRegistry::class => 'السجل ' . ($model->registry ? $model?->registry?->name : $model?->name),
+            Registry::class => 'السجل ' . $model?->name,
             User::class => 'المستخدم ' . $model->name,
         };
     }

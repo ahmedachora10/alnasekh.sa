@@ -5,6 +5,6 @@
         <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
             {{ $message }}
         </div>
-    @break
-@endforeach
+        @break
+    @endforeach
 @endif

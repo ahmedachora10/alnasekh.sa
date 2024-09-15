@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\HomeController;
+use App\Jobs\DateReminderJob;
 use App\Models\Corp;
 use App\Models\Package;
 use App\Services\WhatsappService;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('send-whatsapp-message', fn() => (new WhatsappService)->sendMessage(to: '212684825329', variables: ['رسالة مشفرة من احمد']));
+// Route::get('send-whatsapp-message', fn() => (new WhatsappService)->sendMessage(to: '212684825329', variables: ['رسالة مشفرة من احمد']));
 
 Route::get('/', function () {
     return view('welcome');

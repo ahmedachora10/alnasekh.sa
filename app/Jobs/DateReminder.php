@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Notifications\UserActionNotification;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
@@ -131,27 +132,33 @@ class DateReminder
 
         }
 
-        $notifications = collect($notifications)->chunk(10);
+        Log::info("it's up and running");
+        // Log::info(json_encode($notifications));
 
-        $notifications->each(function ($notificationChunks) use($admins) {
 
-            $notificationChunks->each(function ($notification) use($admins) {
+        // dd($notifications);
 
-                $corp = $notification['corp'];
-                $user = $corp->user;
+        // $notifications = collect($notifications)->chunk(10);
 
-                $peraperNotification = $this->sendNotification($notification);
+        // $notifications->each(function ($notificationChunks) use($admins) {
 
-                if($admins->where('id', $user->id)->count() < 1) {
-                    $user->notify($peraperNotification);
-                }
+        //     $notificationChunks->each(function ($notification) use($admins) {
 
-                Notification::send($admins, $peraperNotification);
+        //         $corp = $notification['corp'];
+        //         $user = $corp->user;
 
-                sleep(1);
-            });
+        //         $peraperNotification = $this->sendNotification($notification);
 
-        });
+        //         if($admins->where('id', $user->id)->count() < 1) {
+        //             $user->notify($peraperNotification);
+        //         }
+
+        //         Notification::send($admins, $peraperNotification);
+
+        //         sleep(1);
+        //     });
+
+        // });
     }
 
     private function prepareNotificationData($item, $parentItem = null, $columnName = 'end_date', $branch = null)
@@ -171,6 +178,7 @@ class DateReminder
 
         $status = status_handler($columnValue);
 
+        return $this->notificationExists($id, $className);
         return [
             'id' => $id,
             'image' => !empty($corp->thumbnail) ? asset($corp->thumbnail) : '',
@@ -243,13 +251,19 @@ class DateReminder
         $corp = $data['corp'];
         unset($data['corp']);
 
-        return new UserActionNotification($data, $corp->email, $corp);
+        // return new UserActionNotification($data, $corp->email, $corp);
     }
 
     private function getAllNotifications() {
         $this->notifications = DB::table('notifications')->get();
     }
 
+    private function notificationExists(int $itemId, string $className) {
+        return $this->notifications->filter(function ($notification) use ($itemId, $className) {
+            $data = json_decode($notification->data, true);
+            return (isset($data['id']) && $data['id'] == $itemId) && (isset($data['model']) && $data['model'] == $className);
+        })->first();
+    }
     private function notificationsFilter($item, $columnName, $className) : bool {
         $className = $className !== null ? $className : get_class($item);
 

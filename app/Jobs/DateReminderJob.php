@@ -26,6 +26,7 @@ use App\Notifications\UserActionNotification;
 use App\Observers\ActivityLogsObserver;
 use App\Services\WhatsappService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
 class DateReminderJob implements ShouldQueue
@@ -33,6 +34,7 @@ class DateReminderJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $notifications;
+    private array $updatedNotifications = [];
 
     private Corp $corp;
     private CorpBranch $corpBranch;
@@ -151,6 +153,7 @@ class DateReminderJob implements ShouldQueue
                 foreach($registries as $registry) {
                     if(!$this->checkItemStatusNotification($registry->registry, className: Registry::class)) {
                         $notifications[] = $this->prepareNotificationData($registry, $corp, 'end_date', $branch);
+
                     }
                 }
             }
@@ -181,6 +184,12 @@ class DateReminderJob implements ShouldQueue
             });
 
         });
+
+        // Delete all existing notifications
+        $this->deleteAllExistingNotifications();
+        // make array empty again
+        $this->updatedNotifications = [];
+
     }
     private function prepareNotificationData($item, $parentItem = null, $columnName = 'end_date', $branch = null)
     {
@@ -198,6 +207,8 @@ class DateReminderJob implements ShouldQueue
         }
 
         $status = status_handler($columnValue);
+
+        $this->notificationExists(itemId: $id, className: $className);
 
         return [
             'id' => $id,
@@ -307,5 +318,26 @@ class DateReminderJob implements ShouldQueue
     private function sendToWhatsapp(Corp $corp, string $message = '') {
          (new ActivityLogsObserver)->sendWhatsapp($corp);
         return SendWhatsappMessages::dispatch($corp->phone, $message);
+    }
+    private function notificationExists(int $itemId, string $className): void
+    {
+        $notification = $this->notifications->filter(function ($notification) use ($itemId, $className) {
+                $data = json_decode($notification->data, true);
+                return (isset($data['id']) && $data['id'] == $itemId) && (isset($data['model']) && $data['model'] == $className);
+        });
+
+        if($notification->count() > 0) {
+            $notification->pluck(value: 'id')->each(fn($item) => $this->updatedNotifications[] = $item);
+            // array_push(array: $this->updatedNotifications,  values: );
+        }
+
+    }
+
+    private function deleteAllExistingNotifications(): bool
+    {
+        if (count($this->updatedNotifications) < 1)
+            return false;
+
+        return DB::table('notifications')->whereIn('id', $this->updatedNotifications)->delete();
     }
 }
