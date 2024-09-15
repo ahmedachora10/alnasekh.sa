@@ -35,7 +35,7 @@
 
             <!-- Notifications -->
             @hasPermission('notification.show')
-            <livewire:dashboard.container.notifications-container theme="navbar" />
+                <livewire:dashboard.container.notifications-container theme="navbar" />
             <!--/ Notifications -->
             @endhasPermission
             <!-- User -->
