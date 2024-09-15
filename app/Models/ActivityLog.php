@@ -12,7 +12,7 @@ class ActivityLog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'activity_type', 'content', 'logable_id', 'logable_type'];
+    protected $fillable = ['user_id', 'activity_type', 'content', 'logable_id', 'logable_type', 'corp_id'];
 
     protected $casts = [
         'activity_type' => ActivityLogType::class

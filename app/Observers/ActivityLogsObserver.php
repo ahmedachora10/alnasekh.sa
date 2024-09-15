@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class ActivityLogsObserver
 {
 
-    public function __construct(protected ?string $className = null, protected ?string $title = null) {}
+    public function __construct(protected ?string $className = null, protected ?string $title = null, protected ?string $corpId = null) {}
     public function created(Model|Pivot $model) {
         $this->createActivityLog(activityLogType: ActivityLogType::Create,model: $model);
     }
@@ -56,9 +56,9 @@ class ActivityLogsObserver
 
     private function prepareModelContent(Model|Pivot $model): string {
         return match ($this->className ?? $model::class) {
-            Corp::class => 'المنشأة ' . $model->name,
-            CorpBranch::class => 'الفرع '. $model->name,
-            BranchRecord::class => 'الرخصة ' . $model->type,
+            Corp::class => 'المنشأة ' . $model->id,
+            CorpBranch::class => 'الفرع '. $model->corp_id,
+            BranchRecord::class => 'الرخصة ' . $model->branche,
             BranchCertificate::class => 'الرخصة ' . $model->type,
             BranchSubscription::class => 'الاشتراك ' . $model->subscription_type?->name(),
             BranchCivilDefenseCertificate::class => 'شهادة الدفاع المدني',
@@ -71,4 +71,22 @@ class ActivityLogsObserver
             User::class => 'المستخدم ' . $model->name,
         };
     }
+
+    // private function getCorpId(string $className): string {
+    //     return match ($this->className ?? $model::class) {
+    //         Corp::class => $model->id,
+    //         CorpBranch::class => $model->name,
+    //         BranchRecord::class => $model->type,
+    //         BranchCertificate::class => $model->type,
+    //         BranchSubscription::class =>$model->subscription_type?->name(),
+    //         BranchCivilDefenseCertificate::class => ,
+    //         BranchEmployee::class => $model->name,
+    //         EmployeeHealthCardPaper::class =>  $model?->employee?->name,
+    //         EmployeeMedicalInsurance::class =>$model?->employee?->name,
+    //         CorpBranchMonthlyQuarterlyUpdate::class =>,
+    //         CorpBranchRegistry::class => $model->registry,
+    //         Registry::class => $model?->name,
+    //         User::class => 'المستخدم ' . $model->name,
+    //     };
+    // }
 }

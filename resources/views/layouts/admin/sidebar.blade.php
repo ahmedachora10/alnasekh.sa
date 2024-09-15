@@ -37,34 +37,33 @@
 
     <ul class="menu-inner py-1 ps ps--active-y">
 
-        @hasPermission('dashboard.show')
-            <x-dashboard.sidebar.link :title="trans('sidebar.home')" icon="home-circle" :link="route('dashboard')" />
-        @endhasPermission
+        {{-- @hasPermission('dashboard.show') --}}
+        <x-dashboard.sidebar.link :title="trans('sidebar.home')" icon="home-circle" :link="route('dashboard')" />
+        {{-- @endhasPermission --}}
 
-        @hasPermission('dashboard.show')
+        @hasPermission('notification.show')
             <x-dashboard.sidebar.link :title="trans('sidebar.notifications')" icon="bell" :link="route('users.notifications')" />
         @endhasPermission
 
-        @hasPermission('corp.show|setting.show|corp.updates and registries')
+        @hasPermission('corp.show|setting.show|monthly_update.show|registry.show|entity.show')
             <x-dashboard.sidebar.link :title="trans('sidebar.corps')" icon="folder" link="#" :hasSubMenu="true">
                 @hasPermission('corp.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.corps')" :link="route('corps.index')" />
                 @endhasPermission
-                @hasPermission('corp.updates and registries')
+                @hasPermission('monthly_update.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.monthly quarterly updates')" :link="route('monthly-quarterly-update.index')" />
                 @endhasPermission
-                @hasPermission('corp.updates and registries')
+                @hasPermission('registry.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.registries')" :link="route('registries.index')" />
                 @endhasPermission
 
-                @hasPermission('corp.updates and registries')
+                @hasPermission('entity.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.ministries')" :link="route('ministries.index')" />
                 @endhasPermission
-
             </x-dashboard.sidebar.link>
         @endhasPermission
 
-        @hasPermission('user.show|setting.show')
+        @hasPermission('user.show|setting.show|slider.show')
             <x-dashboard.sidebar.link-head>
                 <span>{{ trans('sidebar.all settings') }}</span>
             </x-dashboard.sidebar.link-head>
@@ -81,34 +80,59 @@
                 @hasPermission('setting.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.general settings')" :link="route('settings.index')" />
                 @endhasPermission
-                @hasPermission('dashboard.show')
+                @hasPermission('slider.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.sliders')" :link="route('sliders.index')" />
-                    <x-dashboard.sidebar.link :title="trans('sidebar.our specials')" :link="route('our-services.index')" />
-                    <x-dashboard.sidebar.link :title="trans('sidebar.our clients')" :link="route('our-clients.index')" />
-                    <x-dashboard.sidebar.link :title="trans('sidebar.headlines')" :link="route('translation.index')" />
-                    <x-dashboard.sidebar.link :title="trans('sidebar.statistics')" :link="route('statistics.index')" />
+                @endhasPermission
+                <x-dashboard.sidebar.link :title="trans('sidebar.our specials')" :link="route('our-services.index')" />
+                <x-dashboard.sidebar.link :title="trans('sidebar.our clients')" :link="route('our-clients.index')" />
+                <x-dashboard.sidebar.link :title="trans('sidebar.headlines')" :link="route('translation.index')" />
+                <x-dashboard.sidebar.link :title="trans('sidebar.statistics')" :link="route('statistics.index')" />
+            </x-dashboard.sidebar.link>
+        @endhasPermission
+
+        @hasPermission('job.show|job_request.show|city.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="server" link="#" :hasSubMenu="true"
+                :notification="$jobsRequestsCount">
+                @hasPermission('job.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" :link="route('jobs.index')" />
+                @endhasPermission
+                @hasPermission('job_request.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" :link="route('job-requests.index')" :notification="$jobsRequestsCount" />
+                @endhasPermission
+                @hasPermission('city.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.cities')" :link="route('job-cities.index')" />
                 @endhasPermission
             </x-dashboard.sidebar.link>
         @endhasPermission
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" icon="server" link="#" :hasSubMenu="true"
-            :notification="$jobsRequestsCount">
-            <x-dashboard.sidebar.link :title="trans('sidebar.jobs')" :link="route('jobs.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.job requests')" :link="route('job-requests.index')" :notification="$jobsRequestsCount" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.cities')" :link="route('job-cities.index')" />
-        </x-dashboard.sidebar.link>
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" link="#" :hasSubMenu="true"
-            :notification="$packagesRequestCount">
-            <x-dashboard.sidebar.link :title="trans('sidebar.packages')" :link="route('packages.index')" />
-            <x-dashboard.sidebar.link :title="trans('sidebar.package requests')" :link="route('packages.requests')" :notification="$packagesRequestCount" />
-        </x-dashboard.sidebar.link>
+        @hasPermission('package.show|package_request.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.packages')" icon="package" link="#" :hasSubMenu="true"
+                :notification="$packagesRequestCount">
+                @hasPermission('package.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.packages')" :link="route('packages.index')" />
+                @endhasPermission
+                @hasPermission('package_request.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.package requests')" :link="route('packages.requests')" :notification="$packagesRequestCount" />
+                @endhasPermission
+            </x-dashboard.sidebar.link>
+        @endhasPermission
 
-        <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user" :link="route('subscribers.index')" :notification="$subscribersCount" />
-        <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="user-pin" :link="route('contact-us.index')" :notification="$contactsCount" />
-        <x-dashboard.sidebar.link :title="trans('sidebar.reviews')" icon="star" :link="route('reviews.index')" />
-        <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="server" :link="route('services.index')" />
-        <x-dashboard.sidebar.link :title="trans('sidebar.activities')" icon="archive" :link="route('activitylogs')" />
+        @hasPermission('subscriber.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.subscribers')" icon="user" :link="route('subscribers.index')" :notification="$subscribersCount" />
+        @endhasPermission
+        @hasPermission('contact.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.contact us')" icon="user-pin" :link="route('contact-us.index')" :notification="$contactsCount" />
+        @endhasPermission
+        @hasPermission('review.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.reviews')" icon="star" :link="route('reviews.index')" />
+        @endhasPermission
+        @hasPermission('service.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="server" :link="route('services.index')" />
+        @endhasPermission
+        @hasPermission('activity.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.activities')" icon="archive" :link="route('activitylogs')" />
+        @endhasPermission
 
         <!-- Misc -->
         {{-- <li class="menu-item">

@@ -366,4 +366,26 @@ return [
             'not_deletable' => [],
         ],
     ],
+
+    'default_permissions' => [
+        'user' => ['create', 'edit', 'delete', 'show'],
+        'corp' => ['create', 'edit', 'delete', 'show'],
+        'monthly_update' => ['create', 'edit', 'delete', 'show'],
+        'registry' => ['create', 'edit', 'delete', 'show'],
+        'entity' => ['create', 'edit', 'delete', 'show'],
+        'setting' => ['create', 'show'],
+        'role' => ['create', 'edit', 'delete', 'show'],
+        'notification' => ['create', 'edit', 'delete', 'show'],
+        'job' => ['create', 'edit', 'delete', 'show'],
+        'job_request' => ['show'],
+        'package' => ['create', 'edit', 'delete', 'show'],
+        'package_request' => ['show'],
+        'subscriber' => ['show'],
+        'city' => ['create', 'edit', 'delete', 'show'],
+        'contact' => ['show'],
+        'review' => ['show'],
+        'service' => ['create', 'edit', 'delete', 'show'],
+        'slider' => ['create', 'edit', 'delete', 'show'],
+        'activity' => ['show'],
+    ]
 ];

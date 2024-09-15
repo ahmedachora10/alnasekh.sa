@@ -26,22 +26,11 @@
                 </div>
             </div>
         </div>
+        @hasPermission('notification.show')
         <div class="col-lg-4 col-md-4 order-1 mb-3">
-            {{-- <div class="card overflow-hidden mb-6" style="height: 600px;">
-                <h5 class="card-header">المهام</h5>
-                <div class="card-body ps ps--active-y" id="notification-scrolling"> --}}
-
-                    <livewire:dashboard.container.notifications-container theme="todo" />
-
-                    {{-- <div class="ps__rail-x" style="left: 0px; bottom: -109px;">
-                        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                    </div>
-                    <div class="ps__rail-y" style="top: 109px; height: 224px; right: 0px;">
-                        <div class="ps__thumb-y" tabindex="0" style="top: 19px; height: 40px;"></div>
-                    </div>
-                </div>
-            </div> --}}
+            <livewire:dashboard.container.notifications-container theme="todo" />
         </div>
+        @endhasPermission
     </div>
     <div class="row">
         <!-- Order Statistics -->

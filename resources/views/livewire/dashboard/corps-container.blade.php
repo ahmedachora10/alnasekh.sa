@@ -24,10 +24,12 @@
                     <span>{{ trans('common.export') }}</span>
                 </button>
 
+                @hasPermission('corp.create')
                 <a href="{{ route('corps.create') }}" class="btn btn-primary mx-4 btn-sm ">
                     <span class="tf-icons bx bx-plus"></span>
                     <span>{{ trans('common.create') }}</span>
                 </a>
+                @endhasPermission
 
                 <label class="btn btn-warning btn-sm me-3">
                     الاجمالي : {{ $corps->total() }}
@@ -84,34 +86,42 @@
                 </td>
                 <td>
                     <x-dashboard.actions.container>
-                        @if (!$corp->doesnt_has_branches)
-                            <a href="{{ route('branches.index', $corp) }}" class="dropdown-item text-primary"> <i
-                                    class="bx bx-git-branch me-1"></i>{{ trans('sidebar.branches') }}</a>
-                        @endif
+                        @hasPermission('corp.show')
+                            @if (!$corp->doesnt_has_branches)
+                                <a href="{{ route('branches.index', $corp) }}" class="dropdown-item text-primary"> <i
+                                        class="bx bx-git-branch me-1"></i>{{ trans('sidebar.branches') }}</a>
+                            @endif
+                        @endhasPermission
 
-                        @if ($corp->doesnt_has_branches)
-                            <a href="{{ route('branches.show', $corp->branches?->first()) }}"
-                                class="dropdown-item text-primary">
-                                <i class="bx bx-show me-1"></i>{{ trans('common.show') }}</a>
-                            @php
-                                $steps = stepsChecker($corp->branch);
-                            @endphp
-                            <a class="dropdown-item text-{{ $steps['link'] === '#' ? 'secondary disabled' : 'danger' }}"
-                                target="_blank" href="{{ $steps['link'] }}">
-                                <i class="bx bx-link-external position-relative" style="font-size: 15px"></i>
-                                {{ $steps['text'] }}
-                            </a>
-                        @else
-                            <a href="{{ route('corps.show', $corp) }}" class="dropdown-item"> <i
-                                    class="bx bx-show me-1"></i> {{ trans('common.show') }} </a>
-                        @endif
+                        @hasPermission('corp.show')
+                            @if ($corp->doesnt_has_branches)
+                                <a href="{{ route('branches.show', $corp->branches?->first()) }}"
+                                    class="dropdown-item text-primary">
+                                    <i class="bx bx-show me-1"></i>{{ trans('common.show') }}</a>
+                                @php
+                                    $steps = stepsChecker($corp->branch);
+                                @endphp
+                                <a class="dropdown-item text-{{ $steps['link'] === '#' ? 'secondary disabled' : 'danger' }}"
+                                    target="_blank" href="{{ $steps['link'] }}">
+                                    <i class="bx bx-link-external position-relative" style="font-size: 15px"></i>
+                                    {{ $steps['text'] }}
+                                </a>
+                            @else
+                                <a href="{{ route('corps.show', $corp) }}" class="dropdown-item"> <i
+                                        class="bx bx-show me-1"></i> {{ trans('common.show') }} </a>
+                            @endif
+                        @endhasPermission
                         <a href="#!" wire:click="export({{ $corp }})" class="dropdown-item"> <i
                                 class="bx bx-cloud-download me-1"></i>
                             {{ trans('common.export') }}
                         </a>
-                        <x-dashboard.actions.edit
-                            :href="route('corps.edit', $corp->id)">{{ trans('common.edit') }}</x-dashboard.actions.edit>
-                        <x-dashboard.actions.delete :route="route('corps.destroy', $corp)" />
+                        @hasPermission('corp.edit')
+                            <x-dashboard.actions.edit
+                                :href="route('corps.edit', $corp->id)">{{ trans('common.edit') }}</x-dashboard.actions.edit>
+                        @endhasPermission
+                        @hasPermission('corp.delete')
+                            <x-dashboard.actions.delete :route="route('corps.destroy', $corp)" />
+                        @endhasPermission
                     </x-dashboard.actions.container>
                 </td>
             </tr>

@@ -44,7 +44,7 @@
     </div>
 
     <div>
-        <x-dashboard.modals.modal1 id="RoleFormModal" :title="trans('common.new role')">
+        <x-dashboard.modals.modal1 id="RoleFormModal" size="modal-xl" :title="trans('common.new role')">
             <livewire:dashboard.store-role />
         </x-dashboard.modals.modal1>
     </div>

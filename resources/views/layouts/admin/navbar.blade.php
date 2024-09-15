@@ -34,9 +34,10 @@
             <!--/ Switch Theme -->
 
             <!-- Notifications -->
+            @hasPermission('notification.show')
             <livewire:dashboard.container.notifications-container theme="navbar" />
             <!--/ Notifications -->
-
+            @endhasPermission
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
