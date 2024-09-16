@@ -20,7 +20,7 @@
                 <td>{{ $branch->address ?? '-' }}</td>
                 <td>
                     @php
-                        $steps = stepsChecker($corp->branch);
+                        $steps = stepsChecker($branch);
                     @endphp
                     <a class="btn btn-sm btn-outline-{{ $steps['link'] === '#' ? 'secondary disabled' : 'danger' }}"
                         target="_blank" href="{{ $steps['link'] }}">{{ $steps['text'] }}</a>
