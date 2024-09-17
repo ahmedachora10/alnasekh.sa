@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\HasBranches;
 use App\Models\Interfaces\ObservationColumnsInterface;
 use App\Traits\DeleteNotification;
+use App\Traits\LogActivityOptions;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\ThumbnailModelAttribute;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Scout\Searchable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Corp
@@ -40,7 +43,9 @@ use Laravel\Scout\Searchable;
 
 class Corp extends Model implements ObservationColumnsInterface
 {
-    use HasFactory, ModelBasicAttributeValue, ThumbnailModelAttribute, Searchable, DeleteNotification;
+    use HasFactory, ModelBasicAttributeValue,
+        ThumbnailModelAttribute, Searchable, DeleteNotification;
+    use LogsActivity, LogActivityOptions;
 
     protected $fillable = [
         'user_id',
@@ -116,7 +121,6 @@ class Corp extends Model implements ObservationColumnsInterface
             'end_date' => $this->end_date,
         ];
     }
-
     public function observationColumns(): array
     {
         return ['end_date'];

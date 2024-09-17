@@ -314,6 +314,6 @@
     </div>
 
     <div class="col-12 mb-4 mt-4">
-        <livewire:dashboard.container.activities-logs :corpId="$branch->corp_id" />
+        <livewire:dashboard.container.activities-logs :branch="$branch" />
     </div>
 </div>

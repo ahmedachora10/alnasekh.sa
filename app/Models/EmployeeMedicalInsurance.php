@@ -5,15 +5,18 @@ namespace App\Models;
 use App\Enums\Status;
 use App\Models\Interfaces\ObservationColumnsInterface;
 use App\Traits\DeleteNotification;
+use App\Traits\LogActivityTabForCorp;
 use App\Traits\ModelBasicAttributeValue;
 use App\Traits\SetStatusAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class EmployeeMedicalInsurance extends Model implements ObservationColumnsInterface
 {
     use HasFactory, ModelBasicAttributeValue, SetStatusAttribute, DeleteNotification;
+    use LogsActivity, LogActivityTabForCorp;
 
     protected $fillable = [
         'branch_employee_id',

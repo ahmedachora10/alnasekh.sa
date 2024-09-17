@@ -1,3 +1,6 @@
 {
-    "select a city" : "حدد المدينة"
+    "select a city" : "حدد المدينة",
+    "updated" : "تحديث",
+    "deleted" : "حذف",
+    "created" : "اضافة"
 }

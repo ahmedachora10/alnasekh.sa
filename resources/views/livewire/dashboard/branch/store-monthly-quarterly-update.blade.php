@@ -2,7 +2,7 @@
     <x-dashboard.alert key="date" color="danger" />
 
     @if ($createMode)
-        <x-dashboard.wizard.wizard-head current="monthly_quarterly_updates" :branch="!$branch->corp->doesnt_has_branches" />
+        <x-dashboard.wizard.wizard-head current="monthly_quarterly_updates" :branch="$branch" />
         <div class="mb-3"></div>
     @endif
 

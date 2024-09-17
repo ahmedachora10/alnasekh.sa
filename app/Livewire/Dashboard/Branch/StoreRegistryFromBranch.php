@@ -33,12 +33,9 @@ class StoreRegistryFromBranch extends Component
         $this->validate();
 
         DB::transaction(function () {
-            $this->branch->registries()->attach($this->registryId, $this->form->all());
-
-            (new ActivityLogsObserver(CorpBranchRegistry::class))
-            ->created(
-                model: $this->branch->registries()->latest()->first()
-            );
+        CorpBranchRegistry::create(
+            attributes: ['registry_id' => $this->registryId, 'corp_branch_id' => $this->branch->id] + $this->form->all()
+        );
 
             session()->put('success', trans('message.create'));
 

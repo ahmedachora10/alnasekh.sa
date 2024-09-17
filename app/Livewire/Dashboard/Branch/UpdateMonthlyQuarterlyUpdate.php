@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Dashboard\Branch;
 
+use App\Enums\ActivityLogType;
 use App\Models\CorpBranch;
 use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\MonthlyQuarterlyUpdate;
+use App\Models\User;
 use App\Observers\ActivityLogsObserver;
 use App\Observers\DeleteNotificationObserver;
 use App\Traits\Livewire\Message;
@@ -50,16 +52,6 @@ class UpdateMonthlyQuarterlyUpdate extends Component
         $update?->update(['date' => $this->date]);
         $update->fireUpdatedEvent($oldDate);
 
-        (
-            new ActivityLogsObserver(
-                className: CorpBranchMonthlyQuarterlyUpdate::class,
-                title: $update?->monthlyQuarterlyUpdate?->entity_name
-            )
-        )
-        ->updated(
-            model: $update,
-        );
-
         $this->fireMessage();
 
         $this->dispatch('refresh-dashboard');
@@ -81,13 +73,14 @@ class UpdateMonthlyQuarterlyUpdate extends Component
                 ->whereJsonContains("data->id", $removedItemId->id)
                 ->whereJsonContains('data->model', MonthlyQuarterlyUpdate::class)?->delete();
 
-                (new ActivityLogsObserver(
-                    className: CorpBranchMonthlyQuarterlyUpdate::class,
-                    title: $removedItemId?->monthlyQuarterlyUpdate?->entity_name
-                ))
-                ->deleted(
-                    model: $removedItemId,
-                );
+            $user = User::find(auth()->id());
+            $model = $removedItemId;
+
+            activity()
+                ->performedOn($model)
+                ->causedBy($user)
+                ->event(ActivityLogType::Delete->value)
+                ->log(ActivityLogType::Delete->content($model));
 
                 $removedItemId->delete();
 

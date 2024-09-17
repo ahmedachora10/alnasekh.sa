@@ -1,5 +1,5 @@
 <section>
-    <x-dashboard.wizard.wizard-head current="employees" :branch="!$branch->corp->doesnt_has_branches" />
+    <x-dashboard.wizard.wizard-head current="employees" :branch="$branch" />
 
     <div class="mb-3"></div>
 

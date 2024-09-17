@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Enums\ActivityLogType;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -316,7 +317,10 @@ class DateReminderJob implements ShouldQueue
         return $this->getStatus($item, $columnName) || $this->notificationsFilter($item, $columnName, $className);
     }
     private function sendToWhatsapp(Corp $corp, string $message = '') {
-         (new ActivityLogsObserver)->sendWhatsapp($corp);
+        activity('send-whatsapp')
+            ->event(ActivityLogType::Whatsapp->value)
+            ->log(ActivityLogType::Whatsapp->content($corp));
+
         return SendWhatsappMessages::dispatch($corp->phone, $message);
     }
     private function notificationExists(int $itemId, string $className): void

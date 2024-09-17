@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <x-dashboard.wizard.wizard-head current="corps" :branch="false" />
+    <x-dashboard.wizard.wizard-head current="corps" :branch="null" />
 
     <div class="mb-3"></div>
 

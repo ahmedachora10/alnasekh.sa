@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Dashboard\Branch;
 
+use App\Enums\ActivityLogType;
 use App\Livewire\Forms\MonthlyQuarterlyUpdateForm;
 use App\Models\CorpBranch;
 use App\Models\CorpBranchMonthlyQuarterlyUpdate;
 use App\Models\MonthlyQuarterlyUpdate;
+use App\Models\User;
 use App\Observers\ActivityLogsObserver;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -59,14 +61,13 @@ class StoreMonthlyQuarterlyUpdate extends Component
     }
 
     private function save($monthlyQuarterlyUpdate) {
-        DB::transaction(function () use($monthlyQuarterlyUpdate) {
+        DB::transaction(function () use ($monthlyQuarterlyUpdate) {
+            CorpBranchMonthlyQuarterlyUpdate::create([
+                'corp_branch_id' => $this->branch->id,
+                'monthly_quarterly_update_id' => $monthlyQuarterlyUpdate,
+                'date' => $this->date
+            ]);
 
-            $this->branch->monthlyQuarterlyUpdates()->attach($monthlyQuarterlyUpdate, ['date' => $this->date, 'corp_branch_id' => $this->branch->id]);
-            // dd($this->branch->monthlyQuarterlyUpdates()->latest()->first());
-            (new ActivityLogsObserver(CorpBranchMonthlyQuarterlyUpdate::class))
-            ->created(
-                model: $this->branch->monthlyQuarterlyUpdates()->latest()->first()
-            );
             session()->put('success', trans('message.create'));
             $this->reset('date');
             $this->dispatch('refresh-alert');
@@ -77,7 +78,12 @@ class StoreMonthlyQuarterlyUpdate extends Component
     }
 
     private function delete($monthlyQuarterlyUpdate): void {
-        $this->branch->monthlyQuarterlyUpdates()->detach(ids: $monthlyQuarterlyUpdate);
+
+        CorpBranchMonthlyQuarterlyUpdate::firstWhere([
+            ['corp_branch_id', $this->branch->id],
+            ['monthly_quarterly_update_id', $monthlyQuarterlyUpdate]
+        ])?->delete();
+
         session()->put('success', trans('message.delete'));
         $this->reset('date');
         $this->dispatch('refresh-alert');

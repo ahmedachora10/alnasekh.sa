@@ -7,6 +7,7 @@ use App\Models\Corp;
 use App\Models\Package;
 use App\Services\WhatsappService;
 use Illuminate\Support\Facades\Route;
+use Spatie\Activitylog\Models\Activity;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 // Route::get('send-whatsapp-message', fn() => (new WhatsappService)->sendMessage(to: '212684825329', variables: ['رسالة مشفرة من احمد']));
-
+Route::get('/logs', fn() => dd(Activity::all()->last()));
 Route::get('/', function () {
     return view('welcome');
 });

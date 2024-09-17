@@ -1,5 +1,5 @@
 <section>
-    <x-dashboard.wizard.wizard-head current="civil_defense_permit" :branch="!$branch->corp->doesnt_has_branches" />
+    <x-dashboard.wizard.wizard-head current="civil_defense_permit" :branch="$branch" />
     <div class="mb-3"></div>
     <x-dashboard.cards.sample column="col-12">
         <div class="row">

@@ -70,16 +70,18 @@ class StoreRegistry extends Component
     }
 
     private function store() {
-        $this->branch->registries()->attach($this->registryId, $this->form->all());
-        // dd(CorpBranchRegistry::find($this->registryId));
-        (new ActivityLogsObserver)->created(model: $this->branch->registries()->latest()->first());
+        CorpBranchRegistry::create(
+            attributes: ['registry_id' => $this->registryId, 'corp_branch_id' => $this->branch->id] + $this->form->all()
+        );
         session()->put('success', trans('message.create'));
     }
 
     private function update() {
+        $registry = CorpBranchRegistry::firstWhere([
+            ['registry_id', $this->registry->id],
+            ['corp_branch_id', $this->branch->id]
+        ]);
 
-        $registry = CorpBranchRegistry::where('registry_id', $this->registry->id)
-                    ->where('corp_branch_id', $this->branch->id)->first();
         $oldEndDate = $registry->end_date;
 
         $registry->update($this->form->all());

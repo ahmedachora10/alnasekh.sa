@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Enums\ActivityLogType;
 use App\Mail\SendReminderEmail;
 use App\Models\Corp;
 use App\Models\User;
@@ -27,7 +28,10 @@ class UserActionNotification extends Notification
     )
     {
         if($this->corp->send_reminder == true && ($this->email !== null || $this->email != '')) {
-            (new ActivityLogsObserver)->sendEmail($this->corp);
+        activity('send-email')
+            ->event(ActivityLogType::Email->value)
+            ->log(ActivityLogType::Email->content($this->corp));
+
             Mail::to($this->email)->queue(new SendReminderEmail($this->corp->name, $this->corp->administrator_name, $this->data['email_title']));
             // 'suliman@isbd5.com'
             // Artisan::call('email:send', [

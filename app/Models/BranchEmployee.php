@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Nationalities;
 use App\Models\Interfaces\ObservationColumnsInterface;
 use App\Traits\DeleteNotification;
+use App\Traits\LogActivityTabForCorp;
 use App\Traits\ModelBasicAttributeValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,10 +14,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class BranchEmployee extends Model implements ObservationColumnsInterface
 {
     use HasFactory, ModelBasicAttributeValue, Searchable, DeleteNotification;
+    use LogsActivity, LogActivityTabForCorp;
 
     protected $fillable = [
         'corp_id',

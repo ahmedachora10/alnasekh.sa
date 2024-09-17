@@ -21,6 +21,8 @@ class StoreCertificate extends Component
         $this->branch = $branch;
         $this->certificate = new BranchCertificate;
         $this->company_name = $branch->name;
+
+        $this->form->fill($this->branch->certificate?->toArray() ?? []);
     }
 
     public function save() {

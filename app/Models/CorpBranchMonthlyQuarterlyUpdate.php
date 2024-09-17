@@ -4,23 +4,28 @@ namespace App\Models;
 
 use App\Models\Interfaces\ObservationColumnsInterface;
 use App\Traits\DeleteNotification;
+use App\Traits\LogActivityTabForCorp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class CorpBranchMonthlyQuarterlyUpdate extends Pivot implements ObservationColumnsInterface
 {
     use HasFactory;
+    use LogsActivity, LogActivityTabForCorp;
 
     protected $table = 'branch_monthly_quarterly';
-
-    protected $guarded = [];
-
+    protected $fillable = [
+        'corp_branch_id',
+        'monthly_quarterly_update_id',
+        'date'
+    ];
+    protected $primaryKey = 'id';
+    public $incrementing = true;
     public $timestamps = true;
-
-    // public $incrementing = true;
 
     public function branch() : BelongsTo {
         return $this->belongsTo(CorpBranch::class, 'corp_branch_id');

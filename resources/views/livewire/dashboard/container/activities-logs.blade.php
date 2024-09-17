@@ -16,11 +16,14 @@
         </x-slot:actions>
 
         @forelse ($activities as $item)
+        @php
+            $type = App\Enums\ActivityLogType::tryFrom($item->event);
+        @endphp
         <tr wire:loading.class="opacity-50">
             <td>{{ $item->id }}</td>
-            <td>{{ $item->user?->name ?? '-' }}</td>
-            <td><x-dashboard.badge :color="$item->activity_type?->color()"> {{ $item->activity_type?->name() }} </x-dashboard.badge></td>
-            <td>{{ $item->content }}</td>
+            <td><x-dashboard.badge color="secondary">{{ $item->causer?->name ?? '-' }}</x-dashboard.badge></td>
+            <td><x-dashboard.badge :color="$type?->color()"> {{ $type?->name() }} </x-dashboard.badge></td>
+            <td>{{ $item->description }}</td>
             <td>{{ $item->created_at->format('Y-m-d H:i:s') }}</td>
             <td>
                 <x-dashboard.actions.container>

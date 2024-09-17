@@ -24,7 +24,7 @@
                                 @endif
                             </span>
                         @else
-                            <x-dashboard.tooltips class="bs-stepper-circle" :title="$loop->iteration">
+                            <x-dashboard.tooltips :link="$checkRouteName($step->routeName)" class="bs-stepper-circle" :title="$loop->iteration">
                                 <span class="bs-stepper-label mt-1">
                                     <span class="bs-stepper-title">
                                         <i class="bx bx-info-circle"></i>

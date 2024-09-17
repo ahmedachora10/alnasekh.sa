@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\ActivityLogType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
@@ -31,7 +32,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        (new ActivityLogsObserver)->login(User::find(auth()->id()));
+        $user = User::find(auth()->id());
+
+        activity('auth')
+            ->performedOn($user)
+            ->causedBy($user)
+            ->event(ActivityLogType::Login->value)
+            ->log(ActivityLogType::Login->content($user));
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -41,11 +48,20 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $user = User::find(auth()->id());
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+
+
+        activity('logout')
+            ->performedOn($user)
+            ->causedBy($user)
+            ->event(ActivityLogType::LogOut->value)
+            ->log(ActivityLogType::LogOut->content($user));
 
         return redirect()->route('login');
     }

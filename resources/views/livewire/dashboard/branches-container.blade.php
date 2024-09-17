@@ -1,6 +1,6 @@
 <section>
     @if ($targetStep)
-        <x-dashboard.wizard.wizard-head current="branches" :branch="!$corp->doesnt_has_branches" />
+        <x-dashboard.wizard.wizard-head current="branches" :branch="null" />
     @else
         <x-dashboard.headline :title="trans('sidebar.branches')" description="عرض جميع فروع المنشأة {{ $corp->name }}" />
     @endif
