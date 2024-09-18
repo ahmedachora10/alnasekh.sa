@@ -15,7 +15,7 @@
                     'crossed' => !isset($oldSteps),
                 ]) data-target="#{{ $step->target }}">
                     <button type="button" class="step-trigger" aria-selected="false">
-                        <a href="{{$checkRouteName($step->routeName)}}" class="row">
+                        <a href="{{$checkRouteName($step->routeName)}}" class="d-flex">
                             @if ($currentStep || $loop->count < $countOfSteps)
                                     <span class="bs-stepper-circle">{{ $loop->iteration }}</span>
                                     <span class="bs-stepper-label mt-1">
