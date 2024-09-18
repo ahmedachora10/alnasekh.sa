@@ -14,25 +14,27 @@
                     'active' => $currentStep,
                     'crossed' => !isset($oldSteps),
                 ]) data-target="#{{ $step->target }}">
-                    <a href="{{$checkRouteName($step->routeName)}}" class="step-trigger" aria-selected="false">
-                        @if ($currentStep || $loop->count < $countOfSteps)
-                                <span class="bs-stepper-circle">{{ $loop->iteration }}</span>
-                                <span class="bs-stepper-label mt-1">
-                                    <span class="bs-stepper-title">{{ $step->title }}</span>
-                                    @if ($step->subtitle)
-                                    <span class="bs-stepper-subtitle">{{ $step->subtitle }}</span>
-                                    @endif
-                                </span>
-                        @else
-                            <x-dashboard.tooltips class="bs-stepper-circle" :title="$loop->iteration">
-                                <span class="bs-stepper-label mt-1">
-                                    <span class="bs-stepper-title">
-                                        <i class="bx bx-info-circle"></i>
-                                        {{ $step->title }}
+                    <button type="button" class="step-trigger" aria-selected="false">
+                        <a href="{{$checkRouteName($step->routeName)}}">
+                            @if ($currentStep || $loop->count < $countOfSteps)
+                                    <span class="bs-stepper-circle">{{ $loop->iteration }}</span>
+                                    <span class="bs-stepper-label mt-1">
+                                        <span class="bs-stepper-title">{{ $step->title }}</span>
+                                        @if ($step->subtitle)
+                                        <span class="bs-stepper-subtitle">{{ $step->subtitle }}</span>
+                                        @endif
                                     </span>
-                                </span>
-                            </x-dashboard.tooltips>
-                        @endif
+                            @else
+                                <x-dashboard.tooltips class="bs-stepper-circle" :title="$loop->iteration">
+                                    <span class="bs-stepper-label mt-1">
+                                        <span class="bs-stepper-title">
+                                            <i class="bx bx-info-circle"></i>
+                                            {{ $step->title }}
+                                        </span>
+                                    </span>
+                                </x-dashboard.tooltips>
+                            @endif
+                        </a>
                     </button>
                 </div>
                 @if (!$loop->last)
