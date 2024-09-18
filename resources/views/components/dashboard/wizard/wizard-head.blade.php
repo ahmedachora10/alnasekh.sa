@@ -16,13 +16,15 @@
                 ]) data-target="#{{ $step->target }}">
                     <button type="button" class="step-trigger" aria-selected="false">
                         @if ($currentStep || $loop->count < $countOfSteps)
-                            <span class="bs-stepper-circle">{{ $loop->iteration }}</span>
-                            <span class="bs-stepper-label mt-1">
-                                <span class="bs-stepper-title">{{ $step->title }}</span>
-                                @if ($step->subtitle)
+                            <a href="{{$checkRouteName($step->routeName)}}">
+                                <span class="bs-stepper-circle">{{ $loop->iteration }}</span>
+                                <span class="bs-stepper-label mt-1">
+                                    <span class="bs-stepper-title">{{ $step->title }}</span>
+                                    @if ($step->subtitle)
                                     <span class="bs-stepper-subtitle">{{ $step->subtitle }}</span>
-                                @endif
-                            </span>
+                                    @endif
+                                </span>
+                            </a>
                         @else
                             <x-dashboard.tooltips :link="$checkRouteName($step->routeName)" class="bs-stepper-circle" :title="$loop->iteration">
                                 <span class="bs-stepper-label mt-1">
