@@ -15,7 +15,7 @@ class Tooltips extends Component
         public string $title = '',
         public string $class = 'btn btn-primary',
         public string $position = 'top',
-        public string $link = '#!',
+        // public string $link = '#!',
     )
     {}
 
