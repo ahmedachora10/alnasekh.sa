@@ -3,11 +3,14 @@
 namespace App\Livewire\Dashboard;
 
 use App\Livewire\Forms\ReportForm;
+use App\Mail\SendReportEmail;
 use App\Models\Corp;
 use App\Models\CorpReport;
 use App\Models\Entity;
 use App\Models\Ministry;
 use App\Models\Mission;
+use App\Notifications\UserActionNotification;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -58,6 +61,10 @@ class StoreReport extends Component
     private function store() {
         $report = $this->corp->reports()->create($this->form->all());
         session()->put('success', trans('message.update'));
+
+        if($this->corp?->send_reminder) {
+            Mail::to($this->corp->email)->queue(new SendReportEmail(content: $report->missionModel?->content));
+        }
     }
 
     private function update() {

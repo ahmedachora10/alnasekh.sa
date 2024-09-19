@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard;
 
 use App\Models\Corp;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -23,7 +24,6 @@ class CorpsContainer extends Component
     public function mount($title = null) {
         $this->corpModel = Corp::first();
     }
-
     public function export(Corp $corp) {
         $target = '#ExportHasBranchesBranchModal';
 
@@ -34,6 +34,15 @@ class CorpsContainer extends Component
         $this->dispatch('open-modal', target: $target);
         $this->corpModel = $corp;
         $this->dispatch('set-corp', corp: $corp);
+    }
+
+    #[On('refresh-corps')]
+    public function refresh() {
+        $this->dispatch('$refresh');
+    }
+    public function openAssignUserModal(Corp $corp) {
+        $this->dispatch('set-corp', corp: $corp);
+        $this->dispatch('open-modal', target: '#assign-a-user-to-crop');
     }
 
     public function render()

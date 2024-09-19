@@ -318,6 +318,7 @@ class DateReminderJob implements ShouldQueue
     }
     private function sendToWhatsapp(Corp $corp, string $message = '') {
         activity('send-whatsapp')
+            ->withProperties(['custom' => ['corp_id' => $corp->id]])
             ->event(ActivityLogType::Whatsapp->value)
             ->log(ActivityLogType::Whatsapp->content($corp));
 
@@ -332,7 +333,6 @@ class DateReminderJob implements ShouldQueue
 
         if($notification->count() > 0) {
             $notification->pluck(value: 'id')->each(fn($item) => $this->updatedNotifications[] = $item);
-            // array_push(array: $this->updatedNotifications,  values: );
         }
 
     }
