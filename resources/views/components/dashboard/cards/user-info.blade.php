@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card my-2">
     <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
             <div class="content-left">

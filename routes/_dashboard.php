@@ -35,6 +35,7 @@ use App\Livewire\Dashboard\Container\JobRequestsContainer;
 use App\Livewire\Dashboard\Container\NotificationsContainer;
 use App\Livewire\Dashboard\Container\SubscribePackageRequestsContainer;
 use App\Livewire\Dashboard\Container\SubscribersContainer;
+use App\Services\DashboardService;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,7 +57,8 @@ Route::middleware(['auth'])->group(function ()
     })->name('ministries.index');
 
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        $statistics = (new DashboardService)->statistics();
+        return view('admin.dashboard', compact('statistics'));
     })->middleware('verified')->name('dashboard');
 
     Route::resource('users', UserController::class);

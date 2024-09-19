@@ -23,6 +23,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <x-dashboard.cards.user-info :title="trans('sidebar.users')" color="primary" :count="$statistics->usersCount" icon="bx bx-user" />
+                </div>
+                <div class="col-md-4">
+                    <x-dashboard.cards.user-info :title="trans('sidebar.corps')" color="success" :count="$statistics->corpsCount"
+                        icon="bx bx-folder" />
+                </div>
+                <div class="col-md-4">
+                    <x-dashboard.cards.user-info :title="trans('sidebar.jobs')" color="danger" :count="$statistics->jobsCount"
+                        icon="bx bx-server" />
+                </div>
+                <div class="col-md-4">
+                    <x-dashboard.cards.user-info :title="trans('sidebar.subscribers')" color="info" :count="$statistics->subscribersCount" icon="bx bx-user-pin" />
+                </div>
+            </div>
         </div>
         @hasPermission('notification.show')
         <div class="col-lg-4 col-md-4 order-1 mb-3">
