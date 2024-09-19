@@ -29,7 +29,7 @@
                     <x-dashboard.cards.user-info :title="trans('sidebar.users')" color="primary" :count="$statistics->usersCount" icon="bx bx-user" />
                 </div>
                 <div class="col-md-4">
-                    <x-dashboard.cards.user-info :title="trans('sidebar.corps')" color="success" :count="$statistics->corpsCount"
+                    <x-dashboard.cards.user-info title="المنشأت" color="success" :count="$statistics->corpsCount"
                         icon="bx bx-folder" />
                 </div>
                 <div class="col-md-4">
