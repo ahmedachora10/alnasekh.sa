@@ -24,6 +24,8 @@ class StoreReport extends Component
 
     public $ministries = [];
 
+    public bool $sendReminderEmail = true;
+
     public function mount() {
         $this->ministries = Ministry::all();
     }
@@ -62,9 +64,11 @@ class StoreReport extends Component
         $report = $this->corp->reports()->create($this->form->all());
         session()->put('success', trans('message.update'));
 
-        if($this->corp?->send_reminder) {
+        if($this->sendReminderEmail) {
             Mail::to($this->corp->email)->queue(new SendReportEmail(content: $report->missionModel?->content));
         }
+
+        $this->reset('sendReminderEmail');
     }
 
     private function update() {

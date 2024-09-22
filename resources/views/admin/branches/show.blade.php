@@ -85,7 +85,7 @@
         <livewire:dashboard.branch.store-health-card />
     </x-dashboard.modals.modal1>
 
-    <x-dashboard.modals.modal1 id="createCorpReportModal" :title="trans('common.new report')">
+    <x-dashboard.modals.modal1 id="createCorpReportModal" :title="trans('common.new report')" :closeButton="false">
         <livewire:dashboard.store-report :corp="$branch->corp" />
     </x-dashboard.modals.modal1>
 

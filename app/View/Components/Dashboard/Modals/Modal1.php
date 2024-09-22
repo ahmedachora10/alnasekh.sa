@@ -17,6 +17,7 @@ class Modal1 extends Component
         public string $description = '',
         public string $style = 'display:none',
         public string $show = '',
+        public bool $closeButton = true,
         public string $size= 'modal-lg',
     )
     {

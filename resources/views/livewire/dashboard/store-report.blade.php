@@ -26,6 +26,18 @@
         </x-dashboard.select-group>
     </div>
 
+
+    <div class="col-12 mb-3">
+        <label class="switch switch-primary my-3">
+            <input type="checkbox" class="switch-input" wire:model.defer="sendReminderEmail" name="sendReminderEmail" value="1">
+            <span class="switch-toggle-slider">
+                <span class="switch-on"></span>
+                <span class="switch-off"></span>
+            </span>
+            <span class="switch-label">{{ trans('common.send reminder') }}</span>
+        </label>
+    </div>
+
     {{-- <div class="col-12 mb-3">
         <x-dashboard.label> {{ trans('table.columns.mission') }} </x-dashboard.label>
         <textarea type="text" class="form-control" wire:model.defer="form.mission" name="form.mission">
