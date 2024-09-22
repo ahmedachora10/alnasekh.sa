@@ -33,4 +33,5 @@ return [
     'entities' => 'الجهات',
     'ministries' => 'الوزارات',
     'activities' => 'سجل العمليات',
+    'reminders' => 'سجل التذكيرات',
 ];

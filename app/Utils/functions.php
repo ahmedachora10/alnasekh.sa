@@ -9,11 +9,6 @@ if (! function_exists('setting')) {
 
     function setting($key, $default = null)
     {
-
-        if (cache()->has('setting_' . $key)) {
-            return cache()->get('setting_' . $key);
-        }
-
         if (is_null($key)) {
             return new Setting();
         }
@@ -22,11 +17,9 @@ if (! function_exists('setting')) {
             return Setting::set($key[0], $key[1]);
         }
 
-        $value = Setting::get($key);
+        $value = app('settings')->firstWhere('name', $key);
 
-        cache()->put('setting_' . $key, $value, now()->addDay());
-
-        return is_null($value) ? value($default) : $value;
+        return is_null($value) ? value($default) : Setting::castValue($value->val, $value->type);
     }
 }
 

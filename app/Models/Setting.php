@@ -161,7 +161,7 @@ class Setting extends Model
      * @param $castTo
      * @return bool|int
      */
-    private static function castValue($val, $castTo)
+    public static function castValue($val, $castTo)
     {
         switch ($castTo) {
             case 'int':

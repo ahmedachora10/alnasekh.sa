@@ -1,6 +1,6 @@
 <section>
 
-    <x-dashboard.headline :title="trans('sidebar.activities')" />
+    <x-dashboard.headline :title="trans('sidebar.reminders')" />
 
     <x-dashboard.tables.table1 :columns="['user', 'type' ,'activity', 'created at']">
 
