@@ -369,7 +369,7 @@ return [
 
     'default_permissions' => [
         'user' => ['create', 'edit', 'delete', 'show'],
-        'corp' => ['create', 'edit', 'delete', 'show'],
+        'corp' => ['create', 'edit', 'delete', 'show', 'manager'],
         'monthly_update' => ['create', 'edit', 'delete', 'show'],
         'registry' => ['create', 'edit', 'delete', 'show'],
         'entity' => ['create', 'edit', 'delete', 'show'],
@@ -387,5 +387,6 @@ return [
         'service' => ['create', 'edit', 'delete', 'show'],
         'slider' => ['create', 'edit', 'delete', 'show'],
         'activity' => ['show'],
+        'task' => ['create', 'edit', 'delete', 'show', 'user.assign'],
     ]
 ];

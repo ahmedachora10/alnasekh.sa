@@ -18,7 +18,9 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.2",
         "maatwebsite/excel": "^3.1",
+        "mhmiton/laravel-modules-livewire": "^2.3",
         "mpdf/mpdf": "^8.2",
+        "nwidart/laravel-modules": "^10.0",
         "santigarcor/laratrust": "^8.2",
         "spatie/laravel-activitylog": "^4.8",
         "tecnickcom/tc-lib-pdf": "^8.0"
@@ -36,7 +38,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Modules\\": "Modules/"
         },
         "files": [
             "app/Utils/functions.php"

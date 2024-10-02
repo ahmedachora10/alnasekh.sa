@@ -20,7 +20,8 @@ class PermissionSeeder extends Seeder
 
             foreach ($abilities as $ability) {
                 $key = strtolower(trim($section)).'.'.strtolower(trim($ability));
-                if (in_array($section, $existingPermissions))
+
+                if (in_array($key, $existingPermissions))
                     continue;
 
                 $permissions[] = [

@@ -29,6 +29,8 @@ use App\Services\WhatsappService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Modules\Tasks\App\DTO\TaskActionDTO;
+use Modules\Tasks\App\Models\Task;
 
 class DateReminderJob implements ShouldQueue
 {
@@ -161,11 +163,12 @@ class DateReminderJob implements ShouldQueue
 
         }
 
+        $tasks = [];
         $notifications = collect($notifications)->chunk(10);
 
-        $notifications->each(function ($notificationChunks) use($admins) {
+        $notifications->each(function ($notificationChunks) use($admins, &$tasks) {
 
-            $notificationChunks->each(function ($notification) use($admins) {
+            $notificationChunks->each(function ($notification) use($admins, &$tasks) {
 
                 $corp = $notification['corp'];
                 $user = $corp->user;
@@ -181,6 +184,11 @@ class DateReminderJob implements ShouldQueue
 
                 Notification::send($admins, $peraperNotification);
 
+                $tasks[] = (new TaskActionDTO(
+                    name: $notification['title'],
+                    description: $notification['email_title'] . ' - ' . $notification['content'],
+                ))->toArray();
+
                 sleep(1);
             });
 
@@ -190,6 +198,8 @@ class DateReminderJob implements ShouldQueue
         $this->deleteAllExistingNotifications();
         // make array empty again
         $this->updatedNotifications = [];
+
+        Task::insert($tasks);
 
     }
     private function prepareNotificationData($item, $parentItem = null, $columnName = 'end_date', $branch = null)

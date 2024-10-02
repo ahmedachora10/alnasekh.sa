@@ -88,14 +88,14 @@
                     <x-dashboard.actions.container>
                         <a href="#!" class="dropdown-item text-info" wire:click="openAssignUserModal({{$corp}})">
                             <i class="bx bx-user-plus me-1"></i>تعيين موظف</a>
-                        @hasPermission('corp.show')
+                        @hasPermission('corp.manager|corp.show')
                             @if (!$corp->doesnt_has_branches)
                                 <a href="{{ route('branches.index', $corp) }}" class="dropdown-item text-primary"> <i
                                         class="bx bx-git-branch me-1"></i>{{ trans('sidebar.branches') }}</a>
                             @endif
                         @endhasPermission
 
-                        @hasPermission('corp.show')
+                        @hasPermission('corp.manager|corp.show')
                             @if ($corp->doesnt_has_branches)
                                 <a href="{{ route('branches.show', $corp->branches?->first()) }}"
                                     class="dropdown-item text-primary">
@@ -117,11 +117,11 @@
                                 class="bx bx-cloud-download me-1"></i>
                             {{ trans('common.export') }}
                         </a>
-                        @hasPermission('corp.edit')
+                        @hasPermission('corp.manager|corp.edit')
                             <x-dashboard.actions.edit
                                 :href="route('corps.edit', $corp->id)">{{ trans('common.edit') }}</x-dashboard.actions.edit>
                         @endhasPermission
-                        @hasPermission('corp.delete')
+                        @hasPermission('corp.manager|corp.delete')
                             <x-dashboard.actions.delete :route="route('corps.destroy', $corp)" />
                         @endhasPermission
                     </x-dashboard.actions.container>

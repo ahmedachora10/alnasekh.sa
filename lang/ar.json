@@ -1,5 +1,6 @@
 {
     "select a city" : "حدد المدينة",
+    "select an employee" : "حدد الموظف",
     "updated" : "تحديث",
     "deleted" : "حذف",
     "created" : "اضافة"

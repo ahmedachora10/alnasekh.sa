@@ -35,4 +35,5 @@ return [
     'ministries' => 'Ministries',
     'activities' => 'Activities',
     'reminders' => 'Reminders',
+    'tasks' => 'Tasks',
 ];
