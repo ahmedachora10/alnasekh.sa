@@ -132,7 +132,8 @@ return [
         'company city' => 'مدينة الشركة',
         'number of branches' => 'عدد الفروع',
         'corp' => 'المنشأة',
-        'activity' => 'النشاط'
+        'activity' => 'النشاط',
+        T'due date' => 'تاريخ الانجاز',
 
     ],
     'empty' => 'لا يوجد عناصر لعرضها',
