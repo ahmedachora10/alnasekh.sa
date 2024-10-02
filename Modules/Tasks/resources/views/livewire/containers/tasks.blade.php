@@ -50,7 +50,7 @@
                     </x-dashboard.actions.edit>
                     @endhasPermission
                     @hasPermission('task.delete')
-                    <x-dashboard.actions.delete wire:click="$dispatch('delele-task-action', {task: {{$task}}})" :livewire="true" />
+                    <x-dashboard.actions.delete wire:click="$dispatch('delete-task-action', {task: {{$task}}})" :livewire="true" />
                     @endhasPermission
                 </x-dashboard.actions.container>
                 @endhasPermission
