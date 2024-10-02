@@ -95,6 +95,7 @@ return [
     'service management' => 'Services Management',
     'entity management' => 'Entities Management',
     'slider management' => 'Sliders Management',
+    'task management' => 'Tasks Management',
     'activity management' => 'Activities Management',
 
     'civil defense permit' => 'Civil Defense Permit',
@@ -115,4 +116,5 @@ return [
 
     'subscribe package request' => 'Subscribe Request',
     'select the element' => 'Select The Element',
+    'manager' => 'Manager'
 ];

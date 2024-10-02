@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Tasks\App\Http\Requests\TaskRequest;
+use Modules\Tasks\App\Services\TaskService;
 
 class TasksController extends Controller
 {
+    public function __construct(protected TaskService $taskService) {}
     /**
      * Display a listing of the resource.
      */
@@ -18,43 +21,19 @@ class TasksController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('tasks::create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(TaskRequest $request): RedirectResponse
     {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('tasks::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('tasks::edit');
+        return redirect()->route('tasks.index')->with('success', trans('message.create'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(TaskRequest $request, $id): RedirectResponse
     {
-        //
+        return redirect()->route('tasks.index')->with('success', trans('message.update'));
     }
 
     /**
@@ -62,6 +41,8 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!$this->taskService->delete($id))
+            return redirect()->route('tasks.index')->with('success', 'Something went wrong');
+        return redirect()->route('tasks.index')->with('success', trans('message.delete'));
     }
 }

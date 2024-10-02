@@ -98,6 +98,7 @@ return [
     'review management' => 'إدارة التقيمات',
     'service management' => 'إدارة الخدمات',
     'slider management' => 'إدارة السلايدات',
+    'task management' => 'إدارة المهام',
     'activity management' => 'إدارة سجل العمليات',
 
     'civil defense permit' => 'تصريح الدفاع المدني',
@@ -115,4 +116,5 @@ return [
     'sar' => 'ر.س',
     'subscribe package request' => 'طلب الاشتراك',
     'select the element' => 'حدد العنصر',
+    'manager' => 'المشرف'
 ];

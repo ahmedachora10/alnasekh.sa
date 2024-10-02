@@ -47,10 +47,11 @@ class CorpsContainer extends Component
 
     public function render()
     {
+        // dd(!auth()->user()->hasRole('admin') || !auth()->user()->isAbleTo('corp.manager'), auth()->user()->roles->pluck('name'));
         return view('livewire.dashboard.corps-container', [
             'corps' => Corp::search($this->search)
             ->query(fn (Builder $query) => $query
-            ->when(!auth()->user()->hasRole('admin'), fn($q) => $q->forUser(auth()->id()))
+            ->when(!auth()->user()->hasRole('admin') && !auth()->user()->isAbleTo('corp.manager'), fn($q) => $q->forUser(auth()->id()))
             ->with([
                 'user', 'branch' => fn ($q) => $q->with([
                     'record',

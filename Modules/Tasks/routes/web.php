@@ -14,6 +14,6 @@ use Modules\Tasks\App\Http\Controllers\TasksController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('tasks', TasksController::class)->names('tasks');
-});
+Route::resource('tasks', TasksController::class)
+->middleware(['auth', 'permission:task.show'])
+->only('index');

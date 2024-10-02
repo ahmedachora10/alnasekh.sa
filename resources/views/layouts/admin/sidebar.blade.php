@@ -130,6 +130,9 @@
         @hasPermission('service.show')
             <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="server" :link="route('services.index')" />
         @endhasPermission
+        @hasPermission('task.show')
+            <x-dashboard.sidebar.link :title="trans('sidebar.tasks')" icon="task" :link="route('tasks.index')" />
+        @endhasPermission
         @hasPermission('activity.show')
             <x-dashboard.sidebar.link :title="trans('sidebar.activities')" icon="archive" :link="route('activitylogs')" />
         @endhasPermission
