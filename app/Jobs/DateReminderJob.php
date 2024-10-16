@@ -26,6 +26,8 @@ use App\Models\User;
 use App\Notifications\UserActionNotification;
 use App\Observers\ActivityLogsObserver;
 use App\Services\WhatsappService;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
@@ -184,6 +186,7 @@ class DateReminderJob implements ShouldQueue
 
                 Notification::send($admins, $peraperNotification);
 
+
                 $tasks[] = (new TaskActionDTO(
                     name: $notification['title'],
                     description: $notification['email_title'] . ' - ' . $notification['content'],
@@ -219,7 +222,7 @@ class DateReminderJob implements ShouldQueue
 
         $status = status_handler($columnValue);
 
-        $this->notificationExists(itemId: $id, className: $className);
+        $this->notificationExists(item: $item, className: $className, columnName: $columnName);
 
         return [
             'id' => $id,
@@ -334,11 +337,11 @@ class DateReminderJob implements ShouldQueue
 
         return SendWhatsappMessages::dispatch($corp->phone, $message);
     }
-    private function notificationExists(int $itemId, string $className): void
+    private function notificationExists(Model|Pivot $item, string $className, string $columnName): void
     {
-        $notification = $this->notifications->filter(function ($notification) use ($itemId, $className) {
+        $notification = $this->notifications->filter(function ($notification) use ($item, $className, $columnName) {
                 $data = json_decode($notification->data, true);
-                return (isset($data['id']) && $data['id'] == $itemId) && (isset($data['model']) && $data['model'] == $className);
+                return (isset($data['id']) && $data['id'] == $item->id) && (isset($data['model']) && $data['model'] == $className) && (isset($data[$columnName]) && now()->parse($data[$columnName])->format('Y-m-d') != now()->parse($item->{$columnName})->format('Y-m-d'));
         });
 
         if($notification->count() > 0) {
