@@ -116,5 +116,6 @@ return [
     'sar' => 'ر.س',
     'subscribe package request' => 'طلب الاشتراك',
     'select the element' => 'حدد العنصر',
-    'manager' => 'المشرف'
+    'manager' => 'المشرف',
+    'user.assign' => 'تعيين موظف'
 ];
