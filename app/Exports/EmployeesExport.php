@@ -3,18 +3,14 @@
 namespace App\Exports;
 
 use App\Exports\Helpers\CommonColumns;
-use App\Exports\Sheets\MedicalInsuranceExport;
 use App\Models\BranchEmployee;
 use App\Models\Corp;
 use App\Traits\Exports\RTLDirection;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-use Maatwebsite\Excel\Events\AfterSheet;
 
 class EmployeesExport implements FromQuery, WithHeadings, WithEvents, ShouldAutoSize, WithMapping
 {
@@ -56,8 +52,8 @@ class EmployeesExport implements FromQuery, WithHeadings, WithEvents, ShouldAuto
             $item->contract_end_date,
             $item->business_card_start_date,
             $item->business_card_end_date,
-            $item->start_date->format('Y-m-d'),
-            $item->end_date->format('Y-m-d'),
+            $item->start_date?->format('Y-m-d'),
+            $item->end_date?->format('Y-m-d'),
         ]);
     }
 
