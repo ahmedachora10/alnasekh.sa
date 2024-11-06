@@ -86,8 +86,11 @@
                 </td>
                 <td>
                     <x-dashboard.actions.container>
+                        @hasPermission('corp.assign-employee')
                         <a href="#!" class="dropdown-item text-info" wire:click="openAssignUserModal({{$corp}})">
                             <i class="bx bx-user-plus me-1"></i>تعيين موظف</a>
+                        @endhasPermission
+
                         @hasPermission('corp.manager|corp.show')
                             @if (!$corp->doesnt_has_branches)
                                 <a href="{{ route('branches.index', $corp) }}" class="dropdown-item text-primary"> <i

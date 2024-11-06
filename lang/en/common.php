@@ -117,5 +117,6 @@ return [
     'subscribe package request' => 'Subscribe Request',
     'select the element' => 'Select The Element',
     'manager' => 'Manager',
-    'user.assign' => 'Assign Employee'
+    'user.assign' => 'Assign Employee',
+    'assign-employee' => 'Assign Employee'
 ];

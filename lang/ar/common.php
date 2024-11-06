@@ -117,5 +117,6 @@ return [
     'subscribe package request' => 'طلب الاشتراك',
     'select the element' => 'حدد العنصر',
     'manager' => 'المشرف',
-    'user.assign' => 'تعيين موظف'
+    'user.assign' => 'تعيين موظف',
+    'assign-employee' => 'تعيين موظف'
 ];
