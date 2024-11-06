@@ -369,7 +369,7 @@ return [
 
     'default_permissions' => [
         'user' => ['create', 'edit', 'delete', 'show'],
-        'corp' => ['create', 'edit', 'delete', 'show', 'manager'],
+        'corp' => ['create', 'edit', 'delete', 'show', 'manager', 'assign-employee'],
         'monthly_update' => ['create', 'edit', 'delete', 'show'],
         'registry' => ['create', 'edit', 'delete', 'show'],
         'entity' => ['create', 'edit', 'delete', 'show'],
