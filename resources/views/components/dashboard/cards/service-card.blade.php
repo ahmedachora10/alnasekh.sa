@@ -1,6 +1,6 @@
 <div class="card p-2 h-100 shadow-none border">
     <div class="rounded-2 text-center mb-3">
-        <a href=""><img class="img-fluid" src="{{ asset($service->thumbnail) }}" alt="tutor image"></a>
+        <a href=""><img class="img-fluid p-5" src="{{ asset($service->thumbnail) }}" alt="tutor image"></a>
     </div>
     <div class="card-body p-3 pt-2">
         <a href="" class="h5">{{ $service->get_name }}</a>
