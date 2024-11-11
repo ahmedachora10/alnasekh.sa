@@ -10,6 +10,7 @@
     $contactsCount = $notifications->where('model', 'App\Models\ContactUs')->count();
     $packagesRequestCount = $notifications->where('model', 'App\Models\SubscribePackageRequest')->count();
     $subscribersCount = $notifications->where('model', 'App\Models\Subscriber')->count();
+    $servicesRequestsCount = $notifications->where('model', 'Modules\Service\App\Models\ServiceRequest')->count();
 @endphp
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
@@ -128,7 +129,11 @@
             <x-dashboard.sidebar.link :title="trans('sidebar.reviews')" icon="star" :link="route('reviews.index')" />
         @endhasPermission
         @hasPermission('service.show')
-            <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="server" :link="route('services.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.services')" icon="server" link="#" :hasSubMenu="true"
+                :notification="$servicesRequestsCount">
+                <x-dashboard.sidebar.link :title="trans('sidebar.services')" :link="route('services.index')" />
+                <x-dashboard.sidebar.link :title="trans('sidebar.package requests')" :link="route('services.requests')" :notification="$servicesRequestsCount" />
+            </x-dashboard.sidebar.link>
         @endhasPermission
         @hasPermission('task.show')
             <x-dashboard.sidebar.link :title="trans('sidebar.tasks')" icon="task" :link="route('tasks.index')" />

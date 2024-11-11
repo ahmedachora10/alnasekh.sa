@@ -73,6 +73,7 @@ class NotificationsContainer extends Component
                 'notifications' => auth()
                 ->user()
                 ->unreadNotifications()
+                ->where('type', 'App\Notifications\UserActionNotification')
                 ->latest()->paginate(10),
                 // ->where('type', 'App\Notifications\UserActionNotification')
                 // ->where(fn($query) => $query

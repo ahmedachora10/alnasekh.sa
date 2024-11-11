@@ -115,6 +115,7 @@ return [
     'sar' => 'SAR',
 
     'subscribe package request' => 'Subscribe Request',
+    'subscribe service request' => 'Subscribe Request',
     'select the element' => 'Select The Element',
     'manager' => 'Manager',
     'user.assign' => 'Assign Employee',

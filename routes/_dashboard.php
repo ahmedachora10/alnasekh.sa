@@ -37,8 +37,7 @@ use App\Livewire\Dashboard\Container\SubscribePackageRequestsContainer;
 use App\Livewire\Dashboard\Container\SubscribersContainer;
 use App\Services\DashboardService;
 use Illuminate\Support\Facades\Route;
-
-
+use Modules\Service\Livewire\RequestsContainer;
 
 Route::middleware(['auth'])->group(function ()
 {
@@ -122,5 +121,6 @@ Route::middleware(['auth'])->group(function ()
     Route::resource('job-cities', JobCityController::class);
     Route::resource('reviews', ReviewController::class)->only(['index', 'destroy']);
     Route::resource('services', ServiceController::class);
+    Route::get('services-requests', RequestsContainer::class)->name('services.requests');
     Route::get('subscribe-package-requests', SubscribePackageRequestsContainer::class)->name('packages.requests');
 });

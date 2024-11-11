@@ -15,7 +15,11 @@
                 <td><img src="{{ asset($item->thumbnail) }}" alt="logo" width="40" height="40"
                         class="rounded-circle"></td>
                 <td>{{ $item->get_name }}</td>
-                <td><x-dashboard.badge color="primary">{{ $item->price }}</x-dashboard.badge></td>
+                <td>
+                    <x-dashboard.badge color="secondary">{{ $item->old_price }}$</x-dashboard.badge>
+                    -
+                    <x-dashboard.badge color="primary">{{ $item->price }}$</x-dashboard.badge>
+                </td>
                 <td>
                     <x-dashboard.actions.container>
                         <x-dashboard.actions.edit

@@ -8,8 +8,6 @@ use Livewire\Form;
 
 class SubscribePackageRequestForm extends Form
 {
-    // #[Rule('required|integer|exists:packages,id')]
-    // public ?int $package_id = null;
 
     #[Rule('required|string')]
     public ?string $company_name = null;

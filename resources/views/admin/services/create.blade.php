@@ -18,15 +18,18 @@
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="headline-content-service" role="tabpanel">
                         <div class="row g-3">
-                            <div class="col-12 mb-3">
+                            <div class="col-md-6 col-12 mb-3">
                                 <x-dashboard.input-group type="file" name="image" :title="trans('table.columns.image')" />
                                 <x-size-notice key="service" />
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-12 mb-3">
                                 <x-dashboard.input-group type="text" name="name" :title="trans('table.columns.name')" />
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-12 mb-3">
                                 <x-dashboard.input-group type="text" name="price" :title="trans('table.columns.price')" />
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <x-dashboard.input-group type="text" name="old_price" :title="trans('table.columns.old price')" />
                             </div>
                             <div class="col-12">
                                 <x-dashboard.label>{{ trans('table.columns.description') }}</x-dashboard.label>
