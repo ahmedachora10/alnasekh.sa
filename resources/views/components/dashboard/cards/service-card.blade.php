@@ -6,7 +6,7 @@
         <a href="" class="h5">{{ $service->get_name }}</a>
         <p class="mt-2">{{ $service->get_description }}</p>
         <p class="d-flex align-items-center"><i
-                class="bx bx-time-five me-2"></i>{{ $service->created_at->diffForHumans() }}</p>
+                {{-- class="bx bx-time-five me-2"></i>{{ $service->created_at->diffForHumans() }}</p> --}}
 
         <div class="d-flex flex-column justify-content-end flex-md-row gap-2 text-nowrap pe-xl-3 pe-xxl-0">
             <a class="app-academy-md-50 btn btn-label-primary d-flex align-items-center" href="">
