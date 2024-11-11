@@ -4,7 +4,7 @@
     </div>
     <div class="card-body p-3 pt-2">
         <div class="d-flex justify-content-end align-items-center mb-4">
-            <span class="badge bg-label-warning">{{$service->price}}$</span>
+            <span class="badge bg-label-warning fw-bold">{{$service->price}}$</span>
         </div>
 
         <a href="" class="h5">{{ $service->get_name }}</a>
