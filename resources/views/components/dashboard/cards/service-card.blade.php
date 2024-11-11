@@ -13,7 +13,7 @@
 
         <div class="d-flex flex-column justify-content-end flex-md-row gap-2 text-nowrap pe-xl-3 pe-xxl-0">
             <a class="app-academy-md-50 btn btn-label-primary d-flex align-items-center" href="">
-                <span class="me-2">{{ trans('common.order now') }}</span><i
+                <span class="me-2 text-bold">{{ trans('common.order now') }}</span><i
                     class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
             </a>
         </div>
