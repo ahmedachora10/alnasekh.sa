@@ -3,6 +3,10 @@
         <a href=""><img class="img-fluid p-5" src="{{ asset($service->thumbnail) }}" alt="tutor image"></a>
     </div>
     <div class="card-body p-3 pt-2">
+        <div class="d-flex justify-content-end align-items-center mb-4">
+            <span class="badge bg-label-warning">{{$service->price}}$</span>
+        </div>
+
         <a href="" class="h5">{{ $service->get_name }}</a>
         <p class="mt-2">{{ $service->get_description }}</p>
         {{-- <p class="d-flex align-items-center"><i class="bx bx-time-five me-2"></i>{{ $service->created_at->diffForHumans() }}</p> --}}
