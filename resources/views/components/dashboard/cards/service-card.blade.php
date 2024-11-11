@@ -4,7 +4,9 @@
     </div>
     <div class="card-body p-3 pt-2">
         <div class="d-flex justify-content-end align-items-center mb-4">
+            @if($service->old_price > 0)
             <span class="badge bg-label-secondary text-decoration-line-through fw-bold me-2">{{$service->old_price}}$</span>
+            @endif
             <span class="text-warning fw-bold">{{$service->price}}$</span>
         </div>
 
