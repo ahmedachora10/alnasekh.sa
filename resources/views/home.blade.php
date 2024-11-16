@@ -183,7 +183,7 @@
             <div class="container">
                 <x-front.headline :headline="$getHeadline('services', 'title')" :subHeadline="$getHeadline('services', 'subtitle')" :description="$getHeadline('services', 'description')" />
 
-                <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden" id="swiper-services">
+                <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden px-6" id="swiper-services">
                     <div class="swiper-wrapper">
                         @foreach ($services as $service)
                             <div class="swiper-slide">
@@ -441,6 +441,21 @@
             #swiper-services .swiper-button-prev:after, #swiper-services .swiper-rtl .swiper-button-next:after  {
                 content: '' !important;
             }
+
+            #swiper-services [dir=rtl] .swiper-button-prev {
+                right: 0 !important;
+            }
+
+            #swiper-services [dir=ltr] .swiper-button-prev {
+                left: 0 !important;
+            }
+            #swiper-services [dir=rtl] .swiper-button-next {
+                left: 0 !important;
+            }
+
+            #swiper-services [dir=ltr] .swiper-button-next {
+                right: 0 !important;
+            }
         </style>
     @endpush
 
@@ -483,7 +498,7 @@
                 // direction: 'vertical',
                 loop: true,
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 26,
                 // freeMode: true,
 
                 breakpoints: {
