@@ -442,18 +442,18 @@
                 content: '' !important;
             }
 
-            #swiper-services [dir=rtl] .swiper-button-prev {
+            [dir=rtl] .swiper-button-prev {
                 right: 0 !important;
             }
 
-            #swiper-services [dir=ltr] .swiper-button-prev {
+            [dir=ltr] .swiper-button-prev {
                 left: 0 !important;
             }
-            #swiper-services [dir=rtl] .swiper-button-next {
+            [dir=rtl] .swiper-button-next {
                 left: 0 !important;
             }
 
-            #swiper-services [dir=ltr] .swiper-button-next {
+            [dir=ltr] .swiper-button-next {
                 right: 0 !important;
             }
         </style>
