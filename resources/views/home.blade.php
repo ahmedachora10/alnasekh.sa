@@ -190,11 +190,6 @@
                                 <x-dashboard.cards.service-card :service="$service" />
                             </div>
                         @endforeach
-                        <div class="swiper-slide mt-5 mt-5">
-                            <div class="card border-3 border-dashed d-flex justify-content-center align-items-center" style="height: 240px; background-color: #ffffffad">
-                                <a href="{{route('front.services.index')}}" class="btn btn-label-primary btn-lg">{{ trans('common.show more') }}</a>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="swiper-button-prev btn btn-icon btn-label-warning px-5 text-black">
@@ -203,6 +198,10 @@
                     <div class="swiper-button-next btn btn-icon btn-label-warning px-5 text-black">
                         <i class="tf-icons bx bx-left-arrow-alt fs-4"></i>
                     </div>
+                </div>
+                <div class="w-full d-flex justify-content-end">
+                    <a href="{{route('front.services.index')}}" class="btn btn-label-primary btn-lg">{{ trans('common.show more')
+                        }}</a>
                 </div>
             </div>
         </section>
