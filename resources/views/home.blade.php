@@ -193,10 +193,10 @@
                     </div>
 
                     <div class="swiper-button-prev btn btn-icon btn-label-warning px-5 text-black">
-                        <i class="tf-icons bx bx-right-arrow-alt fs-4"></i>
+                        <i class="tf-icons bx bx-{{app()->getLocale() == 'ar' ? 'right' : 'left'}}-arrow-alt fs-4"></i>
                     </div>
                     <div class="swiper-button-next btn btn-icon btn-label-warning px-5 text-black">
-                        <i class="tf-icons bx bx-left-arrow-alt fs-4"></i>
+                        <i class="tf-icons bx bx-{{app()->getLocale() == 'ar' ? 'left' : 'right'}}-arrow-alt fs-4"></i>
                     </div>
                 </div>
                 <div class="w-full d-flex justify-content-end mt-4">
