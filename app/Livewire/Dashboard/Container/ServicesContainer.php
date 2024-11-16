@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Dashboard\Container;
 
-use App\Models\Service;
+use Modules\Service\App\Models\Service;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Modules\Service\App\Services\Service as ServicesService;
 
 class ServicesContainer extends Component
 {
@@ -15,7 +16,7 @@ class ServicesContainer extends Component
     public function render()
     {
         return view('livewire.dashboard.container.services-container', [
-            'services' => Service::paginate(setting('pagination') ?? 8)
+            'services' => app()->make(ServicesService::class)->all()
         ]);
     }
 }

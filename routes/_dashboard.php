@@ -14,7 +14,6 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\RegistryController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
@@ -120,7 +119,6 @@ Route::middleware(['auth'])->group(function ()
     Route::resource('requests/jobs', JobPostController::class);//->parameter('translation', 'headlineTranslation');
     Route::resource('job-cities', JobCityController::class);
     Route::resource('reviews', ReviewController::class)->only(['index', 'destroy']);
-    Route::resource('services', ServiceController::class);
     Route::get('services-requests', RequestsContainer::class)->name('services.requests');
     Route::get('subscribe-package-requests', SubscribePackageRequestsContainer::class)->name('packages.requests');
 });

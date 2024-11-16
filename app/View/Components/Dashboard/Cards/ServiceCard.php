@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Dashboard\Cards;
 
-use App\Models\Service;
+use Modules\Service\App\Models\Service;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;

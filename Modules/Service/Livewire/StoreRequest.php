@@ -3,7 +3,7 @@
 namespace Modules\Service\Livewire;
 
 use App\Livewire\Forms\SubscribePackageRequestForm;
-use App\Models\Service;
+use Modules\Service\App\Models\Service;
 use App\Models\User;
 use App\Notifications\ClientActionNotification;
 use Illuminate\Support\Facades\Notification;

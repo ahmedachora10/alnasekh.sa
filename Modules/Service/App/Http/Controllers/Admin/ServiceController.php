@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\Service\App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreServiceRequest;
-use App\Models\Service;
+use Modules\Service\App\Models\Service;
 use App\Services\UploadFileService;
 use Illuminate\Http\Request;
+use Modules\Service\App\DTOs\ServiceActionDTO;
+use Modules\Service\App\Http\Requests\StoreServiceRequest;
+use Modules\Service\App\Services\Service as ServicesService;
 
 class ServiceController extends Controller
 {
-    public function __construct(protected UploadFileService $uploadFileService) {}
+    public function __construct(protected ServicesService $servicesService) {}
 
     /**
      * Display a listing of the resource.
@@ -35,7 +37,7 @@ class ServiceController extends Controller
     {
         $request->validated();
 
-        Service::create($request->safe()->except('image') + ['image' => $this->uploadFileService->store($request->image, 'images/services')]);
+        $this->servicesService->store(ServiceActionDTO::fromWebRequest($request));
 
         return redirect()->route('services.index')->with('success', trans('message.update'));
     }
@@ -63,7 +65,7 @@ class ServiceController extends Controller
     {
         $request->validated();
 
-        $service->update($request->safe()->except('image') + ['image' => $this->uploadFileService->update($request->image, $service->image, 'images/services')]);
+        $this->servicesService->update($service, ServiceActionDTO::fromWebRequest($request));
 
         return redirect()->route('services.index')->with('success', trans('message.update'));
     }
@@ -73,8 +75,7 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        $this->uploadFileService->delete($service->image);
-        $service->delete();
+        $this->servicesService->delete($service->id);
 
         return redirect()->route('services.index')->with('success', trans('message.delete'));
     }

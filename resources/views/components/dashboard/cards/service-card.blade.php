@@ -1,24 +1,18 @@
-<div class="card p-2 h-100 shadow-none border">
-    <div class="rounded-2 text-center mb-3">
-        <a href=""><img class="img-fluid p-2" src="{{ asset($service->thumbnail) }}" alt="tutor image"></a>
+<div class="card h-auto">
+    <img height="186px" width="100%"
+        src="{{ asset($service->thumbnail) }}"
+        alt="{{$service->get_name}}">
+    <div class="mt-n8">
+        <span class="d-inline-block ms-6 shadow-lg text-center">
+            <span class="mb-0 h6 fw-bold text-dark bg-warning px-4 rounded-top pt-2 pb-1 d-inline-block">{{$service->price}}$</span><br>
+            <span class="rounded-bottom bg-light text-secondary text-decoration-line-through pt-1 pb-2 px-4 d-block">{{$service->old_price}}$</span>
+        </span>
     </div>
-    <div class="card-body p-3 pt-2">
-        <div class="d-flex justify-content-end align-items-center mb-4">
-            @if($service->old_price > 0)
-            <span class="badge bg-label-secondary text-decoration-line-through fw-bold me-2">{{$service->old_price}}$</span>
-            @endif
-            <span class="text-warning fw-bold">{{$service->price}}$</span>
-        </div>
-
-        <a href="" class="h5">{{ $service->get_name }}</a>
-        <p class="mt-2">{{ $service->get_description }}</p>
-        {{-- <p class="d-flex align-items-center"><i class="bx bx-time-five me-2"></i>{{ $service->created_at->diffForHumans() }}</p> --}}
-
-        <div class="d-flex flex-column justify-content-end flex-md-row gap-2 text-nowrap pe-xl-3 pe-xxl-0">
-            <a class="app-academy-md-50 btn btn-label-primary d-flex align-items-center" href="{{route('services.request', $service)}}">
-                <span class="me-2">{{ trans('common.order now') }}</span><i
-                    class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-            </a>
+    <div class="card-body">
+        <h5 class="text-truncate mb-2">{{$service->get_name}}</h5>
+        <p>{{ $service->get_description }}</p>
+        <div class="d-flex justify-content-end my-6">
+            <a href="{{route('front.services.request', $service)}}" class="btn btn-primary ms-auto" role="button">{{ trans('common.order now') }}</a>
         </div>
     </div>
 </div>

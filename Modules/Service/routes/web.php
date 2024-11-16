@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Service\App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use Modules\Service\App\Http\Controllers\ServiceController;
 
 /*
@@ -14,4 +15,15 @@ use Modules\Service\App\Http\Controllers\ServiceController;
 |
 */
 
-Route::get('service/{service}/request', [ServiceController::class, 'request'])->name('services.request');
+Route::controller(ServiceController::class)
+    ->prefix('services')
+    ->name('front.services.')
+    ->group(function () {
+        Route::get('/all', 'services')->name('index');
+        Route::get('{service}/request', 'request')->name('request');
+    });
+
+Route::middleware(['auth'])
+    ->group(function () {
+        Route::resource('services', AdminServiceController::class);
+});

@@ -183,14 +183,26 @@
             <div class="container">
                 <x-front.headline :headline="$getHeadline('services', 'title')" :subHeadline="$getHeadline('services', 'subtitle')" :description="$getHeadline('services', 'description')" />
 
-                <div class="row gy-4 pt-lg-3">
-                    <!-- Basic Plan: Start -->
-                    @foreach ($services as $service)
-                        <div class="col-lg-3 col-md-6">
-                            <x-dashboard.cards.service-card :service="$service" />
+                <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden" id="swiper-services">
+                    <div class="swiper-wrapper">
+                        @foreach ($services as $service)
+                            <div class="swiper-slide">
+                                <x-dashboard.cards.service-card :service="$service" />
+                            </div>
+                        @endforeach
+                        <div class="swiper-slide mt-5 mt-5">
+                            <div class="card border-3 border-dashed d-flex justify-content-center align-items-center" style="height: 240px; background-color: #ffffffad">
+                                <a href="{{route('front.services.index')}}" class="btn btn-label-primary btn-lg">{{ trans('common.show more') }}</a>
+                            </div>
                         </div>
-                    @endforeach
-                    <!-- Basic Plan: End -->
+                    </div>
+
+                    <div class="swiper-button-prev btn btn-icon btn-label-warning px-5 text-black">
+                        <i class="tf-icons bx bx-right-arrow-alt fs-4"></i>
+                    </div>
+                    <div class="swiper-button-next btn btn-icon btn-label-warning px-5 text-black">
+                        <i class="tf-icons bx bx-left-arrow-alt fs-4"></i>
+                    </div>
                 </div>
             </div>
         </section>
@@ -425,6 +437,11 @@
             .swiper-pagination.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
                 background-color: #6b3c1f !important;
             }
+
+            #swiper-services .swiper-button-next:after, #swiper-services .swiper-rtl .swiper-button-prev:after,
+            #swiper-services .swiper-button-prev:after, #swiper-services .swiper-rtl .swiper-button-next:after  {
+                content: '' !important;
+            }
         </style>
     @endpush
 
@@ -487,6 +504,39 @@
 
             });
 
+            var servicesSwiper = new Swiper('#swiper-services', {
+                // Optional parameters
+                // direction: 'vertical',
+                loop: true,
+                slidesPerView: 4,
+                spaceBetween: 20,
+                autoplay: {
+                    delay: 1500,
+                    disableOnInteraction: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev"
+                },
+                // freeMode: true,
+
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1,
+                    },
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                    },
+                },
+
+            });
+
             var clientLogosSwiper = new Swiper('#swiper-clients-logos', {
                 // Optional parameters
                 // direction: 'vertical',
@@ -530,6 +580,23 @@
                     });
                 });
             }
+
+            const services = $('#swiper-services');
+
+            let max = 0;
+            services.find('.swiper-slide').each(function () {
+                const currentEleHeight = $(this).children().first().height();
+
+                if(currentEleHeight > max)
+                    max = currentEleHeight;
+
+                console.log(max);
+
+            });
+
+            services.css({'height': `${max + 10}px`});
+
+
         </script>
     @endpush
 
