@@ -2,12 +2,16 @@
     <img height="186px" width="100%"
         src="{{ asset($service->thumbnail) }}"
         alt="{{$service->get_name}}">
-    <div class="mt-n8">
-        <span class="d-inline-block ms-6 shadow-lg text-center">
-            <span class="mb-0 h6 fw-bold text-dark bg-warning px-4 rounded-top pt-2 pb-1 d-inline-block">{{$service->price}}$</span><br>
-            <span class="rounded-bottom bg-light text-secondary text-decoration-line-through pt-1 pb-2 px-4 d-block">{{$service->old_price}}$</span>
-        </span>
-    </div>
+    @if($service->price > 0)
+        <div class="mt-n8">
+            <span class="d-inline-block ms-6 shadow-lg text-center">
+                <span class="mb-0 h6 fw-bold text-dark bg-warning px-4 rounded-top pt-2 pb-1 d-inline-block">{{$service->price}}$</span>
+                @if($service->old_price > 0)
+                <span class="rounded-bottom bg-light text-secondary text-decoration-line-through pt-1 pb-2 px-4 d-block">{{$service->old_price}}$</span>
+                @endif
+            </span>
+        </div>
+    @endif
     <div class="card-body">
         <h5 class="text-truncate mb-2">{{$service->get_name}}</h5>
         <p>{{ $service->get_description }}</p>
