@@ -199,7 +199,7 @@
                         <i class="tf-icons bx bx-left-arrow-alt fs-4"></i>
                     </div>
                 </div>
-                <div class="w-full d-flex justify-content-end">
+                <div class="w-full d-flex justify-content-end mt-4">
                     <a href="{{route('front.services.index')}}" class="btn btn-label-primary btn-lg">{{ trans('common.show more')
                         }}</a>
                 </div>
