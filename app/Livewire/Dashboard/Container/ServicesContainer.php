@@ -16,7 +16,7 @@ class ServicesContainer extends Component
     public function render()
     {
         return view('livewire.dashboard.container.services-container', [
-            'services' => app()->make(ServicesService::class)->all()
+            'services' => app()->make(ServicesService::class)->paginate()
         ]);
     }
 }
