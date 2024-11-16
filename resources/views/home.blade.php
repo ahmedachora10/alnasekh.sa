@@ -498,7 +498,7 @@
                 // direction: 'vertical',
                 loop: true,
                 slidesPerView: 4,
-                spaceBetween: 26,
+                spaceBetween: 20,
                 // freeMode: true,
 
                 breakpoints: {
@@ -523,7 +523,7 @@
                 // direction: 'vertical',
                 loop: true,
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 25,
                 autoplay: {
                     delay: 1500,
                     disableOnInteraction: true,
