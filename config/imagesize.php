@@ -2,7 +2,7 @@
 
 return [
     'corp' => '60x60',
-    'service' => '328x227',
+    'service' => '332x186',
     'slider' => '1265x634',
     'user' => '100x100',
     'contact_image' => '545x470',
