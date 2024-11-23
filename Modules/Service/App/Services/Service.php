@@ -37,7 +37,7 @@ class Service implements UpdateAction, StoreAction, DeleteAction, PaginateAction
     public function update(Model $model, DTOInterface $dto): ModelsService
     {
         $data = $dto->toArray();
-        if (!$dto->image)
+        if ($dto->image)
             $data['image'] = $this->uploadFileService->update($dto->image, $model->image, 'images/services');
 
         $model->update($data);
