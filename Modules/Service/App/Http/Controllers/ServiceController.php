@@ -22,7 +22,7 @@ class ServiceController extends Controller
 
     public function services()
     {
-        $services = $this->service->paginate();
+        $services = $this->service->all();
         return view('service::services', compact('services'));
     }
 }
