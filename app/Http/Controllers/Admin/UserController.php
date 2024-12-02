@@ -9,11 +9,13 @@ use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\Role;
 use App\Services\UploadFileService;
 use Illuminate\Support\Facades\Hash;
+use Modules\User\App\DTO\UserActionDTO;
+use Modules\User\App\Services\UserService;
 
 class UserController extends Controller
 {
 
-    public function __construct(protected UploadFileService $fileService) {}
+    public function __construct(protected UserService $userService) {}
 
     /**
      * Display a listing of the resource.
@@ -37,18 +39,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        // dd($request->all());
-        $request->validated();
-
-        $user = User::create(
-            $request->safe()->only(['name', 'email']) +
-            [
-                'avatar' => $this->fileService->store($request->file('avatar'),
-                'images/users'), 'password' => Hash::make($request->input('password'))
-            ]
-        );
-
-        $user->addRoles($request->input('roles'));
+        $this->userService->store(UserActionDTO::fromWebRequest($request));
 
         return redirect()->route('users.index')->with('success', trans('message.create'));
     }
@@ -75,17 +66,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $request->validated();
-
-        $user->update(
-            $request->safe()->only(['name', 'email']) +
-                [
-                    'avatar' => $request->hasFile('avatar') ? $this->fileService->update($request->file('avatar'), $user->avatar,'images/users') : $user->avatar,
-                    'password' => !empty($request->input('password')) ? Hash::make($request->input('password')) : $user->password
-                ]
-        );
-
-        $user->syncRoles($request->input('roles'));
+        $this->userService->update($user, UserActionDTO::fromWebRequest($request));
 
         return redirect()->route('users.index')->with('success', trans('message.update'));
     }
@@ -95,7 +76,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        $this->userService->delete($user->id);
         return redirect()->route('users.index')->with('success', trans('message.delete'));
     }
 }

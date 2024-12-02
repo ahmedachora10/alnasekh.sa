@@ -31,6 +31,10 @@
                         <a href="{{ route('users.show', $user->id) }}" class="dropdown-item"> <i
                                 class="bx bx-show me-1"></i>
                             عرض</a>
+                            <a href="#!" class="dropdown-item" wire:click="$dispatch('open-wallet', { user: {{$user}}})">
+                                <i class="bx bx-show me-1"></i>
+                                {{trans('common.wallet')}}
+                            </a>
                         <x-dashboard.actions.edit
                             :href="route('users.edit', $user->id)">{{ trans('common.edit') }}</x-dashboard.actions.edit>
                         <x-dashboard.actions.delete :route="route('users.destroy', $user->id)" />

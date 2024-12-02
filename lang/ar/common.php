@@ -119,5 +119,12 @@ return [
     'select the element' => 'حدد العنصر',
     'manager' => 'المشرف',
     'user.assign' => 'تعيين موظف',
-    'assign-employee' => 'تعيين موظف'
+    'assign-employee' => 'تعيين موظف',
+
+    'wallet' => 'المحفظة الالكترونية',
+    'points wallet' => 'محفظة النقاط',
+    'balance' => 'الرصيد',
+    'points' => 'النقاط',
+    'deposit' => 'ايداع',
+    'withdraw' => 'سحب',
 ];

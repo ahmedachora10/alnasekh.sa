@@ -1,4 +1,6 @@
 {
     "Tasks": true,
-    "Service": true
+    "Service": true,
+    "Wallet": true,
+    "User": true
 }
