@@ -54,6 +54,15 @@
                 direction: ltr !important;
                 text-align: right;
             }
+
+            [dir=rtl] .modal-simple .btn-close {
+                left: 0rem;
+            }
+
+            [dir=rtl] .modal-simple .btn-close {
+                position: absolute;
+                top: 0rem;
+            }
         </style>
     @else
         @if (session('theme') == 'dark')
