@@ -47,6 +47,11 @@ final class UserService implements FindAction, StoreAction, UpdateAction, Delete
 
         $model->syncRoles($dto->roles);
 
+        if ($model->hasRole('client'))
+            $this->walletService->store(
+                dto: new WalletActionDTO(userId: $model->id)
+            );
+
         return $model;
     }
     /**
@@ -66,7 +71,7 @@ final class UserService implements FindAction, StoreAction, UpdateAction, Delete
 
         $user->addRoles($dto->roles);
 
-        if ($user->hasRole('employee'))
+        if ($user->hasRole('client'))
             $this->walletService->store(
                 dto: new WalletActionDTO(userId: $user->id)
             );

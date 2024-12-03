@@ -49,15 +49,15 @@ final class WalletService implements FindAction, StoreAction, UpdateAction {
                 )
             );
 
-            $this->transactionService->store(
-                dto: new TransactionActionDTO(
-                    userId: $dto->userId,
-                    type: TransactionType::Deposit,
-                    amount: $dto->balance,
-                    points: $this->pointsWalletService->convertBalanceToPoints($dto->balance),
-                    status: TransactionStatus::Completed
-                )
-            );
+            // $this->transactionService->store(
+            //     dto: new TransactionActionDTO(
+            //         userId: $dto->userId,
+            //         type: TransactionType::Deposit,
+            //         amount: $dto->balance,
+            //         points: $this->pointsWalletService->convertBalanceToPoints($dto->balance),
+            //         status: TransactionStatus::Completed
+            //     )
+            // );
 
             return $model;
         });
@@ -121,9 +121,21 @@ final class WalletService implements FindAction, StoreAction, UpdateAction {
             if (!$userWallet || $dto->points === 0)
                 return false;
 
-            $userWallet->increment('balance', $this->pointsWalletService->pointsToBalanceRate($dto->points));
+            $amount = $this->pointsWalletService->pointsToBalanceRate($dto->points);
+
+            $userWallet->increment('balance', $amount);
 
             $this->pointsWalletService->decrement($dto);
+
+            $this->transactionService->store(
+                    dto: new TransactionActionDTO(
+                        userId: $dto->userId,
+                        type: TransactionType::ConvertPoints,
+                        amount: $amount,
+                        points: $dto->points,
+                        status: TransactionStatus::Completed
+                    )
+                );
 
             return true;
         });

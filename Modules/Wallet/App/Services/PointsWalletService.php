@@ -30,7 +30,7 @@ final class PointsWalletService implements FindAction, StoreAction, UpdateAction
      */
     public function store(DTOInterface $dto): PointWallet
     {
-        return $this->model->create($dto->toArray());
+        return $this->forUser($dto->userId) ?? $this->model->create($dto->toArray());
     }
 
     public function find(int $id): PointWallet|null
