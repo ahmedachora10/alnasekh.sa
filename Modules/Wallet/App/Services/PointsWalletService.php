@@ -54,10 +54,10 @@ final class PointsWalletService implements FindAction, StoreAction, UpdateAction
     }
 
     public function convertBalanceToPoints(?float $balance) : float {
-        return ($balance ?? 0) / (setting('conversion_rate') ??  10);
+        return ($balance ?? 0) / (setting('points_conversion_rate') ??  0);
     }
     public function pointsToBalanceRate(?float $points) : float {
-        return ($points ?? 0) * (setting('conversion_rate') ??  10);
+        return ($points ?? 0) * (setting('balance_conversion_rate') ??  0);
     }
     public function forUser(int $userId): PointWallet|null {
         return $this->model->forUser($userId)->first();

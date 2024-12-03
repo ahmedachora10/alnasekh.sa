@@ -84,7 +84,6 @@ final class UserService implements FindAction, StoreAction, UpdateAction, Delete
     {
         return $this->model->find($id);
     }
-
     public function delete(int $id): bool
     {
         return DB::transaction(function () use ($id) {

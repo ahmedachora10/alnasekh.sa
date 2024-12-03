@@ -35,4 +35,7 @@ return [
     'all the general settings for application.' => 'كل الاعدادات العامة الخاصة بالتطبيق',
     'file' => 'ملف',
     'link' => 'الرابط',
+    'wallet' => 'المحفظة الالكترونية',
+    'points' => 'كل n ريال يساوي نقطة واحدة',
+    'balance' => 'كل نقطة تساوي n ريال',
 ];

@@ -297,4 +297,33 @@ return [
             ],
         ]
     ],
+    'wallet' => [
+
+        'title' => 'Wallet',
+        'desc' => '',
+        'icon' => 'menu-icon tf-icons bx bx-wallet',
+
+        'elements' => [
+            [
+                'type' => 'text',
+                'data' => 'integer',
+                'name' => 'points_conversion_rate',
+                'label' => 'Points',
+                'rules' => 'nullable|integer',
+                'class' => '',
+                'value' => 'n'
+
+            ],
+            [
+                'type' => 'text',
+                'data' => 'integer',
+                'name' => 'balance_conversion_rate',
+                'label' => 'Balance',
+                'rules' => 'nullable|integer',
+                'class' => '',
+                'value' => 'n',
+
+            ],
+        ]
+    ],
 ];
