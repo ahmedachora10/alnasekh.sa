@@ -34,4 +34,8 @@ return [
     'all the general settings for application.' => 'All the general settings for application',
     'file' => 'File',
     'link' => 'Link',
+
+    'wallet' => 'Wallet',
+    'points' => 'each n RS equal one Point',
+    'balance' => 'each n Point equal 1 RS',
 ];
