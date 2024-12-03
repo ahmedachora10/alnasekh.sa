@@ -10,6 +10,7 @@ use App\Contracts\DTOInterface;
 use App\Models\User;
 use App\Services\UploadFileService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Modules\User\App\DTO\UserActionDTO;
 use Modules\Wallet\App\DTO\WalletActionDTO;
@@ -86,12 +87,18 @@ final class UserService implements FindAction, StoreAction, UpdateAction, Delete
 
     public function delete(int $id): bool
     {
-        if($model = $this->find($id)) {
-            $this->fileService->delete($model->avatar);
-            return $model->delete();
-        }
+        return DB::transaction(function () use ($id) {
+            $model =  $this->find($id);
 
-        return false;
+            if(!$model) return false;
+
+            $this->fileService->delete($model->avatar);
+
+            $this->wallet($id)?->delete();
+            $this->piontsWallet($id)?->delete();
+
+            return $model->delete();
+        });
     }
 
     public function wallet(int $userId): Wallet|null {
