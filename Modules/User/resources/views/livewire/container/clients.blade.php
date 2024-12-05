@@ -15,28 +15,28 @@
                 placeholder="{{ trans('table.columns.search') }}" />
         </x-slot:title>
 
-        @forelse ($clients as $user)
+        @forelse ($clients as $client)
         <tr wire:loading.class="opacity-50">
-            <td>{{ $user->id }}</td>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->email }}</td>
-            <td>{{ $user->created_at->diffForHumans() }}</td>
+            <td>{{ $client->id }}</td>
+            <td>{{ $client->name }}</td>
+            <td>{{ $client->email }}</td>
+            <td>{{ $client->created_at->diffForHumans() }}</td>
 
             <td>
                 <x-dashboard.actions.container>
                     @hasPermission('client.wallet')
-                    <a href="#!" class="dropdown-item" wire:click="$dispatch('open-wallet', { user: {{$user}}})">
+                    <a href="#!" class="dropdown-item" wire:click="$dispatch('open-wallet', { user: {{$client}}})">
                         <i class="bx bx-wallet me-1"></i>
                         {{trans('common.wallet')}}
                     </a>
                     @endhasPermission
                     @hasPermission('client.edit')
-                    <x-dashboard.actions.edit :href="route('clients.edit', $user->id)">{{ trans('common.edit') }}
+                    <x-dashboard.actions.edit :href="route('clients.edit', $client->id)">{{ trans('common.edit') }}
                     </x-dashboard.actions.edit>
                     @endhasPermission
 
                     @hasPermission('client.delete')
-                        <x-dashboard.actions.delete :route="route('clients.destroy', $user->id)" />
+                        <x-dashboard.actions.delete :route="route('clients.destroy', $client->id)" />
                     @endhasPermission
                 </x-dashboard.actions.container>
             </td>
