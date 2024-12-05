@@ -97,6 +97,8 @@ return [
     'slider management' => 'Sliders Management',
     'task management' => 'Tasks Management',
     'activity management' => 'Activities Management',
+    'client management' => 'Clients Management',
+    'wallet' => 'Wallet',
 
     'civil defense permit' => 'Civil Defense Permit',
     'update civil defense permit' => 'Update Civil Defense Permit',

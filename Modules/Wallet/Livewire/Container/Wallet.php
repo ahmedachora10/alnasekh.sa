@@ -2,7 +2,6 @@
 
 namespace Modules\Wallet\Livewire\Container;
 
-use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Modules\Wallet\App\Enums\TransactionType;

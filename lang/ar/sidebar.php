@@ -35,4 +35,5 @@ return [
     'activities' => 'سجل العمليات',
     'reminders' => 'سجل التذكيرات',
     'tasks' => 'المهام',
+    'clients' => 'العملاء',
 ];

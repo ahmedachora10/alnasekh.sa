@@ -28,12 +28,6 @@
 
                 <td>
                     <x-dashboard.actions.container>
-                        @if($user->roles->contains('name', 'client'))
-                            <a href="#!" class="dropdown-item" wire:click="$dispatch('open-wallet', { user: {{$user}}})">
-                                <i class="bx bx-wallet me-1"></i>
-                                {{trans('common.wallet')}}
-                            </a>
-                        @endif
                         <a href="{{ route('users.show', $user->id) }}" class="dropdown-item"> <i
                                 class="bx bx-show me-1"></i>
                             عرض</a>

@@ -20,7 +20,7 @@ class TransactionActionDTO implements DTOInterface, ToArray {
     public function toArray(): array
     {
         return [
-            'user_id' => $this->userId,
+            'client_id' => $this->userId,
             'points' => $this->points,
             'amount' => $this->amount,
             'type' => $this->type->value,

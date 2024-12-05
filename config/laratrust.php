@@ -388,5 +388,6 @@ return [
         'slider' => ['create', 'edit', 'delete', 'show'],
         'activity' => ['show'],
         'task' => ['create', 'edit', 'delete', 'show', 'user.assign'],
+        'client' => ['create', 'edit', 'show', 'delete', 'wallet'],
     ]
 ];

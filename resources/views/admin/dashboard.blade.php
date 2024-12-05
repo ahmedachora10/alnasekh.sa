@@ -39,6 +39,9 @@
                 <div class="col-md-4">
                     <x-dashboard.cards.user-info :title="trans('sidebar.subscribers')" color="info" :count="$statistics->subscribersCount" icon="bx bx-user-pin" />
                 </div>
+                <div class="col-md-4">
+                    <x-dashboard.cards.user-info :title="trans('sidebar.clients')" color="warning" :count="$statistics->clientsCount" icon="bx bx-user" />
+                </div>
             </div>
         </div>
         @hasPermission('notification.show')

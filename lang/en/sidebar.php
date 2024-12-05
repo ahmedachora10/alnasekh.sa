@@ -36,4 +36,5 @@ return [
     'activities' => 'Activities',
     'reminders' => 'Reminders',
     'tasks' => 'Tasks',
+    'clients' => 'Clients',
 ];

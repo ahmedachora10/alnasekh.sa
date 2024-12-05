@@ -2,12 +2,10 @@
 
 namespace Modules\Wallet\Livewire\Container;
 
-use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use Modules\User\App\Services\UserService;
+use Modules\User\App\Services\ClientService;
 use Modules\Wallet\App\DTO\PointsWalletActionDTO;
-use Modules\Wallet\App\Services\PointsWalletService;
 use Modules\Wallet\App\Services\WalletService;
 
 class PointsWallet extends Component
@@ -32,7 +30,7 @@ class PointsWallet extends Component
             )
         );
 
-        $wallet = app(UserService::class)->wallet($this->userId);
+        $wallet = app(ClientService::class)->wallet($this->userId);
 
         $this->dispatch('set-balance', balance: $wallet?->balance ?? 0, userId: $this->userId);
         $this->dispatch('set-points', points: 0, userId: $this->userId);

@@ -75,6 +75,9 @@
                 @hasPermission('user.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.users')" :link="route('users.index')" />
                 @endhasPermission
+                @hasPermission('client.show')
+                    <x-dashboard.sidebar.link :title="trans('sidebar.clients')" :link="route('clients.index')" />
+                @endhasPermission
                 @hasPermission('role.show')
                     <x-dashboard.sidebar.link :title="trans('sidebar.roles')" :link="route('roles.index')" />
                 @endhasPermission

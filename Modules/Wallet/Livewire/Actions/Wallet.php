@@ -4,7 +4,7 @@ namespace Modules\Wallet\Livewire\Actions;
 
 use Livewire\Attributes\On;
 use Livewire\Component;
-use Modules\User\App\Services\UserService;
+use Modules\User\App\Services\ClientService;
 use Modules\Wallet\App\DTO\WalletActionDTO;
 use Modules\Wallet\App\Enums\TransactionType;
 use Modules\Wallet\App\Rules\CheckWalletBalance;
@@ -62,8 +62,10 @@ class Wallet extends Component
     }
 
     public function refreshBalance() {
-        $wallet = app(UserService::class)->wallet($this->userId);
-        $pointsWallet = app(UserService::class)->piontsWallet($this->userId);
+        $clientService = app(ClientService::class);
+
+        $wallet = $clientService->wallet($this->userId);
+        $pointsWallet = $clientService->piontsWallet($this->userId);
 
         if (!$wallet || !$pointsWallet)
             return false;

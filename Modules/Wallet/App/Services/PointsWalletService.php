@@ -30,7 +30,7 @@ final class PointsWalletService implements FindAction, StoreAction, UpdateAction
      */
     public function store(DTOInterface $dto): PointWallet
     {
-        return $this->forUser($dto->userId) ?? $this->model->create($dto->toArray());
+        return $this->forClient($dto->userId) ?? $this->model->create($dto->toArray());
     }
 
     public function find(int $id): PointWallet|null
@@ -43,14 +43,14 @@ final class PointsWalletService implements FindAction, StoreAction, UpdateAction
      * @return int
      */
     public function increment(DTOInterface $dto): int|null {
-        return $this->model->forUser($dto->userId)->first()?->increment('points', $this->convertBalanceToPoints($dto->points));
+        return $this->model->forClient($dto->userId)->first()?->increment('points', $this->convertBalanceToPoints($dto->points));
     }
     /**
      * @param PointsWalletActionDTO $dto
      * @return int
      */
     public function decrement(DTOInterface $dto): int|null {
-        return $this->model->forUser($dto->userId)->first()?->decrement('points', $dto->points);
+        return $this->model->forClient($dto->userId)->first()?->decrement('points', $dto->points);
     }
 
     public function convertBalanceToPoints(?float $balance) : float {
@@ -59,7 +59,7 @@ final class PointsWalletService implements FindAction, StoreAction, UpdateAction
     public function pointsToBalanceRate(?float $points) : float {
         return ($points ?? 0) * (setting('balance_conversion_rate') ??  0);
     }
-    public function forUser(int $userId): PointWallet|null {
-        return $this->model->forUser($userId)->first();
+    public function forClient(int $userId): PointWallet|null {
+        return $this->model->forClient($userId)->first();
     }
 }

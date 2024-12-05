@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\User\App\Models\Client;
 use Modules\Wallet\App\Enums\TransactionStatus;
 use Modules\Wallet\App\Enums\TransactionType;
 
@@ -16,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Client::class);
             $table->float('amount')->default(0);
             $table->mediumInteger('points')->default(0);
             $table->enum('status',[1,2,3])->default(TransactionStatus::Pending);

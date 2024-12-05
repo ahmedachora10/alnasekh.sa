@@ -24,8 +24,6 @@ final class UserService implements FindAction, StoreAction, UpdateAction, Delete
     const STORAGE_FOLDER = 'images/users';
     public function __construct(
         private User $model,
-        private WalletService $walletService,
-        private PointsWalletService $pointsWalletService,
         protected UploadFileService $fileService
     ) {}
 
@@ -48,11 +46,6 @@ final class UserService implements FindAction, StoreAction, UpdateAction, Delete
 
         $model->syncRoles($dto->roles);
 
-        if ($model->hasRole('client'))
-            $this->walletService->store(
-                dto: new WalletActionDTO(userId: $model->id)
-            );
-
         return $model;
     }
     /**
@@ -72,11 +65,6 @@ final class UserService implements FindAction, StoreAction, UpdateAction, Delete
 
         $user->addRoles($dto->roles);
 
-        if ($user->hasRole('client'))
-            $this->walletService->store(
-                dto: new WalletActionDTO(userId: $user->id)
-            );
-
         return $user;
     }
 
@@ -93,17 +81,7 @@ final class UserService implements FindAction, StoreAction, UpdateAction, Delete
 
             $this->fileService->delete($model->avatar);
 
-            $this->wallet($id)?->delete();
-            $this->piontsWallet($id)?->delete();
-
             return $model->delete();
         });
-    }
-
-    public function wallet(int $userId): Wallet|null {
-        return $this->walletService->forUser($userId);
-    }
-    public function piontsWallet(int $userId): PointWallet|null {
-        return $this->pointsWalletService->forUser($userId);
     }
 }

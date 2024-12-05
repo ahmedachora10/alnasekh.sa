@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\User\App\Models\Client;
 use Modules\Wallet\App\Enums\TransactionStatus;
 use Modules\Wallet\App\Enums\TransactionType;
 use Modules\Wallet\Database\factories\TransactionFactory;
@@ -17,15 +18,15 @@ class Transaction extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['user_id', 'type', 'amount', 'points', 'status'];
+    protected $fillable = ['client_id', 'type', 'amount', 'points', 'status'];
 
     protected $casts = [
         'type' => TransactionType::class,
         'status' => TransactionStatus::class
     ];
 
-    public function user() : BelongsTo {
-        return $this->belongsTo(User::class);
+    public function client() : BelongsTo {
+        return $this->belongsTo(Client::class);
     }
 
     public function getPriceAttribute() {

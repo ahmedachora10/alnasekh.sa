@@ -7,8 +7,6 @@ use App\Models\User;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\Role;
-use App\Services\UploadFileService;
-use Illuminate\Support\Facades\Hash;
 use Modules\User\App\DTO\UserActionDTO;
 use Modules\User\App\Services\UserService;
 

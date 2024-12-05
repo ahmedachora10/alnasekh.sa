@@ -40,11 +40,11 @@ final class WalletService implements FindAction, StoreAction, UpdateAction {
     public function store(DTOInterface $dto): Wallet
     {
         return DB::transaction(function () use($dto) {
-            $model = $this->model->forUser($dto->userId)->first() ?? $this->model->create($dto->toArray());
+            $model = $this->model->forClient($dto->userId)->first() ?? $this->model->create($dto->toArray());
 
             $this->pointsWalletService->store(
                 new PointsWalletActionDTO(
-                    userId: $model->user_id,
+                    userId: $model->client_id,
                     points: $this->pointsWalletService->convertBalanceToPoints($model->banance)
                 )
             );
@@ -74,7 +74,7 @@ final class WalletService implements FindAction, StoreAction, UpdateAction {
      */
     public function increment(DTOInterface $dto): int|null {
         return DB::transaction(function () use($dto) {
-            $model = $this->model->forUser($dto->userId)->first();
+            $model = $this->model->forClient($dto->userId)->first();
 
             if(!$model) return null;
 
@@ -108,15 +108,15 @@ final class WalletService implements FindAction, StoreAction, UpdateAction {
                         status: TransactionStatus::Completed
                     )
                 );
-            return $this->model->forUser($dto->userId)->first()?->decrement('balance', $dto->balance);
+            return $this->model->forClient($dto->userId)->first()?->decrement('balance', $dto->balance);
         });
     }
-    public function forUser(int $userId): Wallet|null {
-        return $this->model->forUser($userId)->first();
+    public function forClient(int $userId): Wallet|null {
+        return $this->model->forClient($userId)->first();
     }
     public function convertPointsToBalance(PointsWalletActionDTO $dto) {
         return DB::transaction(function () use($dto) {
-            $userWallet = $this->forUser($dto->userId);
+            $userWallet = $this->forClient($dto->userId);
 
             if (!$userWallet || $dto->points === 0)
                 return false;

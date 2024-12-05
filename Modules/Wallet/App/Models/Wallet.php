@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Modules\User\App\Models\Client;
 use Modules\Wallet\Database\factories\WalletFactory;
 
 class Wallet extends Model
@@ -16,14 +17,14 @@ class Wallet extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['user_id', 'balance'];
+    protected $fillable = ['client_id', 'balance'];
 
-    public function scopeForUser(Builder $builder, int $userId) {
-        $builder->where('user_id', $userId);
+    public function scopeForClient(Builder $builder, int $userId) {
+        $builder->where('client_id', $userId);
     }
 
     public function client(): HasOne {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Client::class);
     }
 
     // protected static function newFactory(): WalletFactory

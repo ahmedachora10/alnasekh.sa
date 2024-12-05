@@ -2,25 +2,22 @@
 
 namespace Modules\User\Livewire\Container;
 
-use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use Modules\User\App\Services\UserService;
-use Modules\Wallet\App\Services\PointsWalletService;
-use Modules\Wallet\App\Services\WalletService;
-
+use Modules\User\App\Models\Client;
+use Modules\User\App\Services\ClientService;
 class UserWallet extends Component
 {
-    public ?User $user = null;
+    public ?Client $user = null;
 
     public float $balance = 0;
     public float $points = 0;
 
     #[On('open-wallet')]
-    public function openWallet(User $user) {
+    public function openWallet(Client $user) {
         $this->user = $user;
 
-        $userService = app(UserService::class);
+        $userService = app(ClientService::class);
 
         $this->balance = $userService->wallet($user->id)?->balance ?? 0;
         $this->points = $userService->piontsWallet($user->id)?->points ?? 0;

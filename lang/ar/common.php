@@ -100,6 +100,8 @@ return [
     'slider management' => 'إدارة السلايدات',
     'task management' => 'إدارة المهام',
     'activity management' => 'إدارة سجل العمليات',
+    'client management' => 'إدارة العملاء',
+    'wallet' => 'المحفظة الالكترونية',
 
     'civil defense permit' => 'تصريح الدفاع المدني',
     'update civil defense permit' => 'تحديث تصريح الدفاع المدني',

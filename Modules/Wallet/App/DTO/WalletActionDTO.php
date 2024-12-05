@@ -15,7 +15,7 @@ class WalletActionDTO implements DTOInterface, FromWebRequest, ToArray {
     public function toArray(): array
     {
         return [
-            'user_id' => $this->userId,
+            'client_id' => $this->userId,
             'balance' => $this->balance,
         ];
     }
@@ -23,7 +23,7 @@ class WalletActionDTO implements DTOInterface, FromWebRequest, ToArray {
     public static function fromWebRequest(\Illuminate\Foundation\Http\FormRequest $request): static
     {
         return new self(
-            userId: $request->validated('user_id'),
+            userId: $request->validated('client_id'),
             balance: $request->validated('balance'),
         );
     }
