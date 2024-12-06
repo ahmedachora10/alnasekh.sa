@@ -16,6 +16,7 @@ use App\Models\EmployeeMedicalInsurance;
 use App\Models\MonthlyQuarterlyUpdate;
 use App\Models\Registry;
 use App\Models\User;
+use Modules\User\App\Models\Client;
 
 enum ActivityLogType:string {
     case Create = 'created';
@@ -80,6 +81,7 @@ enum ActivityLogType:string {
             CorpBranchRegistry::class => 'السجل ' . $model?->name,
             Registry::class => 'السجل ' . $model?->name,
             User::class => 'المستخدم ' . $model->name,
+            Client::class => 'العميل ' . $model->name,
             default => 'Default'
         };
     }

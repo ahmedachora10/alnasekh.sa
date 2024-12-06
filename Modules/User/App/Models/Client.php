@@ -2,15 +2,18 @@
 
 namespace Modules\User\App\Models;
 
+use App\Traits\LogActivityOptions;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Scout\Searchable;
 use Modules\User\Database\factories\ClientFactory;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Client extends Model
 {
     use HasFactory, Searchable;
+     use LogsActivity, LogActivityOptions;
 
     /**
      * The attributes that are mass assignable.
