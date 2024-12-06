@@ -23,7 +23,8 @@
         <h4 class="card-title mb-3">
             <x-loader class="d-block" wire:loading.class.remove='d-none' />
             <span wire:loading.remove>
-                {{$currency}}{{$amount}}
+                <span>{{$amount}}</span>
+                <small class="text-muted fw-normal">{{$currency}}</small>
             </span>
         </h4>
         {{-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}

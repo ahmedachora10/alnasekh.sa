@@ -15,7 +15,7 @@ class Wallet extends Component
         public string $image = '',
         public ?string $title = null,
         public float|int $amount = 0,
-        public string $currency = '$'
+        public string $currency = 'ر.س'
     )
     {
         //

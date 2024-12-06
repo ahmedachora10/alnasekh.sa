@@ -1,5 +1,5 @@
 <section>
-    <x-dashboard.tables.table1 :columns="['name', 'email', 'created at']">
+    <x-dashboard.tables.table1 :columns="['name', 'email', 'phone', 'city', 'status', 'created at']">
 
         <x-slot:actions>
             @hasPermission('client.create')
@@ -20,15 +20,29 @@
             <td>{{ $client->id }}</td>
             <td>{{ $client->name }}</td>
             <td>{{ $client->email }}</td>
-            <td>{{ $client->created_at->diffForHumans() }}</td>
+            <td>{{ $client->phone }}</td>
+            <td>{{ $client->city }}</td>
+            <td>
+                <x-dashboard.badge wire:click="switch({{$client}})" :color="$client->blocked ? 'danger' : 'primary'">
+                    {{ $client->blocked_text }}
+                </x-dashboard.badge>
+            </td>
+            <td>{{ $client->registration_at?->diffForHumans() ?? '-' }}</td>
 
             <td>
                 <x-dashboard.actions.container>
-                    @hasPermission('client.wallet')
-                    <a href="#!" class="dropdown-item" wire:click="$dispatch('open-wallet', { user: {{$client}}})">
-                        <i class="bx bx-wallet me-1"></i>
+                    @hasPermission('client.wallet')*
+                    @if($client->can_use_wallet)
+                        <a href="#!" class="dropdown-item" wire:click="$dispatch('open-wallet', { user: {{$client}}})">
+                            <i class="bx bx-wallet me-1"></i>
+                            {{trans('common.wallet')}}
+                        </a>
+                    @else
+                    <a href="#!" class="dropdown-item text-decoration-line-through text-muted" disabled>
+                        <i class="bx bx-wallet me-1 text-danger"></i>
                         {{trans('common.wallet')}}
                     </a>
+                    @endif
                     @endhasPermission
                     @hasPermission('client.edit')
                     <x-dashboard.actions.edit :href="route('clients.edit', $client->id)">{{ trans('common.edit') }}
