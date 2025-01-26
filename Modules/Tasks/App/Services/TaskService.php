@@ -105,7 +105,16 @@ class TaskService implements StoreAction, UpdateAction, DeleteAction, PaginateAc
     }
     public function delete(int $id): bool
     {
-        return $this->find($id)?->delete() ?? false;
+        return DB::transaction(function () use($id) {
+            $task = $this->find($id);
+
+            if (!$task)
+                return false;
+
+            $task->userTaskStatus()->delete();
+
+            return $task->delete() ?? false;
+        });
     }
     public function switchStatus(Task $task): Task {
         return DB::transaction(function () use ($task) {
