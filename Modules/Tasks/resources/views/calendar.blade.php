@@ -31,6 +31,6 @@
             var calendarEventDetailsUri = '{{route("calendar.events.show", "id")}}';
         </script>
         {{-- @vite('Modules/Tasks/resources/assets/js/app.js') --}}
-        <script src="{{asset('build/assets/app3.js')}}"></script>
+        <script type="module" src="{{asset('build/assets/app3.js')}}"></script>
     @endpush
 </x-app-layout>
