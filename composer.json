@@ -23,6 +23,7 @@
         "nwidart/laravel-modules": "^10.0",
         "santigarcor/laratrust": "^8.2",
         "spatie/laravel-activitylog": "^4.8",
+        "spatie/laravel-medialibrary": "^10.0.0",
         "tecnickcom/tc-lib-pdf": "^8.0"
     },
     "require-dev": {

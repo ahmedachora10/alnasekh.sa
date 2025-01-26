@@ -7,4 +7,10 @@
     <x-dashboard.modals.modal1 id="task-action">
         <livewire:tasks::actions.task-action />
     </x-dashboard.modals.modal1>
+    <x-dashboard.modals.modal1 id="task-approval-rejection-container">
+        <livewire:tasks::containers.tasks-approval-rejection />
+    </x-dashboard.modals.modal1>
+    <x-dashboard.modals.modal1 id="task-details-action">
+        <livewire:tasks::actions.task-details />
+    </x-dashboard.modals.modal1>
 </x-app-layout>

@@ -3,7 +3,12 @@
 use App\Enums\Status;
 use App\Models\CorpBranch;
 use App\Models\Setting;
+use App\Models\User;
+use App\Notifications\UserActionNotification;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Notification;
 
 if (! function_exists('setting')) {
 
@@ -147,5 +152,49 @@ if (!function_exists('go_back')) {
 
         // Default: If no history exists, go to a fallback route (e.g., Dashboard)
         return '/dashboard';
+    }
+}
+
+if(!function_exists('notify_admin')) {
+    function notify_admin(array|Illuminate\Notifications\Notification|null $data) {
+
+        if (!is_array($data) && !$data instanceof Illuminate\Notifications\Notification)
+            logger("the notication doesn't supported as notification action");
+            return null;
+
+        if (is_array($data))
+            $notification = new UserActionNotification($data);
+
+        if($data instanceof Illuminate\Notifications\Notification)
+            $notification = $data;
+
+        Notification::send(
+            notifiables: Cache::remember(
+                key: 'notify-admins',
+                ttl: now()->addDay(),
+                callback: fn() => User::whereHasRole('admin')->get()
+            ),
+            notification: $notification
+        );
+    }
+}
+
+if(!function_exists('notify_user')) {
+    function notify_user(User|Collection $notifiables, array|Illuminate\Notifications\Notification|null $data) {
+
+        if (!is_array($data) && !$data instanceof Illuminate\Notifications\Notification)
+            logger("the notication doesn't supported as notification action");
+            return null;
+
+        if (is_array($data))
+            $notification = new UserActionNotification($data);
+
+        if($data instanceof Illuminate\Notifications\Notification)
+            $notification = $data;
+
+        Notification::send(
+            notifiables: $notifiables,
+            notification: $notification
+        );
     }
 }

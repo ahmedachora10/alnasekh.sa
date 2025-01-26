@@ -9,6 +9,9 @@ enum TaskStatus:int {
     case InReview = 2;
     case Done = 3;
 
+    public function name() {
+        return __($this->label());
+    }
     public function color() {
         return match ($this) {
             self::Pending => 'warning',

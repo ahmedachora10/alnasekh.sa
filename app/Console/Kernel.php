@@ -6,7 +6,7 @@ use App\Jobs\DateReminder;
 use App\Jobs\DateReminderJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use Modules\Tasks\App\Services\TaskService;
 
 class Kernel extends ConsoleKernel
 {
@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         // $schedule->call(new DateReminder)->everyMinute();
+        $schedule->call(fn() => app(TaskService::class)->checkCorpTaskStatus())->twiceDaily();
         $schedule->job(new DateReminderJob())->everyMinute();
         $schedule->command('queue:work --stop-when-empty')->everyMinute();
     }

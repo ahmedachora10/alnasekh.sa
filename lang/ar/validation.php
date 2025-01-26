@@ -209,6 +209,8 @@ return [
         'employee_start_date' => 'تاريخ بداية العقد',
         'employee_end_date' => 'تاريخ نهاية العقد',
         'employee' => 'الموظف',
+        'priority' => 'أولوية',
+        'comment' => 'التعليق',
         'mission' => 'المهمة',
         'entity' => 'الجهة',
         'entity_name' => 'اسم السجل',

@@ -35,7 +35,7 @@
 
             <!-- Notifications -->
             @hasPermission('notification.show')
-                <livewire:dashboard.container.notifications-container theme="navbar" />
+                <livewire:dashboard.container.notifications-container :theme="auth()->user()->hasRole('admin') ? 'navbar' : 'employee'" />
             <!--/ Notifications -->
             @endhasPermission
             <!-- User -->
@@ -43,7 +43,7 @@
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                         <img src="{{ asset(auth()->user()->thumbnail) }}" alt=""
-                            class="w-px-40 h-auto rounded-circle">
+                            class="w-px-40 h-px-40 rounded-circle">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">

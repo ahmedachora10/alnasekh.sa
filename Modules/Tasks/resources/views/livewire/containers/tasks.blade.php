@@ -3,11 +3,15 @@
     <x-dashboard.headline :title="trans('sidebar.tasks')" />
 
     <x-dashboard.tables.table1
-        :columns="['name', 'employee', 'status', 'due date']">
+        :columns="$columns">
 
         <x-slot:actions>
+            <a href="#!" data-bs-toggle="modal" data-bs-target="#task-approval-rejection-container" class="btn btn-warning mx-2 btn-sm ">
+                    <span class="tf-icons bx bx-task"></span>
+                    <span>حالات المهام</span>
+                </a>
                 @hasPermission('task.create')
-                <a href="#!" wire:click="$dispatch('open-modal', {target:'#task-action'})" class="btn btn-primary mx-4 btn-sm ">
+                <a href="#!" wire:click="$dispatch('open-modal', {target:'#task-action'})" class="btn btn-primary ms-2 me-4 btn-sm ">
                     <span class="tf-icons bx bx-plus"></span>
                     <span>{{ trans('common.create') }}</span>
                 </a>
@@ -21,6 +25,19 @@
             </td>
             <td>{{ $task->name }}</td>
             <td>
+                @if(($admin || $task->userTaskCompleted) && !$task->done)
+                <x-dashboard.badge wire:click="switchStatus({{$task}})" :color="$task->status->color() . ' cursor-pointer'">
+                    {{ $task->status->label() }}
+                </x-dashboard.badge>
+                @else
+                <x-dashboard.badge :color="$task->status->color() . ' cursor-pointer'">
+                    {{ $task->status->label() }}
+                </x-dashboard.badge>
+                @endif
+            </td>
+
+            @if($admin)
+            <td>
                 @if ($employee = $task->employee)
                 <a href="{{ route('users.show', $employee) }}" class="text-danger" target="_blank">
                     <i class="bx bx-link-external position-relative" style="font-size: 16px; top:-1.5px"></i>
@@ -30,12 +47,9 @@
                 -
                 @endif
             </td>
-            <td>
-                <x-dashboard.badge wire:click="switchStatus({{$task}})" :color="$task->status->color() . ' cursor-pointer'">
-                    {{ $task->status->label() }}
-                </x-dashboard.badge>
-            </td>
-            <td>{{ $task->due_date?->format('Y-m-d') ?? '-' }}</td>
+
+            <td class="text-primary">{{ $task->completed?->format('m d / H:i') ?? '-' }}</td>
+            @endif
 
             <td>
 

@@ -14,7 +14,7 @@ class ClientActionNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(public array $data)
+    public function __construct(public array $data = [])
     {
         //
     }
@@ -37,5 +37,12 @@ class ClientActionNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return $this->data;
+    }
+
+
+    public static function render($notifiable = null) {
+        return view('notifications.client-action', [
+            'notification' => $notifiable
+        ]);
     }
 }

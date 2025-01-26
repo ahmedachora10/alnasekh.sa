@@ -57,4 +57,11 @@ class UserActionNotification extends Notification
     {
         return $this->data;
     }
+
+
+    public static function render($notifiable = null) {
+        return view('notifications.corp', [
+            'notification' => $notifiable
+        ]);
+    }
 }

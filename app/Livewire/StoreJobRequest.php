@@ -3,13 +3,16 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\JobRequestForm;
+use App\Mail\JobRequestSubmitted;
 use App\Models\JobCity;
 use App\Models\JobPost;
 use App\Models\JobRequest;
 use App\Models\User;
 use App\Notifications\ClientActionNotification;
 use App\Services\UploadFileService;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -51,11 +54,15 @@ class StoreJobRequest extends Component
                 }
             }
 
-            Notification::send(User::whereHasRole('admin')->get(), new ClientActionNotification([
-                'title' => '',
-                'content' => '',
+            $admins = Cache::remember('new-post-job-request-admin', now()->addDay(), fn() => User::whereHasRole('admin')->get());
+
+            Notification::send($admins, new ClientActionNotification([
+                'title' => ' طلب توظيف جديد',
+                'content' => 'تم تقديم طلب توظيف على  ' . $jobRequest->jobPost?->title,
                 'model' => JobRequest::class,
             ]));
+
+            Mail::to($admins)->send(new JobRequestSubmitted($jobRequest));
 
             $this->form->reset();
             $this->reset('attachments');

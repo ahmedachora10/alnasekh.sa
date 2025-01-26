@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Tasks\App\Http\Requests\CalendarEventsRequest;
 use Modules\Tasks\App\Http\Requests\TaskRequest;
+use Modules\Tasks\App\resources\CalendarEventsResource;
 use Modules\Tasks\App\Services\TaskService;
 
 class TasksController extends Controller

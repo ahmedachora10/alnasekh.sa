@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Tasks\App\Models\Task;
+use Modules\Tasks\App\Services\TaskService;
 
 class AssignUserTo extends Component
 {
@@ -23,10 +24,9 @@ class AssignUserTo extends Component
     }
     public function assign(User $user) {
 
-        if ($user->id === $this->model?->{$this->columnName})
+        if (!app(TaskService::class)->assignEmployee($this->model, $user))
             return false;
 
-        $this->model?->update([$this->columnName => $user->id, 'assigned_at' => now()]);
         session()->put('success', 'تم تعيين ' . $user->name . '  للمهمة ' . $this->model->name);
         $this->dispatch('refresh-alert');
         $this->dispatch('close-modal', target: '#assign-a-user-to-task');
@@ -35,7 +35,9 @@ class AssignUserTo extends Component
     public function render()
     {
         return view('tasks::livewire.actions.assign-user-to', [
-            'users' => User::with('roles')->paginate(10)
+            'users' => User::with('roles')
+            ->when($this->columnName === 'assigned_to', fn($query) => $query->whereHasRole('employee'))
+            ->paginate(10)
         ]);
     }
 }

@@ -51,7 +51,13 @@ class NotificationsContainer extends Component
 
     public function render()
     {
-        if ($this->theme == 'card') {
+        if($this->theme == 'employee') {
+            return view('livewire.dashboard.container.notifications-tasks-container', [
+                'notifications' => auth()->user()->unreadNotifications()->whereNot('type', 'App\Notifications\UserActionNotification')->latest()->get(),
+                'unreadNotifications' => auth()->user()->unreadNotifications()->whereNot('type', 'App\Notifications\UserActionNotification')->count()
+            ]);
+        }
+        elseif ($this->theme == 'card') {
             $notify = auth()->user()->notifications()
                 ->where('type', 'App\Notifications\UserActionNotification')
                 ->when($this->filterBy === $this->filters[0], function ($query) {
@@ -73,7 +79,7 @@ class NotificationsContainer extends Component
                 'notifications' => auth()
                 ->user()
                 ->unreadNotifications()
-                ->where('type', 'App\Notifications\UserActionNotification')
+                // ->where('type', 'App\Notifications\UserActionNotification')
                 ->latest()->paginate(10),
                 // ->where('type', 'App\Notifications\UserActionNotification')
                 // ->where(fn($query) => $query

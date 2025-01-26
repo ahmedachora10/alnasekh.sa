@@ -5,7 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Jobs\DateReminderJob;
 use App\Models\Corp;
 use App\Models\Package;
+use App\Models\User;
 use App\Services\WhatsappService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Activitylog\Models\Activity;
 
@@ -21,10 +23,11 @@ use Spatie\Activitylog\Models\Activity;
  */
 
 // Route::get('send-whatsapp-message', fn() => (new WhatsappService)->sendMessage(to: '212684825329', variables: ['رسالة مشفرة من احمد']));
-Route::get('/logs', fn() => dd(Activity::all()->last()));
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/logs', fn() => dd(Activity::all()->last()));
+// Route::get('/test', function () {
+//     return User::all();
+// });
+Route::get('/sign-in/{email?}', fn($email = 'ahmed@ahmed.com') => Auth::login(User::firstWhere('email', $email)));
 
 Route::get('switch-theme', function () {
     $theme = request()->session()->get('theme', 'light');

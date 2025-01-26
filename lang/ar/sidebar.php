@@ -36,4 +36,6 @@ return [
     'reminders' => 'سجل التذكيرات',
     'tasks' => 'المهام',
     'clients' => 'العملاء',
+    'calendar' => 'ألتقويم',
+    'meetings' => 'الاجتماعات',
 ];

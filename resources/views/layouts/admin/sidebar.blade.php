@@ -1,16 +1,15 @@
 @php
-    $notifications = collect(
-        auth()->user()->hasRole('admin')
-            ? auth()->user()?->unreadNotifications()->where('type', 'App\Notifications\ClientActionNotification')->get()
-            : [],
-    )->pluck('data');
+    $notifications = collect(auth()->user()?->unreadNotifications()->get());
+
+    $userActionsNotifications = $notifications->where('type', 'App\Notifications\ClientActionNotification')->pluck('data');
 
     // $servicesRequestsCount = $notifications->where('type', 'App\Models\ServiceRequest')->count();
-    $jobsRequestsCount = $notifications->where('model', 'App\Models\JobRequest')->count();
-    $contactsCount = $notifications->where('model', 'App\Models\ContactUs')->count();
-    $packagesRequestCount = $notifications->where('model', 'App\Models\SubscribePackageRequest')->count();
-    $subscribersCount = $notifications->where('model', 'App\Models\Subscriber')->count();
-    $servicesRequestsCount = $notifications->where('model', 'Modules\Service\App\Models\ServiceRequest')->count();
+    $jobsRequestsCount = $userActionsNotifications->where('model', 'App\Models\JobRequest')->count();
+    $contactsCount = $userActionsNotifications->where('model', 'App\Models\ContactUs')->count();
+    $packagesRequestCount = $userActionsNotifications->where('model', 'App\Models\SubscribePackageRequest')->count();
+    $subscribersCount = $userActionsNotifications->where('model', 'App\Models\Subscriber')->count();
+    $servicesRequestsCount = $userActionsNotifications->where('model', 'Modules\Service\App\Models\ServiceRequest')->count();
+    $tasksCount = $notifications->where('type', 'Modules\Tasks\App\Notifications\EmployeeTaskAssignmentNotification')->count();
 @endphp
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
@@ -139,7 +138,12 @@
             </x-dashboard.sidebar.link>
         @endhasPermission
         @hasPermission('task.show')
-            <x-dashboard.sidebar.link :title="trans('sidebar.tasks')" icon="task" :link="route('tasks.index')" />
+        <x-dashboard.sidebar.link :title="trans('sidebar.tasks')" icon="task" link="#" :hasSubMenu="true"
+                :notification="$tasksCount">
+            <x-dashboard.sidebar.link :title="trans('sidebar.meetings')"  :link="route('meetings.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.tasks')"  :link="route('tasks.index')" />
+            <x-dashboard.sidebar.link :title="trans('sidebar.calendar')"  :link="route('calendar.index')" />
+        </x-dashboard.sidebar.link>
         @endhasPermission
         @hasPermission('activity.show')
             <x-dashboard.sidebar.link :title="trans('sidebar.activities')" icon="archive" :link="route('activitylogs')" />

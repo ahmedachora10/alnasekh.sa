@@ -5,8 +5,8 @@ namespace App\Traits;
 trait HasLabel {
     public function label() : string
     {
-        return str($this->name)
+        return __(str($this->name)
             ->title()
-            ->headline();
+            ->headline()->value());
     }
 }

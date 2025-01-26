@@ -186,7 +186,6 @@
 
     @stack('component-scripts')
 
-    {{-- @vite('resources/js/app.js') --}}
     <script src="{{ asset('build/assets/app2.js') }}"></script>
 
     @stack('scripts')
@@ -260,23 +259,23 @@
 
         // }
 
-        $(window).on('mouseout', (function() {
-            window.onbeforeunload = closingPage;
-        }));
+        // $(window).on('mouseout', (function() {
+        //     window.onbeforeunload = closingPage;
+        // }));
 
-        $(window).on('mouseover', (function() {
-            window.onbeforeunload = null;
-        }));
+        // $(window).on('mouseover', (function() {
+        //     window.onbeforeunload = null;
+        // }));
 
-        function closingPage(event) {
-            $.ajax({
-                type: "POST",
-                url: "{{ route('logout') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                }
-            });
-        }
+        // function closingPage(event) {
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "{{ route('logout') }}",
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //         }
+        //     });
+        // }
     </script>
 
 </body>

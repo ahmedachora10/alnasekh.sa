@@ -140,7 +140,8 @@ return [
         'corp' => 'Corp',
         'activity' => 'Activity',
         'due date' => 'Due Date',
-        'old price' => 'Old Price'
+        'old price' => 'Old Price',
+        'priority' => 'Priority',
     ],
     'empty' => 'No Records'
 ];

@@ -4,20 +4,25 @@ namespace Modules\Tasks\App\DTO;
 
 use App\Contracts\DTOInterface;
 use App\Contracts\FromLivewireRequest;
-use App\Contracts\FromWebRequest;
 use App\Contracts\ToArray;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Modules\Tasks\App\Enums\TaskPriority;
 use Modules\Tasks\App\Enums\TaskStatus;
 
-class TaskActionDTO implements DTOInterface, FromWebRequest, FromLivewireRequest, ToArray {
+class TaskActionDTO implements DTOInterface, FromLivewireRequest, ToArray {
     public function __construct(
         public readonly string $name,
         public readonly string $description,
         public readonly ?User $assignedTo = null,
         public readonly ?Carbon $assignedAt = null,
-        public readonly ?Carbon $dueDate = null,
-        // public readonly TaskStatus $status = TaskStatus::Pending,
+        public readonly ?Carbon $startDate,
+        public readonly ?Carbon $endDate,
+        public readonly TaskPriority $priority,
+        public readonly array $attachments = [],
+        public readonly ?User $creator = null,
+        public readonly bool $relatedToCorp = false
     ) {}
 
     public function toArray(): array
@@ -25,24 +30,28 @@ class TaskActionDTO implements DTOInterface, FromWebRequest, FromLivewireRequest
         return [
             'name' => $this->name,
             'description' => $this->description,
-            'due_date' => $this->dueDate,
             'assigned_to' => $this->assignedTo?->id,
             'assigned_at' => $this->assignedAt,
-            // 'status' => $this->status->value,
+            'start_date' => $this->startDate,
+            'end_date' => $this->endDate,
+            'created_by' => $this->creator?->id,
+            'priority' => $this->priority->value,
+            'status' => TaskStatus::Pending->value,
+            'from_corp' => $this->relatedToCorp,
         ];
     }
 
-    public static function fromWebRequest(\Illuminate\Foundation\Http\FormRequest $request): static
-    {
-        return new self(
-            name: $request->validated('name'),
-            description: $request->validated('description'),
-            assignedTo: null,
-            assignedAt: null,
-            dueDate: $request->validated('due_date'),
-            // status: TaskStatus::tryFrom($request->validated('status')) ?? self::$status,
-        );
-    }
+    // public static function fromWebRequest(\Illuminate\Foundation\Http\FormRequest $request): static
+    // {
+    //     return new self(
+    //         name: $request->validated('name'),
+    //         description: $request->validated('description'),
+    //         assignedTo: null,
+    //         assignedAt: null,
+    //         dueDate: $request->validated('due_date'),
+    //         // status: TaskStatus::tryFrom($request->validated('status')) ?? self::$status,
+    //     );
+    // }
 
     public static function fromLivewireRequest(array $data): static {
         $employee = User::find($data['assigned_to']);
@@ -51,9 +60,11 @@ class TaskActionDTO implements DTOInterface, FromWebRequest, FromLivewireRequest
             description: $data['description'],
             assignedTo: $employee,
             assignedAt: $employee instanceof User ? now() : null,
-            dueDate: now()->parse($data['due_date']),
-            // status: TaskStatus::tryFrom($data['status']) ?? TaskStatus::Pending,
-
+            startDate: now()->parse($data['start_date']),
+            endDate: now()->parse($data['end_date']),
+            priority: TaskPriority::tryFrom($data['priority']) ?? TaskPriority::Not_Important_And_Not_Urgent,
+            attachments: $data['attachments'] ?? [],
+            creator: User::find(Auth::id())
         );
     }
 }

@@ -3,5 +3,15 @@
     "select an employee" : "حدد الموظف",
     "updated" : "تحديث",
     "deleted" : "حذف",
-    "created" : "اضافة"
+    "created" : "اضافة",
+    "Urgent And Important": " عاجل وهام",
+    "Important And Not Urgent": "هام ولكن ليس عاجلا",
+    "Not Important And Not Urgent": "ليس عاجلاً ولا هاماً",
+    "Urgent And Not Important": "عاجل ولكن ليس مهمًا",
+    "Reject": "رفض",
+    "Accept": "قبول",
+    "Rejected": "مرفوض",
+    "Accepted": "مقبول",
+    "Reason": "السبب"
+
 }
