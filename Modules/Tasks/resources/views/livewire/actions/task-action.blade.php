@@ -96,7 +96,7 @@
         uploadAttachment.on("success", function(file, response) {
             submitBtn.removeAttr('disabled');
 
-            if (!response.status) return notify({status:response.status, message: response.message});
+            if (!response.status) return notify({status:response.status, message: response.message,  style: 'bg-wanring'});
 
             notify({status: true, message: "{{__('File has been uploaded succefully')}}"});
 

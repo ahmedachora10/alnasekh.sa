@@ -54,9 +54,9 @@ window.notify = (data) => {
     notifyTitle.textContent = data.message;
 
     if (data.status) {
-        notify.classList.add("bg-primary");
+        notify.classList.add(data.style || "bg-primary");
     } else {
-        notify.classList.add("bg-danger");
+        notify.classList.add(data.style || "bg-danger");
         notifyIcon.classList.add("bx-error-alt");
     }
     setTimeout(() => notify.classList.remove("show"), 5000);
