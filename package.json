@@ -22,6 +22,7 @@
         "@fullcalendar/list": "^6.1.15",
         "@fullcalendar/timegrid": "^6.1.15",
         "cleave.js": "^1.6.0",
+        "dropzone": "^6.0.0-beta.2",
         "select2": "^4.1.0-rc.0"
     }
 }

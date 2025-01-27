@@ -12,6 +12,7 @@ use Modules\Tasks\App\Enums\TaskPriority;
 use Modules\Tasks\App\Models\Task;
 use Modules\Tasks\App\Services\TaskService;
 use Modules\Tasks\Livewire\Forms\TaskForm;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class TaskAction extends Component
 {
@@ -42,6 +43,7 @@ class TaskAction extends Component
             'start_date' => $task->start_date?->format('Y-m-d H:i'),
             'end_date' => $task->end_date?->format('Y-m-d H:i'),
             'priority' => $task->priority?->value,
+            'attachments' => $task->attachments?->toArray() ?? []
         ]);
         $this->dispatch('open-modal', target: self::$modal);
     }
@@ -72,6 +74,7 @@ class TaskAction extends Component
     public function save()
     {
         $this->validate();
+        // dd($this->form->all());
 
         if(!$this->isAdmin)
             $this->form->fill(['assigned_to' => Auth::id()]);
@@ -89,6 +92,29 @@ class TaskAction extends Component
         session()->put('success', $message);
         $this->dispatch('refresh-alert');
         $this->form->reset();
+    }
+
+    #[On('add-attachments')]
+    public function addAttachments(string $path, ?string $name = null) {
+        $this->form->attachments[] =[
+            'id' => null,
+            'name' => $name,
+            'url' => $path
+        ];
+    }
+
+    public function deleteAttachment(string|int $media = '', bool $isNumber = false) {
+
+        if ($media === '')
+            return false;
+
+        if(is_string($media) && !$isNumber) {
+            $this->form->attachments = array_filter($this->form->attachments, fn($file) => $file['url'] !== $media);
+        } else {
+            $media = Media::findOrFail($media);
+            $media->delete();
+            $this->form->attachments = $this->task->attachments?->toArray() ?? [];
+        }
     }
     public function render()
     {

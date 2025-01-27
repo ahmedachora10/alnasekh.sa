@@ -12,6 +12,9 @@
     "Accept": "قبول",
     "Rejected": "مرفوض",
     "Accepted": "مقبول",
-    "Reason": "السبب"
+    "Reason": "السبب",
+    "Drop files here or click to upload": "اسحب الملفات او اضغط لتحميل",
+    "Something went wrong": "حدث خطأ اثناء محاولة الارسال",
+    "File has been uploaded succefully": "تم تحميل الملف بنجاح"
 
 }

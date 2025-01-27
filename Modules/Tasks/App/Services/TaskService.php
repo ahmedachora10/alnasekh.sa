@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Modules\Tasks\App\Contracts\CalendarEvent;
 use Modules\Tasks\App\Enums\TaskStatus;
 use Modules\Tasks\App\Enums\UserTaskStatus;
@@ -50,7 +51,11 @@ class TaskService implements StoreAction, UpdateAction, DeleteAction, PaginateAc
                 $sendTo = !$isEmployee || $dto->relatedToCorp ? $dto->assignedTo : User::whereHasRole('admin')->get();
                 Notification::send($sendTo, $newEmployeeNotification);
 
-            collect($dto->attachments)->each(fn($file) => $task->addMediaFromDisk($file)->toMediaCollection('tasks'));
+            collect($dto->attachments)
+                ->pluck('url')
+                ->each(
+                    fn($file) => $task->addMediaFromDisk($file, 'public')->toMediaCollection('tasks')
+                );
 
             return $task;
         });
@@ -82,6 +87,13 @@ class TaskService implements StoreAction, UpdateAction, DeleteAction, PaginateAc
                 $dto->assignedTo->notify(new EmployeeTaskAssignmentNotification($model));
             }
 
+            collect($dto->attachments)
+            ->pluck('url')
+            ->filter(fn($file) => Storage::disk('public')->exists($file))
+                ->each(
+                    fn($file) => $model->addMediaFromDisk($file, 'public')->toMediaCollection('tasks')
+                );
+
             return $model;
         });
     }
@@ -112,6 +124,8 @@ class TaskService implements StoreAction, UpdateAction, DeleteAction, PaginateAc
                 return false;
 
             $task->userTaskStatus()->delete();
+
+            $task->media()->delete();
 
             return $task->delete() ?? false;
         });

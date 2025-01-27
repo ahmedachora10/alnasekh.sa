@@ -1,8 +1,8 @@
-@props(['name', 'title'])
+@props(['name' => '', 'title' => ''])
 
 <x-dashboard.label :for="$name">{{ $title }}</x-dashboard.label>
 
-<select {{ $attributes->merge(['class' => 'form-select']) }} :name="$name" :id="$name">
+<select {{ $attributes->merge(['class' => 'form-select']) }} name="{{$name}}" id="{{$name}}">
     {{ $slot }}
 </select>
 

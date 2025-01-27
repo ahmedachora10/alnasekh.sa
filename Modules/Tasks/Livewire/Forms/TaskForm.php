@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Modules\Tasks\App\Enums\TaskPriority;
 
@@ -31,4 +32,11 @@ class TaskForm extends Form
 
     #[Rule(['required', new Enum(TaskPriority::class)])]
     public ?int $priority = null;
+
+    #[Validate([
+        'attachments' => 'array',
+        'attachments.*.path' => ['nullable', 'string', 'ends_with:.jpg,.png,.webp,.jpeg,.png,.pdf,.docx'],
+    ])]
+    public array $attachments = [];
+
 }

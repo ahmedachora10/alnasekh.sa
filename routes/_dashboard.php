@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UploadMediaController;
 use App\Livewire\Dashboard\Branch\StoreCertificate;
 use App\Livewire\Dashboard\Branch\StoreCivilDefenseCertificate;
 use App\Livewire\Dashboard\Branch\StoreEmployee;
@@ -40,6 +41,10 @@ use Modules\Service\Livewire\RequestsContainer;
 
 Route::middleware(['auth'])->group(function ()
 {
+
+
+    Route::post('media/files/upload', [UploadMediaController::class, 'store'])->name('file.uploader');
+
     Route::controller(SettingController::class)
     ->prefix('settings')->name('settings.')
     ->group(function ()

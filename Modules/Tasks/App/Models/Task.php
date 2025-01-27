@@ -53,6 +53,15 @@ class Task extends Model implements HasMedia
         );
     }
 
+    public function attachments(): Attribute {
+        return Attribute::make(
+            get: fn() => $this->getMedia('tasks')
+                    ->map(
+                    fn($media) => ['id' => $media->id ,'name' => $media->file_name, 'url' => $media?->getUrl()]
+                    )
+        );
+    }
+
     public function userTaskStatus(): HasMany {
         return $this->hasMany(UserTask::class);
     }

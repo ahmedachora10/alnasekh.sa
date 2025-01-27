@@ -2,13 +2,13 @@
   "Modules/Tasks/resources/assets/js/app.js": {
     "file": "assets/app3.js",
     "imports": [
-      "_axios-28bc18a3.js"
+      "_axios.js"
     ],
     "isEntry": true,
     "src": "Modules/Tasks/resources/assets/js/app.js"
   },
-  "_axios-28bc18a3.js": {
-    "file": "assets/axios-28bc18a3.js"
+  "_axios.js": {
+    "file": "assets/axios.js"
   },
   "resources/css/app.css": {
     "file": "assets/app.css",
@@ -18,7 +18,7 @@
   "resources/js/app.js": {
     "file": "assets/app2.js",
     "imports": [
-      "_axios-28bc18a3.js"
+      "_axios.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"

@@ -159,6 +159,9 @@
         </div>
     </div>
 
+    <!-- Toast Alert -->
+    <x-dashboard.toast title="Done" content="This Only For Me" />
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
@@ -186,7 +189,7 @@
 
     @stack('component-scripts')
 
-    <script src="{{ asset('build/assets/app2.js') }}"></script>
+    <script type="module" src="{{ asset('build/assets/app2.js') }}"></script>
 
     @stack('scripts')
 
