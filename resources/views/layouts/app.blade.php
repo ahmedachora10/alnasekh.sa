@@ -191,9 +191,9 @@
 
     <script type="module" src="{{ asset('build/assets/app2.js') }}"></script>
 
-    @stack('scripts')
 
     @livewireScripts
+    @stack('scripts')
 
     <script defer>
         Livewire.on('close-modal', ({
