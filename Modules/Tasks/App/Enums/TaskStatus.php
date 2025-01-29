@@ -10,7 +10,7 @@ enum TaskStatus:int {
     case Done = 3;
 
     public function name() {
-        return __($this->label());
+        return $this->label();
     }
     public function color() {
         return match ($this) {

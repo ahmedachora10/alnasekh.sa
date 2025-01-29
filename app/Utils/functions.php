@@ -198,3 +198,20 @@ if(!function_exists('notify_user')) {
         );
     }
 }
+
+
+if (!function_exists('file_type')) {
+    function file_type(string $type): object {
+
+
+
+        $match = match ($type) {
+            'image/jpeg' => ['icon' => 'bx bx-image', 'name' => __('Image')],
+            'application/pdf' => ['icon' => 'bx bx-file', 'name' => __('Pdf')],
+            'application/docx' => ['icon' => 'bx bx-file-doc', 'name' => __('Docx')],
+            default => ['icon' => 'bx bx-file', 'name' => __('File')],
+        };
+
+        return (object) $match;
+    }
+}

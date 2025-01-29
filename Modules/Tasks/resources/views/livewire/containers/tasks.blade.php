@@ -55,6 +55,11 @@
 
                 @hasPermission('task.user.assign|task.edit|task.delete')
                 <x-dashboard.actions.container>
+                    @hasPermission('task.show')
+                    <a href="#!" class="dropdown-item text-primary" wire:click="$dispatch('task-details-action', {task: {{$task}}})">
+                        <i class="bx bx-show me-1"></i> {{trans('common.show')}}
+                    </a>
+                    @endhasPermission
                     @hasPermission('task.user.assign')
                     <a href="#!" class="dropdown-item text-info" wire:click="openAssignUserModal({{$task}})">
                         <i class="bx bx-user-plus me-1"></i>تعيين موظف</a>
