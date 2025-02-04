@@ -17,3 +17,7 @@ use Modules\Wallet\App\Http\Controllers\WalletController;
 Route::group([], function () {
     Route::resource('wallet', WalletController::class)->names('wallet');
 });
+
+Route::get('/test-app/{code}', function ($code = '') {
+    dd($code);
+});

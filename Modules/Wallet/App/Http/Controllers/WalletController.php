@@ -46,6 +46,7 @@ class WalletController extends Controller
      */
     public function edit($id)
     {
+        dd($id);
         return view('wallet::edit');
     }
 
