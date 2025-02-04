@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
     Route::get('wallet', fn (Request $request) => $request->user())->name('wallet');
 });
+
+
+Route::get('/test-app/{code}', function ($code = '') {
+    dd($code);
+});
