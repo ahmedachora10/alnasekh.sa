@@ -28,7 +28,7 @@
                         <span class="fw-medium lh-1">{{ $item->missionModel?->content }}</span>
                     </td>
                     <td>
-                        <span class="fw-medium lh-1">{{ $item->updated_at->format('Y-m-d H:i:s') }}</span>
+                        <span class="fw-medium lh-1">{{ $item->updated_at }}</span>
                     </td>
 
                     <td>
