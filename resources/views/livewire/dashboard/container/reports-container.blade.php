@@ -50,5 +50,6 @@
             @endforelse
         </x-dashboard.tables.table2>
 
+        {{ $reports->links() }}
     </div>
 </div>
